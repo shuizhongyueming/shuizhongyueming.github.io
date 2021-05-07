@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="技术人的博客, 说技术人的事">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NVHB3R');</script>
+    <!-- End Google Tag Manager -->
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css">
+    <title>
+        
+        用Python实现FTP文件上传｜水中月明的Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://www.shuizhongyueming.com/2017/05/27/用python实现ftp文件上传/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="" class="animated fadeIn">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true"
+    data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    水中月明的Blog
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    //    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function () {
+                // prevent frequently toggle
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+    <!-- Main Content -->
+    
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.imagehost.top/default-background-1920x640.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.imagehost.top/default-background-1920x640.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>用Python实现FTP文件上传</h1>
+                    
+                    <span class="meta">
+                         作者 happyWang
+                        <span>
+                          日期 2017-05-27
+                         </span>
+                        <span id="busuanzi_container_page_pv">
+                         浏览量 <i id="busuanzi_value_page_pv"></i>
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#file.read"
+                           title="file.read">file.read</a>
+                        
+                        <a class="tag" href="/tags/#ftp"
+                           title="ftp">ftp</a>
+                        
+                        <a class="tag" href="/tags/#hash"
+                           title="hash">hash</a>
+                        
+                        <a class="tag" href="/tags/#read cursor"
+                           title="read cursor">read cursor</a>
+                        
+                        <a class="tag" href="/tags/#seek"
+                           title="seek">seek</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            用Python实现FTP文件上传
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="前情">前情</h2>
+<p>最近在做活动编辑器的时候，考虑到运营人员很多都没有图片上传的权限，所以想在活动编辑器里面内置一个这样的功能，让运营可以使用上传控件或者托拽的方式上传图片到服务器，并在上传成功之后，自动把地址放到文本框里。</p>
+<p>第一步要做的就是尝试着实现用FTP来上传一个文件到服务器的指定目录，同时基于文件的sha1值来命名上传之后的文件。</p>
+<p>手上现有的两种实现路径是<strong>NodeJs</strong>和<strong>Python</strong>，不过想到最近刚学Python，正需要这样一个机会，就先尝试python的方式。</p>
+<h2 id="开发">开发</h2>
+<p>先是Google了一下，知道了一个<code>ftplib</code>的内置模块可以用来做FTP相关的功能。然后是之前在即刻上有看到<strong>余弦</strong>发的一个文章，说到用Python一句话查看文件的哈希值，上去找了找，也很快找到了那篇文章里面的相关代码。</p>
+<p>折腾一下之后，实现代码如下：</p>
+<pre><code>import ftplib
+import hashlib
+import os
+
+host = 'YOUR HOST'
+username = 'YOUR NAME'
+pwd = 'YOUR PWD'
+port = 21
+filePath = 'some/path/to/img.jpg'
+serverPath = '/where/to/store/your/file/on/the/server/'
+
+session = ftplib.FTP()
+
+session.connect(host, port)
+
+session.login(username, pwd)
+
+session.cwd(serverPath)
+
+file = open(filePath, 'rb')
+
+filename, file_extension = os.path.splitext(filePath)
+
+str_hash = hashlib.sha1(file.read()).hexdigest()
+
+target_file_name = str_hash[:16]+file_extension
+
+session.storbinary('STOR '+target_file_name, file)
+
+file.close()
+
+session.quit()
+</code></pre>
+<p>代码写完，就顺手执行看了下效果：文件顺利按的传到了预设的目录，也重命名为了指定的文件名。但是，文件的体积是0</p>
+<h2 id="调试">调试</h2>
+<p>在Python的<strong>IDEL</strong>环境里面使用<code>help</code>命令查看了<code>file</code>相关的各种文档，最后把问题的方向指向了<code>file.read</code>。因为当时在IDEL环境里面，使用file.read读取了要上传的文件内容之后，再次调用file.read时，返回的内容为空。</p>
+<p>于是在Google上面用<strong>python file read twice</strong>作为搜索词搜索了一下。果然找到了问题，文件里面有一个指针指向上一次读取的位置，默认是在最开始，也就是0。file.read会读取文件的全部内容，完成之后，指针就指向文件的最末尾。</p>
+<p>所以，在调用过一次file.read之后，再次调用file.read，会从文件最末尾开始获取内容，这获取的内容自然就是空了。而<code>ftp.storbinary</code>在上传文件的时候，内部应该也是会使用类似file.read类似的方法来获取要上传的文件内容并传递给服务器。这个时候也自然就没法正常获取正确的文件内容</p>
+<p>解决方式是在file.read之后，使用<code>file.seek(0)</code>来把文件的指针指回最开始。</p>
+<p>最终代码：</p>
+<pre><code>import ftplib
+import hashlib
+import os
+
+host = 'YOUR HOST'
+username = 'YOUR NAME'
+pwd = 'YOUR PWD'
+port = 21
+filePath = 'some/path/to/img.jpg'
+serverPath = '/where/to/store/your/file/on/the/server/'
+
+session = ftplib.FTP()
+
+session.connect(host, port)
+
+session.login(username, pwd)
+
+session.cwd(serverPath)
+
+file = open(filePath, 'rb')
+
+filename, file_extension = os.path.splitext(filePath)
+
+str_hash = hashlib.sha1(file.read()).hexdigest()
+
+target_file_name = str_hash[:16]+file_extension
+
+# 前面的file.read使得file的read cursor指向了文件的尾部
+# 如果不手动调整指针的话，后面的文件上传，就会是一个空文件
+file.seek(0)
+
+session.storbinary('STOR '+target_file_name, file)
+
+file.close()
+
+session.quit()
+</code></pre>
+<h2 id="参考文档">参考文档</h2>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/12613797/python-script-uploading-files-via-ftp">Python Script Uploading files via FTP</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/541390/extracting-extension-from-filename-in-python">Extracting extension from filename in Python</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/3906137/why-cant-i-call-read-twice-on-an-open-file">Why can’t I call read() twice on an open file?</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzA3NTEzMTUwNA%3D%3D&amp;mid=2651081246&amp;idx=1&amp;sn=c891a5e5770f1bd31f80c31e33144965#wechat_redirect">我是如何 Python 一句话校验软件哈希值的</a></li>
+</ol>
+
+                <div class="copyright-notice">
+<div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://www.shuizhongyueming.com/2017/05/27/%E7%94%A8python%E5%AE%9E%E7%8E%B0ftp%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/" title="https://www.shuizhongyueming.com/2017/05/27/%E7%94%A8python%E5%AE%9E%E7%8E%B0ftp%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/">https://www.shuizhongyueming.com/2017/05/27/%E7%94%A8python%E5%AE%9E%E7%8E%B0ftp%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/</a></div>
+                </div>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/06/09/vim-todo-list-manager/" data-toggle="tooltip" data-placement="top"
+                           title="在Vim里面列出TODO和FIXME等备注">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/04/25/docer-for-mac的ca-pem找不到的问题/" data-toggle="tooltip" data-placement="top"
+                           title="Docer for Mac的ca.pem找不到的问题">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr class="popular-posts-split">
+                <script data-ad-client="ca-pub-3438190576149990" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <hr class="popular-posts-split">
+                <h2 class="popular-posts-title">相关推荐</h2>
+                
+
+                <hr>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E6%83%85"><span class="toc-text">前情</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%8F%91"><span class="toc-text">开发</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B0%83%E8%AF%95"><span class="toc-text">调试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3"><span class="toc-text">参考文档</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://refined-x.com/">前端路上</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shui-zhong-yue-ming-de-blog";
+    var disqus_config = function () {
+        this.page.url = "https://www.shuizhongyueming.com/2017/05/27/%E7%94%A8python%E5%AE%9E%E7%8E%B0ftp%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "735 https://www.shuizhongyueming.com/?p=735"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var d = document;
+        var dsq = d.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.defer = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(dsq);
+    });
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/shuizhongyue91">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/水中月明">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/如风轻吟1991">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/shuizhongyueming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 水中月明的Blog 2021
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://www.shuizhongyueming.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+$('pre').each(function(i, tag) {
+    $(this).addClass('prettyprint')
+})
+</script>
+<script async src="https://cdn.imagehost.top/wp-content/uploads/2019/02/google-code-prettify/run_prettify.js?skin=desert"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="https://cdn.imagehost.top/ipic/t0yg1.png-q60">
+</body>
+
+</html>

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="技术人的博客, 说技术人的事">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NVHB3R');</script>
+    <!-- End Google Tag Manager -->
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css">
+    <title>
+        
+        一个发票挂账月份修改功能引发的小重构｜水中月明的Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://www.shuizhongyueming.com/2019/03/15/一个发票挂账月份修改功能引发的小重构/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="" class="animated fadeIn">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true"
+    data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    水中月明的Blog
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    //    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function () {
+                // prevent frequently toggle
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+    <!-- Main Content -->
+    
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.imagehost.top/default-background-1920x640.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.imagehost.top/default-background-1920x640.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>一个发票挂账月份修改功能引发的小重构</h1>
+                    
+                    <span class="meta">
+                         作者 happyWang
+                        <span>
+                          日期 2019-03-15
+                         </span>
+                        <span id="busuanzi_container_page_pv">
+                         浏览量 <i id="busuanzi_value_page_pv"></i>
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#react"
+                           title="react">react</a>
+                        
+                        <a class="tag" href="/tags/#发票"
+                           title="发票">发票</a>
+                        
+                        <a class="tag" href="/tags/#重构"
+                           title="重构">重构</a>
+                        
+                        <a class="tag" href="/tags/#ant-design"
+                           title="ant-design">ant-design</a>
+                        
+                        <a class="tag" href="/tags/#单一职责"
+                           title="单一职责">单一职责</a>
+                        
+                        <a class="tag" href="/tags/#设计模式"
+                           title="设计模式">设计模式</a>
+                        
+                        <a class="tag" href="/tags/#封装"
+                           title="封装">封装</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            一个发票挂账月份修改功能引发的小重构
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>今天在做一个发票列表的页面，整个项目是基于<code>TypeScript</code>, <code>React</code>, <code>AntDesign</code>来开发。</p>
+<p>有个功能是这样的：对于其中的每一个发票，在此发票拥有指定状态，同时访问此页面的用户拥有指定权限的时候。改用户可以变更发票的挂账月份。</p>
+<p>这个功能在开发的时候，我就注意到了，在我之前做发票的详情页的时候已经做过了这个功能。</p>
+<h2 id="发票详情页的挂账月份修改功能的实现">发票详情页的挂账月份修改功能的实现</h2>
+<p>首先配置了一个发票状态和修改权限的配置表</p>
+<pre><code>export const InvoiceModifyAuthority = &#123;
+  toPayDate: &#123;
+    status: [STATUS_1],
+    role: [ROLE_1],
+  &#125;,
+  gzDate: &#123;
+    status: [
+      STATUS_3,
+      STATUS_6,
+      STATUS_9,
+    ],
+    role: [ROLE_3],
+  &#125;,
+&#125;;
+</code></pre>
+<p>并引入了<code>isAbleModify</code>方法，传入配置和当前发票状态，它会自动获取当前用户的角色，然后进行判断，最后返回bool值，告知能否修改。</p>
+<p>然后引入了一个功能组件<code>ModalDatePicker</code>，它的功能是弹窗并在其中选择日期。</p>
+<p>这个组件需要<code>title</code>, <code>defaultValue</code>, <code>onCancel</code>, <code>onOk</code>, <code>visible</code>这些props。</p>
+<p>为了能正确给ModalDatePicker配置上这些属性，我在页面组件的<code>State</code>中对应加上了这几个key。</p>
+<p>同时新增了<code>showModalDatePicker</code>, <code>hideModalDatePicker</code>, <code>handleDateModify</code>这三个方法来服务于ModalDatePicker的显示、隐藏和值的回调。</p>
+<p>而在handleDateModify方法中，为了实现发票属性的变更，又引入了<code>updateInvoice</code>方法，并在成功修改之后，调用<code>antd</code>(也就是AntDesign的包的实际名称)的<code>message</code>功能来通知用户修改成功。</p>
+<p>具体实施过程就会大概如下：</p>
+<ol>
+<li>在render里面确认能够修改的时候，显示一个修改按钮。</li>
+<li>按钮上绑定了click事件。点击之后设置调用showModalDatePicker，使得ModalDatePicker可见。</li>
+<li>在弹窗ModalDatePicker上，用户选择取消，则隐藏弹窗不做任何事情，而如果进行了时间筛选并确定，就会调用handleDateModify方法，把用户选择好的时间传递过去。</li>
+<li>handleDateModify会
+<ol>
+<li>调用hideModalDatePicker隐藏弹窗</li>
+<li>调用updateInvoice方法使用invoiceId和传递过来的日期来更新发票信息</li>
+<li>updateInvoice处理完毕之后调用message告知用户</li>
+</ol>
+</li>
+</ol>
+<h2 id="现有实现的问题">现有实现的问题</h2>
+<p>现在，发票列表页也需要同样的修改账期的功能。</p>
+<p>直接复制粘贴的方法来迁移这个功能相关代码，是一种实现方案，但很明显不是一个明智的选择。各种依赖的管理，冗余的代码，对功能变化的承受能力还有再遇到类似功能时候的快速实施方面都不理想。</p>
+<p>为什么已经实现过的功能再别处需要使用的时候会这么麻烦。因为最初实现里面包含了太多的细节：权限判断，交互实现，更新的功能实现，操作结果的反馈。</p>
+<p>这么多的细节，那功能的迁移上自然也就无法简化。</p>
+<h2 id="重构">重构</h2>
+<h3 id="封装">封装</h3>
+<p>要方便功能的复用，我们要做的就是封装，让一切我们不需要关注的细节被隐藏起来。</p>
+<p>让我们尝试着回到最开始，来重新解刨一下整个需求。 我们最直接的需求是什么：修改账期。</p>
+<p>我们期待的方式应该是，有一个<code>ModifyGzDate</code>的组件，我们提供<code>invoiceStatus</code>, <code>invoiceId</code>, <code>currentInvoiceGzDate</code>和一个可选的<code>onUpdateFinish</code>方法。而这个组件会自行完成权限和状态校验，自行处理用户修改挂账月份的操作并在处理完成之后，在设定了onUpdateFinish时，调用onUpdateFinish并传递最新值。</p>
+<p>这样这个功能的迁移成本就非常的低廉。</p>
+<p>在有现有功能的情况下，封装这个需求还是比较容易实现的</p>
+<h3 id="拆分和组合">拆分和组合</h3>
+<p>上面的ModifyGzDate是能很好的满足修改挂账月份这个需求的，可是如果我现在还需要一个修改发票的付款月份的功能呢。</p>
+<p>所以上面的ModifyGzDate需要进行一些拆分，可以拆分成三个部分：权限判断，交互，接口。</p>
+<p>实现一个<code>DateUpdater</code>的组件，接受<code>initDate</code>和<code>handleDateChange</code>两个属性，把弹窗显隐，时间筛选等细节封装进去。</p>
+<p>再基于DateUpdater来具象化一个<code>InvoiceDateUpdater</code>组件，接受<code>initDate</code>, <code>invoiceId</code>, <code>modifyKey</code>和可选的<code>onUpdateFinish</code>。这个组件主要是具像化了DateUpdater的handleDateChange, 根据invoiceId, modifyKey和最新的日期值来调用updateInvoice更新发票信息。并在完成之后看情况回调onUpdateFinish。</p>
+<p>最后就是重构<code>ModifyGzDate</code>，根据传入的invoiceStatus来判断是否有权限修改挂账月份，如果有，则调用InvoiceDateUpdater组件</p>
+<p>再这样的重构完成之后，如果要新增修改付款月份的功能。就类似ModifyGzDate一样，完成权限判断之后，根据情况调用InvoiceDateUpdater。</p>
+<h2 id="总结">总结</h2>
+<p>上述的重构完成之后，对于后续发票这块的功能的复用和扩展来说就是很方便了。里面用到的主要的设计思想就是单一职责的原理。尽可能的去拆分你的逻辑，让每个模块的功能尽可能的单一，这样就可以在需要的时候，轻易的组合和封装这些单一的模块，从而实现一些特定场景下的功能组件。</p>
+
+                <div class="copyright-notice">
+<div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://www.shuizhongyueming.com/2019/03/15/%E4%B8%80%E4%B8%AA%E5%8F%91%E7%A5%A8%E6%8C%82%E8%B4%A6%E6%9C%88%E4%BB%BD%E4%BF%AE%E6%94%B9%E5%8A%9F%E8%83%BD%E5%BC%95%E5%8F%91%E7%9A%84%E5%B0%8F%E9%87%8D%E6%9E%84/" title="https://www.shuizhongyueming.com/2019/03/15/%E4%B8%80%E4%B8%AA%E5%8F%91%E7%A5%A8%E6%8C%82%E8%B4%A6%E6%9C%88%E4%BB%BD%E4%BF%AE%E6%94%B9%E5%8A%9F%E8%83%BD%E5%BC%95%E5%8F%91%E7%9A%84%E5%B0%8F%E9%87%8D%E6%9E%84/">https://www.shuizhongyueming.com/2019/03/15/%E4%B8%80%E4%B8%AA%E5%8F%91%E7%A5%A8%E6%8C%82%E8%B4%A6%E6%9C%88%E4%BB%BD%E4%BF%AE%E6%94%B9%E5%8A%9F%E8%83%BD%E5%BC%95%E5%8F%91%E7%9A%84%E5%B0%8F%E9%87%8D%E6%9E%84/</a></div>
+                </div>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/08/13/如何使得Svelte项目输出ES5代码/" data-toggle="tooltip" data-placement="top"
+                           title="如何使得Svelte项目输出ES5代码">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/03/02/Mac的终端下如何快速前进后退一个单词/" data-toggle="tooltip" data-placement="top"
+                           title="Mac的终端下如何快速前进后退一个单词">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr class="popular-posts-split">
+                <script data-ad-client="ca-pub-3438190576149990" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <hr class="popular-posts-split">
+                <h2 class="popular-posts-title">相关推荐</h2>
+                <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2018\12\05\how-does-react-tell-a-class-from-a-function\" title="React里面是如何区分Class和Function的" rel="bookmark">React里面是如何区分Class和Function的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2018\11\07\reach-router的嵌套路由失效的可能原因\" title="@reach/router的嵌套路由失效的可能原因" rel="bookmark">@reach/router的嵌套路由失效的可能原因</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2015\06\05\react入门实例教程读书笔记\" title="React入门实例教程读书笔记" rel="bookmark">React入门实例教程读书笔记</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2017\11\29\在styled-components的样式声明中做px到rem的自动转换\" title="在styled-components的样式声明中做px到rem的自动转换" rel="bookmark">在styled-components的样式声明中做px到rem的自动转换</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2017\12\04\实现react-router下，非法路径访问跳转首页\" title="实现react-router下，非法路径访问跳转首页" rel="bookmark">实现react-router下，非法路径访问跳转首页</a></h3></div></li></ul>
+
+                <hr>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%91%E7%A5%A8%E8%AF%A6%E6%83%85%E9%A1%B5%E7%9A%84%E6%8C%82%E8%B4%A6%E6%9C%88%E4%BB%BD%E4%BF%AE%E6%94%B9%E5%8A%9F%E8%83%BD%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">发票详情页的挂账月份修改功能的实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%B0%E6%9C%89%E5%AE%9E%E7%8E%B0%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">现有实现的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E6%9E%84"><span class="toc-text">重构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%81%E8%A3%85"><span class="toc-text">封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8B%86%E5%88%86%E5%92%8C%E7%BB%84%E5%90%88"><span class="toc-text">拆分和组合</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://refined-x.com/">前端路上</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shui-zhong-yue-ming-de-blog";
+    var disqus_config = function () {
+        this.page.url = "https://www.shuizhongyueming.com/2019/03/15/%E4%B8%80%E4%B8%AA%E5%8F%91%E7%A5%A8%E6%8C%82%E8%B4%A6%E6%9C%88%E4%BB%BD%E4%BF%AE%E6%94%B9%E5%8A%9F%E8%83%BD%E5%BC%95%E5%8F%91%E7%9A%84%E5%B0%8F%E9%87%8D%E6%9E%84/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = " https://www.shuizhongyueming.com/?p="; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var d = document;
+        var dsq = d.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.defer = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(dsq);
+    });
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/shuizhongyue91">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/水中月明">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/如风轻吟1991">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/shuizhongyueming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 水中月明的Blog 2021
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://www.shuizhongyueming.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+$('pre').each(function(i, tag) {
+    $(this).addClass('prettyprint')
+})
+</script>
+<script async src="https://cdn.imagehost.top/wp-content/uploads/2019/02/google-code-prettify/run_prettify.js?skin=desert"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="https://cdn.imagehost.top/ipic/t0yg1.png-q60">
+</body>
+
+</html>

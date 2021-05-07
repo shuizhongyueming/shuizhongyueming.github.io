@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="技术人的博客, 说技术人的事">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NVHB3R');</script>
+    <!-- End Google Tag Manager -->
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css">
+    <title>
+        
+        基于webpack来配置html的preload和prefetch｜水中月明的Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://www.shuizhongyueming.com/2018/06/05/基于webpack来配置html的preload和prefetch/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="" class="animated fadeIn">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true"
+    data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    水中月明的Blog
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    //    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function () {
+                // prevent frequently toggle
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+    <!-- Main Content -->
+    
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.imagehost.top/default-background-1920x640.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.imagehost.top/default-background-1920x640.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>基于webpack来配置html的preload和prefetch</h1>
+                    
+                    <span class="meta">
+                         作者 happyWang
+                        <span>
+                          日期 2018-06-05
+                         </span>
+                        <span id="busuanzi_container_page_pv">
+                         浏览量 <i id="busuanzi_value_page_pv"></i>
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#webpack"
+                           title="webpack">webpack</a>
+                        
+                        <a class="tag" href="/tags/#caniuse"
+                           title="caniuse">caniuse</a>
+                        
+                        <a class="tag" href="/tags/#html-webpack-plugin"
+                           title="html-webpack-plugin">html-webpack-plugin</a>
+                        
+                        <a class="tag" href="/tags/#HtmlWebpackPlugin"
+                           title="HtmlWebpackPlugin">HtmlWebpackPlugin</a>
+                        
+                        <a class="tag" href="/tags/#prefetch"
+                           title="prefetch">prefetch</a>
+                        
+                        <a class="tag" href="/tags/#preload"
+                           title="preload">preload</a>
+                        
+                        <a class="tag" href="/tags/#preload-webpack-plugin"
+                           title="preload-webpack-plugin">preload-webpack-plugin</a>
+                        
+                        <a class="tag" href="/tags/#PreloadWebpackPlugin"
+                           title="PreloadWebpackPlugin">PreloadWebpackPlugin</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            基于webpack来配置html的preload和prefetch
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="起因">起因</h2>
+<p>最近在做一个手机站点，服务器用的Google Cloud，但是用户多是国内的。所以在提升页面加载和响应速度这块，是很重视的。</p>
+<p>一开始是想使用manifest.json来做Application Cache, 不过后面发现Google和FireFox都有提到打算废弃这个标准并建议大家改用Service Worker。</p>
+<p>可是我要做到站点是文章居多的偏新闻性质的，而且交互也不多，用Service Worker来做PWA，感觉有点大材小用。所以想找一些更好实践，而且对于css和js资源的缓存和快速加载有意义的方案。</p>
+<p>prefetch和preload就出现在眼前了。</p>
+<h2 id="关于prefetch和preload">关于prefetch和preload</h2>
+<p>具体的技术介绍，这里就不详述，大家可以看看MDN的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content">这篇文章</a></p>
+<p>这里说一下preload和prefetch的区别：</p>
+<p>preload是<strong>通知浏览器尽快的去加载当前页面现在或者将来需要的一些资源文件</strong>(css,js,image,viedo,audio,fonts等等)，这个加载跟页面解析是并行的，不会阻塞页面本身的加载。</p>
+<p>prefetch是一种预测，预测访问当前页面A的用户很可能会访问页面B，所以<strong>在页面A提前告知浏览器去加载页面B的资源</strong>。这个提前加载的优先级最低，不会干扰页面的正常资源的加载解析，也不会干扰preload。</p>
+<h2 id="兼容性">兼容性</h2>
+<p>preload在pc上，chrome和firefox支持比较好,</p>
+<p>eage是还在开发状态，safari的最新版本也已经支持了。在手机端的支持就不是很好，Andriod 需要5之后的webview才支持，国内的UC，QQ和Baidu都不支持；iOS是最新的11.3开始支持</p>
+<p>具体参看：<a target="_blank" rel="noopener" href="https://caniuse.com/#search=preload">caniuse preload</a></p>
+<p>prefetch的兼容性，相对好点，除了MacOS和iOS上的safari不支持之外，其他浏览器都支持了。</p>
+<p>具体参看：<a target="_blank" rel="noopener" href="https://caniuse.com/#search=prefetch">caniuse prefetch</a></p>
+<p>另外，<strong>preload和prefetch都是申明性质的，所以就算不支持，也不会影响现有页面的任何功能</strong></p>
+<h2 id="关于站点的webpack配置">关于站点的webpack配置</h2>
+<p>为了方便js和css资源的缓存，在nginx上是配置了很长的过期时间，所以对应的，css和js的编译后的文件名都做了hash后缀。这样，线上的更新，都是文件的替换而不是刷新缓存。</p>
+<p>为了方便的实现html里面css和js资源文件能在编译后自动更新路径，使用了<a target="_blank" rel="noopener" href="https://webpack.js.org/plugins/html-webpack-plugin/">HtmlWebpackPlugin</a>来实现html的编译和输出</p>
+<p>而在HtmlWebpackPlugin本身也有插件机制，其中一个由GoogleChromeLabs开发的插件<a target="_blank" rel="noopener" href="https://github.com/GoogleChromeLabs/preload-webpack-plugin">PreloadWebpackPlugin</a>，就能方便的给编译的html文件添加相关资源的preload和pretch</p>
+<h2 id="具体实现-针对多页面多Entry情况">具体实现(针对多页面多Entry情况)</h2>
+<p>如果你是一个单页面应用，那么一切都很简单，就不多说了。这里主要说一下在处理多页面的输出时的注意点</p>
+<p>首先，说一下我的几个module的版本：</p>
+<pre><code>&quot;webpack&quot;: &quot;^4.10.2&quot;,
+&quot;html-webpack-plugin&quot;: &quot;^3.2.0&quot;,
+&quot;preload-webpack-plugin&quot;: &quot;^3.0.0-alpha.3&quot;,
+</code></pre>
+<p>PreloadWebpackPlugin，我一开始用的是正式版的<code>v2.3.0</code>，可是我的webpack是4.x版本，有点不兼容。按照官方issues上的解决方案，改为安装了<code>preload-webpack-plugin@latest</code>，然后才可以的。</p>
+<h3 id="HtmlWebpackPlugin多页面配置">HtmlWebpackPlugin多页面配置</h3>
+<p>首先，你需要配置好HtmlWebpackPlugin，不同的页面使用不同的template，编译到不同的filename，同时还要指定哪些chunks需要加载到页面里面。</p>
+<p>我的站点是目前包括四个页面index.html, book.html, content.html和search.html，对应配置如下：</p>
+<pre><code>    new HtmlWebpackPlugin(&#123;
+      title: 'index',
+      template: './src/pages/index/index.html',
+      filename: 'index.html',
+      chunks: ['index']
+    &#125;),
+    new HtmlWebpackPlugin(&#123;
+      title: 'book',
+      template: './src/pages/book/book.html',
+      filename: 'book.html',
+      chunks: ['book']
+    &#125;),
+    new HtmlWebpackPlugin(&#123;
+      title: 'content',
+      template: './src/pages/content/content.html',
+      filename: 'content.html',
+      chunks: ['content']
+    &#125;),
+    new HtmlWebpackPlugin(&#123;
+      title: 'search',
+      template: './src/pages/search/search.html',
+      filename: 'search.html',
+      chunks: ['search']
+    &#125;),
+</code></pre>
+<p>完成这一步之后，编译，dist目录应该有对应的四个文件，里面的资源也能正确加载。接下来就是配置preload了</p>
+<h3 id="preload配置">preload配置</h3>
+<p>PreloadWebpackPlugin这个插件更适用于单页面应用，对于多页面应用，在配置上比较繁琐一点。</p>
+<p>首先，需要使用<code>excludeHtmlNames</code>来反向排除所有页面，只关联你要配置的那个页面，</p>
+<p>再然后，使用<code>include</code>选项来明确指定哪些资源要被preload</p>
+<p>最后，每一个页面对应添加一个PreloadWebpackPlugin的实例</p>
+<p>还有一点需要补充说明一下，在webpack配置的plugins里面，PreloadWebpackPlugin的配置需要在HtmlWebpackPlugin之后，不然PreloadWebpackPlugin找不到HtmlWebpackPlugin提供的hooks，会报错。</p>
+<p>完成上面这一步之后的配置如下：</p>
+<pre><code>    new HtmlWebpackPlugin(&#123;
+      title: 'index',
+      template: './src/pages/index/index.html',
+      filename: 'index.html',
+      chunks: ['index']
+    &#125;),
+    new HtmlWebpackPlugin(&#123;
+      title: 'book',
+      template: './src/pages/book/book.html',
+      filename: 'book.html',
+      chunks: ['book']
+    &#125;),
+    new HtmlWebpackPlugin(&#123;
+      title: 'content',
+      template: './src/pages/content/content.html',
+      filename: 'content.html',
+      chunks: ['content']
+    &#125;),
+    new HtmlWebpackPlugin(&#123;
+      title: 'search',
+      template: './src/pages/search/search.html',
+      filename: 'search.html',
+      chunks: ['search']
+    &#125;),
+    new PreloadWebpackPlugin(&#123;
+      rel: 'preload',
+      excludeHtmlNames: ['book.html', 'content.html', 'search.html'],
+      include: ['index']
+    &#125;),
+    new PreloadWebpackPlugin(&#123;
+      rel: 'preload',
+      excludeHtmlNames: ['index.html', 'content.html', 'search.html'],
+      include: ['book']
+    &#125;),
+    new PreloadWebpackPlugin(&#123;
+      rel: 'preload',
+      excludeHtmlNames: ['index.html', 'book.html', 'search.html'],
+      include: ['content']
+    &#125;),
+    new PreloadWebpackPlugin(&#123;
+      rel: 'preload',
+      excludeHtmlNames: ['index.html', 'book.html', 'content.html'],
+      include: ['search']
+    &#125;),
+</code></pre>
+<p>可以看到，在excludeHtmlNames的配置上比较繁琐，如果页面多的话，最好写个函数来实现过滤。</p>
+<h3 id="prefetch的配置">prefetch的配置</h3>
+<p>一个PreloadWebpackPlugin实例同时只能干一件事情，根据rel字段区分，要么是preload，要么是prefetch。所以，还得新增PreloadWebpackPlugin的实例。</p>
+<p>不过不着急，先想好如何配置prefetch。在我的这个站点里面，在index页面，大部分的链接都是指向的book页面，所以可以在index页面prefetch book页面的资源。同样的还有，在book页面prefetch content页面的资源。</p>
+<p>定好之后，就是配置了，跟preload的配置比较类似，需要区分的就是rel和include这两个选项</p>
+<p>rel需要改成prefetch，这不用多说。include，这个时候需要改成你打算prefetch的页面的资源，而不是当前页面的资源。</p>
+<p>最终的配置如下：</p>
+<pre><code>    new HtmlWebpackPlugin(&#123;
+      title: 'index',
+      template: './src/pages/index/index.html',
+      filename: 'index.html',
+      chunks: ['index']
+    &#125;),
+    new HtmlWebpackPlugin(&#123;
+      title: 'book',
+      template: './src/pages/book/book.html',
+      filename: 'book.html',
+      chunks: ['book']
+    &#125;),
+    new HtmlWebpackPlugin(&#123;
+      title: 'content',
+      template: './src/pages/content/content.html',
+      filename: 'content.html',
+      chunks: ['content']
+    &#125;),
+    new HtmlWebpackPlugin(&#123;
+      title: 'search',
+      template: './src/pages/search/search.html',
+      filename: 'search.html',
+      chunks: ['search']
+    &#125;),
+    new PreloadWebpackPlugin(&#123;
+      rel: 'preload',
+      excludeHtmlNames: ['book.html', 'content.html', 'search.html'],
+      include: ['index']
+    &#125;),
+    new PreloadWebpackPlugin(&#123;
+      rel: 'prefetch',
+      excludeHtmlNames: ['book.html', 'content.html', 'search.html'],
+      include: ['book']
+    &#125;),
+    new PreloadWebpackPlugin(&#123;
+      rel: 'preload',
+      excludeHtmlNames: ['index.html', 'content.html', 'search.html'],
+      include: ['book']
+    &#125;),
+    new PreloadWebpackPlugin(&#123;
+      rel: 'prefetch',
+      excludeHtmlNames: ['index.html', 'content.html', 'search.html'],
+      include: ['content']
+    &#125;),
+    new PreloadWebpackPlugin(&#123;
+      rel: 'preload',
+      excludeHtmlNames: ['index.html', 'book.html', 'search.html'],
+      include: ['content']
+    &#125;),
+    new PreloadWebpackPlugin(&#123;
+      rel: 'preload',
+      excludeHtmlNames: ['index.html', 'book.html', 'content.html'],
+      include: ['search']
+    &#125;),
+</code></pre>
+<p>以上，就能顺利的实现，在webpack编译过程中，在html页面里面自动配置上preload和prefetch。希望能帮到大家</p>
+
+                <div class="copyright-notice">
+<div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://www.shuizhongyueming.com/2018/06/05/%E5%9F%BA%E4%BA%8Ewebpack%E6%9D%A5%E9%85%8D%E7%BD%AEhtml%E7%9A%84preload%E5%92%8Cprefetch/" title="https://www.shuizhongyueming.com/2018/06/05/%E5%9F%BA%E4%BA%8Ewebpack%E6%9D%A5%E9%85%8D%E7%BD%AEhtml%E7%9A%84preload%E5%92%8Cprefetch/">https://www.shuizhongyueming.com/2018/06/05/%E5%9F%BA%E4%BA%8Ewebpack%E6%9D%A5%E9%85%8D%E7%BD%AEhtml%E7%9A%84preload%E5%92%8Cprefetch/</a></div>
+                </div>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2018/06/13/canvas里面如何基于随机点绘制一个多边形/" data-toggle="tooltip" data-placement="top"
+                           title="canvas里面如何基于随机点绘制一个多边形">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/06/01/微信网页jssdk分享，图片不显示的问题/" data-toggle="tooltip" data-placement="top"
+                           title="微信网页jssdk分享，图片不显示的问题">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr class="popular-posts-split">
+                <script data-ad-client="ca-pub-3438190576149990" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <hr class="popular-posts-split">
+                <h2 class="popular-posts-title">相关推荐</h2>
+                <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2017\11\28\webpack-dynamic-import出错-syntaxerror-import-and-export-may-only-appear-at-the-top-level\" title="webpack dynamic import出错: SyntaxError: 'import' and 'export' may only appear at the top level" rel="bookmark">webpack dynamic import出错: SyntaxError: 'import' and 'export' may only appear at the top level</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2017\03\15\webpack的target选项的作用\" title="webpack的target选项的作用" rel="bookmark">webpack的target选项的作用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2019\08\13\如何使得Svelte项目输出ES5代码\" title="如何使得Svelte项目输出ES5代码" rel="bookmark">如何使得Svelte项目输出ES5代码</a></h3></div></li></ul>
+
+                <hr>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-text">起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8Eprefetch%E5%92%8Cpreload"><span class="toc-text">关于prefetch和preload</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%BC%E5%AE%B9%E6%80%A7"><span class="toc-text">兼容性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E7%AB%99%E7%82%B9%E7%9A%84webpack%E9%85%8D%E7%BD%AE"><span class="toc-text">关于站点的webpack配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E5%AE%9E%E7%8E%B0-%E9%92%88%E5%AF%B9%E5%A4%9A%E9%A1%B5%E9%9D%A2%E5%A4%9AEntry%E6%83%85%E5%86%B5"><span class="toc-text">具体实现(针对多页面多Entry情况)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HtmlWebpackPlugin%E5%A4%9A%E9%A1%B5%E9%9D%A2%E9%85%8D%E7%BD%AE"><span class="toc-text">HtmlWebpackPlugin多页面配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#preload%E9%85%8D%E7%BD%AE"><span class="toc-text">preload配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#prefetch%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-text">prefetch的配置</span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://refined-x.com/">前端路上</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shui-zhong-yue-ming-de-blog";
+    var disqus_config = function () {
+        this.page.url = "https://www.shuizhongyueming.com/2018/06/05/%E5%9F%BA%E4%BA%8Ewebpack%E6%9D%A5%E9%85%8D%E7%BD%AEhtml%E7%9A%84preload%E5%92%8Cprefetch/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "883 https://www.shuizhongyueming.com/?p=883"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var d = document;
+        var dsq = d.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.defer = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(dsq);
+    });
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/shuizhongyue91">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/水中月明">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/如风轻吟1991">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/shuizhongyueming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 水中月明的Blog 2021
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://www.shuizhongyueming.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+$('pre').each(function(i, tag) {
+    $(this).addClass('prettyprint')
+})
+</script>
+<script async src="https://cdn.imagehost.top/wp-content/uploads/2019/02/google-code-prettify/run_prettify.js?skin=desert"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="https://cdn.imagehost.top/ipic/t0yg1.png-q60">
+</body>
+
+</html>

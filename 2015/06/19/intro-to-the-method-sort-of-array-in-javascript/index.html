@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="技术人的博客, 说技术人的事">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NVHB3R');</script>
+    <!-- End Google Tag Manager -->
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css">
+    <title>
+        
+        关于javascript里面数组的sort方法｜水中月明的Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://www.shuizhongyueming.com/2015/06/19/intro-to-the-method-sort-of-array-in-javascript/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="" class="animated fadeIn">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true"
+    data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    水中月明的Blog
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    //    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function () {
+                // prevent frequently toggle
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+    <!-- Main Content -->
+    
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.imagehost.top/default-background-1920x640.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.imagehost.top/default-background-1920x640.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>关于javascript里面数组的sort方法</h1>
+                    
+                    <span class="meta">
+                         作者 happyWang
+                        <span>
+                          日期 2015-06-19
+                         </span>
+                        <span id="busuanzi_container_page_pv">
+                         浏览量 <i id="busuanzi_value_page_pv"></i>
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                        <a class="tag" href="/tags/#array"
+                           title="array">array</a>
+                        
+                        <a class="tag" href="/tags/#jsperf"
+                           title="jsperf">jsperf</a>
+                        
+                        <a class="tag" href="/tags/#map"
+                           title="map">map</a>
+                        
+                        <a class="tag" href="/tags/#sort"
+                           title="sort">sort</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            关于javascript里面数组的sort方法
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="介绍">介绍</h2>
+<p>Array.sort([compareFunction]) 对Array里面的元素进行升序排序</p>
+<h2 id="关于排序的规则">关于排序的规则</h2>
+<h3 id="默认的排序">默认的排序</h3>
+<p>如果compareFunction没有提供的时候，默认把所有Array里面的元素转换为字符串，然后取第一个字符，比较它们的<code>Unicode</code>值，进行正序排序。 这个转为字符串再比较第一个字符的Unicode值，很关键，很多数字的比较，经常就是这样出错的。</p>
+<pre><code>[1,2,3].sort();  // ==&gt; [1,2,3]  正确
+
+[9, 80].sort();  // ==&gt; [9, 80]  错误
+
+[9, 80].sort();  // ==&gt; [80, 9]  正确
+</code></pre>
+<p>上面例子中，数组[9, 80]进行sort的时候，先转为为字符串 “9”, “80”, 再比较第一个字符， “9&quot;和&quot;8” 根据这个比较结果进行排序，所以最后80会在9前面，而不是按照它们的数值大小进行排序的。</p>
+<p>想自行测试的，可以看看这个demo（<a target="_blank" rel="noopener" href="http://www.icondownloader.com/demo/sort-stable.html">http://www.icondownloader.com/demo/sort-stable.html</a>]</p>
+<h3 id="compareFunction的排序">compareFunction的排序</h3>
+<p>进行sort的时候，如果compareFunction提供了，会往compareFunction传两个数组的元素(类似<code>compareFunction(a, b)</code>)</p>
+<p>取compareFunction的返回值，如果小于0，则表明a小于b；大于0，则a大于b</p>
+<p>最后对结果进行升序排序，如果a小于b，则[a, b]; 如果a大于b 则[b, a]</p>
+<p>这里有个技巧，在排序的时候，如果想实现<code>降序</code>排序，可以在compareFuction里面实现类似：<code>return !(a-b);</code></p>
+<h2 id="sort-stable">sort stable</h2>
+<p>关于排序，有个stable的说法，也就是，排序完成之后，对于<code>值相同</code>的元素，在排序结束之后，能否保留其在排序之前的顺序。</p>
+<p><img src="https://cdn.imagehost.top/wp-content/uploads/2015/05/Sorting_stability_playing_cards.png" alt="sort stable"></p>
+<p>具体的概念可以参考维基百科<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Sorting_algorithm#Stability">https://en.wikipedia.org/wiki/Sorting_algorithm#Stability</a></p>
+<p>目前的主流浏览器对stable的sort的支持情况如下：</p>
+<table>
+<thead>
+<tr>
+<th>Browser</th>
+<th>Sort is stable</th>
+<th>Sort is unstable</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Firefox 8</td>
+<td>all lengths</td>
+<td></td>
+</tr>
+<tr>
+<td>Safari 5.1.1</td>
+<td>all lengths</td>
+<td></td>
+</tr>
+<tr>
+<td>Opera 11.52</td>
+<td></td>
+<td>all lengths</td>
+</tr>
+<tr>
+<td>Internet Explorer 6, 7, 8</td>
+<td>all lengths</td>
+<td></td>
+</tr>
+<tr>
+<td>Internet Explorer 9</td>
+<td></td>
+<td>all lengths</td>
+</tr>
+<tr>
+<td>Android 2.3 Browser</td>
+<td></td>
+<td>all lengths</td>
+</tr>
+<tr>
+<td>Chrome 15 .. 17.0.942.0</td>
+<td>length &lt;= 10</td>
+<td>length &gt; 10</td>
+</tr>
+</tbody>
+</table>
+<p>可以参考此网站，检测浏览器的sort情况<a target="_blank" rel="noopener" href="http://ofb.net/~sethml/is-sort-stable.html">http://ofb.net/~sethml/is-sort-stable.html</a></p>
+<h2 id="sort的效率">sort的效率</h2>
+<p>可以尝试着对compare function在执行的时候，进行一个计数。这样可以知道每次sort，总共执行了多少次compare function。 我这边写了个demo，有兴趣的可以在自己本机的各个浏览器上测试看看。<a target="_blank" rel="noopener" href="http://www.icondownloader.com/demo/sort-compare-function-call-times.html">http://www.icondownloader.com/demo/sort-compare-function-call-times.html</a> 这边我贴出我自己Mac OSX Yosemite 10.10.4下的浏览器的运行结果</p>
+<pre><code>## chrome 版本 42.0.2311.135 (64-bit)
+Array length is: 5 and sort call compare 7 times;
+Array length is: 10 and sort call compare 23 times;
+Array length is: 11 and sort call compare 22 times;
+Array length is: 12 and sort call compare 19 times;
+Array length is: 13 and sort call compare 27 times;
+Array length is: 14 and sort call compare 25 times;
+Array length is: 15 and sort call compare 24 times;
+Array length is: 20 and sort call compare 29 times;
+Array length is: 50 and sort call compare 80 times;
+Array length is: 100 and sort call compare 206 times;
+Array length is: 1000 and sort call compare 1996 times;
+Array length is: 10000 and sort call compare 20206 times;
+
+## Safari 版本 8.0.7 (10600.7.7)
+Array length is: 5 and sort call compare 8 times;
+Array length is: 10 and sort call compare 23 times;
+Array length is: 11 and sort call compare 28 times;
+Array length is: 12 and sort call compare 31 times;
+Array length is: 13 and sort call compare 35 times;
+Array length is: 14 and sort call compare 40 times;
+Array length is: 15 and sort call compare 44 times;
+Array length is: 20 and sort call compare 65 times;
+Array length is: 50 and sort call compare 232 times;
+Array length is: 100 and sort call compare 568 times;
+Array length is: 1000 and sort call compare 8996 times;
+Array length is: 10000 and sort call compare 123583 times;
+
+## Firefox (Developer Edition) 40.0a2 (2015-05-29)
+Array length is: 5 and sort call compare 6 times;
+Array length is: 10 and sort call compare 26 times;
+Array length is: 11 and sort call compare 24 times;
+Array length is: 12 and sort call compare 33 times;
+Array length is: 13 and sort call compare 48 times;
+Array length is: 14 and sort call compare 48 times;
+Array length is: 15 and sort call compare 37 times;
+Array length is: 20 and sort call compare 70 times;
+Array length is: 50 and sort call compare 245 times;
+Array length is: 100 and sort call compare 574 times;
+Array length is: 1000 and sort call compare 8600 times;
+Array length is: 10000 and sort call compare 114046 times;
+</code></pre>
+<p>从上面的数据可以看出两个结论：</p>
+<ol>
+<li>
+<p>chrome的执行效率明显高于Safari和Firefox。但是chrome的sort是unstable的，而Safari和Firefox是stable的。是不是可以认为，因为chrome不需要考虑stable，所以提高了执行效率。</p>
+</li>
+<li>
+<p>可以看出随着数组长度的增加，比较的次数是指数增加的</p>
+</li>
+</ol>
+<h2 id="用map来提高提高sort的性能">用map来提高提高sort的性能</h2>
+<p>从上面的结论2可以知道，在数组长度很长的时候，compareFunction的调用次数是很多的，这个时候，提高compareFunction的效率就很有必要性了。 现在咱们构建一个数组</p>
+<pre><code>var arr = \[\],
+    arrLen = 1000,
+    i = 0;
+
+function makeWord()&#123;
+    var word = \[\],
+        words = \['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'\],
+        wordsLength = words.length,
+        arrMinLen = 3,
+        arrLen = arrMinLen + Math.floor( Math.random()*9 ),
+
+        i = 0;
+
+    for (i = 0; i &lt; arrLen; i++)&#123;
+        word.push( words\[Math.floor( Math.random()*wordsLength )\] );
+    &#125;
+
+    return word.join('');
+&#125;
+
+for (i = 0; i &lt; arrLen; i++) &#123;
+    arr.push( makeWord() );
+&#125;
+</code></pre>
+<p>然后比较一下它们小写字母状态下的排序</p>
+<pre><code>// 未优化
+arr.sort(function(a, b)&#123;
+    return +(a.toLowerCase() &gt; b.toLowerCase()) || +(a.toLowerCase() === b.toLowerCase())-1;
+&#125;);
+
+// 优化后
+
+// 用一个临时数组来保存位置和计算后的数值
+var mapped = list.map(function(el, i) &#123;
+  return &#123; index: i, value: el.toLowerCase() &#125;;
+&#125;)
+
+// 排序这个已经计算后的临时数组
+mapped.sort(function(a, b) &#123;
+  return +(a.value &gt; b.value) || +(a.value === b.value) - 1;
+&#125;);
+
+// 根据位置信息 对应映射生成一个排序后的数组
+var result = mapped.map(function(el)&#123;
+  return list\[el.index\];
+&#125;);
+
+// 不支持map的时候的兼容方法
+
+var tmpArr = \[\],
+    result = \[\],
+    i = 0,
+    len = arr.length;
+
+for (i = 0; i &lt; len; i++) &#123;
+    tmpArr\[i\] = &#123;index: i, value: arr\[i\].toLowerCase()&#125;;
+&#125;
+
+tmpArr.sort(function(a, b) &#123;
+  return +(a.value &gt; b.value) || +(a.value === b.value) - 1;
+&#125;);
+
+for (i = 0; i &lt; len; i++) &#123;
+    result\[i\] = arr\[tmpArr\[i\].index\];
+&#125;
+</code></pre>
+<p>具体的执行效果可以看看jsperf里面的这个地址<a target="_blank" rel="noopener" href="http://jsperf.com/arraysortperform">http://jsperf.com/arraysortperform</a></p>
+<p>参考文章：</p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Unicode">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Unicode</a></p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#String_literals">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#String_literals</a></p>
+<p><a target="_blank" rel="noopener" href="http://ofb.net/~sethml/is-sort-stable.html">http://ofb.net/~sethml/is-sort-stable.html</a></p>
+<p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/3026281/array-sort-sorting-stability-in-different-browsers">http://stackoverflow.com/questions/3026281/array-sort-sorting-stability-in-different-browsers</a></p>
+
+                <div class="copyright-notice">
+<div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://www.shuizhongyueming.com/2015/06/19/intro-to-the-method-sort-of-array-in-javascript/" title="https://www.shuizhongyueming.com/2015/06/19/intro-to-the-method-sort-of-array-in-javascript/">https://www.shuizhongyueming.com/2015/06/19/intro-to-the-method-sort-of-array-in-javascript/</a></div>
+                </div>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2015/09/09/在阿里云centos6-7上安装docker/" data-toggle="tooltip" data-placement="top"
+                           title="在阿里云CentOS6.7上安装docker">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2015/06/12/svn-to-git/" data-toggle="tooltip" data-placement="top"
+                           title="svn迁移到git">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr class="popular-posts-split">
+                <script data-ad-client="ca-pub-3438190576149990" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <hr class="popular-posts-split">
+                <h2 class="popular-posts-title">相关推荐</h2>
+                <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2013\04\21\about-stop-the-submit-of-form\" title="关于阻止表单提交" rel="bookmark">关于阻止表单提交</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2018\06\13\canvas里面如何基于随机点绘制一个多边形\" title="canvas里面如何基于随机点绘制一个多边形" rel="bookmark">canvas里面如何基于随机点绘制一个多边形</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2013\03\17\getelementbytagname-is-not-only-belong-to-docuemnt\" title="getElementsByTagName不是document的专利" rel="bookmark">getElementsByTagName不是document的专利</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2013\03\17\how-the-code-be-encode-before-the-javascript-parse-it\" title="JavaScript中文字符进行大小的比较" rel="bookmark">JavaScript中文字符进行大小的比较</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2014\10\14\maintainable-javascript-of-statement-and-expression\" title="编写可维护的JavaScript-语句和表达式" rel="bookmark">编写可维护的JavaScript-语句和表达式</a></h3></div></li></ul>
+
+                <hr>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8B%E7%BB%8D"><span class="toc-text">介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E6%8E%92%E5%BA%8F%E7%9A%84%E8%A7%84%E5%88%99"><span class="toc-text">关于排序的规则</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E7%9A%84%E6%8E%92%E5%BA%8F"><span class="toc-text">默认的排序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#compareFunction%E7%9A%84%E6%8E%92%E5%BA%8F"><span class="toc-text">compareFunction的排序</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sort-stable"><span class="toc-text">sort stable</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sort%E7%9A%84%E6%95%88%E7%8E%87"><span class="toc-text">sort的效率</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8map%E6%9D%A5%E6%8F%90%E9%AB%98%E6%8F%90%E9%AB%98sort%E7%9A%84%E6%80%A7%E8%83%BD"><span class="toc-text">用map来提高提高sort的性能</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://refined-x.com/">前端路上</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shui-zhong-yue-ming-de-blog";
+    var disqus_config = function () {
+        this.page.url = "https://www.shuizhongyueming.com/2015/06/19/intro-to-the-method-sort-of-array-in-javascript/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "621 https://www.shuizhongyueming.com/?p=621"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var d = document;
+        var dsq = d.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.defer = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(dsq);
+    });
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/shuizhongyue91">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/水中月明">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/如风轻吟1991">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/shuizhongyueming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 水中月明的Blog 2021
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://www.shuizhongyueming.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+$('pre').each(function(i, tag) {
+    $(this).addClass('prettyprint')
+})
+</script>
+<script async src="https://cdn.imagehost.top/wp-content/uploads/2019/02/google-code-prettify/run_prettify.js?skin=desert"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="https://cdn.imagehost.top/ipic/t0yg1.png-q60">
+</body>
+
+</html>

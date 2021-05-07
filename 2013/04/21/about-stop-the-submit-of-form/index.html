@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="技术人的博客, 说技术人的事">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NVHB3R');</script>
+    <!-- End Google Tag Manager -->
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css">
+    <title>
+        
+        关于阻止表单提交｜水中月明的Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://www.shuizhongyueming.com/2013/04/21/about-stop-the-submit-of-form/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="" class="animated fadeIn">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true"
+    data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    水中月明的Blog
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    //    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function () {
+                // prevent frequently toggle
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+    <!-- Main Content -->
+    
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.imagehost.top/default-background-1920x640.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.imagehost.top/default-background-1920x640.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>关于阻止表单提交</h1>
+                    
+                    <span class="meta">
+                         作者 happyWang
+                        <span>
+                          日期 2013-04-21
+                         </span>
+                        <span id="busuanzi_container_page_pv">
+                         浏览量 <i id="busuanzi_value_page_pv"></i>
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#addEventListener"
+                           title="addEventListener">addEventListener</a>
+                        
+                        <a class="tag" href="/tags/#attachEvent"
+                           title="attachEvent">attachEvent</a>
+                        
+                        <a class="tag" href="/tags/#DOM"
+                           title="DOM">DOM</a>
+                        
+                        <a class="tag" href="/tags/#JavaScript"
+                           title="JavaScript">JavaScript</a>
+                        
+                        <a class="tag" href="/tags/#事件注册"
+                           title="事件注册">事件注册</a>
+                        
+                        <a class="tag" href="/tags/#浏览器默认动作"
+                           title="浏览器默认动作">浏览器默认动作</a>
+                        
+                        <a class="tag" href="/tags/#浏览器默认行为"
+                           title="浏览器默认行为">浏览器默认行为</a>
+                        
+                        <a class="tag" href="/tags/#表单"
+                           title="表单">表单</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            关于阻止表单提交
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="起因">起因</h2>
+<p>今天在公司忙活着一个项目，涉及到表单提交，要求在表单提交之前判断几个input的值是否为空，如果是，则阻止表单提交。</p>
+<p>我的做法是给form添加了一个submit事件绑定，然后判断，如果有input的值为空则return false 阻止提交。判断input值是否为空，这一块走的正常，可是在判断有空值的时候，表单还是提交了，很是奇怪。</p>
+<p>上网看了看大家的一些做法，也都是return false.为啥到我这边就不管用了？后来仔细看了下别人代码和自己的区别，这才找到了原因。</p>
+<h2 id="表单提交前判断的常用做法">表单提交前判断的常用做法</h2>
+<p>一般来说，js要实现提交前的判断，有以下三种常见做法：</p>
+<ol>
+<li>监听form标签的submit事件</li>
+<li>监听input[type=submit]按钮的click事件</li>
+<li>监听input[type=button]或者任何指定作为提交按钮的标签的任意事件，在条件符合之后调用form标签的submit()方法</li>
+</ol>
+<p>一下是一个简单的例子：</p>
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>demo-form</title>
+</head>
+<body>
+<form action="answer.php" id="form1" method="post">
+    <input type="text" value="" id="txt">
+    <input type="submit" value="提交" id="sbtn">
+    <input type="button" value="按钮" id="btn">
+</form>
+<script type="text/javascript">
+    var d = document,
+        form1 = d.getElementById('form1'),
+        txt = d.getElementById('txt'),
+        sbtn = d.getElementById('sbtn'),
+        btn = d.getElementById('btn');
+<pre><code>    // 检测文本框内容是否为空
+    function checkIsNull()&#123;
+        if(txt.value === &quot;&quot;)&#123;
+            return false;
+        &#125;else&#123;
+            return true;
+        &#125;
+    &#125;
+</code></pre>
+</script>
+</body>
+</html>
+<p>对于第三种方法，实现阻止表单提交最简单，只要条件不符合就不调用form标签的submit()方法即可</p>
+<pre><code>    btn.addEventListener('click',function(e)&#123;
+        if(checkIsNull())&#123;
+            form1.submit();
+        &#125;else&#123;
+            alert('文本框内容不能为空');
+        &#125;
+    &#125;);
+</code></pre>
+<p>对于第二种方法和第一种方法，就有比较多的可能性了</p>
+<h3 id="直接绑定到标签属性上">直接绑定到标签属性上</h3>
+<p>如果是使用直接绑定到标签属性上的方法，则第一和第二种方法都可以简单的使用return false;的方法去阻止表单提交。</p>
+<pre><code>    form1.onsubmit = function(e)&#123;
+        if(checkIsNull())&#123;
+            return true;
+        &#125;else&#123;
+            alert('文本框内容不能为空');
+            return false;
+        &#125;
+    &#125;;
+</code></pre>
+<p></p>
+<pre><code>    sbtn.onclick = function(e)&#123;
+        if(checkIsNull())&#123;
+            return true;
+        &#125;else&#123;
+            alert('文本框内容不能为空');
+            return false;
+        &#125;
+    &#125;;
+</code></pre>
+<p>这种直接注册到标签属性上的方法，方法内部的return false;就会直接作用到整个事件上，这一点我是在下面这个文章里面看到的，有兴趣的同学可以看看，传送门：<a target="_blank" rel="noopener" href="http://www.cnblogs.com/yoyozhou/archive/2007/02/12/648375.html" title="传送门：由表单中onsubmit=">由表单中onsubmit=&quot;return false;&quot;想到的</a></p>
+<p>可是这种事件注册有个缺点就是没有办法给同一个标签的同一个事件注册多个回调函数函数，这个在某些情况下还是不行的。然后就是通过addEventListener(IE下面是attachEvent)</p>
+<h3 id="通过addEventListener-attachEvent注册事件">通过addEventListener/attachEvent注册事件</h3>
+<p>通过addEventListener方法注册的事件的回调函数，假设是:</p>
+<p>form.addeventListener(‘submit’,function doSubmit(e){<br>
+return false;<br>
+},false);</p>
+<p>其实就类似于：</p>
+<p>form.onsubmit = function(e){<br>
+doSubmit();<br>
+}</p>
+<p>所以doSubmit()内部的return false;是没办法影响到整个事件的浏览器默认动作</p>
+<p>这个时候，在非IE浏览器下，回调函数函数可以通过传入的event，调用该event对象的preventDefault()方法阻止浏览器的默认动作；如果是在IE浏览器下，则是通过window.event.returnValue = false;方法来阻止浏览器的默认动作。（这段内容参考的网站，传送门：<a target="_blank" rel="noopener" href="http://blog.csdn.net/shanliangliuxing/article/details/7091886" title="js阻止浏览器的默认行为以及停止事件冒泡（用JQuery实现回车提交，兼容IE、FF浏览器）">js阻止浏览器的默认行为以及停止事件冒泡（用JQuery实现回车提交，兼容IE、FF浏览器）</a>） 所以可行的代码如下：</p>
+<pre><code>    function doSubmit(e)&#123;
+        if(checkIsNull())&#123;
+            return true;
+        &#125;else&#123;
+            alert('文本框内容不能为空');
+            //如果提供了事件对象，则这是一个非IE浏览器 
+            if(e &amp;&amp; e.preventDefault)&#123;
+                //阻止默认浏览器动作(W3C)
+                e.preventDefault();
+            &#125;else&#123;
+                //IE中阻止函数器默认动作的方式 
+                window.event.returnValue = false;
+            &#125;
+        &#125;
+    &#125;
+
+    // 判断是否支持IE的注册事件方法，如果支持则是IE浏览器，使用attachEvent进行事件注册
+    if(sbtn.attachEvent)&#123;
+        // attachEvent不支持捕捉，所以只有两个参数
+        sbtn.attachEvent('click',doSubmit)
+    &#125;else&#123;
+        sbtn.addEventListener('click',duSubmit,false);
+    &#125;
+</code></pre>
+<p>form标签的submit事件也是类似的，就不重复写了</p>
+<h2 id="总结">总结</h2>
+<p>return false;是能够阻止表单提交的，不过只能针对直接注册事件到标签属性上面的情况。对于addEventListener/attachEvent注册的事件，则需要通过event.preventDefaule()或window.event.returnValue=false的方式阻止表单的提交。针对其他浏览器默认行为，也大体上类似</p>
+
+                <div class="copyright-notice">
+<div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://www.shuizhongyueming.com/2013/04/21/about-stop-the-submit-of-form/" title="https://www.shuizhongyueming.com/2013/04/21/about-stop-the-submit-of-form/">https://www.shuizhongyueming.com/2013/04/21/about-stop-the-submit-of-form/</a></div>
+                </div>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2013/05/04/lost/" data-toggle="tooltip" data-placement="top"
+                           title="lost">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2013/04/17/know-what-you-are-doing/" data-toggle="tooltip" data-placement="top"
+                           title="要明白自己在干什么">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr class="popular-posts-split">
+                <script data-ad-client="ca-pub-3438190576149990" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <hr class="popular-posts-split">
+                <h2 class="popular-posts-title">相关推荐</h2>
+                <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2013\03\17\getelementbytagname-is-not-only-belong-to-docuemnt\" title="getElementsByTagName不是document的专利" rel="bookmark">getElementsByTagName不是document的专利</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2018\06\13\canvas里面如何基于随机点绘制一个多边形\" title="canvas里面如何基于随机点绘制一个多边形" rel="bookmark">canvas里面如何基于随机点绘制一个多边形</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2013\03\17\how-the-code-be-encode-before-the-javascript-parse-it\" title="JavaScript中文字符进行大小的比较" rel="bookmark">JavaScript中文字符进行大小的比较</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2015\06\19\intro-to-the-method-sort-of-array-in-javascript\" title="关于javascript里面数组的sort方法" rel="bookmark">关于javascript里面数组的sort方法</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2014\10\14\maintainable-javascript-of-statement-and-expression\" title="编写可维护的JavaScript-语句和表达式" rel="bookmark">编写可维护的JavaScript-语句和表达式</a></h3></div></li></ul>
+
+                <hr>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-text">起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%A8%E5%8D%95%E6%8F%90%E4%BA%A4%E5%89%8D%E5%88%A4%E6%96%AD%E7%9A%84%E5%B8%B8%E7%94%A8%E5%81%9A%E6%B3%95"><span class="toc-text">表单提交前判断的常用做法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B4%E6%8E%A5%E7%BB%91%E5%AE%9A%E5%88%B0%E6%A0%87%E7%AD%BE%E5%B1%9E%E6%80%A7%E4%B8%8A"><span class="toc-text">直接绑定到标签属性上</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9A%E8%BF%87addEventListener-attachEvent%E6%B3%A8%E5%86%8C%E4%BA%8B%E4%BB%B6"><span class="toc-text">通过addEventListener&#x2F;attachEvent注册事件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://refined-x.com/">前端路上</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shui-zhong-yue-ming-de-blog";
+    var disqus_config = function () {
+        this.page.url = "https://www.shuizhongyueming.com/2013/04/21/about-stop-the-submit-of-form/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "174 https://www.shuizhongyueming.com/?p=174"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var d = document;
+        var dsq = d.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.defer = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(dsq);
+    });
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/shuizhongyue91">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/水中月明">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/如风轻吟1991">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/shuizhongyueming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 水中月明的Blog 2021
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://www.shuizhongyueming.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+$('pre').each(function(i, tag) {
+    $(this).addClass('prettyprint')
+})
+</script>
+<script async src="https://cdn.imagehost.top/wp-content/uploads/2019/02/google-code-prettify/run_prettify.js?skin=desert"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="https://cdn.imagehost.top/ipic/t0yg1.png-q60">
+</body>
+
+</html>

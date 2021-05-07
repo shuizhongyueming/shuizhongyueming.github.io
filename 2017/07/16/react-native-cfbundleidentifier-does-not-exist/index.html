@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="技术人的博客, 说技术人的事">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NVHB3R');</script>
+    <!-- End Google Tag Manager -->
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css">
+    <title>
+        
+        React Native错误: &#34;:CFBundleIdentifier&#34;, Does Not Exist｜水中月明的Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://www.shuizhongyueming.com/2017/07/16/react-native-cfbundleidentifier-does-not-exist/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="" class="animated fadeIn">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true"
+    data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    水中月明的Blog
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    //    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function () {
+                // prevent frequently toggle
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+    <!-- Main Content -->
+    
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.imagehost.top/default-background-1920x640.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.imagehost.top/default-background-1920x640.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>React Native错误: &#34;:CFBundleIdentifier&#34;, Does Not Exist</h1>
+                    
+                    <span class="meta">
+                         作者 happyWang
+                        <span>
+                          日期 2017-07-16
+                         </span>
+                        <span id="busuanzi_container_page_pv">
+                         浏览量 <i id="busuanzi_value_page_pv"></i>
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#CFBundleIdentifier"
+                           title="CFBundleIdentifier">CFBundleIdentifier</a>
+                        
+                        <a class="tag" href="/tags/#curl"
+                           title="curl">curl</a>
+                        
+                        <a class="tag" href="/tags/#double-conversion.build"
+                           title="double-conversion.build">double-conversion.build</a>
+                        
+                        <a class="tag" href="/tags/#react native"
+                           title="react native">react native</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            React Native错误: ":CFBundleIdentifier", Does Not Exist
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>最近项目需要，决定入手React Native。</p>
+<p>第一步要做的肯定就是能在本机顺利的把官网的<a target="_blank" rel="noopener" href="https://facebook.github.io/react-native/docs/getting-started.html">Quick Start</a> 跑出来.</p>
+<p>先说一下本机的环境：</p>
+<ul>
+<li>系统: macOS Sierra 10.12.5</li>
+<li>NodeJs: 8.1.0</li>
+<li>Xcode: 8.3.3 (8E3004b)</li>
+<li>react-native-cli: 2.0.1</li>
+<li>react-native: 0.45.1</li>
+</ul>
+<h2 id="构建过程">构建过程</h2>
+<p>官网是用的<code>brew</code>来安装<code>node</code>，但是我这边根据日常开发的需要，会在多个Node版本之间切换，所以我是用的<code>nvm</code></p>
+<p>接下来是<code>watchman</code>和<code>react-native-cli</code>，都是按照教程来一步一步安装</p>
+<pre><code>brew install watchman
+npm install -g react-native-cli
+</code></pre>
+<p>然后是初始化和启动项目</p>
+<pre><code>react-native init AwesomeProject
+cd AwesomeProject
+react-native run-ios
+</code></pre>
+<p>然后就出错了：<strong>“:CFBundleIdentifier”, Does Not Exist</strong></p>
+<h2 id="debug过程">debug过程</h2>
+<p>先是在github上面找到了一个同样错误的<a target="_blank" rel="noopener" href="https://github.com/facebook/react-native/issues/7308">issue</a>，发现有这个错误的人很多，给的解释也不少</p>
+<h3 id="端口占用">端口占用</h3>
+<p>端口8081被别的程序占用了</p>
+<pre><code>lsof -n -i4TCP:8081
+node    7601 CXI624   23u  IPv6 0xc6b249599e5f1169      0t0  TCP *:sunproxyadmin (LISTEN)
+kill - 9 7601 
+</code></pre>
+<p>这里面的7601只是一种情况，具体看真实占用这个端口的是什么程序。</p>
+<p>我这边可以确定不是，所以pass</p>
+<h3 id="重买一台mac解决了">重买一台mac解决了</h3>
+<p>这… 没钱，pass</p>
+<h3 id="react-native-upgrade">react-native upgrade</h3>
+<p>更新<code>react-native</code>到最新版</p>
+<p>我这刚刚下载的，肯定最新版没毛病</p>
+<h3 id="sudo">sudo</h3>
+<pre><code>sudo react-native run-ios
+</code></pre>
+<p>这个我是不太想用的，因为用了之后，以后基本都得用sudo，比较麻烦，等确认没别的解决方式再考虑</p>
+<h3 id="尝试调整Xcode的配置：">尝试调整Xcode的配置：</h3>
+<ol>
+<li>Go to File -&gt; Project settings</li>
+<li>Click the Advanced button</li>
+<li>Select “Custom” and select “Relative to Workspace” in the pull down</li>
+<li>click done, done</li>
+</ol>
+<p><img src="https://cdn.imagehost.top/ipic/w88n6.jpg" alt=""></p>
+<p>按照上面的做了一下，然后直接基于Xcode来运行程序</p>
+<p>结果又出了新的问题 <strong>double-conversion.build failed</strong> 然后是在这个<a target="_blank" rel="noopener" href="https://github.com/facebook/react-native/issues/14368">issue</a>下找到了问题的解决方式：</p>
+<pre><code>rm -r ~/.rncache
+rm -r &lt;your-project&gt;/node_modules/react-native/third_party
+</code></pre>
+<p>不过最终的编译还是失败。</p>
+<h3 id="网络问题">网络问题</h3>
+<p>最后在刚刚的那个issue里面找到了那么一段话：</p>
+<blockquote>
+<p>The problem is when building react-native for iOS, the process tries to download some files (using curl) into /.rncache. Specifically, they are “boost1630.tar.gz, double-conversion-1.1.5.tar.gz folly-2016.09.26.00.tar.gz, glog-0.3.4.tar.gz”. The sources of them (at least some of them) are from AWS S3, which aren’t accessible in some regions (I’m from China). And that caused the problem. By using a proxy server and setting the http_proxy and https_proxy environment variables, curl will go through the proxy and the build should succeed. This is not a problem with React Native. This issue can be closed now.</p>
+</blockquote>
+<p>是说的在build的时候，会从AWS S3里面下载一些资源，但是在咱们国内，很多时候是访问不到这些资源的，也自然就导致了一些文件的缺损。</p>
+<p>作者在后面给的方式是给curl配置代理，具体看<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/9445489/linux-curl-command-with-proxy">https://stackoverflow.com/questions/9445489/linux-curl-command-with-proxy</a>。</p>
+<p>不过我这边用了另外一种方式，把我的蓝灯设置为代理全部流量，接着</p>
+<pre><code>rm -r ~/.rncache
+rm -r &lt;your-project&gt;/node_modules/
+</code></pre>
+<p>把所有资源删掉，然后重新编译。</p>
+<p>最后，成功编译通过！！</p>
+<p><img src="https://cdn.imagehost.top/ipic/8wrn7.jpg" alt=""></p>
+
+                <div class="copyright-notice">
+<div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://www.shuizhongyueming.com/2017/07/16/react-native-cfbundleidentifier-does-not-exist/" title="https://www.shuizhongyueming.com/2017/07/16/react-native-cfbundleidentifier-does-not-exist/">https://www.shuizhongyueming.com/2017/07/16/react-native-cfbundleidentifier-does-not-exist/</a></div>
+                </div>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/11/06/博客搬迁2017/" data-toggle="tooltip" data-placement="top"
+                           title="博客搬迁2017">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/06/10/python-error-module-shutil-has-no-attribute-copy/" data-toggle="tooltip" data-placement="top"
+                           title="python错误:module 'shutil' has no attribute 'copy'">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr class="popular-posts-split">
+                <script data-ad-client="ca-pub-3438190576149990" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <hr class="popular-posts-split">
+                <h2 class="popular-posts-title">相关推荐</h2>
+                
+
+                <hr>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9E%84%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="toc-text">构建过程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#debug%E8%BF%87%E7%A8%8B"><span class="toc-text">debug过程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E5%8D%A0%E7%94%A8"><span class="toc-text">端口占用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E4%B9%B0%E4%B8%80%E5%8F%B0mac%E8%A7%A3%E5%86%B3%E4%BA%86"><span class="toc-text">重买一台mac解决了</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#react-native-upgrade"><span class="toc-text">react-native upgrade</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sudo"><span class="toc-text">sudo</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%9D%E8%AF%95%E8%B0%83%E6%95%B4Xcode%E7%9A%84%E9%85%8D%E7%BD%AE%EF%BC%9A"><span class="toc-text">尝试调整Xcode的配置：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E9%97%AE%E9%A2%98"><span class="toc-text">网络问题</span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://refined-x.com/">前端路上</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shui-zhong-yue-ming-de-blog";
+    var disqus_config = function () {
+        this.page.url = "https://www.shuizhongyueming.com/2017/07/16/react-native-cfbundleidentifier-does-not-exist/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "757 https://www.shuizhongyueming.com/?p=757"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var d = document;
+        var dsq = d.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.defer = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(dsq);
+    });
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/shuizhongyue91">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/水中月明">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/如风轻吟1991">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/shuizhongyueming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 水中月明的Blog 2021
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://www.shuizhongyueming.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+$('pre').each(function(i, tag) {
+    $(this).addClass('prettyprint')
+})
+</script>
+<script async src="https://cdn.imagehost.top/wp-content/uploads/2019/02/google-code-prettify/run_prettify.js?skin=desert"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="https://cdn.imagehost.top/ipic/t0yg1.png-q60">
+</body>
+
+</html>

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="技术人的博客, 说技术人的事">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NVHB3R');</script>
+    <!-- End Google Tag Manager -->
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css">
+    <title>
+        
+        Web端打开APP功能的实现｜水中月明的Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://www.shuizhongyueming.com/2017/03/31/web端打开app功能的实现/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="" class="animated fadeIn">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true"
+    data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    水中月明的Blog
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    //    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function () {
+                // prevent frequently toggle
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+    <!-- Main Content -->
+    
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.imagehost.top/default-background-1920x640.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.imagehost.top/default-background-1920x640.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Web端打开APP功能的实现</h1>
+                    
+                    <span class="meta">
+                         作者 happyWang
+                        <span>
+                          日期 2017-03-31
+                         </span>
+                        <span id="busuanzi_container_page_pv">
+                         浏览量 <i id="busuanzi_value_page_pv"></i>
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#App"
+                           title="App">App</a>
+                        
+                        <a class="tag" href="/tags/#android"
+                           title="android">android</a>
+                        
+                        <a class="tag" href="/tags/#ios"
+                           title="ios">ios</a>
+                        
+                        <a class="tag" href="/tags/#url scheme"
+                           title="url scheme">url scheme</a>
+                        
+                        <a class="tag" href="/tags/#web"
+                           title="web">web</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            Web端打开APP功能的实现
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>这两天公司开始发力做APP的推广，很多活动页和移动端站点需要加上打开APP的功能，如果没安装则提示用户下载。</p>
+<p>首先，<strong>基于隐私保护的目的，浏览器是不会提供接口给网页去获取系统上安装了的APP的列表</strong>。</p>
+<p>然后很多产品经理会在提需求的时候有一种洁癖，希望网页上那个可供用户点击的按钮，在已安装APP的时候是<strong>打开</strong>，在未安装的时候是<strong>下载</strong>。</p>
+<h2 id="早先的做法">早先的做法</h2>
+<p>为了应对这样的需求，前端程序员们想出了一个很棒的方法，利用<strong>浏览器进驻后台之后会暂停js的执行</strong>这一特性，顺利实现了对是否安装了自己公司APP的探测。具体实现如下：</p>
+<p>在用户点击或者进入页面时候，记录一个当前时间<strong>time1</strong>，然后设置一个300ms的timeout，在timeout的回调里面记录时间<strong>time2</strong>，接着就用location.href直接指向对应APP已经配置的url scheme。</p>
+<p>如果<strong>time1</strong>与<strong>time2</strong>的时间差超过400ms(考虑到setTimeout本身的误差)就认为安装了APP，不需要处理，否则则是没安装，提示下载或者自动下载。</p>
+<p>因为，如果用户安装了对应的APP，那么会自动的跳转到APP的界面，浏览器这边的计时会被中断，等下次用户偶然再使用浏览器的时候，计时继续，会触发setTimeout的回调，不过这个时候<strong>time1</strong>与<strong>time2</strong>的时间差就远大于300ms了。</p>
+<p>如果用户没有安装对应APP就不会发生跳转，setTimeout也就自然在规定时间内运行回调了。</p>
+<p>这种方法曾经是非常有效果的，不过现在会有些问题了。</p>
+<p>首先是安卓下，有些浏览器，比如UC会在网页试图打开APP的时候阻断这个行为并弹出一个select弹窗，让用户选择是否打开，是否始终打开等等。</p>
+<p><img src="https://cdn.imagehost.top/ipic/bccre.jpg" alt="UC的select弹窗"></p>
+<p>但是这个弹窗并没有像alert那样阻塞js的执行，也就是说setTimeout会正常进行，在用户犹豫怎么选择的时候，300ms就过了，页面就自动跳转了下载页。</p>
+<p>接着是IOS这边，到IOS10之后，如果已经安装了对应的APP，浏览器也会在网页尝试打开APP的时候弹出一个confirm窗，让用户选择是否打开对应的APP。</p>
+<p><img src="https://cdn.imagehost.top/ipic/t5533.jpg" alt="已安装：确认窗提示是否打开APP"></p>
+<p>如果没有安装对应APP，就会实现一个很丑陋的网页无法打开此链家的错误alert窗。</p>
+<p><img src="https://cdn.imagehost.top/ipic/csl1i.jpg" alt="未安装：提示网址无效"></p>
+<p>而且这两个窗口也是没有阻断js脚本的执行的，setTimeout也是同样正常进行中。</p>
+<p>尝试过把300ms的时间改成3000ms，去预想用户可以在3秒内在浏览器的选择窗内做好选择。可是仔细一想，这种预想又是非常不靠谱的，永远没法猜测用户的未知行为，而且3000ms的响应延迟也是非常不好的交互体验。</p>
+<h2 id="是时候去调整思路了">是时候去调整思路了</h2>
+<p><strong>如果浏览器不希望我们知道设备上是否已经安装了对应的APP，那就不尝试去知晓。</strong></p>
+<p>目前我们的做法是：在用户通过点击或者别的行为触发了打开APP的策略的时候，首先是尝试直接访问url scheme，在这同时，展现一个弹窗，里面包含一个APP的介绍文案，然后底部是两个按钮，<code>下载APP</code>和<code>打开APP</code>。</p>
+<p>下面是天猫的做法，很值得借鉴：</p>
+<p><img src="https://cdn.imagehost.top/ipic/xn9qr.jpg" alt="先尝试跳转"></p>
+<p><img src="https://cdn.imagehost.top/ipic/85ywo.jpg" alt="同时显示下载和打开"></p>
+<p>这样做的好处是：如果用户已经安装了APP，那么就直接跳转了，弹窗对用户不会有任何的影响；如果没有安装，或者用户安装了，但是因为不想跳转或者误操作没有跳转，则用户在关闭了浏览器的错误提示之后，看到弹窗，能大概理解之前的浏览器的行为是什么意思，同时可以再次选择打开或者下载APP。</p>
+<p>同时，如果是进入页面立马就跳转的行为，最好能有一个次数限制，不然一个高频访问的页面，每进入一次都有这样一个弹窗，明摆着是想赶用户走了啊</p>
+
+                <div class="copyright-notice">
+<div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://www.shuizhongyueming.com/2017/03/31/web%E7%AB%AF%E6%89%93%E5%BC%80app%E5%8A%9F%E8%83%BD%E7%9A%84%E5%AE%9E%E7%8E%B0/" title="https://www.shuizhongyueming.com/2017/03/31/web%E7%AB%AF%E6%89%93%E5%BC%80app%E5%8A%9F%E8%83%BD%E7%9A%84%E5%AE%9E%E7%8E%B0/">https://www.shuizhongyueming.com/2017/03/31/web%E7%AB%AF%E6%89%93%E5%BC%80app%E5%8A%9F%E8%83%BD%E7%9A%84%E5%AE%9E%E7%8E%B0/</a></div>
+                </div>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/04/15/关于我的口才/" data-toggle="tooltip" data-placement="top"
+                           title="关于我的口才">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/03/15/webpack的target选项的作用/" data-toggle="tooltip" data-placement="top"
+                           title="webpack的target选项的作用">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr class="popular-posts-split">
+                <script data-ad-client="ca-pub-3438190576149990" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <hr class="popular-posts-split">
+                <h2 class="popular-posts-title">相关推荐</h2>
+                <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2013\12\09\fix-the-fullscreen-problem-for-phonegap-app-in-ios7\" title="修复在IOS7下面，PhoneGap App的全屏问题" rel="bookmark">修复在IOS7下面，PhoneGap App的全屏问题</a></h3></div></li></ul>
+
+                <hr>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A9%E5%85%88%E7%9A%84%E5%81%9A%E6%B3%95"><span class="toc-text">早先的做法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%98%AF%E6%97%B6%E5%80%99%E5%8E%BB%E8%B0%83%E6%95%B4%E6%80%9D%E8%B7%AF%E4%BA%86"><span class="toc-text">是时候去调整思路了</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://refined-x.com/">前端路上</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shui-zhong-yue-ming-de-blog";
+    var disqus_config = function () {
+        this.page.url = "https://www.shuizhongyueming.com/2017/03/31/web%E7%AB%AF%E6%89%93%E5%BC%80app%E5%8A%9F%E8%83%BD%E7%9A%84%E5%AE%9E%E7%8E%B0/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "715 https://www.shuizhongyueming.com/?p=715"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var d = document;
+        var dsq = d.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.defer = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(dsq);
+    });
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/shuizhongyue91">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/水中月明">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/如风轻吟1991">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/shuizhongyueming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 水中月明的Blog 2021
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://www.shuizhongyueming.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+$('pre').each(function(i, tag) {
+    $(this).addClass('prettyprint')
+})
+</script>
+<script async src="https://cdn.imagehost.top/wp-content/uploads/2019/02/google-code-prettify/run_prettify.js?skin=desert"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="https://cdn.imagehost.top/ipic/t0yg1.png-q60">
+</body>
+
+</html>

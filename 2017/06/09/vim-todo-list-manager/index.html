@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="技术人的博客, 说技术人的事">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png">
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NVHB3R');</script>
+    <!-- End Google Tag Manager -->
+
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css">
+    <title>
+        
+        在Vim里面列出TODO和FIXME等备注｜水中月明的Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://www.shuizhongyueming.com/2017/06/09/vim-todo-list-manager/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
+
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="" class="animated fadeIn">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true"
+    data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    水中月明的Blog
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    //    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function () {
+                // prevent frequently toggle
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+    <!-- Main Content -->
+    
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.imagehost.top/default-background-1920x640.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.imagehost.top/default-background-1920x640.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>在Vim里面列出TODO和FIXME等备注</h1>
+                    
+                    <span class="meta">
+                         作者 happyWang
+                        <span>
+                          日期 2017-06-09
+                         </span>
+                        <span id="busuanzi_container_page_pv">
+                         浏览量 <i id="busuanzi_value_page_pv"></i>
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#vim"
+                           title="vim">vim</a>
+                        
+                        <a class="tag" href="/tags/#vimrc"
+                           title="vimrc">vimrc</a>
+                        
+                        <a class="tag" href="/tags/#ack"
+                           title="ack">ack</a>
+                        
+                        <a class="tag" href="/tags/#ag"
+                           title="ag">ag</a>
+                        
+                        <a class="tag" href="/tags/#TODO"
+                           title="TODO">TODO</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            在Vim里面列出TODO和FIXME等备注
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>很多程序员，包括我，会在写代码的时候，习惯性的用<strong>TODO</strong>, <strong>FIXME</strong>, <strong>HACK</strong>等作为一些注释的前缀。这样方便自己和后来者预先知道相关注释和代码的状况</p>
+<p>不过这样的备注只有是以后恰巧看到这段代码的时候才能看到，没法在一次发版或者空闲的时候，有一个直观的界面能看到这个项目里面所有这样的关键词。</p>
+<p>这个时候一个简单的自定义命令兴许能帮到你：</p>
+<pre><code>command Todo Ack! 'TODO\|FIXME'
+</code></pre>
+<p>效果如下：</p>
+<p><img src="https://cdn.imagehost.top/ipic/agkxl.jpg" alt=""></p>
+<p>不过要想使这条命令生效，需要一些环境准备工作</p>
+<h2 id="Ack">Ack</h2>
+<p>首先我们需要安装<code>Ack</code>或者<code>Ag</code>，这两个都是命令行下的一个全局搜索工具，比系统自带的<code>grep</code>要快很多的。</p>
+<p>这里的安装以<code>Ag</code>为例，因为这个是基于C来重写的<code>Ack</code>并新增了很多特性，效率也是比<code>Ack</code>快了很多的。</p>
+<pre><code># OSX
+brew install the_silver_searcher
+# Archlinux
+pacman -S the_silver_searcher
+# Ubuntu
+apt-get install silversearcher-ag
+</code></pre>
+<p>在安装完成之后，就可以在shell里面测试一下</p>
+<pre><code>ag TODO ./
+</code></pre>
+<h2 id="Ack-vim">Ack.vim</h2>
+<p><a target="_blank" rel="noopener" href="https://github.com/mileszs/ack.vim">Ack.vim</a>是一款插件，用来方便在Vim里面使用<code>Ack</code>/<code>Ag</code>,</p>
+<p>然后通过<a target="_blank" rel="noopener" href="http://vimdoc.sourceforge.net/htmldoc/quickfix.html#quickfix">Quickfix</a>来提供搜索结果</p>
+<p>不过这款插件，默认是使用的<code>Ack</code>作为搜索引擎，为了能用上我们刚刚安装的<code>Ag</code>，需要在<code>~/.vimrc</code>里面作一些配置：</p>
+<pre><code>if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+</code></pre>
+<p>这段配置是引用的官方仓库的Readme</p>
+<p>不过也看很多人是用的</p>
+<pre><code>if executable('ag')
+  let g:ackprg = 'ag --nogroup --nocolor --column'
+endif
+</code></pre>
+<p>本人测试之后，发现二者并没有什么区别。可能对于<code>Ag</code>来说 <code>--vimgrep</code>是等同于<code>--nogroup --nocolor --column </code>的。</p>
+<p>这个时候在Vim的命令行里面输入</p>
+<pre><code>:Ack! TODO 
+</code></pre>
+<p>是可以实现上图所示效果的，而且还可以通过</p>
+<pre><code>:AckAdd FIXME
+</code></pre>
+<p>这样的方式来附加其它要查看的。</p>
+<p>不过这样的方式，命令还是有点长。所以配置一个alias来替代上面的命令，是一个比较符合懒人的想法 在<code>~/.vimrc</code>里面新增</p>
+<pre><code>command Todo Ack! 'TODO\|FIXME'
+</code></pre>
+<p>然后在Vim的命令行里面输入：</p>
+<pre><code>:Todo
+</code></pre>
+<p>就能实现列出当前项目里面的所有<strong>TODO</strong>,<strong>FIXME</strong>了，而且可以根据自己的需要来扩展这样的关键字，像我就扩展为如下代码：</p>
+<pre><code>command Todo Ack! 'TODO|FIXME|CHANGED|BUG|HACK'
+command Debug Ack! 'NOTE|INFO|IDEA'
+</code></pre>
+<p>区分了Todo和Debug两种功能。</p>
+<h2 id="高亮">高亮</h2>
+<p>Vim里面会自动的高亮<strong>TODO</strong>、<strong>FIXME</strong>，但是不会高亮<strong>CHANGED</strong>这样的关键字，所以需要手动的来指定一下，在<code>~/.vimrc</code>里面添加如下配置：</p>
+<pre><code>if has(&quot;autocmd&quot;)
+  &quot; Highlight TODO, FIXME, NOTE, etc.
+  if v:version &gt; 701
+    autocmd Syntax * call matchadd('Todo',  '\W\zs\(TODO\|FIXME\|CHANGED\|BUG\|HACK\)')
+    autocmd Syntax * call matchadd('Debug', '\W\zs\(NOTE\|INFO\|IDEA\)')
+  endif
+endif
+</code></pre>
+<p>上面这段代码是摘抄的，具体的功能就是匹配TODO等关键字，然后加上语法高亮。</p>
+<p>综上，一个简单好用的TODO管理器就已经完成了。</p>
+<h2 id="参考资料">参考资料</h2>
+<p>上文里面的绝大部分代码都是从以下资料里面摘抄拼凑的，对于Vim，我还只是一个懵懵懂懂的拿来主义者。</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://coderwall.com/p/prfnnw/vim-to-do-list">https://coderwall.com/p/prfnnw/vim-to-do-list</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/6577579/task-tags-in-vim">https://stackoverflow.com/questions/6577579/task-tags-in-vim</a></li>
+<li><a target="_blank" rel="noopener" href="http://harttle.com/2015/12/21/vim-search.html">http://harttle.com/2015/12/21/vim-search.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/mileszs/ack.vim">https://github.com/mileszs/ack.vim</a></li>
+<li><a target="_blank" rel="noopener" href="http://betterthanack.com/">http://betterthanack.com/</a></li>
+</ol>
+
+                <div class="copyright-notice">
+<div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://www.shuizhongyueming.com/2017/06/09/vim-todo-list-manager/" title="https://www.shuizhongyueming.com/2017/06/09/vim-todo-list-manager/">https://www.shuizhongyueming.com/2017/06/09/vim-todo-list-manager/</a></div>
+                </div>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/06/10/python-error-module-shutil-has-no-attribute-copy/" data-toggle="tooltip" data-placement="top"
+                           title="python错误:module 'shutil' has no attribute 'copy'">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/05/27/用python实现ftp文件上传/" data-toggle="tooltip" data-placement="top"
+                           title="用Python实现FTP文件上传">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr class="popular-posts-split">
+                <script data-ad-client="ca-pub-3438190576149990" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <hr class="popular-posts-split">
+                <h2 class="popular-posts-title">相关推荐</h2>
+                <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2014\07\22\share-my-vim-config\" title="分享我的vim配置" rel="bookmark">分享我的vim配置</a></h3></div></li></ul>
+
+                <hr>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Ack"><span class="toc-text">Ack</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ack-vim"><span class="toc-text">Ack.vim</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%AB%98%E4%BA%AE"><span class="toc-text">高亮</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://refined-x.com/">前端路上</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shui-zhong-yue-ming-de-blog";
+    var disqus_config = function () {
+        this.page.url = "https://www.shuizhongyueming.com/2017/06/09/vim-todo-list-manager/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "744 https://www.shuizhongyueming.com/?p=744"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var d = document;
+        var dsq = d.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.defer = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(dsq);
+    });
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/shuizhongyue91">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/水中月明">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/如风轻吟1991">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/shuizhongyueming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 水中月明的Blog 2021
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://www.shuizhongyueming.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+$('pre').each(function(i, tag) {
+    $(this).addClass('prettyprint')
+})
+</script>
+<script async src="https://cdn.imagehost.top/wp-content/uploads/2019/02/google-code-prettify/run_prettify.js?skin=desert"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="https://cdn.imagehost.top/ipic/t0yg1.png-q60">
+</body>
+
+</html>
