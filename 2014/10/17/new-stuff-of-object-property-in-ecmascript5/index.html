@@ -200,10 +200,10 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <p><img src="https://cdn.imagehost.top/wp-content/uploads/2014/10/ecmascript5-defineProperty.png" alt="ecmascript5-defineProperty"></p>
-<p>在ECMAScript3中，对象的属性是很简单的，可读可写可遍历，也不存在公有私有的说法。</p>
+<p>在ECMAScript3中，对象的属性是很简单的，可读可写可遍历，也不存在公有私有的说法。 </p>
 <p>为了实现只读变量，很多时候不得不依赖闭包。</p>
 <pre><code>var o = (function()&#123;
-    var readOnlyVarible = '我是只读的';
+    var readOnlyVarible = &#39;我是只读的&#39;;
         
     return &#123;
         getReadAbleVarible = function()&#123;
@@ -217,27 +217,28 @@
 <blockquote>
 <p><code>configurable</code> 当且仅当这个属性描述符值为 true 时，该属性可能会改变，也可能会被从相应的对象删除。<strong>默认为 false</strong>。 <code>enumerable</code> true 当且仅当该属性出现在相应的对象枚举属性中。<strong>默认为 false</strong>。 数据描述符同时具有以下可选键值： <code>value</code> 与属性相关的值。可以是任何有效的 JavaScript 值（数值，对象，函数等）。<strong>默认为 undefined</strong>。 <code>writable</code> true 当且仅当可能用 赋值运算符 改变与属性相关的值。<strong>默认为 false</strong>。</p>
 </blockquote>
-<p>上述的默认值是指的用Object.defineProperty()方法创建属性的时候的默认值，而不是通常那种直接量或者.的方式创建的属性的默认值，使用后者创建属性的时候，三个bool型的描述符的值都是true。</p>
+<p>上述的默认值是指的用Object.defineProperty()方法创建属性的时候的默认值，而不是通常那种直接量或者.的方式创建的属性的默认值，使用后者创建属性的时候，三个bool型的描述符的值都是true。 </p>
 <p>有了这新增的三个描述符之后，在创建只读属性的时候就方便多了</p>
 <pre><code>var o = &#123;&#125;;
 
-Object.defineProperty(o,'readOnlyVarible',&#123;
+Object.defineProperty(o,&#39;readOnlyVarible&#39;,&#123;
     writable: false,
     enumberable: true,
     configurable: false, // 防止修改可写性
-    value: '我是只读的'
+    value: &#39;我是只读的&#39;
 &#125;);
 </code></pre>
 <p>或者下面这种方式（把一个已经定义的属性设置为只读的）</p>
 <pre><code>var o = &#123;&#125;;
 
-o.readOnlyVarible = '我是只读的'
+o.readOnlyVarible = &#39;我是只读的&#39;
 
-Object.defineProperty(o,'readOnlyVarible',&#123;
+Object.defineProperty(o,&#39;readOnlyVarible&#39;,&#123;
     writable: false,
     enumberable: true,
     configurable: false // 防止修改可写性
-&#125;);</code></pre>
+&#125;);
+</code></pre>
 
                 <div class="copyright-notice">
 <div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
@@ -262,7 +263,16 @@ Object.defineProperty(o,'readOnlyVarible',&#123;
                 </ul>
 
                 <hr class="popular-posts-split">
-                <script data-ad-client="ca-pub-3438190576149990" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                    style="display:block; text-align:center;"
+                    data-ad-layout="in-article"
+                    data-ad-format="fluid"
+                    data-ad-client="ca-pub-3438190576149990"
+                    data-ad-slot="9181655524"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
                 <hr class="popular-posts-split">
                 <h2 class="popular-posts-title">相关推荐</h2>
                 

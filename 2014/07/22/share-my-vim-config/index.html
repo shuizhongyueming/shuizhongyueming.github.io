@@ -204,9 +204,9 @@ set modelines=0     &quot; CVE-2007-2438
 set nocompatible    &quot; Use Vim defaults instead of 100% vi compatibility
 set backspace=2     &quot; more powerful backspacing
 
-&quot; Don't write backup file if vim is being called by &quot;crontab -e&quot;
+&quot; Don&#39;t write backup file if vim is being called by &quot;crontab -e&quot;
 au BufWrite /private/tmp/crontab.* set nowritebackup
-&quot; Don't write backup file if vim is being called by &quot;chpass&quot;
+&quot; Don&#39;t write backup file if vim is being called by &quot;chpass&quot;
 au BufWrite /private/etc/pw.* set nowritebackup
 
 &quot; 自动语法高亮
@@ -265,13 +265,13 @@ set ofu=syntaxcomplete#Complete
 &quot;共享剪贴板
 &quot;set clipboard+=unnamed
 
-&quot; 实现 (、[、&#123;、&quot;、'  输入后自动补全右边部分，光标也会位于中间位置
+&quot; 实现 (、[、&#123;、&quot;、&#39;  输入后自动补全右边部分，光标也会位于中间位置
 inoremap ( ()i
 inoremap [ []i
 inoremap &#123; &#123;&#125;i
 inoremap &lt; &lt;&gt;i
 inoremap &quot; &quot;&quot;i
-inoremap ' ''i
+inoremap &#39; &#39;&#39;i
 
 &quot; 高亮显示匹配的括号
 set showmatch
@@ -305,7 +305,8 @@ au BufNewFile,BufRead *.less set filetype=less
 &quot; 始终显示状态行
 set ls=2 
 &quot;命令行补全以增强模式运行
-set wildmenu </code></pre>
+set wildmenu 
+</code></pre>
 
                 <div class="copyright-notice">
 <div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
@@ -330,7 +331,16 @@ set wildmenu </code></pre>
                 </ul>
 
                 <hr class="popular-posts-split">
-                <script data-ad-client="ca-pub-3438190576149990" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                    style="display:block; text-align:center;"
+                    data-ad-layout="in-article"
+                    data-ad-format="fluid"
+                    data-ad-client="ca-pub-3438190576149990"
+                    data-ad-slot="9181655524"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
                 <hr class="popular-posts-split">
                 <h2 class="popular-posts-title">相关推荐</h2>
                 <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2017\06\09\vim-todo-list-manager\" title="在Vim里面列出TODO和FIXME等备注" rel="bookmark">在Vim里面列出TODO和FIXME等备注</a></h3></div></li></ul>

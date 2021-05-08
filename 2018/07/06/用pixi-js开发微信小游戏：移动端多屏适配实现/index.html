@@ -214,11 +214,11 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>一直都是做网页开发，对于移动端的多屏适配可以说是比较有经验了，不管是用rem还是vw。不过在写游戏的时候，有点头疼了，完全不知道如何着手。</p>
-<p>游戏里面元素的位置变化比较频繁多变，一开始是想的所有的位移都是基准屏幕(iPhone 6)的尺寸加上屏幕变化的比率。可这样，光想想就很头疼，这种不优雅的解决方式，一定不是最优解。</p>
-<p>在网上搜索一番之后，大概明白大致的实现方案了：<strong>把页面主要元素都放到一个rootStage里面，再等比缩放这个rootStage，因为缩放是自动计算的，其它的所有运动和碰撞都可以基于rootStage的尺寸来进行，不需要考虑多屏适配。</strong></p>
-<p>具体实现如下：</p>
-<p>在pixi.js里面，有一个最基础的由Application实例化过来的stage, 先取名叫做app。</p>
+                <p>一直都是做网页开发，对于移动端的多屏适配可以说是比较有经验了，不管是用rem还是vw。不过在写游戏的时候，有点头疼了，完全不知道如何着手。 </p>
+<p>游戏里面元素的位置变化比较频繁多变，一开始是想的所有的位移都是基准屏幕(iPhone 6)的尺寸加上屏幕变化的比率。可这样，光想想就很头疼，这种不优雅的解决方式，一定不是最优解。 </p>
+<p>在网上搜索一番之后，大概明白大致的实现方案了：<strong>把页面主要元素都放到一个rootStage里面，再等比缩放这个rootStage，因为缩放是自动计算的，其它的所有运动和碰撞都可以基于rootStage的尺寸来进行，不需要考虑多屏适配。</strong> </p>
+<p>具体实现如下： </p>
+<p>在pixi.js里面，有一个最基础的由Application实例化过来的stage, 先取名叫做app。 </p>
 <p>这个app里面可以放置场景内容，背景色或者背景图片什么的。需要保证这个app是完全全屏的：</p>
 <pre><code>app = new Application(&#123;
   width: windowWidth * pixelRatio,
@@ -233,8 +233,8 @@ app.renderer.autoResize = true;
 app.renderer.resize(windowWidth, windowHeight);
 </code></pre>
 <p>新增一个Container，叫做rootStage，这个rootStage的width和height，是设计稿的尺寸，像我们这边都是基于iPhone6，也就是375 x 667。</p>
-<p>基于这个尺寸和app的尺寸，计算出一个rootStage可以以<strong>cover</strong>形式放置的尺寸。(cover尺寸是指的rootStage等比缩放，在不发生裁剪的情况下，在app里面能展现出最大的尺寸）。</p>
-<p>基于cover尺寸和实际尺寸，计算出rootStage的scale，并调整rootStage的x和y，使得可以在app里面居中放置。</p>
+<p>基于这个尺寸和app的尺寸，计算出一个rootStage可以以<strong>cover</strong>形式放置的尺寸。(cover尺寸是指的rootStage等比缩放，在不发生裁剪的情况下，在app里面能展现出最大的尺寸）。 </p>
+<p>基于cover尺寸和实际尺寸，计算出rootStage的scale，并调整rootStage的x和y，使得可以在app里面居中放置。 </p>
 <pre><code>root = new Container();
 root.width = rootScreen.width;
 root.height = rootScreen.height;
@@ -245,13 +245,13 @@ root.x = (windowWidth - realScreen.width) / 2;
 root.y = (windowHeight - realScreen.height) / 2;
 app.stage.addChild(root)
 </code></pre>
-<p>现在rootStage已经配置好，后面所有游戏内的主要交互和运动的元素都可以放到这里面，计算都是基于375 x 667的舞台计算，不需要考虑多屏幕的适配问题。</p>
-<p>这是头一回正式的进行游戏开发，也没什么领路人，暂时只能想到这么多，如果有更好的办法，也欢迎大家告知</p>
+<p>现在rootStage已经配置好，后面所有游戏内的主要交互和运动的元素都可以放到这里面，计算都是基于375 x 667的舞台计算，不需要考虑多屏幕的适配问题。 </p>
+<p>这是头一回正式的进行游戏开发，也没什么领路人，暂时只能想到这么多，如果有更好的办法，也欢迎大家告知 </p>
 <p>参考资料：</p>
 <ol>
-<li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/38fcbcaf2930">使用 pixi.js 开发微信小游戏</a></li>
-<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/31619385">在pixi.js实现设备自适应和强制竖屏</a></li>
-<li><a target="_blank" rel="noopener" href="http://club.phaser-china.com/topic/593fb7b6484a53dd723f41e9">Phaser横竖屏适配</a></li>
+<li> <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/38fcbcaf2930">使用 pixi.js 开发微信小游戏</a></li>
+<li> <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/31619385">在pixi.js实现设备自适应和强制竖屏</a></li>
+<li> <a target="_blank" rel="noopener" href="http://club.phaser-china.com/topic/593fb7b6484a53dd723f41e9">Phaser横竖屏适配</a></li>
 </ol>
 
                 <div class="copyright-notice">
@@ -277,7 +277,16 @@ app.stage.addChild(root)
                 </ul>
 
                 <hr class="popular-posts-split">
-                <script data-ad-client="ca-pub-3438190576149990" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                    style="display:block; text-align:center;"
+                    data-ad-layout="in-article"
+                    data-ad-format="fluid"
+                    data-ad-client="ca-pub-3438190576149990"
+                    data-ad-slot="9181655524"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
                 <hr class="popular-posts-split">
                 <h2 class="popular-posts-title">相关推荐</h2>
                 

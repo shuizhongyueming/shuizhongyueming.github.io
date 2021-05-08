@@ -204,17 +204,17 @@
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <p>今天在经历数番折磨之后，终于成功的把应用提交到iTunes Connect上面了，看到状态变成“Upload Received”，终于送了一口气，可是没过一会儿，刷新页面一看，状态就变成红色的错误“missing localized screenshots” 按字面意思就是缺少截屏，但是我的3.5inch 和 4inch的图都上传了4张，没问题啊。上网检索了一番，发现可能的可能情况如下：</p>
 <ul>
-<li>iPhone5的没上传</li>
-<li>写了device适配iPad，但是没上传iPad相关的截图</li>
+<li>  iPhone5的没上传</li>
+<li>  写了device适配iPad，但是没上传iPad相关的截图</li>
 </ul>
-<p>我在应用详情里面编辑截屏，往4inch里面再上传了一张截屏，然后保存。保存的时候，提示我iPad的截屏没有上传。这个时候我就奇怪了，因为我这个应用是打算只发布到iPhone的。</p>
-<p>回到xcode里面一看，玩蛋，devices里面写的是universe。现在只能看看iPad下面能不能正常工作了，可惜不能。</p>
-<p>现在的问题就变成了<strong>如何取消已经上传的应用并重新上传</strong></p>
-<p>第一步：取消应用 进入itunes connect -&gt; Manage Your Apps -&gt; 点击对应应用 -&gt; View Details -&gt; Version Information -&gt; Binary Details -&gt; 进入之后，右上角有一个Reject This Binary 点击之后，会要求表明再次上传的包是否有修改，是否加密，以及广告策略 完成之后就能继续上传</p>
-<p>第二步：重新上传 在xcode里面，点击对应的target -&gt; General -&gt; Devices 选择iPhone。重新archive，上传即可。</p>
-<p>参考文章：</p>
-<p><a target="_blank" rel="noopener" href="http://miraclei.net/index.php/2013/01/app-store%E4%B8%8A%E4%BC%A0%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%90%8E%E6%89%A7%E8%A1%8C%E5%8F%96%E6%B6%88%E6%93%8D%E4%BD%9C/" title="http://miraclei.net/index.php/2013/01/app-store上传应用程序后执行取消操作/">http://miraclei.net/index.php/2013/01/app-store上传应用程序后执行取消操作/</a></p>
-<p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/12760709/missing-localized-screenshots-error-on-itunes" title="http://stackoverflow.com/questions/12760709/missing-localized-screenshots-error-on-itunes">http://stackoverflow.com/questions/12760709/missing-localized-screenshots-error-on-itunes</a></p>
+<p>我在应用详情里面编辑截屏，往4inch里面再上传了一张截屏，然后保存。保存的时候，提示我iPad的截屏没有上传。这个时候我就奇怪了，因为我这个应用是打算只发布到iPhone的。 </p>
+<p>回到xcode里面一看，玩蛋，devices里面写的是universe。现在只能看看iPad下面能不能正常工作了，可惜不能。 </p>
+<p>现在的问题就变成了<strong>如何取消已经上传的应用并重新上传</strong> </p>
+<p>第一步：取消应用 进入itunes connect -&gt; Manage Your Apps -&gt; 点击对应应用 -&gt; View Details -&gt; Version Information -&gt; Binary Details -&gt; 进入之后，右上角有一个Reject This Binary 点击之后，会要求表明再次上传的包是否有修改，是否加密，以及广告策略 完成之后就能继续上传 </p>
+<p>第二步：重新上传 在xcode里面，点击对应的target -&gt; General -&gt; Devices 选择iPhone。重新archive，上传即可。 </p>
+<p>参考文章： </p>
+<p><a target="_blank" rel="noopener" href="http://miraclei.net/index.php/2013/01/app-store%E4%B8%8A%E4%BC%A0%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%E5%90%8E%E6%89%A7%E8%A1%8C%E5%8F%96%E6%B6%88%E6%93%8D%E4%BD%9C/" title="http://miraclei.net/index.php/2013/01/app-store上传应用程序后执行取消操作/">http://miraclei.net/index.php/2013/01/app-store上传应用程序后执行取消操作/</a> </p>
+<p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/12760709/missing-localized-screenshots-error-on-itunes" title="http://stackoverflow.com/questions/12760709/missing-localized-screenshots-error-on-itunes">http://stackoverflow.com/questions/12760709/missing-localized-screenshots-error-on-itunes</a> </p>
 <p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/17259886/itunes-connect-complains-missing-localized-screenshot-despite-iphone-5-screens" title="http://stackoverflow.com/questions/17259886/itunes-connect-complains-missing-localized-screenshot-despite-iphone-5-screens">http://stackoverflow.com/questions/17259886/itunes-connect-complains-missing-localized-screenshot-despite-iphone-5-screens</a></p>
 
                 <div class="copyright-notice">
@@ -240,7 +240,16 @@
                 </ul>
 
                 <hr class="popular-posts-split">
-                <script data-ad-client="ca-pub-3438190576149990" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                    style="display:block; text-align:center;"
+                    data-ad-layout="in-article"
+                    data-ad-format="fluid"
+                    data-ad-client="ca-pub-3438190576149990"
+                    data-ad-slot="9181655524"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
                 <hr class="popular-posts-split">
                 <h2 class="popular-posts-title">相关推荐</h2>
                 <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2014\02\20\some-conclusions-about-the-css-media-queries\" title="关于CSS Media Queries的一些总结" rel="bookmark">关于CSS Media Queries的一些总结</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2014\06\05\how-to-set-icon-when-add-web-site-to-home-in-iphone-by-safari\" title="在iPhone的safari中，保存网站到桌面，修改icon的方法" rel="bookmark">在iPhone的safari中，保存网站到桌面，修改icon的方法</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2014\04\25\how-to-clear-mobileprovision-file-in-xcode\" title="如何清除xcode里面的mobileprovision文件" rel="bookmark">如何清除xcode里面的mobileprovision文件</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2014\01\06\load-local-image-js-css-file-to-webview-in-xcode\" title="xcode,在webView中引入本地html,image,js,css文件的方法" rel="bookmark">xcode,在webView中引入本地html,image,js,css文件的方法</a></h3></div></li></ul>

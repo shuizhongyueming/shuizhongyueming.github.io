@@ -222,12 +222,12 @@
 &lt;/Switch&gt;
 </code></pre>
 <p>这个可以实现的时，未匹配的路由展现首页的内容，可是当前的url还是那个未被匹配的路由。这样的显示就会有点怪异。</p>
-<p>针对这个问题，可以使用react-router里面的另外一个组件<code>Redirect</code>。</p>
+<p>针对这个问题，可以使用react-router里面的另外一个组件<code>Redirect</code>。 </p>
 <p>基于Redirect新建如下组件：</p>
 <pre><code>const RouteFallback = (props) =&gt; &#123;
-    console.log('route fallback with location: ', props.location);
+    console.log(&#39;route fallback with location: &#39;, props.location);
     return &lt;Redirect to=&#123; &#123;
-        pathname: '/',
+        pathname: &#39;/&#39;,
         from: props.location
     &#125;&#125; /&gt;
 &#125;
@@ -265,7 +265,16 @@
                 </ul>
 
                 <hr class="popular-posts-split">
-                <script data-ad-client="ca-pub-3438190576149990" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                    style="display:block; text-align:center;"
+                    data-ad-layout="in-article"
+                    data-ad-format="fluid"
+                    data-ad-client="ca-pub-3438190576149990"
+                    data-ad-slot="9181655524"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
                 <hr class="popular-posts-split">
                 <h2 class="popular-posts-title">相关推荐</h2>
                 <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2018\12\05\how-does-react-tell-a-class-from-a-function\" title="React里面是如何区分Class和Function的" rel="bookmark">React里面是如何区分Class和Function的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2018\11\07\reach-router的嵌套路由失效的可能原因\" title="@reach/router的嵌套路由失效的可能原因" rel="bookmark">@reach/router的嵌套路由失效的可能原因</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2015\06\05\react入门实例教程读书笔记\" title="React入门实例教程读书笔记" rel="bookmark">React入门实例教程读书笔记</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2019\03\15\一个发票挂账月份修改功能引发的小重构\" title="一个发票挂账月份修改功能引发的小重构" rel="bookmark">一个发票挂账月份修改功能引发的小重构</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2017\11\29\在styled-components的样式声明中做px到rem的自动转换\" title="在styled-components的样式声明中做px到rem的自动转换" rel="bookmark">在styled-components的样式声明中做px到rem的自动转换</a></h3></div></li></ul>

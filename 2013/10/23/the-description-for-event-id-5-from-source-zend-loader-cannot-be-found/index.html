@@ -214,11 +214,11 @@
 
 C:WINDOWSTEMPZendLoader.MemoryBase@SYSTEM@3391924446 拒绝访问。
 </code></pre>
-<p>系统:windows 8.1 web环境:nginx/1.5.3 PHP/5.3.27</p>
-<p>依旧是先Google了一下，在<a target="_blank" rel="noopener" href="http://www.oaxueyuan.com/solve-the-windows-event-application-log-event-id-5-description-in-the-resource-zend-loader-can-not-be-found-problem.html" title="这篇文章">这篇文章</a>里找到了解决方式</p>
-<p>看了不是很理解，找了其中的几个关键词：php.ini，upload_tmp_dir，C:WINDOWSTemp，Network Service，IIS_WPG，ZendOptimizer.MemoryBase@SYSTEM和ZendOptimizer.MemoryBase@NETWORK SERVICE。</p>
-<p>大体的意思是：在php.ini中upload_tmp_dir的值为C:WINDOWSTemp的时候，在确保ZendOptimizer.MemoryBase@SYSTEM和ZendOptimizer.MemoryBase@NETWORK SERVICE两个文件存在的时候(没有则新建一个命名相同的空文件)，给Temp文件夹添加Network Service和IIS_WPG的写入权限，就能解决问题。</p>
-<p>然后我根据这个思路，开始着手根据我自己的环境和配置，尝试着解决问题。</p>
+<p>系统:windows 8.1 web环境:nginx/1.5.3 PHP/5.3.27 </p>
+<p>依旧是先Google了一下，在<a target="_blank" rel="noopener" href="http://www.oaxueyuan.com/solve-the-windows-event-application-log-event-id-5-description-in-the-resource-zend-loader-can-not-be-found-problem.html" title="这篇文章">这篇文章</a>里找到了解决方式 </p>
+<p>看了不是很理解，找了其中的几个关键词：php.ini，upload_tmp_dir，C:WINDOWSTemp，Network Service，IIS_WPG，ZendOptimizer.MemoryBase@SYSTEM和ZendOptimizer.MemoryBase@NETWORK SERVICE。 </p>
+<p>大体的意思是：在php.ini中upload_tmp_dir的值为C:WINDOWSTemp的时候，在确保ZendOptimizer.MemoryBase@SYSTEM和ZendOptimizer.MemoryBase@NETWORK SERVICE两个文件存在的时候(没有则新建一个命名相同的空文件)，给Temp文件夹添加Network Service和IIS_WPG的写入权限，就能解决问题。 </p>
+<p>然后我根据这个思路，开始着手根据我自己的环境和配置，尝试着解决问题。 </p>
 <p>首先，我的php.ini中，关于upload_tmp_dir这块如下：</p>
 <pre><code>;;;;;;;;;;;;;;;;
 ; File Uploads ;
@@ -241,25 +241,26 @@ upload_max_filesize = 32M
 max_file_uploads = 20
 </code></pre>
 <p>我的upload_tmp_dir 是被注释掉的，但是file_uploads 是开启的，所以upload_tmp_dir 用的是默认的值。然后在<a target="_blank" rel="noopener" href="http://php.net/manual/zh/features.file-upload.php" title="PHP: 文件上传处理 - Manual"></a>这篇文章中找到如下一句话：</p>
-<pre><code>The reason for this is, the uploaded file will inherit the permissions of the directory specified in the directive upload_tmp_dir of php.ini.  If this directive isn't set, the default of C:WindowsTemp is used.
+<pre><code>The reason for this is, the uploaded file will inherit the permissions of the directory specified in the directive upload_tmp_dir of php.ini.  If this directive isn&#39;t set, the default of C:WindowsTemp is used.
 </code></pre>
-<p>所以我的upload_tmp_dir 在默认值的情况下用的是 C:WindowsTemp 在我的Temp文件夹下是有文件ZendLoader.MemoryBase@SYSTEM@3391924446的，这一点和文章里面说的不太一样，可是我的错误信息里面明确是指定这个文件的，所以暂时不需要添加那两个空文件。</p>
-<p>然后就是给Temp文件夹添加权限了，首先得知道Network Service和IIS_WPG分别代表什么？</p>
-<p>看MSDN上面的<a target="_blank" rel="noopener" href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms684272(v=vs.85).aspx" title="NetworkService Account"></a>，可以知道Network Service是一个被服务控制管理器(service control manager)使用的本地账号，用来在网络中代表这台计算机。</p>
+<p>所以我的upload_tmp_dir 在默认值的情况下用的是 C:WindowsTemp 在我的Temp文件夹下是有文件ZendLoader.MemoryBase@SYSTEM@3391924446的，这一点和文章里面说的不太一样，可是我的错误信息里面明确是指定这个文件的，所以暂时不需要添加那两个空文件。 </p>
+<p>然后就是给Temp文件夹添加权限了，首先得知道Network Service和IIS_WPG分别代表什么？ </p>
+<p>看MSDN上面的<a target="_blank" rel="noopener" href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms684272(v=vs.85).aspx" title="NetworkService Account"></a>，可以知道Network Service是一个被服务控制管理器(service control manager)使用的本地账号，用来在网络中代表这台计算机。 </p>
 <p>在<a target="_blank" rel="noopener" href="http://www.iis.net/learn/get-started/planning-for-security/understanding-built-in-user-and-group-accounts-in-iis" title="Understanding Built-In User and Group Accounts in IIS 7">这篇文章</a>里面找到的针对IIS_WPG的定义是：</p>
 <blockquote>
 <p>There was also a group called IIS_WPG, which was used as a container for all the application pool identities. During IIS setup, all the appropriate resources on the system were granted the correct user rights for the IIS_WPG group so that an administrator only needed to add their identity to that group when they created a new application pool account.</p>
 </blockquote>
-<p>大致的意思是给所有IIS应用管理权限的一个组。</p>
-<p>可问题是，我用的不是IIS，所以得找到和Nginx相关的账号.可是看了下，貌似nginx和IIS不一样，它是一个服务，是运行在本地系统账户下的一个服务。所以我不知道该怎么办了。先给Temp账户添加了Network Service的写入权限。然后清空日志，看看明天重启的时候报什么错吧</p>
-<p>============== 后续更新 =====================</p>
+<p>大致的意思是给所有IIS应用管理权限的一个组。 </p>
+<p>可问题是，我用的不是IIS，所以得找到和Nginx相关的账号.可是看了下，貌似nginx和IIS不一样，它是一个服务，是运行在本地系统账户下的一个服务。所以我不知道该怎么办了。先给Temp账户添加了Network Service的写入权限。然后清空日志，看看明天重启的时候报什么错吧 </p>
+<p>============== 后续更新 ===================== </p>
 <p>2013年10月24日 今天开机一段时间之后，查看应用程序日志，没有发现此错误 2013年10月25日 今天开机之后，查看应用程序日志，问题再次出现，分为两种问题状态：</p>
 <pre><code>C:WINDOWSTEMPZendLoader.MemoryBase@SYSTEM@3391924446
 拒绝访问。
 </code></pre>
 <p>和</p>
 <pre><code>Unable to write base address
-拒绝访问。</code></pre>
+拒绝访问。
+</code></pre>
 
                 <div class="copyright-notice">
 <div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
@@ -284,7 +285,16 @@ max_file_uploads = 20
                 </ul>
 
                 <hr class="popular-posts-split">
-                <script data-ad-client="ca-pub-3438190576149990" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                    style="display:block; text-align:center;"
+                    data-ad-layout="in-article"
+                    data-ad-format="fluid"
+                    data-ad-client="ca-pub-3438190576149990"
+                    data-ad-slot="9181655524"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
                 <hr class="popular-posts-split">
                 <h2 class="popular-posts-title">相关推荐</h2>
                 <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2013\10\11\how-to-save-passowrd-for-git-push-under-the-windows\" title="windows下使用git,如何保存push到远程仓库时使用的密码" rel="bookmark">windows下使用git,如何保存push到远程仓库时使用的密码</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2013\04\04\the-server-did-not-register-with-dcom-within-the-required-timeout\" title="服务器没有在要求的超时时间内向 DCOM 注册" rel="bookmark">服务器没有在要求的超时时间内向 DCOM 注册</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2013\11\18\windows-modules-installer-is-making-my-computer-hang\" title="windows modules installer占用过多磁盘读写和CPU的解决方案" rel="bookmark">windows modules installer占用过多磁盘读写和CPU的解决方案</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2014\11\04\the-possible-reason-for-the-nginx-error-emerg-server-directive-is-not-allowed-here\" title="Nginx 错误[emerg] "server" directive is not allowed here的可能情况" rel="bookmark">Nginx 错误[emerg] "server" directive is not allowed here的可能情况</a></h3></div></li></ul>

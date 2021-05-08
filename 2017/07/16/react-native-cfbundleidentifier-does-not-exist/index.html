@@ -202,18 +202,17 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>最近项目需要，决定入手React Native。</p>
-<p>第一步要做的肯定就是能在本机顺利的把官网的<a target="_blank" rel="noopener" href="https://facebook.github.io/react-native/docs/getting-started.html">Quick Start</a> 跑出来.</p>
+                <p>最近项目需要，决定入手React Native。 </p>
+<p>第一步要做的肯定就是能在本机顺利的把官网的<a target="_blank" rel="noopener" href="https://facebook.github.io/react-native/docs/getting-started.html">Quick Start</a> 跑出来. </p>
 <p>先说一下本机的环境：</p>
 <ul>
-<li>系统: macOS Sierra 10.12.5</li>
-<li>NodeJs: 8.1.0</li>
-<li>Xcode: 8.3.3 (8E3004b)</li>
-<li>react-native-cli: 2.0.1</li>
-<li>react-native: 0.45.1</li>
+<li>  系统: macOS Sierra 10.12.5</li>
+<li>  NodeJs: 8.1.0</li>
+<li>  Xcode: 8.3.3 (8E3004b)</li>
+<li>  react-native-cli: 2.0.1</li>
+<li>  react-native: 0.45.1</li>
 </ul>
-<h2 id="构建过程">构建过程</h2>
-<p>官网是用的<code>brew</code>来安装<code>node</code>，但是我这边根据日常开发的需要，会在多个Node版本之间切换，所以我是用的<code>nvm</code></p>
+<h2 id="构建过程"><a href="#构建过程" class="headerlink" title="构建过程"></a>构建过程</h2><p>官网是用的<code>brew</code>来安装<code>node</code>，但是我这边根据日常开发的需要，会在多个Node版本之间切换，所以我是用的<code>nvm</code> </p>
 <p>接下来是<code>watchman</code>和<code>react-native-cli</code>，都是按照教程来一步一步安装</p>
 <pre><code>brew install watchman
 npm install -g react-native-cli
@@ -223,54 +222,47 @@ npm install -g react-native-cli
 cd AwesomeProject
 react-native run-ios
 </code></pre>
-<p>然后就出错了：<strong>“:CFBundleIdentifier”, Does Not Exist</strong></p>
-<h2 id="debug过程">debug过程</h2>
-<p>先是在github上面找到了一个同样错误的<a target="_blank" rel="noopener" href="https://github.com/facebook/react-native/issues/7308">issue</a>，发现有这个错误的人很多，给的解释也不少</p>
-<h3 id="端口占用">端口占用</h3>
-<p>端口8081被别的程序占用了</p>
+<p>然后就出错了：**”:CFBundleIdentifier”, Does Not Exist**</p>
+<h2 id="debug过程"><a href="#debug过程" class="headerlink" title="debug过程"></a>debug过程</h2><p>先是在github上面找到了一个同样错误的<a target="_blank" rel="noopener" href="https://github.com/facebook/react-native/issues/7308">issue</a>，发现有这个错误的人很多，给的解释也不少</p>
+<h3 id="端口占用"><a href="#端口占用" class="headerlink" title="端口占用"></a>端口占用</h3><p>端口8081被别的程序占用了</p>
 <pre><code>lsof -n -i4TCP:8081
 node    7601 CXI624   23u  IPv6 0xc6b249599e5f1169      0t0  TCP *:sunproxyadmin (LISTEN)
 kill - 9 7601 
 </code></pre>
-<p>这里面的7601只是一种情况，具体看真实占用这个端口的是什么程序。</p>
+<p>这里面的7601只是一种情况，具体看真实占用这个端口的是什么程序。 </p>
 <p>我这边可以确定不是，所以pass</p>
-<h3 id="重买一台mac解决了">重买一台mac解决了</h3>
-<p>这… 没钱，pass</p>
-<h3 id="react-native-upgrade">react-native upgrade</h3>
-<p>更新<code>react-native</code>到最新版</p>
+<h3 id="重买一台mac解决了"><a href="#重买一台mac解决了" class="headerlink" title="重买一台mac解决了"></a>重买一台mac解决了</h3><p>这… 没钱，pass</p>
+<h3 id="react-native-upgrade"><a href="#react-native-upgrade" class="headerlink" title="react-native upgrade"></a>react-native upgrade</h3><p>更新<code>react-native</code>到最新版 </p>
 <p>我这刚刚下载的，肯定最新版没毛病</p>
-<h3 id="sudo">sudo</h3>
-<pre><code>sudo react-native run-ios
+<h3 id="sudo"><a href="#sudo" class="headerlink" title="sudo"></a>sudo</h3><pre><code>sudo react-native run-ios
 </code></pre>
 <p>这个我是不太想用的，因为用了之后，以后基本都得用sudo，比较麻烦，等确认没别的解决方式再考虑</p>
-<h3 id="尝试调整Xcode的配置：">尝试调整Xcode的配置：</h3>
-<ol>
-<li>Go to File -&gt; Project settings</li>
-<li>Click the Advanced button</li>
-<li>Select “Custom” and select “Relative to Workspace” in the pull down</li>
-<li>click done, done</li>
+<h3 id="尝试调整Xcode的配置："><a href="#尝试调整Xcode的配置：" class="headerlink" title="尝试调整Xcode的配置："></a>尝试调整Xcode的配置：</h3><ol>
+<li> Go to File -&gt; Project settings</li>
+<li> Click the Advanced button</li>
+<li> Select “Custom” and select “Relative to Workspace” in the pull down</li>
+<li> click done, done</li>
 </ol>
-<p><img src="https://cdn.imagehost.top/ipic/w88n6.jpg" alt=""></p>
-<p>按照上面的做了一下，然后直接基于Xcode来运行程序</p>
+<p><img src="https://cdn.imagehost.top/ipic/w88n6.jpg"> </p>
+<p>按照上面的做了一下，然后直接基于Xcode来运行程序 </p>
 <p>结果又出了新的问题 <strong>double-conversion.build failed</strong> 然后是在这个<a target="_blank" rel="noopener" href="https://github.com/facebook/react-native/issues/14368">issue</a>下找到了问题的解决方式：</p>
 <pre><code>rm -r ~/.rncache
 rm -r &lt;your-project&gt;/node_modules/react-native/third_party
 </code></pre>
 <p>不过最终的编译还是失败。</p>
-<h3 id="网络问题">网络问题</h3>
-<p>最后在刚刚的那个issue里面找到了那么一段话：</p>
+<h3 id="网络问题"><a href="#网络问题" class="headerlink" title="网络问题"></a>网络问题</h3><p>最后在刚刚的那个issue里面找到了那么一段话：</p>
 <blockquote>
 <p>The problem is when building react-native for iOS, the process tries to download some files (using curl) into /.rncache. Specifically, they are “boost1630.tar.gz, double-conversion-1.1.5.tar.gz folly-2016.09.26.00.tar.gz, glog-0.3.4.tar.gz”. The sources of them (at least some of them) are from AWS S3, which aren’t accessible in some regions (I’m from China). And that caused the problem. By using a proxy server and setting the http_proxy and https_proxy environment variables, curl will go through the proxy and the build should succeed. This is not a problem with React Native. This issue can be closed now.</p>
 </blockquote>
 <p>是说的在build的时候，会从AWS S3里面下载一些资源，但是在咱们国内，很多时候是访问不到这些资源的，也自然就导致了一些文件的缺损。</p>
-<p>作者在后面给的方式是给curl配置代理，具体看<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/9445489/linux-curl-command-with-proxy">https://stackoverflow.com/questions/9445489/linux-curl-command-with-proxy</a>。</p>
+<p>作者在后面给的方式是给curl配置代理，具体看<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/9445489/linux-curl-command-with-proxy">https://stackoverflow.com/questions/9445489/linux-curl-command-with-proxy</a>。 </p>
 <p>不过我这边用了另外一种方式，把我的蓝灯设置为代理全部流量，接着</p>
 <pre><code>rm -r ~/.rncache
 rm -r &lt;your-project&gt;/node_modules/
 </code></pre>
-<p>把所有资源删掉，然后重新编译。</p>
-<p>最后，成功编译通过！！</p>
-<p><img src="https://cdn.imagehost.top/ipic/8wrn7.jpg" alt=""></p>
+<p>把所有资源删掉，然后重新编译。 </p>
+<p>最后，成功编译通过！！ </p>
+<p><img src="https://cdn.imagehost.top/ipic/8wrn7.jpg"></p>
 
                 <div class="copyright-notice">
 <div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
@@ -295,7 +287,16 @@ rm -r &lt;your-project&gt;/node_modules/
                 </ul>
 
                 <hr class="popular-posts-split">
-                <script data-ad-client="ca-pub-3438190576149990" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                    style="display:block; text-align:center;"
+                    data-ad-layout="in-article"
+                    data-ad-format="fluid"
+                    data-ad-client="ca-pub-3438190576149990"
+                    data-ad-slot="9181655524"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
                 <hr class="popular-posts-split">
                 <h2 class="popular-posts-title">相关推荐</h2>
                 

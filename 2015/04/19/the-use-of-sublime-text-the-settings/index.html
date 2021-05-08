@@ -209,23 +209,20 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <p>回到目录：<a href="https://www.shuizhongyueming.com/2015/04/the-use-of-sublime-text/">Sublime Text的使用</a></p>
-<h2 id="说明">说明</h2>
-<p>通过修改Sublime Text的配置，能让Sublime Text使用起来更加便捷</p>
-<p>配置分为两种：一个是Default，这个是默认配置，建议不要动，而是作为一个参考。另一个是User，这个才是建议用户去修改和搭配的配置。</p>
+<h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><p>通过修改Sublime Text的配置，能让Sublime Text使用起来更加便捷 </p>
+<p>配置分为两种：一个是Default，这个是默认配置，建议不要动，而是作为一个参考。另一个是User，这个才是建议用户去修改和搭配的配置。 </p>
 <p>配置的写法都是json，所以书写的时候一定要注意规范，比如字段名都是用双引号包裹。如果语法书写有错误，是没法起作用的，不过会有提示</p>
-<h2 id="配置说明">配置说明</h2>
-<p>下面将列举一些常见的配置命令和对应说明：</p>
+<h2 id="配置说明"><a href="#配置说明" class="headerlink" title="配置说明"></a>配置说明</h2><p>下面将列举一些常见的配置命令和对应说明：</p>
 <ul>
-<li><code>font_size</code> {Number} 设置字体大小的，在编辑界面通过<code>Ctrl</code>+鼠标滚轮 或者 <code>Ctrl</code>+<code>+/-</code> 调整的字体大小也会对应的修改到User下的这个命令下，一般13、14、15都是比较合适的值，可以自行调配</li>
-<li><code>highlight_line</code> {Boolean} 是否高亮当前光标所在行</li>
-<li><code>ignored_packages</code> {Array} 要忽略的包 有些包，可能暂时不需要用但是又不想卸载，这个时候，可以选择忽略，使其不起作用，最常见的忽略就是vim包</li>
-<li><code>translate_tabs_to_spaces</code> {Boolean} 是否把制表符转换为空格 建议开启，因为制表符，每个编辑器设定的长度都不一样，而空格的长度都是一样的。这样能保证在不同平台，不同编辑器，不同开发人员的情况下，代码的格式和缩进都一样</li>
-<li><code>trim_trailing_white_space_on_save</code> {Boolean} 是否在保存的时候去掉多余的空格。最常见的情况就是有一个空行没有任何代码，但是这个空行里面有很多制表符或者空格。如果开启了，那么保存的时候，空行还是保留，但是行内的空白字符（制表符，空格等）会被清除掉</li>
-<li><code>word_separators</code> {String} 定义哪些字符可以分隔单词 这个在想双击选中某些单词的时候很有用。比如在前端开发中，class的定义是字母之间用连字符间隔。可是在Default配置里面，-是可以分隔单词的，这导致的结果就是我们双击class的时候，没法完整的选中整个class。解决的方法就是从Defult里面复制word_separators的值（这就是为什么不要动Default配置而是当做参考的原因之一），在User里面新建这个字段，然后把值里面的连字符去掉。</li>
-<li><code>word_wrap</code> {Boolean} 定义在输入的内容到达右边距的时候，是不换行继续输入还是会自动折行展示</li>
+<li>  <code>font_size</code> {Number} 设置字体大小的，在编辑界面通过<code>Ctrl</code>+鼠标滚轮 或者 <code>Ctrl</code>+<code>+/-</code> 调整的字体大小也会对应的修改到User下的这个命令下，一般13、14、15都是比较合适的值，可以自行调配</li>
+<li>  <code>highlight_line</code> {Boolean} 是否高亮当前光标所在行</li>
+<li>  <code>ignored_packages</code> {Array} 要忽略的包 有些包，可能暂时不需要用但是又不想卸载，这个时候，可以选择忽略，使其不起作用，最常见的忽略就是vim包</li>
+<li>  <code>translate_tabs_to_spaces</code> {Boolean} 是否把制表符转换为空格 建议开启，因为制表符，每个编辑器设定的长度都不一样，而空格的长度都是一样的。这样能保证在不同平台，不同编辑器，不同开发人员的情况下，代码的格式和缩进都一样</li>
+<li>  <code>trim_trailing_white_space_on_save</code> {Boolean} 是否在保存的时候去掉多余的空格。最常见的情况就是有一个空行没有任何代码，但是这个空行里面有很多制表符或者空格。如果开启了，那么保存的时候，空行还是保留，但是行内的空白字符（制表符，空格等）会被清除掉</li>
+<li>  <code>word_separators</code> {String} 定义哪些字符可以分隔单词 这个在想双击选中某些单词的时候很有用。比如在前端开发中，class的定义是字母之间用连字符间隔。可是在Default配置里面，-是可以分隔单词的，这导致的结果就是我们双击class的时候，没法完整的选中整个class。解决的方法就是从Defult里面复制word_separators的值（这就是为什么不要动Default配置而是当做参考的原因之一），在User里面新建这个字段，然后把值里面的连字符去掉。</li>
+<li>  <code>word_wrap</code> {Boolean} 定义在输入的内容到达右边距的时候，是不换行继续输入还是会自动折行展示</li>
 </ul>
-<h2 id="推荐的一个初始配置">推荐的一个初始配置</h2>
-<pre><code>&#123;
+<h2 id="推荐的一个初始配置"><a href="#推荐的一个初始配置" class="headerlink" title="推荐的一个初始配置"></a>推荐的一个初始配置</h2><pre><code>&#123;
     &quot;font_size&quot;: 15,
     &quot;highlight_line&quot;: true,
     &quot;ignored_packages&quot;:
@@ -233,9 +230,10 @@
     \],
     &quot;translate\_tabs\_to_spaces&quot;: true,
     &quot;trim\_trailing\_white\_space\_on_save&quot;: true,
-    &quot;word_separators&quot;: &quot;./\\()&quot;':,.;&lt;&gt;~!@#$%^&amp;*|+=\[\]&#123;&#125;`~?&quot;,
+    &quot;word_separators&quot;: &quot;./\\()&quot;&#39;:,.;&lt;&gt;~!@#$%^&amp;*|+=\[\]&#123;&#125;`~?&quot;,
     &quot;word_wrap&quot;: true
-&#125;</code></pre>
+&#125;
+</code></pre>
 
                 <div class="copyright-notice">
 <div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
@@ -260,7 +258,16 @@
                 </ul>
 
                 <hr class="popular-posts-split">
-                <script data-ad-client="ca-pub-3438190576149990" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <ins class="adsbygoogle"
+                    style="display:block; text-align:center;"
+                    data-ad-layout="in-article"
+                    data-ad-format="fluid"
+                    data-ad-client="ca-pub-3438190576149990"
+                    data-ad-slot="9181655524"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
                 <hr class="popular-posts-split">
                 <h2 class="popular-posts-title">相关推荐</h2>
                 <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2015\04\19\the-use-of-sublime-text-of-the-recommend-packages\" title="Sublime Text的使用-推荐的包/插件" rel="bookmark">Sublime Text的使用-推荐的包/插件</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2015\06\05\react入门实例教程读书笔记\" title="React入门实例教程读书笔记" rel="bookmark">React入门实例教程读书笔记</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2015\04\19\the-use-of-sublime-text\" title="Sublime Text的使用" rel="bookmark">Sublime Text的使用</a></h3></div></li></ul>
