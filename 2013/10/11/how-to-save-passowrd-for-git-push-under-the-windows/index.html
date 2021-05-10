@@ -3,49 +3,67 @@
 
 <!-- Head tag -->
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="技术人的博客, 说技术人的事">
-    <meta name="keyword" content="">
-    <meta name="theme-color" content="#600090">
-    <meta name="msapplication-navbutton-color" content="#600090">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
-    <link rel="shortcut icon" href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="技术人的博客, 说技术人的事" />
+  <meta name="keyword" content="" />
+  <meta name="theme-color" content="#600090" />
+  <meta name="msapplication-navbutton-color" content="#600090" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="#600090" />
+  <link
+    rel="shortcut icon"
+    href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png"
+  />
 
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-NVHB3R');</script>
-    <!-- End Google Tag Manager -->
+  <!-- Google Tag Manager -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-NVHB3R');
+  </script>
+  <!-- End Google Tag Manager -->
 
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css">
-    <title>
-        
-        windows下使用git,如何保存push到远程仓库时使用的密码｜水中月明的Blog
-        
-    </title>
+  <link
+    rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css"
+  />
+  <title>
+     windows下使用git,如何保存push到远程仓库时使用的密码｜水中月明的Blog 
+  </title>
 
-    <link rel="canonical" href="https://www.shuizhongyueming.com/2013/10/11/how-to-save-passowrd-for-git-push-under-the-windows/">
+  <link
+    rel="canonical"
+    href="https://www.shuizhongyueming.com/2013/10/11/how-to-save-passowrd-for-git-push-under-the-windows/"
+  />
 
-    <!-- Bootstrap Core CSS -->
-    
+  <!-- Bootstrap Core CSS -->
+  
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
 
 
-    <!-- Custom CSS -->
-    
+  <!-- Custom CSS -->
+  
 <link rel="stylesheet" href="/css/blog-style.css">
 
 
-    <!-- Pygments Github CSS -->
-    
+  <!-- Pygments Github CSS -->
+  
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
 <meta name="generator" content="Hexo 5.4.0"></head>
 
 <!-- hack iOS CSS :active style -->
@@ -258,7 +276,7 @@
 <p>1. <code>Windows</code>中添加一个<code>用户变量</code>(开始-系统-高级系统设置-环境变量)，名称为：<code>HOME</code>,值为<code>%USERPROFILE%</code>。 <img src="https://cdn.imagehost.top/wp-content/uploads/2013/10/a.jpeg" alt="设置用户变量"></p>
 <p>2. 在“开始-运行”中输入<code>%Home%</code>后确定，在打开的文件夹下新建一个名为<code>_netrc</code>的文件。 <img src="https://cdn.imagehost.top/wp-content/uploads/2013/10/b.jpeg" alt="运行%Home%"> <img src="https://cdn.imagehost.top/wp-content/uploads/2013/10/c.png" alt="新建_netrc文件"></p>
 <p> 3. 用记事本打开<code>_netrc</code>文件，输入 Git 服务器名、用户名、密码，并保存，例如：</p>
-<p>  machine git.yourserver.org —- git服务器名称<br>  login <a href="mailto:&#x79;&#111;&#117;&#x72;&#108;&#x6f;&#x67;&#105;&#x6e;&#x40;&#101;&#109;&#97;&#x69;&#x6c;&#46;&#99;&#x6f;&#109;">&#x79;&#111;&#117;&#x72;&#108;&#x6f;&#x67;&#105;&#x6e;&#x40;&#101;&#109;&#97;&#x69;&#x6c;&#46;&#99;&#x6f;&#109;</a> —- git用户名<br>  password yourpassword123 —- git账号密码</p>
+<p>  machine git.yourserver.org —- git服务器名称<br>  login <a href="mailto:&#121;&#111;&#117;&#x72;&#108;&#x6f;&#x67;&#x69;&#110;&#x40;&#x65;&#109;&#x61;&#105;&#108;&#46;&#x63;&#111;&#x6d;">&#121;&#111;&#117;&#x72;&#108;&#x6f;&#x67;&#x69;&#110;&#x40;&#x65;&#109;&#x61;&#105;&#108;&#46;&#x63;&#111;&#x6d;</a> —- git用户名<br>  password yourpassword123 —- git账号密码</p>
 <p>不过这样有一个缺点就是你的帐号和密码会以明文的方式存储了</p>
 <h2 id="方法三-Git-Credential-Manager-for-Windows"><a href="#方法三-Git-Credential-Manager-for-Windows" class="headerlink" title="方法三: Git Credential Manager for Windows"></a>方法三: Git Credential Manager for Windows</h2><p>这个是今天(20180530)在自己的新 windows 设备上尝试提交代码，一直需要帐号密码，前面两个方法都觉得麻烦，所以重新搜索了新的在 windows 下 git 凭据本地存储的方法。</p>
 <p> <a target="_blank" rel="noopener" href="https://github.com/Microsoft/Git-Credential-Manager-for-Windows">Git Credential Manager for Windows</a>这个管理器在 2.11.0 版本开始就已经在 git 的安装包里面了，不过前提是你安装的时候有勾选(默认没勾选)</p>
@@ -291,16 +309,6 @@
                 </ul>
 
                 <hr class="popular-posts-split">
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-                <ins class="adsbygoogle"
-                    style="display:block; text-align:center;"
-                    data-ad-layout="in-article"
-                    data-ad-format="fluid"
-                    data-ad-client="ca-pub-3438190576149990"
-                    data-ad-slot="9181655524"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script>
                 <hr class="popular-posts-split">
                 <h2 class="popular-posts-title">相关推荐</h2>
                 <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2014\10\16\github-help-of-use-pull-request\" title="GitHub帮助-使用Pull Request" rel="bookmark">GitHub帮助-使用Pull Request</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2013\11\18\solution-for-the-503-error-when-take-command-git-push\" title="git push遇到503错误的解决方案" rel="bookmark">git push遇到503错误的解决方案</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2015\06\12\svn-to-git\" title="svn迁移到git" rel="bookmark">svn迁移到git</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2014\07\12\use-package-json-to-manage-the-dependencies-package-of-npm\" title="用package.json来管理NPM里面的依赖包" rel="bookmark">用package.json来管理NPM里面的依赖包</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2017\12\01\关于nodejs项目发版的一些想法\" title="关于NodeJs项目发版的一些想法" rel="bookmark">关于NodeJs项目发版的一些想法</a></h3></div></li></ul>
