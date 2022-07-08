@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="技术人的博客, 说技术人的事" />
+  <meta name="keyword" content="" />
+  <meta name="theme-color" content="#600090" />
+  <meta name="msapplication-navbutton-color" content="#600090" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="#600090" />
+  <link
+    rel="shortcut icon"
+    href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png"
+  />
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-NVHB3R');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <link
+    rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css"
+  />
+  <title>
+     关于NodeJs项目发版的一些想法｜水中月明的Blog 
+  </title>
+
+  <link
+    rel="canonical"
+    href="https://www.shuizhongyueming.com/2017/12/01/关于nodejs项目发版的一些想法/"
+  />
+
+  <!-- Bootstrap Core CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
+
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+  <!-- Pygments Github CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
+
+  <script
+    data-ad-client="ca-pub-3438190576149990"
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+  ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="" class="animated fadeIn">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true"
+    data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    水中月明的Blog
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    //    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function () {
+                // prevent frequently toggle
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+    <!-- Main Content -->
+    
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.imagehost.top/default-background-1920x640.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.imagehost.top/default-background-1920x640.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>关于NodeJs项目发版的一些想法</h1>
+                    
+                    <span class="meta">
+                         作者 happyWang
+                        <span>
+                          日期 2017-12-01
+                         </span>
+                        <span id="busuanzi_container_page_pv">
+                         浏览量 <i id="busuanzi_value_page_pv"></i>
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#git"
+                           title="git">git</a>
+                        
+                        <a class="tag" href="/tags/#nodejs"
+                           title="nodejs">nodejs</a>
+                        
+                        <a class="tag" href="/tags/#NPM"
+                           title="NPM">NPM</a>
+                        
+                        <a class="tag" href="/tags/#pm2"
+                           title="pm2">pm2</a>
+                        
+                        <a class="tag" href="/tags/#verdaccio"
+                           title="verdaccio">verdaccio</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            关于NodeJs项目发版的一些想法
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="起因">起因</h2>
+<p>今天上午把双十二活动相关的页面给上线了，这次的发版，涉及的内容点比较多，上线的时候，没仔细想，打了一个tag就直接在线上git pull，然后活动页挂了…</p>
+<h2 id="糟糕的一连串操作">糟糕的一连串操作</h2>
+<p>我是用的<code>pm2 list</code>查看的项目的状态，发现状态变成<code>errored</code>才知道出了问题。</p>
+<p>这时候一回想才意识到，有些模块没安装。</p>
+<p>在本地执行<code>tig -- package.json</code>，快速的查找两个版本之间都安装过哪些模块，然后对应的在线上npm install。但是一直被<code>webpakc</code>的<code>uglifyjs-webpack-plugin</code>干扰的没法正常安装。 一狠心，<code>rm -rf webpack</code>直接把webpack给移除了。再次执行安装，还是同样的错误，再找到<code>node_modules/.bin/webpack</code>，移除（后面才知道用npm rm/uninstall 才是更正确的做法）。</p>
+<p>webpack的错误总算没了，然后安装又报403的错误，自有的npm服务<code>verdaccio</code>出错了。</p>
+<p>这时候终于意识到，问题不是一会儿能解决的，时间来来回回也过了十分钟，赶紧回滚服务到稳定版不：</p>
+<ol>
+<li><code>git checkout v1.18.1</code>，把代码回滚到之前稳定版本。</li>
+<li>修改pm2的配置文件<code>ecosystem.config.js</code>，配置关闭watch模式，这样后面安装模块和分支切换不会干扰正在运行的服务</li>
+<li>用<code>pm2 restart</code>来重启服务，顺利关闭watch模式，服务本身也没有报错。</li>
+</ol>
+<p>回滚完成。</p>
+<p>接下来先是登上内网服务器来修复npm服务的问题：</p>
+<ol>
+<li><code>ps aux | grep verdaccio</code>找到verdaccio的进程号，kill掉</li>
+<li>verdaccio &amp; 重启verdaccio</li>
+<li>在线上尝试npm install一个模块，还是有问题</li>
+<li>发现线上访问npm服务用的域名是之前废弃的</li>
+<li>编辑~/.npmrc 调整相关配置</li>
+<li>再次安装，成功通过</li>
+</ol>
+<p>现在npm服务正常，开始来面对之前出现的webpack出错的问题。我这个是线上服务器，是用不上webpack的，在安装模块的时候，出现这样的问题，很不正常。</p>
+<p>Google了一下，发现可以用<code>npm install --only=production</code>来让npm只安装<code>package.json</code>里面<code>dependencies</code>部分的模块。</p>
+<p>编辑package.json，整理dependencies和<code>devDependencies</code>，使得对应的模块在对应的分类中。</p>
+<p>执行<code>npm install --only=production</code>安装所有更新，之前查package.json的编辑历史那一步是多余的。</p>
+<p>更新完毕之后，</p>
+<ol>
+<li><code>git checkout .</code>去掉所有临时修改的文件。</li>
+<li><code>git checkout master</code>回到master分支</li>
+<li>用<code>pm2 restart</code>来重启服务</li>
+<li>用<code>pm2 list</code>和<code>pm2 log</code>来检测状态和日志</li>
+</ol>
+<p>一切正常，完成上线。</p>
+<h2 id="后续操作">后续操作</h2>
+<p>在本地，重新审查了一遍package.json，一个模块一个模块的查找，去掉代码里面已经没有使用的模块，划分清除相关模块归属。</p>
+<p>编辑ecosystem.config.js，配置development环境里面开启watch模式，production环境禁用。</p>
+<p>打tag。</p>
+<p>整个操作算是完成。</p>
+<h2 id="总结">总结</h2>
+<p>这次的发版算是一次当头棒喝，在尝试用NodeJs来做后端的前台服务这么久，一直顺风顺水，有点忘却应有的严谨。</p>
+<p>后端代码的线上环境没法跟前端这样明确，很多时候一个git pull没法解决所有问题。</p>
+<p>需要一个持续集成的好的工作流。</p>
+<p>这次出问题的一个主要原因就是太长时间的一个大的任务分支，导致整个项目跨度太大，这样在合并主分支并上线的时候风险自然就大了。</p>
+<p>下次上线，一个正确的更新应该类似这样：<code>git pull;npm install --only=production;pm2 restart &#123;server&#125;</code> 还是不打算把node_modules/目录的内容放到git仓库里，虽然这样可以保证模块的同步，可是会增加仓库的体积，也会对其他成员的开发环境造成干扰。</p>
+<p>或许可以考虑用Docker来包裹服务，保证其代码和环境的一致性。</p>
+
+                <div class="copyright-notice">
+<div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://www.shuizhongyueming.com/2017/12/01/%E5%85%B3%E4%BA%8Enodejs%E9%A1%B9%E7%9B%AE%E5%8F%91%E7%89%88%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/" title="https://www.shuizhongyueming.com/2017/12/01/%E5%85%B3%E4%BA%8Enodejs%E9%A1%B9%E7%9B%AE%E5%8F%91%E7%89%88%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/">https://www.shuizhongyueming.com/2017/12/01/%E5%85%B3%E4%BA%8Enodejs%E9%A1%B9%E7%9B%AE%E5%8F%91%E7%89%88%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/</a></div>
+                </div>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/12/04/实现react-router下，非法路径访问跳转首页/" data-toggle="tooltip" data-placement="top"
+                           title="实现react-router下，非法路径访问跳转首页">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/11/29/在styled-components的样式声明中做px到rem的自动转换/" data-toggle="tooltip" data-placement="top"
+                           title="在styled-components的样式声明中做px到rem的自动转换">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr class="popular-posts-split">
+                <hr class="popular-posts-split">
+                <h2 class="popular-posts-title">相关推荐</h2>
+                <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2014/07/12/use-package-json-to-manage-the-dependencies-package-of-npm/" title="用package.json来管理NPM里面的依赖包" rel="bookmark">用package.json来管理NPM里面的依赖包</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2013/10/11/how-to-save-passowrd-for-git-push-under-the-windows/" title="windows下使用git,如何保存push到远程仓库时使用的密码" rel="bookmark">windows下使用git,如何保存push到远程仓库时使用的密码</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2013/11/18/solution-for-the-503-error-when-take-command-git-push/" title="git push遇到503错误的解决方案" rel="bookmark">git push遇到503错误的解决方案</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2015/06/12/svn-to-git/" title="svn迁移到git" rel="bookmark">svn迁移到git</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2018/05/28/非同名git分支的关联/" title="非同名git分支的关联" rel="bookmark">非同名git分支的关联</a></h3></div></li></ul>
+
+                <hr>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-text">起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%9F%E7%B3%95%E7%9A%84%E4%B8%80%E8%BF%9E%E4%B8%B2%E6%93%8D%E4%BD%9C"><span class="toc-text">糟糕的一连串操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%BB%AD%E6%93%8D%E4%BD%9C"><span class="toc-text">后续操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://refined-x.com/">前端路上</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shui-zhong-yue-ming-de-blog";
+    var disqus_config = function () {
+        this.page.url = "https://www.shuizhongyueming.com/2017/12/01/%E5%85%B3%E4%BA%8Enodejs%E9%A1%B9%E7%9B%AE%E5%8F%91%E7%89%88%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "794 https://www.shuizhongyueming.com/?p=794"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var d = document;
+        var dsq = d.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.defer = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(dsq);
+    });
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/shuizhongyue91">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/水中月明">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/如风轻吟1991">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/shuizhongyueming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 水中月明的Blog 2022
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://www.shuizhongyueming.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+$('pre').each(function(i, tag) {
+    $(this).addClass('prettyprint')
+})
+</script>
+<script async src="https://cdn.imagehost.top/wp-content/uploads/2019/02/google-code-prettify/run_prettify.js?skin=desert"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="https://cdn.imagehost.top/ipic/t0yg1.png-q60">
+</body>
+
+</html>

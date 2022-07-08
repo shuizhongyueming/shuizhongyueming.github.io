@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="技术人的博客, 说技术人的事" />
+  <meta name="keyword" content="" />
+  <meta name="theme-color" content="#600090" />
+  <meta name="msapplication-navbutton-color" content="#600090" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="#600090" />
+  <link
+    rel="shortcut icon"
+    href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png"
+  />
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-NVHB3R');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <link
+    rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css"
+  />
+  <title>
+     QQ内置浏览器下的QQ登录实现｜水中月明的Blog 
+  </title>
+
+  <link
+    rel="canonical"
+    href="https://www.shuizhongyueming.com/2017/04/20/qq内置浏览器下的qq登录实现/"
+  />
+
+  <!-- Bootstrap Core CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
+
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+  <!-- Pygments Github CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
+
+  <script
+    data-ad-client="ca-pub-3438190576149990"
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+  ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="" class="animated fadeIn">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true"
+    data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    水中月明的Blog
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    //    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function () {
+                // prevent frequently toggle
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+    <!-- Main Content -->
+    
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.imagehost.top/default-background-1920x640.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.imagehost.top/default-background-1920x640.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>QQ内置浏览器下的QQ登录实现</h1>
+                    
+                    <span class="meta">
+                         作者 happyWang
+                        <span>
+                          日期 2017-04-20
+                         </span>
+                        <span id="busuanzi_container_page_pv">
+                         浏览量 <i id="busuanzi_value_page_pv"></i>
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#QQ"
+                           title="QQ">QQ</a>
+                        
+                        <a class="tag" href="/tags/#内置浏览器"
+                           title="内置浏览器">内置浏览器</a>
+                        
+                        <a class="tag" href="/tags/#登录"
+                           title="登录">登录</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            QQ内置浏览器下的QQ登录实现
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>在PC时代，调用QQ, 微博之类的三方登录，对于前端来说是比较轻松的(如果不需要异步登录的话)，而且体验也不错，QQ那边可以自动识别是否登录，对于用户只是一个确认和点击的流程。</p>
+<p>但是到了现在，移动互联的时代，这样的三方登录完全都是APP那边前端的事情，Web前端无能为力。毕竟，让用户在一个小设备上的小网页里面输入他已经在登录状态的QQ的账号密码，是挺难为人也挺不现实的。</p>
+<p>缘于产品庆庆同学的执着，偶然发现在QQ内置的浏览器里面进行QQ登录的话，是也可以跟PC那样自动识别到已登录状态的，这让事情有了一线曙光。不过这种便利也只能在QQ的内置浏览器里面</p>
+<p>下面就来说说如何实现web网页在QQ内置浏览器里面的登录</p>
+<h2 id="识别QQ的内置浏览器">识别QQ的内置浏览器</h2>
+<p>首先得识别当前所在的浏览器是不是QQ内置的。</p>
+<p>QQ浏览器分两种情况，一个是独立的浏览器产品，一个是内置在QQ里面的webview。识别的方式，用userAgent。</p>
+<p>先贴出对应平台对应分类的UA(使用v2ex提供的一个<a target="_blank" rel="noopener" href="https://www.v2ex.com/ua">工具页面</a>可以方便的打印UA )</p>
+<p>安卓平台下的独立的QQ浏览器</p>
+<blockquote>
+<p>Mozilla/5.0 (Linux; U; Android 4.4.4; zh-cn; HM 1S Build/KTU84P) AppleWebKit/537.36 (KHTML, like Gecko)Version/4.0 Chrome/37.0.0.0 MQQBrowser/7.4 Mobile Safari/537.36</p>
+</blockquote>
+<p>安卓平台下的内置的QQ浏览器</p>
+<blockquote>
+<p>Mozilla/5.0 (Linux; Android 4.4.4; HM 1S Build/KTU84P; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/53.0.2785.49 Mobile MQQBrowser/6.2 TBS/043124 Safari/537.36 V1_AND_SQ_6.7.1_500_YYB_D QQ/6.7.1.3105 NetType/WIFI WebP/0.3.0 Pixel/720</p>
+</blockquote>
+<p>IOS平台下的独立的QQ浏览器</p>
+<blockquote>
+<p>Mozilla/5.0 (iPhone 5SGLOBAL; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Version/10.0 MQQBrowser/7.4 Mobile/14E304 Safari/8536.25 MttCustomUA/2 QBWebViewType/1</p>
+</blockquote>
+<p>IOS平台下内置的QQ浏览器(TIM内)</p>
+<blockquote>
+<p>Mozilla/5.0 (iPhone; CPU iPhone OS 10_3_1 like Mac OS X) AppleWebKit/603.1.30 (KHTML, like Gecko) Mobile/14E304 QQ/6.5.5.0 TIM/1.0.5.9 V1_IPH_SQ_6.5.5_1_TIM_D Pixel/640 Core/UIWebView NetType/4G QBWebViewType/1</p>
+</blockquote>
+<p>这里因为测试设备有限，没法确切知道所有版本的QQ下的情况，只能等以后慢慢完善。</p>
+<p>从上面的UA可以找到两个关键字<strong>QQ</strong>和<strong>MQQBrowser</strong>。本来两个关键字是分开的，独立浏览器里面是<strong>MQQBrowser</strong>，内置的是<strong>QQ</strong>，但是这在安卓的内置里面同时实现了。</p>
+<p>所以判断方式需要绕一点：先判断<strong>MQQBrowser</strong>，如果存在，判断<strong>QQ</strong>是否存在，存在则是内置，不存在则是独立；如果不存在<strong>MQQBrowser</strong>，则判断<strong>QQ</strong>是否存在，存在是内置，不存在，就都不是。</p>
+<p>不过我们这次的需求只需要判断内置，所以简单，判断<strong>QQ</strong>是否存在即可：<code>navigator.userAgent.match(/QQ\/([\d.]+)/)</code>。</p>
+<h2 id="登录的实现">登录的实现</h2>
+<p>一开始是打算继续用PC时代用的那个登录SDK好实现一个优雅的异步免刷新的登录效果。在实际测试的时候，也的确是可以做到在登录页QQ自动识别状态只需要用户点击登录按钮确认，可是在登录回跳这块卡住了。</p>
+<p>在PC，SDK是用<code>window.open</code>新开一个弹窗来实现登录和各种跳转，在新窗口的最终落地页和主窗口通信返回登录成功获取的<strong>AccessToken</strong>，然后关闭弹出窗口。</p>
+<p>但是内置浏览器里面<code>window.open</code>的效果是替换当前网页展示，类似于<code>location.href</code>赋值跳转，这使得最终落地页一直联系不到主窗口，然后卡着了。</p>
+<p>很自然的，就想到了用<strong>iframe</strong>，把<code>window.open</code>打开的地址放到<strong>iframe</strong>里面，不就可以实现两个window的通信了吗？说干就干，QQ登录界面顺利的展现了，点击登录，结果主界面跳了，跟之前一样，再次无法通信。看来QQ在登录成功之后是用<code>window.top</code>来跳转的。不明白QQ这样做是出于什么考虑的，安全性？可是登录成功的回调地址不是已经被限制了只能是对应域名下的了吗？唯一知道的就是，这个方法行不通……</p>
+<p>所以，目前还是只能走以前的老路，通过页面跳转的方式来实现登录。主要的策略就是在QQ登录成功之后的回调页再跳回之前的发起登录的页面。</p>
+<p>本来这个需求是由后端来实现，在回跳<strong>发起页</strong>之前，在cookie里面记录用户的登录信息，这样发起页就能知道用户登录成功了。</p>
+<p>不过我这次的需求，有两个麻烦的地方：</p>
+<ol>
+<li>后端目前还没有在移动站点配置登录功能</li>
+<li>我需要知道QQ用户的<strong>OpenID</strong>和<strong>AccessToken</strong></li>
+</ol>
+<p>所以改为由后端配置好回调页路由，具体页面里面的跳转和信息记录由前端自行控制。</p>
+<p>然后具体的实现步骤是：</p>
+<ol>
+<li>用户点击发起页上的QQ登录按钮</li>
+<li>前端在后端给的<strong>redirect_url</strong>里面加上一个search query字段<strong>redirect</strong>，方便后面回跳回来</li>
+<li>前端根据<strong>appId</strong>和<strong>redirect_url</strong>整合出跳转QQ登录的地址(<code>https://graph.qq.com/oauth2.0/authorize? response_type=token&amp;client_id=&#123; &#123;appId&#125;&#125;&amp;scope=all&amp;display=mobile&amp;redirect_uri=&#123; &#123;回调地址&#125;&#125;</code>)并跳转</li>
+<li>在QQ登录页面，QQ识别到当前用户的登录状态，自动填充信息并添加一键登录按钮</li>
+<li>用户点击登录</li>
+<li>QQ开始回跳到<strong>redirect_url</strong>并在<strong>redirect_url</strong>后附加hash query，这个query里面有** access_token<strong>和</strong> expires_in**</li>
+<li>这个回调页，js抓取token和token过期时间存储在<strong>localStorage</strong>，同时还在<strong>localStorage</strong>记录两个个临时的key: <strong>TempQQLoginSuccess</strong>和<strong>TempQQLoginSuccessTime</strong>。</li>
+<li>回调页识别search query里面的<strong>redirect</strong>字段，获取发起页地址并跳转过去。</li>
+<li>发起页初始化的时候，查看localStorage里面有没有token和expire_in对应的字段，如果没有则是未登录状态，执行一次退出操作(退出操作是尝试清空回调页记录的四个key，下文同理)。如果存在，则判断当前时间是否超过expire_in对应的时间，如果超过，则执行退出操作。没有超过，则此时用户是登录状态。</li>
+<li>确定用户登录之后，再判断回调页记录的两个临时字段是否存在。如果有，判断<strong>TempQQLoginSuccessTime</strong>存储的时间和当前时间的时间差是否有超过一定的阈值。如果没有超过则说明上一次的发起页有登录行为，可以提示登录成功，如果超过了，则直接显示登录后的状态即可。同时不管超过与否，清空这两个临时key。</li>
+</ol>
+<p>以上，整个登录流程就通了，成功的获取了用户的accessToken。</p>
+<p>后面再使用accssToken作为参数，以jsonp的方式访问QQ的接口<code>https://graph.qq.com/oauth2.0/me?access_token=&#123; &#123;accessToken&#125;&#125;</code>就能顺利的获取到用户的openId。这里要注意的一点是，QQ的这个接口里面callback的函数名写死了是<strong>callback</strong>，所以在使用jsonp的时候，以Zepto为例，jsonpCallback需要设定为<strong>callback</strong>。</p>
+<p>关于这个项目，具体实现代码在这：<a target="_blank" rel="noopener" href="https://github.com/shuizhongyueming/fe-qq-login">https://github.com/shuizhongyueming/fe-qq-login</a>，有兴趣的可以看看</p>
+
+                <div class="copyright-notice">
+<div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://www.shuizhongyueming.com/2017/04/20/qq%E5%86%85%E7%BD%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%8B%E7%9A%84qq%E7%99%BB%E5%BD%95%E5%AE%9E%E7%8E%B0/" title="https://www.shuizhongyueming.com/2017/04/20/qq%E5%86%85%E7%BD%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%8B%E7%9A%84qq%E7%99%BB%E5%BD%95%E5%AE%9E%E7%8E%B0/">https://www.shuizhongyueming.com/2017/04/20/qq%E5%86%85%E7%BD%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%8B%E7%9A%84qq%E7%99%BB%E5%BD%95%E5%AE%9E%E7%8E%B0/</a></div>
+                </div>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/04/25/docer-for-mac的ca-pem找不到的问题/" data-toggle="tooltip" data-placement="top"
+                           title="Docer for Mac的ca.pem找不到的问题">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/04/15/关于我的口才/" data-toggle="tooltip" data-placement="top"
+                           title="关于我的口才">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr class="popular-posts-split">
+                <hr class="popular-posts-split">
+                <h2 class="popular-posts-title">相关推荐</h2>
+                
+
+                <hr>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%86%E5%88%ABQQ%E7%9A%84%E5%86%85%E7%BD%AE%E6%B5%8F%E8%A7%88%E5%99%A8"><span class="toc-text">识别QQ的内置浏览器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E7%9A%84%E5%AE%9E%E7%8E%B0"><span class="toc-text">登录的实现</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://refined-x.com/">前端路上</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shui-zhong-yue-ming-de-blog";
+    var disqus_config = function () {
+        this.page.url = "https://www.shuizhongyueming.com/2017/04/20/qq%E5%86%85%E7%BD%AE%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%8B%E7%9A%84qq%E7%99%BB%E5%BD%95%E5%AE%9E%E7%8E%B0/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "728 https://www.shuizhongyueming.com/?p=728"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var d = document;
+        var dsq = d.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.defer = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(dsq);
+    });
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/shuizhongyue91">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/水中月明">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/如风轻吟1991">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/shuizhongyueming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 水中月明的Blog 2022
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://www.shuizhongyueming.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+$('pre').each(function(i, tag) {
+    $(this).addClass('prettyprint')
+})
+</script>
+<script async src="https://cdn.imagehost.top/wp-content/uploads/2019/02/google-code-prettify/run_prettify.js?skin=desert"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="https://cdn.imagehost.top/ipic/t0yg1.png-q60">
+</body>
+
+</html>

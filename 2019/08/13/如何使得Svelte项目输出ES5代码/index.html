@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="技术人的博客, 说技术人的事" />
+  <meta name="keyword" content="" />
+  <meta name="theme-color" content="#600090" />
+  <meta name="msapplication-navbutton-color" content="#600090" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="#600090" />
+  <link
+    rel="shortcut icon"
+    href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png"
+  />
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-NVHB3R');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <link
+    rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css"
+  />
+  <title>
+     如何使得Svelte项目输出ES5代码｜水中月明的Blog 
+  </title>
+
+  <link
+    rel="canonical"
+    href="https://www.shuizhongyueming.com/2019/08/13/如何使得Svelte项目输出ES5代码/"
+  />
+
+  <!-- Bootstrap Core CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
+
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+  <!-- Pygments Github CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
+
+  <script
+    data-ad-client="ca-pub-3438190576149990"
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+  ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="" class="animated fadeIn">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true"
+    data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    水中月明的Blog
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    //    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function () {
+                // prevent frequently toggle
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+    <!-- Main Content -->
+    
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.imagehost.top/default-background-1920x640.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.imagehost.top/default-background-1920x640.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>如何使得Svelte项目输出ES5代码</h1>
+                    
+                    <span class="meta">
+                         作者 happyWang
+                        <span>
+                          日期 2019-08-13
+                         </span>
+                        <span id="busuanzi_container_page_pv">
+                         浏览量 <i id="busuanzi_value_page_pv"></i>
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#babel"
+                           title="babel">babel</a>
+                        
+                        <a class="tag" href="/tags/#webpack"
+                           title="webpack">webpack</a>
+                        
+                        <a class="tag" href="/tags/#es6"
+                           title="es6">es6</a>
+                        
+                        <a class="tag" href="/tags/#svelte"
+                           title="svelte">svelte</a>
+                        
+                        <a class="tag" href="/tags/#es5"
+                           title="es5">es5</a>
+                        
+                        <a class="tag" href="/tags/#rollup"
+                           title="rollup">rollup</a>
+                        
+                        <a class="tag" href="/tags/#typescript"
+                           title="typescript">typescript</a>
+                        
+                        <a class="tag" href="/tags/#Sucrase"
+                           title="Sucrase">Sucrase</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            如何使得Svelte项目输出ES5代码
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="为什么需要ES5的代码">为什么需要ES5的代码</h2>
+<p>最近在开发公司的一个项目时，为了最小化代码文件，就上手尝试了一下<a target="_blank" rel="noopener" href="https://svelte.dev/">svelte</a>，这个目前号称编译后代码包最小的框架，通过把大部分的计算放在编译时进行，而不是在运行时进行，从而极大程度上减少了运行时库文件的大小</p>
+<p>目前来说，效果很棒，完成一些简单的功能开发之后，整个production模式下编译的代码包在70KB左右，gzip之后的体积是26.5KB，可以说是很惊艳了。不跟<code>React</code>比，跟同样号称代码包很小的<code>Vue.js</code>比，Vue.js项目，不说业务代码，单单库文件(v2.6.10版本)就有83KB了。</p>
+<p>不过有一点问题是，svelte官方认为目前浏览器大部分都已经支持了ES6，所以他们提交到npm的runtime的代码也是直接输出的es6的代码。</p>
+<p>一开始我也比较认可这个说法的，自己的项目代码也输出的es6，然后上线了。</p>
+<p>之后我发现国外的浏览器跟国内还是不一样的进化程度。这个项目是有用<a target="_blank" rel="noopener" href="https://www.fundebug.com/">fundebug</a>来做错误监控的，上线没多久之后，错误就一直不断</p>
+<p><img src="http://cdn.imagehost.top/ipic/fzndn.png-q60" alt=""></p>
+<p>所以还是需要面对现实，代码还是ES5的香，就像当初为了兼容IE6,7时候写ES3的代码一样</p>
+<h2 id="事情没那么简单">事情没那么简单</h2>
+<p>首先是自己的业务代码，是基于<code>babel</code>进行代码转换的，用的<code>@babel/preset-env</code>，配置的targets值为<code>&gt; 2% in CN, last 2 major versions, not dead</code></p>
+<p>不过可能我们业务面对的用户群跟 browserslist-compatible 收集的数据不太匹配，编译后的代码里面const, arrow function, spread等等特性的代码都还在，没办法，又只好手动指定来一些plugin，最终的.babelrc内容如下：</p>
+<pre><code class="language-json">&#123;
+  &quot;presets&quot;: [
+    [
+      &quot;@babel/preset-env&quot;,
+      &#123;
+        &quot;targets&quot;: &quot;&gt; 2% in CN, last 2 major versions, not dead&quot;,
+        &quot;debug&quot;: true,
+        &quot;include&quot;: [
+          &quot;@babel/plugin-transform-block-scoping&quot;,
+          &quot;@babel/plugin-transform-spread&quot;,
+          &quot;@babel/plugin-transform-destructuring&quot;,
+          &quot;@babel/plugin-proposal-object-rest-spread&quot;,
+          &quot;@babel/plugin-transform-arrow-functions&quot;,
+          &quot;@babel/plugin-transform-parameters&quot;
+        ]
+      &#125;
+    ]
+  ]
+&#125;
+</code></pre>
+<p>这番配置之后，业务代码是已经都转换为ES5的了，可是从svelte import过来的代码，却没有被正确转换为ES5的。</p>
+<p>在网上搜了一些解决方案，一个svelte-loader里面的<a target="_blank" rel="noopener" href="https://github.com/sveltejs/svelte-loader/issues/62">issue</a>给了一个解决方案，思路是使用loader进行相应格式文件处理的时候，把<code>node_modules/svelte/</code>模块下的文件也处理一下</p>
+<p>尝试了一下，发现并不可以，也不知道是svelte的版本升级之后不兼容，还是我这边配置有问题</p>
+<h2 id="自行编译svelte">自行编译svelte</h2>
+<p>最后我想，既然我没法在项目里面把svelte的runtime代码丢给babel处理，那不如从源头解决这个问题。git clone下来svelte，编译为es5的代码，然后在用yarn link的方式引用到业务项目里面</p>
+<p>因为svelte是基于typescript编写的，当时在我看来，改编译为es5很简单，直接在<code>tsconfig.json</code>里面把targets改成es5，然后运行<code>npm run build</code>命令来重新编译即可。</p>
+<p>可是不行。</p>
+<p>再仔细看了一下rollup.config.js</p>
+<pre><code class="language-javascript">import sucrase from 'rollup-plugin-sucrase';
+import typescript from 'rollup-plugin-typescript';
+const ts_plugin = is_publish
+	? typescript(&#123;
+		include: 'src/**',
+		typescript: require('typescript')
+	&#125;)
+	: sucrase(&#123;
+		transforms: ['typescript']
+	&#125;);
+</code></pre>
+<p>在publish环境下使用typescript来编译ts文件，其他情况下使用<a target="_blank" rel="noopener" href="https://github.com/alangpierce/sucrase">Sucrase</a>来编译ts文件</p>
+<p>很奇怪的是，build命令并没有设定环境为publish。而Sucrase，看了一下，是一个Babel的替代品，为了加快编译速度，编译出来的代码都是面向现代浏览器，也就是没有什么语法转换和polyfill的。</p>
+<p>为了能够使用typescript来编译，调整了一下package.json里面的build命令</p>
+<p>从<code>rollup -c &amp;&amp; npm run tsd</code>改成<code>PUBLISH=true rollup -c &amp;&amp; npm run tsd</code></p>
+<p>再重新执行build命令，成功。</p>
+<p>然后再回到已经把svelte link到本地的业务项目，重新编译。这次编译，svelte runtime相关代码就成功使用了基于es5编译的。</p>
+
+                <div class="copyright-notice">
+<div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://www.shuizhongyueming.com/2019/08/13/%E5%A6%82%E4%BD%95%E4%BD%BF%E5%BE%97Svelte%E9%A1%B9%E7%9B%AE%E8%BE%93%E5%87%BAES5%E4%BB%A3%E7%A0%81/" title="https://www.shuizhongyueming.com/2019/08/13/%E5%A6%82%E4%BD%95%E4%BD%BF%E5%BE%97Svelte%E9%A1%B9%E7%9B%AE%E8%BE%93%E5%87%BAES5%E4%BB%A3%E7%A0%81/">https://www.shuizhongyueming.com/2019/08/13/%E5%A6%82%E4%BD%95%E4%BD%BF%E5%BE%97Svelte%E9%A1%B9%E7%9B%AE%E8%BE%93%E5%87%BAES5%E4%BB%A3%E7%A0%81/</a></div>
+                </div>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2022/07/08/Xcode无法生成LinkMap的可能原因/" data-toggle="tooltip" data-placement="top"
+                           title="Xcode 无法生成 Link Map 的可能原因">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/03/15/一个发票挂账月份修改功能引发的小重构/" data-toggle="tooltip" data-placement="top"
+                           title="一个发票挂账月份修改功能引发的小重构">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr class="popular-posts-split">
+                <hr class="popular-posts-split">
+                <h2 class="popular-posts-title">相关推荐</h2>
+                <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2017/11/28/webpack-dynamic-import出错-syntaxerror-import-and-export-may-only-appear-at-the-top-level/" title="webpack dynamic import出错: SyntaxError: 'import' and 'export' may only appear at the top level" rel="bookmark">webpack dynamic import出错: SyntaxError: 'import' and 'export' may only appear at the top level</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2017/03/15/webpack的target选项的作用/" title="webpack的target选项的作用" rel="bookmark">webpack的target选项的作用</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2018/06/05/基于webpack来配置html的preload和prefetch/" title="基于webpack来配置html的preload和prefetch" rel="bookmark">基于webpack来配置html的preload和prefetch</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2018/05/30/一个asi陷阱/" title="一个ASI陷阱" rel="bookmark">一个ASI陷阱</a></h3></div></li></ul>
+
+                <hr>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81ES5%E7%9A%84%E4%BB%A3%E7%A0%81"><span class="toc-text">为什么需要ES5的代码</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8B%E6%83%85%E6%B2%A1%E9%82%A3%E4%B9%88%E7%AE%80%E5%8D%95"><span class="toc-text">事情没那么简单</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E8%A1%8C%E7%BC%96%E8%AF%91svelte"><span class="toc-text">自行编译svelte</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://refined-x.com/">前端路上</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shui-zhong-yue-ming-de-blog";
+    var disqus_config = function () {
+        this.page.url = "https://www.shuizhongyueming.com/2019/08/13/%E5%A6%82%E4%BD%95%E4%BD%BF%E5%BE%97Svelte%E9%A1%B9%E7%9B%AE%E8%BE%93%E5%87%BAES5%E4%BB%A3%E7%A0%81/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = " https://www.shuizhongyueming.com/?p="; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var d = document;
+        var dsq = d.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.defer = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(dsq);
+    });
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/shuizhongyue91">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/水中月明">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/如风轻吟1991">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/shuizhongyueming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 水中月明的Blog 2022
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://www.shuizhongyueming.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+$('pre').each(function(i, tag) {
+    $(this).addClass('prettyprint')
+})
+</script>
+<script async src="https://cdn.imagehost.top/wp-content/uploads/2019/02/google-code-prettify/run_prettify.js?skin=desert"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="https://cdn.imagehost.top/ipic/t0yg1.png-q60">
+</body>
+
+</html>

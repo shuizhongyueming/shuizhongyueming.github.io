@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="技术人的博客, 说技术人的事" />
+  <meta name="keyword" content="" />
+  <meta name="theme-color" content="#600090" />
+  <meta name="msapplication-navbutton-color" content="#600090" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="#600090" />
+  <link
+    rel="shortcut icon"
+    href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png"
+  />
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-NVHB3R');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <link
+    rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css"
+  />
+  <title>
+     关于数据备份｜水中月明的Blog 
+  </title>
+
+  <link
+    rel="canonical"
+    href="https://www.shuizhongyueming.com/2013/07/13/about-data-backup/"
+  />
+
+  <!-- Bootstrap Core CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
+
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+  <!-- Pygments Github CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
+
+  <script
+    data-ad-client="ca-pub-3438190576149990"
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+  ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="" class="animated fadeIn">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true"
+    data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    水中月明的Blog
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    //    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function () {
+                // prevent frequently toggle
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+    <!-- Main Content -->
+    
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.imagehost.top/default-background-1920x640.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.imagehost.top/default-background-1920x640.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>关于数据备份</h1>
+                    
+                    <span class="meta">
+                         作者 happyWang
+                        <span>
+                          日期 2013-07-13
+                         </span>
+                        <span id="busuanzi_container_page_pv">
+                         浏览量 <i id="busuanzi_value_page_pv"></i>
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#感悟"
+                           title="感悟">感悟</a>
+                        
+                        <a class="tag" href="/tags/#数据"
+                           title="数据">数据</a>
+                        
+                        <a class="tag" href="/tags/#数据备份"
+                           title="数据备份">数据备份</a>
+                        
+                        <a class="tag" href="/tags/#生活"
+                           title="生活">生活</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            关于数据备份
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="凄惨的经历">凄惨的经历</h2>
+<h3 id="一杯水引发的惨案">一杯水引发的惨案</h3>
+<p>今天在公司上班，因为干活比较用心，喝水的时候也盯着电脑，喝完之后就随便把杯子放笔记本边上，结果一个不小心，水就撒了一部分到键盘上。当时没怎么在意，随便拿个餐巾纸吸掉表面的水就继续干活，顺便跟个妹子聊天。</p>
+<p>结果没两分钟，开始不对劲了，在编辑器里面，一直在触发换行，换别的软件获取焦点之后也是这样——原来是Enter键出毛病了，连按了几次之后，Enter事件不再被触发，但是按Enter键也没得效果。这个时候知道事情大条了，赶紧找公司的网管救命。</p>
+<p>网管知道经过之后，一脸佩服的看着我，一般人电脑进水之后都是立马断电源拔电池的，我倒好，还这么悠闲的跟妹子聊天…</p>
+<p>检查的结果很不理想——就是网管也不知道是哪出问题了，但是帮我把键盘进水的键拔出来仔细擦干了藏在内里的水，然后告诉我：去维修点修吧，要是还在保修期，千万别说是进水了，不在维修期待话，破费一笔是难免的。</p>
+<p>当时我对破费一笔的概念还停留在两三百多境界。</p>
+<h3 id="辛酸的维修过程">辛酸的维修过程</h3>
+<p>公司在中关村，经过网管指点，找维修点倒也简单，在鼎好电子商城的地下二层，A001就是(话说对于我后来修电脑的地方到底是不是联想到官方维修店，我是有点怀疑的，因为我找到了A005，A004，按照摊位的延续，到那家店也差不多是A001，可是偏偏那个店没在店名上挂个联想的名字或者logo，也没有牌子表明序号)。</p>
+<p>在维修点，维修人员弄个仪器左测测右弄弄。在那个时候，我的心情还是比较悠闲的，因为两三百块钱虽然很心疼，但还是能接受的，我就在他们检测的时候在一边拿手机看小说去了。最后，给出个答案——硬盘损坏</p>
+<p>话说这个解释一出来，我挺惊讶的，报修的时候按照网管的指点，我没说是电脑进水而是说突然的就这么开不了机，反正怎么显得自己小白就怎么说，这样保修的时候可以避免自身的责任。可是硬盘损坏，这个跟进水貌似没有什么关联。我有点怀疑对方是不是想坑我的钱，就拿出一个杀手锏：Enter键不能用——这个总不能也跟硬盘坏联系上吧。可是对方又说他们也发现这个问题了，因为boot的时候没法按Enter键进入子菜单。可是在把硬盘移除之后，Enter键就能使用。这我就没解了，而且对方也保证了，要是最后换了硬盘之后，Enter键也没用就是他们的责任。这个时候，只能暂时承认是硬盘坏了，等着他们报价维修了。</p>
+<p>硬盘损坏，换硬盘，320G的400，500G的500，这个价格一出，我就感觉事情开始超出自己能够掌控的范围了，开始不淡定了。可是后面，最最无奈的一个破财点出来了——数据恢复。据他们的说法是：硬盘磁道坏了，一般的方式无法通过数据线连接到机器上识别硬盘，然后用软件做数据恢复，而是在一个无尘的环境里面，拆开硬盘，把坏的硬盘上面磁盘的内容查找对应分区和文件夹复制到一个新的硬盘里面。这样做的手续费是600，然后推荐换个500G的硬盘(这个也是我想的，因为320G的的确有点小).加起来总共的费用1100.</p>
+<p>这个时候，我已经开始有点想崩溃了，一杯水==&gt;1100大洋，这样的一个因果实在是太超出意料。如果不做数据恢复的话，价格倒是便宜，可是电脑里面的确有很多对我来说很重要的数据，一些公司的进行了很久的项目，一些自己平时的技术积累，还有收集了放在桌面上一个妹子发给我的很多文件。这些在我心里的价格是很珍贵的，所以我不得不痛苦的承认，我得挨宰！</p>
+<p>回公司找同事准备借个1200，路上维修点的人又打来电话说可以用一种克隆的方式，把硬盘里面的数据都拷贝到另外一个硬盘上面，然后价格是800.因为是在电话里面，一时说不清，我就跟对方说等我过去再说，可是让同事取钱的时候，还是让他取了1500，已经预测到这笔另加的钱应该是避免不了了。</p>
+<p>再回到维修点，对方说用一个跟坏的磁盘一模一样大小的磁盘，在无尘的环境(又是无尘，无尘你妹啊)里把坏的磁盘的数据完全的拷贝到新磁盘上面。这样的做法一来恢复的数据很多，不用考虑专门恢复哪个文件夹里面的数据了，二来时间上也很快速(因为手上接了个任务，已经承诺了要明后两天完成，所以要求他们尽量快的修复电脑)。看起来这方法的确很好，可是价格不便宜(800),而且有个缺点，C盘里面的东西没法被恢复。这就意味着我桌面，我的文档，等很多地方的文件没法恢复了，特别是那个妹子发的那些文件…可是从时间和恢复的数据量上面来看，这又是唯一解。</p>
+<p>最终的结果是，我倒了一杯水在键盘上，给了别人1200块钱，换了个除C盘没了和F,G,H变成E,F,G的新的320G的磁盘，64位的win8变成64位的win7.仅此而已，一切都和原先一样…</p>
+<p>回了公司，来不及哀悼，开始了悲催的加班节奏…</p>
+<h2 id="最重要的总结">最重要的总结</h2>
+<h3 id="数据的重要性">数据的重要性</h3>
+<p>在维修的时候，和维修人员扯淡的时候，他的一句话让我很有感触：<strong>硬盘有价，数据无价</strong>，的确是这样，电脑上面任何一个部件坏了，换个一样或者更优的部件就能正常工作甚至比之前工作的更好。可是数据一旦没有了就真心没有了，不管那个是你心仪女子的照片，是你苦苦收集的一张张桌面背景，一首首高品质的好歌或者一部部的经典影片，也不管那个是你辛苦工作几个月甚至几年的论文或者程序。失去了就是失去了。所以要注意数据的备份</p>
+<h3 id="如何进行数据备份">如何进行数据备份</h3>
+<p>作为一个到最后花了这么多钱做数据恢复的我，说这个话题也许有点不着调，但是我的确在这个方面有着一定的经验，只是之前是明白如何做却没有认识到这样做的重要性，最后就因为麻烦放弃了坚持。</p>
+<p>数据的备份要考虑到下面几个问题：</p>
+<ul>
+<li>备份的频率</li>
+<li>备份的便捷性</li>
+<li>备份点的安全性</li>
+<li>备份点的稳定性</li>
+</ul>
+<p>常见的备份方法就我所知有两种：本地备份(比如移动硬盘)，云备份(各种网盘，<a target="_blank" rel="noopener" href="https://www.dropbox.com/">Dropbox</a>,<a target="_blank" rel="noopener" href="https://drive.google.com/">Google Drive</a>,<a target="_blank" rel="noopener" href="https://www.kuaipan.cn/">金山快盘</a>,<a target="_blank" rel="noopener" href="https://pan.baidu.com/">百度云盘</a>,<a target="_blank" rel="noopener" href="http://115.com/">115网盘</a>)</p>
+<p>本地备份：这个备份点的安全性和稳定性，只要买个好的移动硬盘(此处以移动硬盘代表本地备份的备份点)，平时注意一下移动硬盘的放置地点，设置好强度足够的密码就能保证。但是如果数据是那种更新比较频繁的，通过本地备份，每次手动的拷贝的话，那么频率和便捷性就是一个相斥的方向了。所以本地备份适合那些变动比较少的，比如一些好的电影，有纪念意义的照片等数据</p>
+<p>云备份：有过相关经验的人都知道，只要开着个软件，就能很实时的将你的增删改的文件保存到云服务器上，便捷性和频率上都无可挑剔，只是如果数据量比较大，可能软件会占用电脑一定的内存和cpu(我当初就是因为这个原因没能坚持一直实时开着软件备份)。在稳定性方面，因为好的云盘都是有多个分布在各地的服务器保存着多份数据的备份。哪怕有一台服务器挂了也不影响数据的完整性。所以稳定性上面可以有保障。但是在安全性方面，安全指的是数据不被他包括云盘服务提供商自身)窃取或查看，这一点，就没法保证。因为数据在别人那儿，你没法监督他的操作。建议的方式是国内和国外的云盘服务交叉使用。国外的公司还是有一些素质的，所以一些重要的，机密程度不是很高的文件，比如公司的一些开发中的项目可以考虑使用国外的云盘。只要你的公司不是国内的顶级公司，那么你的文件就算真的被对方查看了，也没法带给对方什么商业价值。至于其他的一些个人的非私密的摄影摄像文件，自己写的小程序等等就可以放心的放在同步速度比较快而且可以方便的分享给不能翻墙的国内朋友的国内网盘。</p>
+<p>对于那些公司的机密文件，特别是后台的一些文件，任何移动硬盘或者云盘都是不靠谱的，应该的做法是每个公司自己建立好一个svn或者git服务器，而作为使用者的我们，应该多svn up和git commit。保证自己的文件尽量及时的同步到服务器上面。</p>
+<p>好了，以上就是本人的一些比较罗嗦的经验了。(完)</p>
+
+                <div class="copyright-notice">
+<div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://www.shuizhongyueming.com/2013/07/13/about-data-backup/" title="https://www.shuizhongyueming.com/2013/07/13/about-data-backup/">https://www.shuizhongyueming.com/2013/07/13/about-data-backup/</a></div>
+                </div>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2013/10/05/在线前端代码调试分享利器-jsfiddle/" data-toggle="tooltip" data-placement="top"
+                           title="在线前端代码调试,分享利器--jsFiddle">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2013/06/30/add-cnzz-as-the-site-statistics/" data-toggle="tooltip" data-placement="top"
+                           title="给网站加了统计">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr class="popular-posts-split">
+                <hr class="popular-posts-split">
+                <h2 class="popular-posts-title">相关推荐</h2>
+                <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2013/04/17/know-what-you-are-doing/" title="要明白自己在干什么" rel="bookmark">要明白自己在干什么</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2016/04/27/关于如何挑选云存储的一点想法/" title="关于如何挑选云存储的一点想法" rel="bookmark">关于如何挑选云存储的一点想法</a></h3></div></li></ul>
+
+                <hr>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%84%E6%83%A8%E7%9A%84%E7%BB%8F%E5%8E%86"><span class="toc-text">凄惨的经历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E6%9D%AF%E6%B0%B4%E5%BC%95%E5%8F%91%E7%9A%84%E6%83%A8%E6%A1%88"><span class="toc-text">一杯水引发的惨案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%9B%E9%85%B8%E7%9A%84%E7%BB%B4%E4%BF%AE%E8%BF%87%E7%A8%8B"><span class="toc-text">辛酸的维修过程</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E9%87%8D%E8%A6%81%E7%9A%84%E6%80%BB%E7%BB%93"><span class="toc-text">最重要的总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7"><span class="toc-text">数据的重要性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%A4%87%E4%BB%BD"><span class="toc-text">如何进行数据备份</span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://refined-x.com/">前端路上</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shui-zhong-yue-ming-de-blog";
+    var disqus_config = function () {
+        this.page.url = "https://www.shuizhongyueming.com/2013/07/13/about-data-backup/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "228 https://www.shuizhongyueming.com/?p=228"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var d = document;
+        var dsq = d.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.defer = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(dsq);
+    });
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/shuizhongyue91">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/水中月明">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/如风轻吟1991">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/shuizhongyueming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 水中月明的Blog 2022
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://www.shuizhongyueming.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+$('pre').each(function(i, tag) {
+    $(this).addClass('prettyprint')
+})
+</script>
+<script async src="https://cdn.imagehost.top/wp-content/uploads/2019/02/google-code-prettify/run_prettify.js?skin=desert"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="https://cdn.imagehost.top/ipic/t0yg1.png-q60">
+</body>
+
+</html>

@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="技术人的博客, 说技术人的事" />
+  <meta name="keyword" content="" />
+  <meta name="theme-color" content="#600090" />
+  <meta name="msapplication-navbutton-color" content="#600090" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="#600090" />
+  <link
+    rel="shortcut icon"
+    href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png"
+  />
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-NVHB3R');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <link
+    rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css"
+  />
+  <title>
+     GitHub帮助-使用Pull Request｜水中月明的Blog 
+  </title>
+
+  <link
+    rel="canonical"
+    href="https://www.shuizhongyueming.com/2014/10/16/github-help-of-use-pull-request/"
+  />
+
+  <!-- Bootstrap Core CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
+
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+  <!-- Pygments Github CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
+
+  <script
+    data-ad-client="ca-pub-3438190576149990"
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+  ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="" class="animated fadeIn">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true"
+    data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    水中月明的Blog
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    //    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function () {
+                // prevent frequently toggle
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+    <!-- Main Content -->
+    
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.imagehost.top/default-background-1920x640.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.imagehost.top/default-background-1920x640.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>GitHub帮助-使用Pull Request</h1>
+                    
+                    <span class="meta">
+                         作者 happyWang
+                        <span>
+                          日期 2014-10-16
+                         </span>
+                        <span id="busuanzi_container_page_pv">
+                         浏览量 <i id="busuanzi_value_page_pv"></i>
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#github"
+                           title="github">github</a>
+                        
+                        <a class="tag" href="/tags/#Pull Request"
+                           title="Pull Request">Pull Request</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            GitHub帮助-使用Pull Request
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <blockquote>
+<p>本文是翻译的<a target="_blank" rel="noopener" href="https://help.github.com/articles/using-pull-requests/">https://help.github.com/articles/using-pull-requests/</a> 。旨在帮助大家了解 GitHub 上面如何给别人的仓库提交变更，英文好的同学可以查看上述网址，获取最新的内容</p>
+</blockquote>
+<p>Pull Request 可以让你通知别人，你已经推送了一个修改到 GitHub 的版本库。在 pull request 被发送之后，感兴趣的成员可以 review 这些代码变动，讨论可能需要的修改，甚至在必要的时候在这之后 push 一些 commits 本指南详细描述了从发送一个 pull request(假设的)，使用各种代码审查工具和管理工具，到最后完成变更的过程。</p>
+<h2 id="协同开发模式的快速笔记">协同开发模式的快速笔记</h2>
+<p>在 GitHub 上面有两种流行的协同开发模式：</p>
+<h3 id="Fork-Pull">Fork &amp; Pull</h3>
+<p>Fork &amp; Pull 模式让任何人都可以 fork(复制的意思)一个已经存在的版本库并且提交变更到他们自己 fork 出来的版本库上，而不需要获得源版本库的访问权限。变更必须通过项目维护者才能放入源版本库。这种模式降低了给新贡献者带来的麻烦，在开源项目非常流行，因为它使人们能够独立工作而不需要前期的协调。</p>
+<h3 id="共享版本库模式">共享版本库模式</h3>
+<p>共享版本库模式在小团队和组织合作的私人项目中更为普遍。每个人都有 push 到单一共享版本库或者用来隔离变更的顶级分支的权限。 Pull requests 在 Fork &amp; Pull 模式 中更加有用，因为它提供了一种方法去提醒项目维护者，在他的 fork 里面有变更. 但是，在共享版本库模式中，他们同样有用，当人们启动代码审查或者在合并到主分支之前讨论所有变更的时候</p>
+<h2 id="开始之前">开始之前</h2>
+<p>本指南假设您有一个<a target="_blank" rel="noopener" href="https://github.com/signup">GitHub 的帐户</a> ，你已经 Fork 了一个的现有版本，并 push 了您的更改。想要获得关于 Fork 和推送变更的帮助，请参阅文章——<a target="_blank" rel="noopener" href="https://help.github.com/articles/fork-a-repo">Forking a Repo</a>。</p>
+<h2 id="启动-Pull-Request">启动 Pull Request</h2>
+<p>在下面的例子中，codercat 在 Fork 自 Octocat 的 Spoon-Knife 版本库中完成了一些工作，在他的 Fork 中 push 了一个 commit，并希望有人来审查和合并。 进入到你希望别人 Pull 变更的版本库中，点击 Pull Request 按钮。</p>
+<ol>
+<li>切换到您的分支 <img src="https://github-images.s3.amazonaws.com/help/branch/pick-your-branch.png" alt="分支选择下拉"></li>
+<li>点击 Compare &amp; review 按钮 <img src="https://github-images.s3.amazonaws.com/help/pull_requests/pull-request-start-review-button.png" alt="Pull Request 按钮"></li>
+</ol>
+<p>Pull request 可以基于任何分支或者 commit 发送，但是推荐是从一个顶级分支。这样，在必要的时候，一些跟随的 commit 可以被 push，去更新这个 Pull Request。</p>
+<h2 id="审查要提交的-Pull-Request">审查要提交的 Pull Request</h2>
+<p>开始审查之后，你将会进入一个审查页面，在这里你可以概览到所有在你的分支和源版本库的 master 分支之间的变动。你可以审查在所有 commit 中的注释，明白哪些文件发生了变动，看到所有在你的分支中的贡献者。 <img src="https://github-images.s3.amazonaws.com/help/pull_requests/pull-request-review-page.png" alt="Pull Request 复审页"></p>
+<h2 id="改变分支范围和目标版本库">改变分支范围和目标版本库</h2>
+<p>默认情况下，Pull Request 被认为是基于父版本库的<a target="_blank" rel="noopener" href="https://help.github.com/articles/setting-the-default-branch">默认分支</a> 。在这种情况下， hubot/Spoon-Knife 是 contoctocat/Spoon-Knife 中 Fork 出来的。所以这次的 Pull Request 被假定为基于 octocat/Spoon-Knife 版本库的 master 分支。 在绝大多数情况下，默认值将是正确的，但是，如果有任何信息不正确，您可以从下拉列表中更改父版本库和分支。点击顶部的 Edit 按钮，可以让你换你的头和底座，以及建立各种参考点之间的差别。这里引用可以包括：</p>
+<ul>
+<li>添加了 tag 的 release</li>
+<li>commit 的 SHA 值</li>
+<li>分支名称</li>
+<li>Git 的历史标志（如 HEAD^1 ）</li>
+<li>有效的时间引用（如 master@{1day} ）</li>
+</ul>
+<p>欲了解更多信息，请查看<a target="_blank" rel="noopener" href="https://help.github.com/articles/comparing-commits-across-time">our help article on setting up comparisons</a> 。</p>
+<p><img src="https://github-images.s3.amazonaws.com/help/pull_requests/pull-request-review-edit-branch.png" alt="Pull Request 选择比较的分支"></p>
+<p>理解分支范围的最简单的方法是这样的：</p>
+<p>*基础分支( base branch )<em>是你认为变更应该应用的分支，而</em>头部分支( head branch )*是你想被人应用的分支 。</p>
+<p>改变基础版本库会导致 Pull Request 发生时候的通知名单发送变动。所有对基础版本库有 push 权限的人都会在新的 Pull Request 产生的时候收到邮件，并且在他们下次登录的时候能够在他们的仪表盘查看该 Pull Request。</p>
+<p>当您更改分支范围内的任何信息，commit 和文件改动的预览区域将更新以显示新的范围。</p>
+<h2 id="发送-Pull-Request">发送 Pull Request</h2>
+<p>当你准备好提交您的 Pull Request，点击<code>Create pull request</code>按钮： <img src="https://github-images.s3.amazonaws.com/help/pull_requests/pull-request-review-create.png" alt="Pull Request 提交"></p>
+<p>你会被带到一个讨论页面，在这里你可以输入一个标题和说明（可选）。你仍然可以看到，当 Pull Request 发送时哪些 commit 将包括在内。</p>
+<p>当你你输入好标题和描述，针对 commit 范围做了必要的自定义，审查了要发送的 commit 和修改的文件，按<code>Send pull request</code>按钮。</p>
+<p><img src="https://github-images.s3.amazonaws.com/help/pull_requests/send-pull-request.png" alt="Pull Request 发送按钮"></p>
+<p>Pull Request 会被立即发送。你会被带往一个 Pull Request 讨论和审核的主页。</p>
+<p>在你的 Pull Request 发送之后，任何 push 到你的分支的 commit 会被自动更新上去。如果您需要更多的改变，这尤其有用。</p>
+<h2 id="管理-Pull-Request">管理 Pull Request</h2>
+<p>所有经由你发送或者审核的 Pull Request 都可以通过仪表盘的 pull request 查看。给自定版本库的 Pull Request，对于所有能够访问对应 Pull Request 页面的人来说，也是可见的。</p>
+<p><img src="https://help.github.com/assets/images/help/repository/repo-tabs-pull-requests.png" alt="已有的Pull Request 列表"></p>
+<p>Pull Request 仪表板和版本库的 Pull Request 列表支持多种筛选和排序控件。用它们来把列表缩小到你感兴趣的 Pull Request</p>
+<h2 id="审查建议的更改">审查建议的更改</h2>
+<p>当您收到一个 Pull Request，要做的第一件事就是审查这些建议的更改。Pull Request 被紧密地与底层的 git 仓库集成，所以你可以看到如果 Request 被接受，哪些 commit 会被合并：</p>
+<p><img src="https://github-images.s3.amazonaws.com/help/pull_requests/review-commits.png" alt="commit 审核页"></p>
+<p>您还可以了解所有提交，查看所有文件更改的累计差异。</p>
+<p><img src="https://help.github.com/assets/images/help/pull_requests/diff-toggle.gif" alt="差异审核页"></p>
+<h2 id="讨论-Pull-Request">讨论 Pull Request</h2>
+<p>审查了基本说明，commit，和累积差异后，负责应用更改的人可能有问题或意见。也许是编码风格不匹配项目的指引，或变更缺少单元测试，或者也许一切看起来不错，所有事情都准备就绪。设计这种讨论会面，旨在鼓励和关注这种类型的讨论。</p>
+<p><img src="https://help.github.com/assets/images/help/pull_requests/conversation.png" alt="Pull Request 讨论"></p>
+<p>这种讨论会面从 Pull Request 的原始标题和描述开始，然后从那里按时间顺序显示额外的活动。任何以下类型的活动，当发生的时候将会被关注：</p>
+<ul>
+<li>在 Pull Request 中的评论。</li>
+<li>在 Pull Request 分支中新提交的 commit。</li>
+<li>在 Pull Request 范围内的 commit 中的存在的文件和行注释。</li>
+</ul>
+<p>Pull Request 的评论是 Markdown 语法兼容的，所以你可以嵌入图像，使用预格式化文本块，或者其他 Markdown 支持的格式。</p>
+<h2 id="查看长时间存留的-Pull-Request">查看长时间存留的 Pull Request</h2>
+<p>当一个功能或 bug 修正去了几个月，但从来没有通过或者丢弃，你经常想要仔细看看，是什么阻止这个 Pull Request 被解决。查看旧的但仍然活跃的 Pull Request，可以使得这个工作简化。</p>
+<p>您可以从您的版本库的 Pull Request 页面查看和排序长时间存在的 Pull Request。</p>
+<p><img src="https://github-images.s3.amazonaws.com/help/pull_requests/pull-request-longest-running.png" alt="排序Pull Request"></p>
+<p>长期存在的 Pull Request 是至少已经存在了一个多月，并已在过去一个月内有可见活动的。该过滤器将按这样一个排序方式显示那些长期运行的 Pull Request：从创作到最新的活动的时间。(完）</p>
+
+                <div class="copyright-notice">
+<div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://www.shuizhongyueming.com/2014/10/16/github-help-of-use-pull-request/" title="https://www.shuizhongyueming.com/2014/10/16/github-help-of-use-pull-request/">https://www.shuizhongyueming.com/2014/10/16/github-help-of-use-pull-request/</a></div>
+                </div>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2014/10/17/new-stuff-of-object-property-in-ecmascript5/" data-toggle="tooltip" data-placement="top"
+                           title="ECMAScript5 中对象属性的新特性">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2014/10/14/maintainable-javascript-of-statement-and-expression/" data-toggle="tooltip" data-placement="top"
+                           title="编写可维护的JavaScript-语句和表达式">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr class="popular-posts-split">
+                <hr class="popular-posts-split">
+                <h2 class="popular-posts-title">相关推荐</h2>
+                <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2013/10/11/how-to-save-passowrd-for-git-push-under-the-windows/" title="windows下使用git,如何保存push到远程仓库时使用的密码" rel="bookmark">windows下使用git,如何保存push到远程仓库时使用的密码</a></h3></div></li></ul>
+
+                <hr>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%8F%E5%90%8C%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%BF%AB%E9%80%9F%E7%AC%94%E8%AE%B0"><span class="toc-text">协同开发模式的快速笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Fork-Pull"><span class="toc-text">Fork &amp; Pull</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B1%E4%BA%AB%E7%89%88%E6%9C%AC%E5%BA%93%E6%A8%A1%E5%BC%8F"><span class="toc-text">共享版本库模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%A7%8B%E4%B9%8B%E5%89%8D"><span class="toc-text">开始之前</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%AF%E5%8A%A8-Pull-Request"><span class="toc-text">启动 Pull Request</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A1%E6%9F%A5%E8%A6%81%E6%8F%90%E4%BA%A4%E7%9A%84-Pull-Request"><span class="toc-text">审查要提交的 Pull Request</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%94%B9%E5%8F%98%E5%88%86%E6%94%AF%E8%8C%83%E5%9B%B4%E5%92%8C%E7%9B%AE%E6%A0%87%E7%89%88%E6%9C%AC%E5%BA%93"><span class="toc-text">改变分支范围和目标版本库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%91%E9%80%81-Pull-Request"><span class="toc-text">发送 Pull Request</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%A1%E7%90%86-Pull-Request"><span class="toc-text">管理 Pull Request</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A1%E6%9F%A5%E5%BB%BA%E8%AE%AE%E7%9A%84%E6%9B%B4%E6%94%B9"><span class="toc-text">审查建议的更改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A8%E8%AE%BA-Pull-Request"><span class="toc-text">讨论 Pull Request</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E9%95%BF%E6%97%B6%E9%97%B4%E5%AD%98%E7%95%99%E7%9A%84-Pull-Request"><span class="toc-text">查看长时间存留的 Pull Request</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://refined-x.com/">前端路上</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shui-zhong-yue-ming-de-blog";
+    var disqus_config = function () {
+        this.page.url = "https://www.shuizhongyueming.com/2014/10/16/github-help-of-use-pull-request/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "509 https://www.shuizhongyueming.com/?p=509"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var d = document;
+        var dsq = d.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.defer = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(dsq);
+    });
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/shuizhongyue91">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/水中月明">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/如风轻吟1991">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/shuizhongyueming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 水中月明的Blog 2022
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://www.shuizhongyueming.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+$('pre').each(function(i, tag) {
+    $(this).addClass('prettyprint')
+})
+</script>
+<script async src="https://cdn.imagehost.top/wp-content/uploads/2019/02/google-code-prettify/run_prettify.js?skin=desert"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="https://cdn.imagehost.top/ipic/t0yg1.png-q60">
+</body>
+
+</html>

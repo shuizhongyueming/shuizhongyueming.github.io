@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="技术人的博客, 说技术人的事" />
+  <meta name="keyword" content="" />
+  <meta name="theme-color" content="#600090" />
+  <meta name="msapplication-navbutton-color" content="#600090" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="#600090" />
+  <link
+    rel="shortcut icon"
+    href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png"
+  />
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-NVHB3R');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <link
+    rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css"
+  />
+  <title>
+     python错误:module &#39;shutil&#39; has no attribute &#39;copy&#39;｜水中月明的Blog 
+  </title>
+
+  <link
+    rel="canonical"
+    href="https://www.shuizhongyueming.com/2017/06/10/python-error-module-shutil-has-no-attribute-copy/"
+  />
+
+  <!-- Bootstrap Core CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
+
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+  <!-- Pygments Github CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
+
+  <script
+    data-ad-client="ca-pub-3438190576149990"
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+  ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="" class="animated fadeIn">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true"
+    data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    水中月明的Blog
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    //    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function () {
+                // prevent frequently toggle
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+    <!-- Main Content -->
+    
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.imagehost.top/default-background-1920x640.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.imagehost.top/default-background-1920x640.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>python错误:module &#39;shutil&#39; has no attribute &#39;copy&#39;</h1>
+                    
+                    <span class="meta">
+                         作者 happyWang
+                        <span>
+                          日期 2017-06-10
+                         </span>
+                        <span id="busuanzi_container_page_pv">
+                         浏览量 <i id="busuanzi_value_page_pv"></i>
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#AttributeError"
+                           title="AttributeError">AttributeError</a>
+                        
+                        <a class="tag" href="/tags/#Copy"
+                           title="Copy">Copy</a>
+                        
+                        <a class="tag" href="/tags/#module"
+                           title="module">module</a>
+                        
+                        <a class="tag" href="/tags/#python"
+                           title="python">python</a>
+                        
+                        <a class="tag" href="/tags/#shutil"
+                           title="shutil">shutil</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            python错误:module 'shutil' has no attribute 'copy'
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>字符：5706</p>
+<p>平均阅读时长：7分钟</p>
+<p>今天在写一个小脚本来把自己写的一个html批量复制并在保持后缀不变的情况下随机命名。</p>
+<p>先打算实现文件的拷贝。</p>
+<p>Google了一下，发现了一个<code>shutil</code>的库(这个库的名字纠结了发音老半天，后面才理解是sh和util的结合，也就是shell-util)</p>
+<p>这个库提供了与shell命令操作文件等同的所有方法：<code>copy</code>, <code>copytree</code>, <code>rmtree</code>, <code>move</code>…</p>
+<h2 id="代码实现">代码实现</h2>
+<p>有了这个库，代码很容易就实现了：</p>
+<pre><code>import shutil
+
+src = 'sa-jumper.html'
+
+randomStr = 'ad239sdfasdl2asdf9adsfi23dfladf'
+strLen = len(randomStr)
+
+shutil.copy(src, 'tmp/aa.html')
+</code></pre>
+<p>关于随机的部分，就只是提前做了准备。先用的<code>shutil.copy</code>来测试文件拷贝功能。</p>
+<p>然后我先用的<strong>python3.6</strong>执行了这个文件，结果报错：</p>
+<pre><code>Traceback (most recent call last):
+  File &quot;copy.py&quot;, line 2, in &lt;module&gt;
+    import shutil
+  File &quot;/usr/local/Cellar/python3/3.6.0_1/Frameworks/Python.framework/Versions/3.6/lib/python3.6/shutil.py&quot;, line 13, in &lt;module&gt;
+    import tarfile
+  File &quot;/usr/local/Cellar/python3/3.6.0_1/Frameworks/Python.framework/Versions/3.6/lib/python3.6/tarfile.py&quot;, line 49, in &lt;module&gt;
+    import copy
+  File &quot;/Library/WebServer/Documents/xxx/copy.py&quot;, line 13, in &lt;module&gt;
+    shutil.copy(src, 'tmp/aa.html')
+AttributeError: module 'shutil' has no attribute 'copy'
+</code></pre>
+<p>后面改用<strong>python2.7</strong>执行，顺利通过。</p>
+<h2 id="debug">debug</h2>
+<p>打开Python的解释器提示符，执行上述代码，也是成功的。</p>
+<p>这下我就没辙了，感觉个人的Python经验只能到此为止，启用Google大法。</p>
+<p>在StackOverflow的一篇文章上，发现有人遇到类似的问题，链接如下：</p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/22131139/attributeerror-module-object-has-no-attribute-x">https://stackoverflow.com/questions/22131139/attributeerror-module-object-has-no-attribute-x</a></p>
+<p>在上述链接里面，最终的错误是因为提问的人，python脚本的名称是<code>org.py</code>跟系统的一个文件重名，导致了一个错误的引用。</p>
+<p>所以很自然的，我就联想到了我的文件，名字是<code>copy.py</code>，而看上面的错误信息里面，是用一个<code>import copy</code>，估计也是同样错误的把我的脚本当作官方库给错误引用了。</p>
+<h2 id="修复">修复</h2>
+<p>把文件名改成了<code>copy-file.py</code>，再用<code>python3.6</code>执行，一切顺利。</p>
+<h2 id="分析">分析</h2>
+<p>从这个错误里面想到几个问题：</p>
+<ul>
+<li>为啥跟官方库里面的文件同名会导致引用错误</li>
+<li>为啥python2.7没报错</li>
+<li>如何避免这样的问题</li>
+</ul>
+<h3 id="关于引用错误">关于引用错误</h3>
+<p>重新翻了一下之前看的《Python简明教程》 关于模块的索引</p>
+<blockquote>
+<p>如果它不是一个已编译好的模块，即用 Python 编写的模块，那么 Python 解释器将从它的 sys.path 变量所提供的目录中进行搜索。如果找到了对应模块，则该模块中的语句将在开始运行，并能够为你所使用。在这里需要注意的是，初始化工作只需在我们第一次导入模块时完成。</p>
+</blockquote>
+<p>关于索引的顺序</p>
+<blockquote>
+<p>sys.path 内包含了导入模块的字典名称列表。你能观察到 sys.path 的第一段字符串是空的——这一空字符串代表当前目录也是 sys.path 的一部分，它与 PYTHONPATH 环境变量等同。这意味着你可以直接导入位于当前目录的模块。否则，你必须将你的模块放置在 sys.path 内所列出的目录中。</p>
+</blockquote>
+<p>从这里可以看到，执行的脚本所在的目录也是在python搜索模块的范围内的，而且是第一位，也就是会优先搜索的，这也就是为啥同名会导致引用错误的原因了。</p>
+<h3 id="为啥2-7没错">为啥2.7没错</h3>
+<p>按照上面StackOverflow那边文章的分析过程，我分别看了python3.6和python2.7版本里面<code>shutil.py</code>和<code>tarfile.py</code>源码，发现<code>shutil.py</code>都引用了<code>tarfile.py</code>，而<code>tarfile.py</code>也都<code>import copy</code></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://hg.python.org/cpython/file/2.7/Lib/shutil.py">https://hg.python.org/cpython/file/2.7/Lib/shutil.py</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/python/cpython/blob/3.6/Lib/shutil.py">https://github.com/python/cpython/blob/3.6/Lib/shutil.py</a></li>
+<li><a target="_blank" rel="noopener" href="https://hg.python.org/cpython/file/2.7/Lib/tarfile.py">https://hg.python.org/cpython/file/2.7/Lib/tarfile.py</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/python/cpython/blob/3.6/Lib/tarfile.py">https://github.com/python/cpython/blob/3.6/Lib/tarfile.py</a></li>
+</ul>
+<p>那就不可能是2.7里面没有引用copy了。</p>
+<p>然后我又仔细的看了一下各自的实现，终于发现了问题，在2.7里面，不是在初始化的时候就import了tarfile，而是在一个<code>_make_tarball </code>的函数里面。</p>
+<p>我在这个函数的<code>import tarfile</code>前面加了一个<code>print('import tarfile')</code>，再去执行刚刚的<code>copy.py</code>(这块为了测试方便，把<code>copy-file.py</code>复制了一份重命名为<code>copy.py</code>)。</p>
+<p>发现没有print任何内容。</p>
+<p>而在3.6里面，是在文件头部，一开始就import了tarfile。这也就解释了为啥2.7没问题，3.6有问题了。同时也说明：<strong>python的import是按需加载的</strong>。写在函数里面的import，只有在函数被调用的时候才会真实的去import</p>
+<p>为了反证这个推断是否有效，我找到了2.7里面shutil的一个会触发<code>import tarfile</code>的函数<code>make_archive</code></p>
+<p>使用了官方提供的example:</p>
+<pre><code>import shutil
+import os
+archive_name = os.path.expanduser(os.path.join('~', 'myarchive'))
+root_dir = os.path.expanduser(os.path.join('~', '.ssh'))
+shutil.make_archive(archive_name, 'gztar', root_dir)
+</code></pre>
+<p>执行<code>python copy.py</code>(我的环境里面，默认是2.7)</p>
+<p>果然报错了：</p>
+<pre><code>import tarfile
+import tarfile
+Traceback (most recent call last):
+  File &quot;copy.py&quot;, line 20, in &lt;module&gt;
+    shutil.make_archive(archive_name, 'gztar', root_dir)
+  File &quot;/usr/local/Cellar/python/2.7.13/Frameworks/Python.framework/Versions/2.7/lib/python2.7/shutil.py&quot;, line 561, in make_archive
+    filename = func(base_name, base_dir, **kwargs)
+  File &quot;/usr/local/Cellar/python/2.7.13/Frameworks/Python.framework/Versions/2.7/lib/python2.7/shutil.py&quot;, line 376, in _make_tarball
+    import tarfile  # late import so Python build itself doesn't break
+  File &quot;/usr/local/Cellar/python/2.7.13/Frameworks/Python.framework/Versions/2.7/lib/python2.7/tarfile.py&quot;, line 52, in &lt;module&gt;
+    import copy
+  File &quot;/Library/WebServer/Documents/xxx/copy.py&quot;, line 20, in &lt;module&gt;
+    shutil.make_archive(archive_name, 'gztar', root_dir)
+  File &quot;/usr/local/Cellar/python/2.7.13/Frameworks/Python.framework/Versions/2.7/lib/python2.7/shutil.py&quot;, line 561, in make_archive
+    filename = func(base_name, base_dir, **kwargs)
+  File &quot;/usr/local/Cellar/python/2.7.13/Frameworks/Python.framework/Versions/2.7/lib/python2.7/shutil.py&quot;, line 394, in _make_tarball
+    tar = tarfile.open(archive_name, 'w|%s' % tar_compression[compress])
+AttributeError: 'module' object has no attribute 'open'
+</code></pre>
+<p>然后我尝试把文件名修改为<code>copy-file.py</code>，再执行，顺利通过。</p>
+<p>看来2.7和3.6都是一样的索引模块的方式，只是因为<code>shutil</code>模块里面引用<code>tarfile</code>的方式不一样，才造成一开始的执行结果不一样。</p>
+<h3 id="如何避免这样的问题">如何避免这样的问题</h3>
+<p>我还是一个python新手，不知道python在命名的时候有没有提供一些合理的规范，比如不能使用的单词。</p>
+<p>然后我又一次看了《简明Python教程》，里面关于标识符命名这块：</p>
+<blockquote>
+<p>量是标识符的一个例子。标识符（Identifiers） 是为 某些东西 提供的给定名称。在你命名标识符时，你需要遵守以下规则： • 第一个字符必须是字母表中的字母（大写 ASCII 字符或小写 ASCII 字符或 Unicode 字符）或下划线（<em>）。 • 标识符的其它部分可以由字符（大写 ASCII 字符或小写 ASCII 字符或 Unicode 字符）、下划线（</em>）、数字（0~9）组成。 • 标识符名称区分大小写。例如，myname 和 myName 并不等同。要注意到前者是小写字母 n 而后者是大写字母 N。 • 有效 的标识符名称可以是 i 或 name_2_3 ，无效 的标识符名称可能是 2things，this is spaced out，my-name 和 &gt;a1b2_c3。</p>
+</blockquote>
+<p>我想，如果我以非这个规范的方式定义文件名是不是就可以了。</p>
+<p>然而用类似<code>import copy-file</code>的方式引用自己的模块，会报错，<code>SyntaxError</code>。 也有看到有相关的解决方式：</p>
+<ul>
+<li>python2.7 <code>execfile('foo-bar.py')</code></li>
+<li>python3.x <code>exec(open(fn).read())</code></li>
+</ul>
+<p>不过这些方法感觉都不是很自然，还是放弃这样的尝试了。</p>
+<p>只能使用另一种方式了，就是统一文件名的前缀。如果你的项目是<code>foo</code>，那么可以给所有项目的文件定义以这个为前缀的名称: <code>foo__copy.py</code>, <code>foo_shutil.py</code>等等。</p>
+<p>这样只要<code>foo</code>是一个不会和常见的库的前缀重名的字符串，就能保证项目里面不会再发生这样的名称冲突了。</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/123198/how-do-i-copy-a-file-in-python">https://stackoverflow.com/questions/123198/how-do-i-copy-a-file-in-python</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/22131139/attributeerror-module-object-has-no-attribute-x">https://stackoverflow.com/questions/22131139/attributeerror-module-object-has-no-attribute-x</a></li>
+<li><a target="_blank" rel="noopener" href="https://docs.python.org/2/library/shutil.html">https://docs.python.org/2/library/shutil.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/8350853/how-to-import-module-when-module-name-has-a-dash-or-hyphen-in-it">https://stackoverflow.com/questions/8350853/how-to-import-module-when-module-name-has-a-dash-or-hyphen-in-it</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/6031584/importing-from-builtin-library-when-module-with-same-name-exists">https://stackoverflow.com/questions/6031584/importing-from-builtin-library-when-module-with-same-name-exists</a></li>
+<li><a target="_blank" rel="noopener" href="https://bop.molun.net/07.basics.html">https://bop.molun.net/07.basics.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://bop.molun.net/11.modules.html">https://bop.molun.net/11.modules.html</a></li>
+</ul>
+<p>突然发现，我只是想实现一个文件拷贝，咋就绕了这么远呢?</p>
+
+                <div class="copyright-notice">
+<div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://www.shuizhongyueming.com/2017/06/10/python-error-module-shutil-has-no-attribute-copy/" title="https://www.shuizhongyueming.com/2017/06/10/python-error-module-shutil-has-no-attribute-copy/">https://www.shuizhongyueming.com/2017/06/10/python-error-module-shutil-has-no-attribute-copy/</a></div>
+                </div>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/07/16/react-native-cfbundleidentifier-does-not-exist/" data-toggle="tooltip" data-placement="top"
+                           title="React Native错误: ":CFBundleIdentifier", Does Not Exist">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/06/09/vim-todo-list-manager/" data-toggle="tooltip" data-placement="top"
+                           title="在Vim里面列出TODO和FIXME等备注">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr class="popular-posts-split">
+                <hr class="popular-posts-split">
+                <h2 class="popular-posts-title">相关推荐</h2>
+                <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2017/11/28/webpack-dynamic-import出错-syntaxerror-import-and-export-may-only-appear-at-the-top-level/" title="webpack dynamic import出错: SyntaxError: 'import' and 'export' may only appear at the top level" rel="bookmark">webpack dynamic import出错: SyntaxError: 'import' and 'export' may only appear at the top level</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2018/05/30/一个asi陷阱/" title="一个ASI陷阱" rel="bookmark">一个ASI陷阱</a></h3></div></li></ul>
+
+                <hr>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#debug"><span class="toc-text">debug</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%AE%E5%A4%8D"><span class="toc-text">修复</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%9E%90"><span class="toc-text">分析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E5%BC%95%E7%94%A8%E9%94%99%E8%AF%AF"><span class="toc-text">关于引用错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BA%E5%95%A52-7%E6%B2%A1%E9%94%99"><span class="toc-text">为啥2.7没错</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E8%BF%99%E6%A0%B7%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">如何避免这样的问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-text">参考资料</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://refined-x.com/">前端路上</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shui-zhong-yue-ming-de-blog";
+    var disqus_config = function () {
+        this.page.url = "https://www.shuizhongyueming.com/2017/06/10/python-error-module-shutil-has-no-attribute-copy/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "749 https://www.shuizhongyueming.com/?p=749"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var d = document;
+        var dsq = d.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.defer = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(dsq);
+    });
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/shuizhongyue91">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/水中月明">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/如风轻吟1991">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/shuizhongyueming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 水中月明的Blog 2022
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://www.shuizhongyueming.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+$('pre').each(function(i, tag) {
+    $(this).addClass('prettyprint')
+})
+</script>
+<script async src="https://cdn.imagehost.top/wp-content/uploads/2019/02/google-code-prettify/run_prettify.js?skin=desert"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="https://cdn.imagehost.top/ipic/t0yg1.png-q60">
+</body>
+
+</html>

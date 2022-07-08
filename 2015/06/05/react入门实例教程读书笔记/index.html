@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="技术人的博客, 说技术人的事" />
+  <meta name="keyword" content="" />
+  <meta name="theme-color" content="#600090" />
+  <meta name="msapplication-navbutton-color" content="#600090" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="#600090" />
+  <link
+    rel="shortcut icon"
+    href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png"
+  />
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-NVHB3R');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <link
+    rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css"
+  />
+  <title>
+     React入门实例教程读书笔记｜水中月明的Blog 
+  </title>
+
+  <link
+    rel="canonical"
+    href="https://www.shuizhongyueming.com/2015/06/05/react入门实例教程读书笔记/"
+  />
+
+  <!-- Bootstrap Core CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
+
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+  <!-- Pygments Github CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
+
+  <script
+    data-ad-client="ca-pub-3438190576149990"
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+  ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="" class="animated fadeIn">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true"
+    data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    水中月明的Blog
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    //    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function () {
+                // prevent frequently toggle
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+    <!-- Main Content -->
+    
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.imagehost.top/default-background-1920x640.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.imagehost.top/default-background-1920x640.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>React入门实例教程读书笔记</h1>
+                    
+                    <span class="meta">
+                         作者 happyWang
+                        <span>
+                          日期 2015-06-05
+                         </span>
+                        <span id="busuanzi_container_page_pv">
+                         浏览量 <i id="busuanzi_value_page_pv"></i>
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#react"
+                           title="react">react</a>
+                        
+                        <a class="tag" href="/tags/#入门"
+                           title="入门">入门</a>
+                        
+                        <a class="tag" href="/tags/#教程"
+                           title="教程">教程</a>
+                        
+                        <a class="tag" href="/tags/#读书笔记"
+                           title="读书笔记">读书笔记</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            React入门实例教程读书笔记
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>这份读书笔记是看了阮一峰的《<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2015/03/react.html">React 入门实例教程</a>》之后撰写的，留作记录。需要看原文的可以点击前面的书名访问对应链接。</p>
+<h2 id="这篇文章的目的">这篇文章的目的</h2>
+<ul>
+<li>介绍react</li>
+<li>如何下载react</li>
+<li>如何安装react</li>
+<li>如何使用react</li>
+</ul>
+<h2 id="文章的组织架构">文章的组织架构</h2>
+<p>从易到难的开始介绍。</p>
+<h3 id="react在页面的部署">react在页面的部署</h3>
+<ol>
+<li>依赖的两个js</li>
+<li>jsx 模板的标签规范</li>
+<li>模板的编译应该放到服务器完成</li>
+</ol>
+<h3 id="模板语法">模板语法</h3>
+<ol>
+<li>React.render() 转换模板为HTML并插入节点</li>
+<li>允许HTML和javascript混写。
+<ol>
+<li>规则是：遇到HTML标签（以&lt;开头）则视为HTML，遇到代码块（以{）开头，视为javascript</li>
+<li>HTML内容可以直接写在javascript变量里</li>
+<li>javascript变量可以直接插入到模板。如果变量是数组，则自动展开这个数组的所有成员</li>
+</ol>
+</li>
+</ol>
+<h3 id="组件">组件</h3>
+<h4 id="组件介绍">组件介绍</h4>
+<ol>
+<li>用React.createClass来生成组件类</li>
+<li>createClass的传参对象，需要一个render方法，用来描述组件的渲染</li>
+<li>组件类以大驼峰方式书写</li>
+<li>组件类以模板的方式调用，写法可以有单标签和双标签两种</li>
+<li>组件类以模板的方式调用，实际是实例化了产生了一个对象，以下简称为组件</li>
+<li>组件的调用和HTML标签完全一致，能加入属性。属性的调用，可以通过组件类的实例在javascript中，以this.props.xxx的方式调用</li>
+<li>组件的style属性设定的时候，期望的值是一个对象{opacity: 0.5, marginLeft: ‘1px’} 而不是一个字符串，最终的写法是{ {opacity: 0.5, marginLeft: ‘1px’}} 外面一对大括号表明是javascript代码块，里面的一对大括号，表明是对象</li>
+<li>冲突的属性名class和for 要对应改为className和htmlFor，因为class和for是javascript的保留字</li>
+<li>this.props的属性和组件HTML属性一一对应，但是this.props.children例外，它表示组件的子节点</li>
+<li>在用双标签的方式调用组件的时候，标签之间的HTML即为组件的子节点，完全和原生HTML一致</li>
+</ol>
+<h4 id="组件的特性">组件的特性</h4>
+<ol>
+<li>findDOMNode
+<ol>
+<li>virtual DOM</li>
+<li>virtual DOM 通过 DOM diff算法映射到真实DOM上</li>
+<li>findDOMNode用于获取跟组件关联的真实DOM的节点</li>
+<li>只有在virtual DOM插入文档之后才能起作用</li>
+</ol>
+</li>
+<li>this.state
+<ol>
+<li>类似状态机的概念</li>
+<li>getInitialState方法来设定初始状态</li>
+<li>通过用户互动修改状态，一般是对应的event function来setState</li>
+<li>render里面，根据不同的状态渲染出不同的UI</li>
+<li>setState自动调用render重绘UI</li>
+<li>区分this.props和this.state: this.props类似常量，设定之后不改变；this.state是随着用户互动而变化的特性</li>
+<li>表单内容的变化也是通过state来进行更新的</li>
+</ol>
+</li>
+</ol>
+<h4 id="组件生命周期">组件生命周期</h4>
+<ol>
+<li>三个状态
+<ol>
+<li>Mounting 已插入真实DOM</li>
+<li>Updating 正在被重新渲染</li>
+<li>Unmounting 已移出真实DOM</li>
+</ol>
+</li>
+<li>每个状态提供两个回调函数，will在进入状态之前调用，did在进入状态之后调用</li>
+<li>三个状态共计五种回调函数，书写方式component是前缀，will/did是行为，Mount/Update/Unmount是状态
+<ol>
+<li>componentWillMount()</li>
+<li>componentDidMount()</li>
+<li>componentWillUpdate(object nextProps, object nextState)</li>
+<li>componentDidUpdate(object prevProps, object prevState)</li>
+<li>componentWillUnmount()   为什么没有componentDidUnmount() ?</li>
+</ol>
+</li>
+<li>特殊状态的回调
+<ol>
+<li>componentWillReceiveProps(object nextProps) 已加载组件收到新参数</li>
+<li>shouldComponentUpdate(object nextProps, object nextState) 组件判断是否重新渲染时调用 不明白</li>
+</ol>
+</li>
+</ol>
+<h3 id="结合其他库或者框架使用">结合其他库或者框架使用</h3>
+<ol>
+<li>react没有任何依赖</li>
+<li>react只关注表现层</li>
+<li>如果希望对组件的DOM进行操作，尽量在componentDidMount中进行，保证真实DOM已经存在</li>
+</ol>
+<h2 id="主旨">主旨</h2>
+<p>React是一个关注表现层，以组件来构建内容，以状态机来完成交互的UI改变的，可以在浏览器端和服务器端同时运行的前端框架。</p>
+
+                <div class="copyright-notice">
+<div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://www.shuizhongyueming.com/2015/06/05/react%E5%85%A5%E9%97%A8%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" title="https://www.shuizhongyueming.com/2015/06/05/react%E5%85%A5%E9%97%A8%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/">https://www.shuizhongyueming.com/2015/06/05/react%E5%85%A5%E9%97%A8%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/</a></div>
+                </div>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2015/06/12/svn-to-git/" data-toggle="tooltip" data-placement="top"
+                           title="svn迁移到git">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2015/05/07/夜行逢雨小记/" data-toggle="tooltip" data-placement="top"
+                           title="夜行逢雨小记">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr class="popular-posts-split">
+                <hr class="popular-posts-split">
+                <h2 class="popular-posts-title">相关推荐</h2>
+                <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2018/12/05/how-does-react-tell-a-class-from-a-function/" title="React里面是如何区分Class和Function的" rel="bookmark">React里面是如何区分Class和Function的</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2018/11/07/reach-router的嵌套路由失效的可能原因/" title="@reach/router的嵌套路由失效的可能原因" rel="bookmark">@reach/router的嵌套路由失效的可能原因</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2019/03/15/一个发票挂账月份修改功能引发的小重构/" title="一个发票挂账月份修改功能引发的小重构" rel="bookmark">一个发票挂账月份修改功能引发的小重构</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2017/11/29/在styled-components的样式声明中做px到rem的自动转换/" title="在styled-components的样式声明中做px到rem的自动转换" rel="bookmark">在styled-components的样式声明中做px到rem的自动转换</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2017/12/04/实现react-router下，非法路径访问跳转首页/" title="实现react-router下，非法路径访问跳转首页" rel="bookmark">实现react-router下，非法路径访问跳转首页</a></h3></div></li></ul>
+
+                <hr>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%99%E7%AF%87%E6%96%87%E7%AB%A0%E7%9A%84%E7%9B%AE%E7%9A%84"><span class="toc-text">这篇文章的目的</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E7%9A%84%E7%BB%84%E7%BB%87%E6%9E%B6%E6%9E%84"><span class="toc-text">文章的组织架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#react%E5%9C%A8%E9%A1%B5%E9%9D%A2%E7%9A%84%E9%83%A8%E7%BD%B2"><span class="toc-text">react在页面的部署</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%9D%BF%E8%AF%AD%E6%B3%95"><span class="toc-text">模板语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6"><span class="toc-text">组件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E4%BB%8B%E7%BB%8D"><span class="toc-text">组件介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E7%9A%84%E7%89%B9%E6%80%A7"><span class="toc-text">组件的特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%84%E4%BB%B6%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="toc-text">组件生命周期</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E5%90%88%E5%85%B6%E4%BB%96%E5%BA%93%E6%88%96%E8%80%85%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8"><span class="toc-text">结合其他库或者框架使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E6%97%A8"><span class="toc-text">主旨</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://refined-x.com/">前端路上</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shui-zhong-yue-ming-de-blog";
+    var disqus_config = function () {
+        this.page.url = "https://www.shuizhongyueming.com/2015/06/05/react%E5%85%A5%E9%97%A8%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "626 https://www.shuizhongyueming.com/?p=626"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var d = document;
+        var dsq = d.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.defer = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(dsq);
+    });
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/shuizhongyue91">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/水中月明">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/如风轻吟1991">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/shuizhongyueming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 水中月明的Blog 2022
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://www.shuizhongyueming.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+$('pre').each(function(i, tag) {
+    $(this).addClass('prettyprint')
+})
+</script>
+<script async src="https://cdn.imagehost.top/wp-content/uploads/2019/02/google-code-prettify/run_prettify.js?skin=desert"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="https://cdn.imagehost.top/ipic/t0yg1.png-q60">
+</body>
+
+</html>

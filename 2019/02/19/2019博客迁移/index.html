@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="技术人的博客, 说技术人的事" />
+  <meta name="keyword" content="" />
+  <meta name="theme-color" content="#600090" />
+  <meta name="msapplication-navbutton-color" content="#600090" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="#600090" />
+  <link
+    rel="shortcut icon"
+    href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png"
+  />
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-NVHB3R');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <link
+    rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css"
+  />
+  <title>
+     2019博客迁移｜水中月明的Blog 
+  </title>
+
+  <link
+    rel="canonical"
+    href="https://www.shuizhongyueming.com/2019/02/19/2019博客迁移/"
+  />
+
+  <!-- Bootstrap Core CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
+
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+  <!-- Pygments Github CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
+
+  <script
+    data-ad-client="ca-pub-3438190576149990"
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+  ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="" class="animated fadeIn">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true"
+    data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    水中月明的Blog
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    //    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function () {
+                // prevent frequently toggle
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+    <!-- Main Content -->
+    
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.imagehost.top/default-background-1920x640.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.imagehost.top/default-background-1920x640.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>2019博客迁移</h1>
+                    
+                    <span class="meta">
+                         作者 happyWang
+                        <span>
+                          日期 2019-02-19
+                         </span>
+                        <span id="busuanzi_container_page_pv">
+                         浏览量 <i id="busuanzi_value_page_pv"></i>
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#博客"
+                           title="博客">博客</a>
+                        
+                        <a class="tag" href="/tags/#2019"
+                           title="2019">2019</a>
+                        
+                        <a class="tag" href="/tags/#迁移"
+                           title="迁移">迁移</a>
+                        
+                        <a class="tag" href="/tags/#Hexo"
+                           title="Hexo">Hexo</a>
+                        
+                        <a class="tag" href="/tags/#Wordpress"
+                           title="Wordpress">Wordpress</a>
+                        
+                        <a class="tag" href="/tags/#GitHub"
+                           title="GitHub">GitHub</a>
+                        
+                        <a class="tag" href="/tags/#GitHub Pages"
+                           title="GitHub Pages">GitHub Pages</a>
+                        
+                        <a class="tag" href="/tags/#https"
+                           title="https">https</a>
+                        
+                        <a class="tag" href="/tags/#cdn"
+                           title="cdn">cdn</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            2019博客迁移
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="为什么要迁移">为什么要迁移</h2>
+<p>我的这个博客从17底年迁移到vultr上（参看<a href="https://www.shuizhongyueming.com/2017/11/06/%E5%8D%9A%E5%AE%A2%E6%90%AC%E8%BF%812017/">博客搬迁2017</a>）到现在已经运行了一年多，一直也算是正常运行。不过要说问题，那也是很有一些的。</p>
+<p>首先是基于docker配置的Wordpress和mysql，经常会莫名的挂掉。有些时候能自动重启，而有些时候只能自己手动上服务器上重启两个container，甚至还经常需要重启服务器来干掉卡死的container。</p>
+<p>然后是访问速度，已经把自己所能想到的找到的相关性能优化的插件都使用过了，但是速度还是很慢。有几个原因：</p>
+<ul>
+<li>服务器本身在国外，没法指望在国内能有多快的访问速度。</li>
+<li>服务器本身也是最低配的，也没法指望在响应上能有多快。</li>
+<li>没法配置CDN，因为网站一直没法在国内通过备案（服务器在国外），所以没法使用国内云服务商的CDN服务。国外的AWS和GoogleCloud，就我所知是需要服务器是他们的才会提供CDN加速服务</li>
+<li>自定义功能很难实现，Wordpress的代码是放在docker内的，而且我本身对php的了解不深，想做一些自定义设定都比较麻烦</li>
+</ul>
+<p>终于，在网站再一次需要重启来恢复功能的时候，我决定是时候改变一下了</p>
+<h2 id="迁移的大体方案">迁移的大体方案</h2>
+<p>早在决定迁移之前，就对现有的一些博客实现方案做了些了解，比较倾向于基于markdown编辑生成静态站点的方式，然后对其中一个方案：<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/">Hexo</a>，也做了初步的了解。</p>
+<p>在这次打算迁移时，又接触到了<a target="_blank" rel="noopener" href="https://www.gatsbyjs.org/">Gatsby.js</a>。</p>
+<p>这两个实现方案都很让我喜欢。Hexo有很丰富的插件和主题，有成熟的从wordpress迁移到Hexo的解决方案。而Gasby则是基于更潮流的React来开发的，有更加灵活便捷的开发体验。</p>
+<p>最终我还是选择了Hexo，因为我已经不是当初那个刚刚毕业的小伙啦，如果选择Gasby，我应该能用自己喜欢的React开发出一个自己很喜欢的网站。可是现在的我，很难在工作之外找到足够的时间来折腾这些事情。我需要的框架是一个能方便我快速迁移并使用上一个完整博客站点的框架。</p>
+<p>选择好博客使用的框架之后，又大概确定了几个需要优化的点：</p>
+<ul>
+<li>全站https化</li>
+<li>静态资源走七牛CDN</li>
+<li>网站托管在GitHub的GitHub Pages上</li>
+</ul>
+<h2 id="准备工作">准备工作</h2>
+<p>先在本地基于hexo搭建了一个博客站，安装了一个自己喜欢的主题<a target="_blank" rel="noopener" href="https://github.com/haojen/hexo-theme-Anisina">Anisina</a>。再根据官网和主题本身的使用教程，完成<code>_config.yml</code>的配置。</p>
+<p>确认博客站点在本地能正确运行，同时主题也没有任何问题之后，可以准备迁移文章进来了。</p>
+<h2 id="从WordPress导出文章到Hexo">从WordPress导出文章到Hexo</h2>
+<p>这一步主要参考的这篇文章：<a target="_blank" rel="noopener" href="https://www.m690.com/archives/1135/">实战–迁移wordpress 到hexo</a></p>
+<p>不过还是遇到了一些问题</p>
+<h3 id="最终生成的markdown文件名称的中文乱码问题">最终生成的markdown文件名称的中文乱码问题</h3>
+<p>作者的实现方案是把post_title赋值为post_id，这样生成的markdown文件的名称就是对应的文章ID，也就规避了乱码的可能性。这块，我是找到了文件名乱码的原因，在从Wordpress导出的xml里面，对文章title里面的中文都是encodeURIComponent处理过的，而migrator在处理的时候，没有解码就直接用来做文件名，自然就是乱码了。</p>
+<p><img src="http://cdn.imagehost.top/ipic/rxa6s.png-q60" alt=""></p>
+<p>解决方式也是修改<code>hexo-migrator-wordpress</code>的源码：<code>node_modules/hexo-migrator-wordpress/index.js</code></p>
+<p>找到<code>slug = item['wp:post_name'][0],</code>，改成<code>slug = decodeURIComponent(item['wp:post_name'][0]),</code>即可</p>
+<h3 id="排版问题">排版问题</h3>
+<p>从博客建站到现在，用过很多种wordpress的编辑器，最终导致现在博客文章的格式十分繁杂，这也导致最终转换的时候还是跟预期有些不一致。</p>
+<p>对于这种情况，没想到什么好的解决方案，因为在当时就连具体有多少种排版问题都不清楚。所以只能用笨办法，一篇篇的文章过一遍。</p>
+<p>这时候我有点庆幸自己这么几年博客生涯的懒惰了，不多不多，就一百出个头的文章总量。</p>
+<p>主要出现的排版问题有</p>
+<ul>
+<li>换行符丢失</li>
+<li>html to markdown的时候，一些html标签的丢失</li>
+</ul>
+<h2 id="图片资源迁移">图片资源迁移</h2>
+<p>在之前，图片都是直接挂在wordpress站点下，只有后期少部分文章里面的图片，是在我的七牛配置起来之后用的七牛的地址的。</p>
+<p>这次迁站正好一并改了。</p>
+<p>首先是登录上vultr上的服务器，然后找到wordpress的container所在的真实目录，这个可以参看<a target="_blank" rel="noopener" href="https://segmentfault.com/q/1010000007555208">docker 如何查看已存在的容器所挂载的目录</a></p>
+<p>把整个<code>wp-content</code>目录使用tar打包，然后放在<code>wp-content/uploads/</code>目录下，走浏览器下载。试过scp下载，速度太慢了。</p>
+<p>下载下来解压之后，只保留uploads目录，其他的发现并没有文章需要的静态资源，删除掉了。</p>
+<p>再利用七牛的qshell工具，把本地整理之后的wp-content目录传递到我在七牛上专门放置博客文章的bucket里面。</p>
+<p>拿到图片在七牛下的静态地址之后，批量匹配文章里面的地址并替换相应的前缀。</p>
+<p>图片资源迁移完成。</p>
+<p>不过中间还是有一些问题，博客这些年迁移过好几次，有一些图片莫名丢失了，没办法，只好又检索所有的图片，一个个的测试访问性，把无法访问的给删除掉了，避免存在太多无法访问的资源。</p>
+<h2 id="实现相关推荐文章">实现相关推荐文章</h2>
+<p>在Wordpress上面，因为是动态网站，所以天生就是有相关文章功能的。迁移到静态站点之后，这块就不是那么好做的。好在还是有人开发了一个这样的插件：<a target="_blank" rel="noopener" href="https://github.com/tea3/hexo-related-popular-posts">hexo-related-popular-posts</a></p>
+<p>在部署的时候遇到一个问题就是</p>
+<p>&lt;%-<br>
+popular_posts( {} , post )<br>
+%&gt;</p>
+<p>一直不知道这个里面的post到底是什么，因为我使用的theme里面，在<code>post.ejs</code>里面并没有<code>post</code>这个变量。而使用<code>page</code>又一直报错，可是在看了插件开发者使用的theme，又确认page就是所需要的post</p>
+<p>最后看到插件使用的第三步</p>
+<pre><code>$ hexo clean
+$ hexo server
+</code></pre>
+<p>试着执行了，发现能正确运行了。</p>
+<p>而之前，我只是Ctrl+C来中止server又重新开启</p>
+<p>想来是clean之后，这个插件才能正确的生成相关需要的数据吧。</p>
+<p>这个插件主要是根据文章的tags来寻找有类似tag的其他文章，同时有一个本地的cache功能，这样有新文章的时候，就不需要全量更新所有文章的相关文章数据了。</p>
+<h2 id="代码高亮">代码高亮</h2>
+<p>在wordpress里面，我是使用的<a target="_blank" rel="noopener" href="https://github.com/kasparsd/code-prettify">Code Prettify</a>这个插件来实现的代码高亮。这个插件的好处是不需要手动指定代码的语言，他自己会自行判断处理。</p>
+<p>所以我的文章里面的代码块，都是直接四个空格标记，没有使用三个`再加上语言名称的方式</p>
+<p>但是hexo默认提供的代码高亮就没法很好的展示这种类型的代码，需要按它的格式调整才行。可是我的文章里面这么多代码块，都修改的话，显然不是很现实。而且我很喜欢之前的代码高亮风格</p>
+<p>现在唯一剩下的方式就是自行加上Code Prettify的代码高亮。</p>
+<p>从Code Prettify插件的GitHub上找到了核心的高亮代码库<a target="_blank" rel="noopener" href="https://github.com/kasparsd/code-prettify-lib">kasparsd/code-prettify-lib</a></p>
+<p>把整个代码下载下来提交到七牛云上面，然后按照需要，在页面引用初始化代码。同时在初始化代码执行之前，找到所有的pre标签，加上class：<code>prettyprint</code>，使得Code Prettify能够识别并处理这些标签。</p>
+<p><img src="http://cdn.imagehost.top/ipic/x9dta.png-q60" alt=""></p>
+<p>在部署过程中，意外发现Code Prettify原来还有一些主题，不过主题对应的样式文件的加载动态地址是写死在js代码里面了。没办法，只好根据最新的七牛地址，调整js代码里面的地址，又重新覆盖了七牛云上面的代码并刷新缓存。像这个改地址的事情，后面还要再来一次，这个后面再说。</p>
+<p>最后选择的主题是desert，还是很好看的</p>
+<p><img src="http://cdn.imagehost.top/ipic/erbtj.png-q60" alt=""></p>
+<h2 id="部署到GitHub-Pages">部署到GitHub Pages</h2>
+<p>在这之前，我已经在GitHub上面新建了自己专有的个人GitHub Pages项目：<a target="_blank" rel="noopener" href="https://github.com/shuizhongyueming/shuizhongyueming.github.io">shuizhongyueming/shuizhongyueming.github.io</a>。这一步，我就不需要重复做了。</p>
+<p>接下来是需要安装插件：<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-deployer-git">hexo-deployer-git</a>，并按照官方的教程完成相应的配置</p>
+<p>执行：<code>hexo deploy</code></p>
+<p>等命令执行完成之后，查看https://shuizhongyueming.github.io，就能正确看到新站点了。</p>
+<h2 id="域名切换">域名切换</h2>
+<p>在切换域名之前，最好能先给现有的Wordpress站点换一个域名，这样在迁移到新站点之后，如果新站点发现有一些东西缺失，也好到旧站点上寻找回来</p>
+<p>GitHub上面关于如何为GitHub Pages设定自定义域名说的很详细，我就不细说了，只说一下我的设定。</p>
+<p>我的域名是放在Godaddy上面的，最终的配置如下</p>
+<p><img src="http://cdn.imagehost.top/ipic/nlolb.png-q60" alt=""></p>
+<p>在最终完成域名切换，并且GitHub那边准备好https证书之后，再开启enforce https之前，还需要做一件事情，就是静态资源所在的七牛云，也需要对应配置https，不然到时候这些静态资源都无法正常访问</p>
+<h2 id="给七牛云配置https">给七牛云配置https</h2>
+<p>本来是想自行配置一个<code>Let’s Encrypt</code>的，不过没想到七牛自己也提供了免费的https证书</p>
+<p><img src="http://cdn.imagehost.top/ipic/68ybs.png-q60" alt=""></p>
+<p>一年有效期足够应付一段时间了。</p>
+<p>填写完成域名申请所需要的资料，并在DNS那边配置好对应的TXT记录之后，等了不到一个小时，刷新页面，发现证书申请通过了。</p>
+<p>再前往七牛的融合CDN，在CDN配置页，对应绑定这个证书。等了几分钟之后，证书配置完成。静态资源可以顺利基于https访问了</p>
+<p><img src="http://cdn.imagehost.top/ipic/rhf07.png-q60" alt=""></p>
+<p>这个时候，顺带就批量处理了一遍所有站点内的静态资源地址，都给加上了https。唯一折腾的就是之前说到的那个Code Prettify的资源地址写死在js里面的情况，需要重新覆盖线上文件，并刷新缓存。</p>
+<p>重新生成所有页面并deploy，再在GitHub的GitHub Pages设定部分，开启enforce https</p>
+<p><img src="http://cdn.imagehost.top/ipic/n2bj7.png-q60" alt=""></p>
+<p>顺利完成站点的https切换。</p>
+<h2 id="评论迁移">评论迁移</h2>
+<p>比较庆幸的是在Wordpress的时候，我就使用了<a target="_blank" rel="noopener" href="https://disqus.com/">Disqus</a>，同时还把Wordpress上的评论也同步到Disqus上了。所以这次的评论迁移，只需要在新站点重新加载Disqus评论即可。</p>
+<p>在Disqus的代码部署上，只能选择执行部署，这块主题本身提供了这个功能，只需要填写站点名称即可。不过我试过了不行，一直无法加载。</p>
+<p>仔细看了一下主题提供的部署方式和Disqus官方提供的部署方式，还是有一些区别的，稳妥起见，还是使用官方版本的比较好。官方版本里面，除了需要page.url之外，还需要page.identifier。这个有点懵，好在旧站点还在，看了旧站点的HTML源码，找到了identifier的构建方式，重新按照旧站点的格式构建了一份</p>
+<p><img src="http://cdn.imagehost.top/ipic/bqes5.png-q60" alt=""></p>
+<p>可以注意到，我还按自己需要给评论的script标签加上了async和defer。因为我的印象里面，页面最后都是卡在Disqus的加载上。</p>
+<p>刷新页面，评论框正确加载成功。从旧站找到有评论的文章，复制后缀路径在本地打开，评论页正确加载。</p>
+<p>由此，评论正确迁移</p>
+<p>在完成评论迁移之后，整个网站的迁移工作算是基本完成了，后续要做的就是确保SEO这块的影响不大。</p>
+<p>对了，我还使用了插件<a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo-generator-sitemap">hexo-generator-sitemap</a>生成了站点地图</p>
+<p>最后说一下迁移前后的网站加载时间</p>
+<table>
+<thead>
+<tr>
+<th>页面</th>
+<th>DOMContentLoaded</th>
+<th>Load</th>
+<th>Finish</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>首页-旧站</td>
+<td>17.05</td>
+<td>20.00</td>
+<td>21.51</td>
+</tr>
+<tr>
+<td>首页-新站</td>
+<td>1.20</td>
+<td>1.84</td>
+<td>1.82</td>
+</tr>
+<tr>
+<td>文章页-旧站</td>
+<td>4.16</td>
+<td>8.47</td>
+<td>10.31</td>
+</tr>
+<tr>
+<td>文章页-新站</td>
+<td>0.765</td>
+<td>1.73</td>
+<td>5.98</td>
+</tr>
+</tbody>
+</table>
+<p>静态化和CDN，的确是网站提速的杀手锏。</p>
+
+                <div class="copyright-notice">
+<div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://www.shuizhongyueming.com/2019/02/19/2019%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/" title="https://www.shuizhongyueming.com/2019/02/19/2019%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/">https://www.shuizhongyueming.com/2019/02/19/2019%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/</a></div>
+                </div>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/02/20/人可以为所欲为，但却不能得偿所愿/" data-toggle="tooltip" data-placement="top"
+                           title="人可以为所欲为，但却不能得偿所愿">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2018/12/05/how-does-react-tell-a-class-from-a-function/" data-toggle="tooltip" data-placement="top"
+                           title="React里面是如何区分Class和Function的">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr class="popular-posts-split">
+                <hr class="popular-posts-split">
+                <h2 class="popular-posts-title">相关推荐</h2>
+                
+
+                <hr>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E8%BF%81%E7%A7%BB"><span class="toc-text">为什么要迁移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%81%E7%A7%BB%E7%9A%84%E5%A4%A7%E4%BD%93%E6%96%B9%E6%A1%88"><span class="toc-text">迁移的大体方案</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%8EWordPress%E5%AF%BC%E5%87%BA%E6%96%87%E7%AB%A0%E5%88%B0Hexo"><span class="toc-text">从WordPress导出文章到Hexo</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E7%94%9F%E6%88%90%E7%9A%84markdown%E6%96%87%E4%BB%B6%E5%90%8D%E7%A7%B0%E7%9A%84%E4%B8%AD%E6%96%87%E4%B9%B1%E7%A0%81%E9%97%AE%E9%A2%98"><span class="toc-text">最终生成的markdown文件名称的中文乱码问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%92%E7%89%88%E9%97%AE%E9%A2%98"><span class="toc-text">排版问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E7%89%87%E8%B5%84%E6%BA%90%E8%BF%81%E7%A7%BB"><span class="toc-text">图片资源迁移</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E7%9B%B8%E5%85%B3%E6%8E%A8%E8%8D%90%E6%96%87%E7%AB%A0"><span class="toc-text">实现相关推荐文章</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E9%AB%98%E4%BA%AE"><span class="toc-text">代码高亮</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0GitHub-Pages"><span class="toc-text">部署到GitHub Pages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%9F%E5%90%8D%E5%88%87%E6%8D%A2"><span class="toc-text">域名切换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%99%E4%B8%83%E7%89%9B%E4%BA%91%E9%85%8D%E7%BD%AEhttps"><span class="toc-text">给七牛云配置https</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%84%E8%AE%BA%E8%BF%81%E7%A7%BB"><span class="toc-text">评论迁移</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://refined-x.com/">前端路上</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shui-zhong-yue-ming-de-blog";
+    var disqus_config = function () {
+        this.page.url = "https://www.shuizhongyueming.com/2019/02/19/2019%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = " https://www.shuizhongyueming.com/?p="; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var d = document;
+        var dsq = d.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.defer = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(dsq);
+    });
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/shuizhongyue91">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/水中月明">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/如风轻吟1991">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/shuizhongyueming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 水中月明的Blog 2022
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://www.shuizhongyueming.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+$('pre').each(function(i, tag) {
+    $(this).addClass('prettyprint')
+})
+</script>
+<script async src="https://cdn.imagehost.top/wp-content/uploads/2019/02/google-code-prettify/run_prettify.js?skin=desert"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="https://cdn.imagehost.top/ipic/t0yg1.png-q60">
+</body>
+
+</html>

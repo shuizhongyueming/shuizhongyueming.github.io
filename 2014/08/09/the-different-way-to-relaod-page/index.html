@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="技术人的博客, 说技术人的事" />
+  <meta name="keyword" content="" />
+  <meta name="theme-color" content="#600090" />
+  <meta name="msapplication-navbutton-color" content="#600090" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="#600090" />
+  <link
+    rel="shortcut icon"
+    href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png"
+  />
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-NVHB3R');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <link
+    rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css"
+  />
+  <title>
+     各种刷新页面的方法｜水中月明的Blog 
+  </title>
+
+  <link
+    rel="canonical"
+    href="https://www.shuizhongyueming.com/2014/08/09/the-different-way-to-relaod-page/"
+  />
+
+  <!-- Bootstrap Core CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
+
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+  <!-- Pygments Github CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
+
+  <script
+    data-ad-client="ca-pub-3438190576149990"
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+  ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="" class="animated fadeIn">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true"
+    data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    水中月明的Blog
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    //    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function () {
+                // prevent frequently toggle
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+    <!-- Main Content -->
+    
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.imagehost.top/default-background-1920x640.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.imagehost.top/default-background-1920x640.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>各种刷新页面的方法</h1>
+                    
+                    <span class="meta">
+                         作者 happyWang
+                        <span>
+                          日期 2014-08-09
+                         </span>
+                        <span id="busuanzi_container_page_pv">
+                         浏览量 <i id="busuanzi_value_page_pv"></i>
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#go"
+                           title="go">go</a>
+                        
+                        <a class="tag" href="/tags/#history"
+                           title="history">history</a>
+                        
+                        <a class="tag" href="/tags/#href"
+                           title="href">href</a>
+                        
+                        <a class="tag" href="/tags/#location"
+                           title="location">location</a>
+                        
+                        <a class="tag" href="/tags/#reload"
+                           title="reload">reload</a>
+                        
+                        <a class="tag" href="/tags/#replace"
+                           title="replace">replace</a>
+                        
+                        <a class="tag" href="/tags/#服务器"
+                           title="服务器">服务器</a>
+                        
+                        <a class="tag" href="/tags/#浏览器"
+                           title="浏览器">浏览器</a>
+                        
+                        <a class="tag" href="/tags/#缓存"
+                           title="缓存">缓存</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            各种刷新页面的方法
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>很多时候，我们因为一些原因，要对页面进行刷新，这个时候，可以使用的方法有很多</p>
+<p>location.reload();</p>
+<p>location.href = location.href;</p>
+<p>window.location = location;</p>
+<p>location.replace( location.href );</p>
+<p>location.go(0);</p>
+<h2 id="关于浏览器缓存和服务器获取">关于浏览器缓存和服务器获取</h2>
+<p>用户浏览网页的时候，在当前标签页内进行各种页面跳转的时候，浏览器会缓存浏览过的页面。</p>
+<p>在进行页面跳转的时候，有两种方式：</p>
+<p>一种是在历史记录内进行跳转，这种跳转会由浏览器读取缓存的页面数据进行展示。</p>
+<p>还有一种是跳出历史的跳转，直接指向路径的url，这种跳转是会从服务器获取数据展示的。</p>
+<h2 id="如何查看是否读取的缓存">如何查看是否读取的缓存</h2>
+<p>以chrome的开发者工具为例，打开之后，查看network面板，清空当前的网络请求列表。</p>
+<p>在console里面执行相应的方法，然后查看当前页面的请求(也就是xxx.html)，</p>
+<p>如果size/content列下显示的是from cache就表明是读的缓存(进行这个实验的时候应该关闭开发者工具里面的禁止缓存选项)</p>
+<h2 id="各种跳转的详细情况">各种跳转的详细情况</h2>
+<h3 id="location-reload">location.reload</h3>
+<p>这个方法有个Boolean值的参数，为true的时候，则刷新就始终是从服务器获取最新的数据。</p>
+<p>如果不设定或者设定为false的时候，则是从浏览器的缓存里面获取数据 chrome里面reload的默认参数似乎是true，也就是说会从服务器端获取</p>
+<p>所以使用reload的时候，最好明确添加reload的参数</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Location.reload" title="Location.reload">https://developer.mozilla.org/en-US/docs/Web/API/Location.reload</a></p>
+<h3 id="location-href-location-href">location.href = location.href</h3>
+<p>把location.href指向当前页地址就会触发重新刷新页面。</p>
+<p>不过这种方法不太稳定，在chrome和firefox下面，第一次执行的时候会从服务器端载入当前页面，之后再次执行的时候就从浏览器缓存读取，所以最好不要轻易使用</p>
+<h3 id="window-location-window-location">window.location = window.location</h3>
+<p>window.location的赋值会导致页面的重载把window.location赋值给window.location，使得重载的页面再次指向当前页面，也就变相的实现了刷新页面。</p>
+<p>这种方式就目前测试读取的是浏览器缓存里面的内容</p>
+<h3 id="location-replace">location.replace</h3>
+<p>location.replace会用指定的url里面的内容替换当前页的内容，这个会导致用户无法后退回到之前的页面,回到的是之前页面的前一个历史。</p>
+<p>chrome下会始终从缓存中读取。</p>
+<p>firefox下，第一次从服务器获取，之后从缓存中读取。</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Location.replace" title="Location.replace">https://developer.mozilla.org/en-US/docs/Web/API/Location.replace</a></p>
+<h3 id="history-go-0">history.go(0)</h3>
+<p>history.go是会跳转向对应的历史，所以很明显是一定会从缓存中读取的。</p>
+<p>使用参数0，表示的是跳转的历史就是当前页，也就实现了刷新页面。</p>
+<p>参考地址：<a target="_blank" rel="noopener" href="http://www.w3schools.com/jsref/met_his_go.asp" title="history.go">http://www.w3schools.com/jsref/met_his_go.asp</a></p>
+<h2 id="总结">总结</h2>
+<p>综上，在刷新页面的时候，如果需要考虑从服务器获取还是读取缓存，比较靠谱的是location.reload()和history.go(0)</p>
+<p>参考地址：</p>
+<p><a target="_blank" rel="noopener" href="http://hi.baidu.com/winterhome/item/73c26920b3faa10a76272c97" title="http://hi.baidu.com/winterhome/item/73c26920b3faa10a76272c97">http://hi.baidu.com/winterhome/item/73c26920b3faa10a76272c97</a></p>
+<p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/1536900/force-a-page-refresh-using-javascript-in-firefox" title="http://stackoverflow.com/questions/1536900/force-a-page-refresh-using-javascript-in-firefox">http://stackoverflow.com/questions/1536900/force-a-page-refresh-using-javascript-in-firefox</a></p>
+
+                <div class="copyright-notice">
+<div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://www.shuizhongyueming.com/2014/08/09/the-different-way-to-relaod-page/" title="https://www.shuizhongyueming.com/2014/08/09/the-different-way-to-relaod-page/">https://www.shuizhongyueming.com/2014/08/09/the-different-way-to-relaod-page/</a></div>
+                </div>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2014/08/09/under-webkit-browser-user-select-none-make-input-unaccessable/" data-toggle="tooltip" data-placement="top"
+                           title="webkit浏览器下user-select:none导致input框无法访问">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2014/07/28/some-css-pre-set-for-mobile-browser-of-webkit/" data-toggle="tooltip" data-placement="top"
+                           title="给移动端webkit内核浏览器的样式预设">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr class="popular-posts-split">
+                <hr class="popular-posts-split">
+                <h2 class="popular-posts-title">相关推荐</h2>
+                
+
+                <hr>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E6%B5%8F%E8%A7%88%E5%99%A8%E7%BC%93%E5%AD%98%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96"><span class="toc-text">关于浏览器缓存和服务器获取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%9F%A5%E7%9C%8B%E6%98%AF%E5%90%A6%E8%AF%BB%E5%8F%96%E7%9A%84%E7%BC%93%E5%AD%98"><span class="toc-text">如何查看是否读取的缓存</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%84%E7%A7%8D%E8%B7%B3%E8%BD%AC%E7%9A%84%E8%AF%A6%E7%BB%86%E6%83%85%E5%86%B5"><span class="toc-text">各种跳转的详细情况</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#location-reload"><span class="toc-text">location.reload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#location-href-location-href"><span class="toc-text">location.href &#x3D; location.href</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#window-location-window-location"><span class="toc-text">window.location &#x3D; window.location</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#location-replace"><span class="toc-text">location.replace</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#history-go-0"><span class="toc-text">history.go(0)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://refined-x.com/">前端路上</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shui-zhong-yue-ming-de-blog";
+    var disqus_config = function () {
+        this.page.url = "https://www.shuizhongyueming.com/2014/08/09/the-different-way-to-relaod-page/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "477 https://www.shuizhongyueming.com/?p=477"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var d = document;
+        var dsq = d.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.defer = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(dsq);
+    });
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/shuizhongyue91">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/水中月明">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/如风轻吟1991">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/shuizhongyueming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 水中月明的Blog 2022
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://www.shuizhongyueming.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+$('pre').each(function(i, tag) {
+    $(this).addClass('prettyprint')
+})
+</script>
+<script async src="https://cdn.imagehost.top/wp-content/uploads/2019/02/google-code-prettify/run_prettify.js?skin=desert"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="https://cdn.imagehost.top/ipic/t0yg1.png-q60">
+</body>
+
+</html>

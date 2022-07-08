@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="技术人的博客, 说技术人的事" />
+  <meta name="keyword" content="" />
+  <meta name="theme-color" content="#600090" />
+  <meta name="msapplication-navbutton-color" content="#600090" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="#600090" />
+  <link
+    rel="shortcut icon"
+    href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png"
+  />
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-NVHB3R');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <link
+    rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css"
+  />
+  <title>
+     无法找到来自源 Zend Loader 的事件 ID 5 的描述｜水中月明的Blog 
+  </title>
+
+  <link
+    rel="canonical"
+    href="https://www.shuizhongyueming.com/2013/10/23/the-description-for-event-id-5-from-source-zend-loader-cannot-be-found/"
+  />
+
+  <!-- Bootstrap Core CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
+
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+  <!-- Pygments Github CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
+
+  <script
+    data-ad-client="ca-pub-3438190576149990"
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+  ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="" class="animated fadeIn">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true"
+    data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    水中月明的Blog
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    //    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function () {
+                // prevent frequently toggle
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+    <!-- Main Content -->
+    
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.imagehost.top/default-background-1920x640.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.imagehost.top/default-background-1920x640.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>无法找到来自源 Zend Loader 的事件 ID 5 的描述</h1>
+                    
+                    <span class="meta">
+                         作者 happyWang
+                        <span>
+                          日期 2013-10-23
+                         </span>
+                        <span id="busuanzi_container_page_pv">
+                         浏览量 <i id="busuanzi_value_page_pv"></i>
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#windows"
+                           title="windows">windows</a>
+                        
+                        <a class="tag" href="/tags/#IIS_WPG"
+                           title="IIS_WPG">IIS_WPG</a>
+                        
+                        <a class="tag" href="/tags/#Network Service"
+                           title="Network Service">Network Service</a>
+                        
+                        <a class="tag" href="/tags/#Nginx"
+                           title="Nginx">Nginx</a>
+                        
+                        <a class="tag" href="/tags/#upload_tmp_dir"
+                           title="upload_tmp_dir">upload_tmp_dir</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            无法找到来自源 Zend Loader 的事件 ID 5 的描述
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>今天在查看windows日志中的应用程序日志时，发现如下错误：</p>
+<pre><code>无法找到来自源 Zend Loader 的事件 ID 5 的描述。本地计算机上未安装引发此事件的组件，或者安装已损坏。可以安装或修复本地计算机上的组件。
+
+如果该事件产生于另一台计算机，则必须在该事件中保存显示信息。
+
+以下是包含在事件中的信息: 
+
+C:WINDOWSTEMPZendLoader.MemoryBase@SYSTEM@3391924446 拒绝访问。
+</code></pre>
+<p>系统:windows 8.1 web环境:nginx/1.5.3 PHP/5.3.27</p>
+<p>依旧是先Google了一下，在<a target="_blank" rel="noopener" href="http://www.oaxueyuan.com/solve-the-windows-event-application-log-event-id-5-description-in-the-resource-zend-loader-can-not-be-found-problem.html" title="这篇文章">这篇文章</a>里找到了解决方式</p>
+<p>看了不是很理解，找了其中的几个关键词：php.ini，upload_tmp_dir，C:WINDOWSTemp，Network Service，IIS_WPG，ZendOptimizer.MemoryBase@SYSTEM和ZendOptimizer.MemoryBase@NETWORK SERVICE。</p>
+<p>大体的意思是：在php.ini中upload_tmp_dir的值为C:WINDOWSTemp的时候，在确保ZendOptimizer.MemoryBase@SYSTEM和ZendOptimizer.MemoryBase@NETWORK SERVICE两个文件存在的时候(没有则新建一个命名相同的空文件)，给Temp文件夹添加Network Service和IIS_WPG的写入权限，就能解决问题。</p>
+<p>然后我根据这个思路，开始着手根据我自己的环境和配置，尝试着解决问题。</p>
+<p>首先，我的php.ini中，关于upload_tmp_dir这块如下：</p>
+<pre><code>;;;;;;;;;;;;;;;;
+; File Uploads ;
+;;;;;;;;;;;;;;;;
+
+; Whether to allow HTTP file uploads.
+; http://php.net/file-uploads
+file_uploads = On
+
+; Temporary directory for HTTP uploaded files (will use system default if not
+; specified).
+; http://php.net/upload-tmp-dir
+;upload_tmp_dir =
+
+; Maximum allowed size for uploaded files.
+; http://php.net/upload-max-filesize
+upload_max_filesize = 32M
+
+; Maximum number of files that can be uploaded via a single request
+max_file_uploads = 20
+</code></pre>
+<p>我的upload_tmp_dir 是被注释掉的，但是file_uploads 是开启的，所以upload_tmp_dir 用的是默认的值。然后在<a target="_blank" rel="noopener" href="http://php.net/manual/zh/features.file-upload.php" title="PHP: 文件上传处理 - Manual"></a>这篇文章中找到如下一句话：</p>
+<pre><code>The reason for this is, the uploaded file will inherit the permissions of the directory specified in the directive upload_tmp_dir of php.ini.  If this directive isn't set, the default of C:WindowsTemp is used.
+</code></pre>
+<p>所以我的upload_tmp_dir 在默认值的情况下用的是 C:WindowsTemp 在我的Temp文件夹下是有文件ZendLoader.MemoryBase@SYSTEM@3391924446的，这一点和文章里面说的不太一样，可是我的错误信息里面明确是指定这个文件的，所以暂时不需要添加那两个空文件。</p>
+<p>然后就是给Temp文件夹添加权限了，首先得知道Network Service和IIS_WPG分别代表什么？</p>
+<p>看MSDN上面的<a target="_blank" rel="noopener" href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms684272(v=vs.85).aspx" title="NetworkService Account"></a>，可以知道Network Service是一个被服务控制管理器(service control manager)使用的本地账号，用来在网络中代表这台计算机。</p>
+<p>在<a target="_blank" rel="noopener" href="http://www.iis.net/learn/get-started/planning-for-security/understanding-built-in-user-and-group-accounts-in-iis" title="Understanding Built-In User and Group Accounts in IIS 7">这篇文章</a>里面找到的针对IIS_WPG的定义是：</p>
+<blockquote>
+<p>There was also a group called IIS_WPG, which was used as a container for all the application pool identities. During IIS setup, all the appropriate resources on the system were granted the correct user rights for the IIS_WPG group so that an administrator only needed to add their identity to that group when they created a new application pool account.</p>
+</blockquote>
+<p>大致的意思是给所有IIS应用管理权限的一个组。</p>
+<p>可问题是，我用的不是IIS，所以得找到和Nginx相关的账号.可是看了下，貌似nginx和IIS不一样，它是一个服务，是运行在本地系统账户下的一个服务。所以我不知道该怎么办了。先给Temp账户添加了Network Service的写入权限。然后清空日志，看看明天重启的时候报什么错吧</p>
+<p>============== 后续更新 =====================</p>
+<p>2013年10月24日 今天开机一段时间之后，查看应用程序日志，没有发现此错误 2013年10月25日 今天开机之后，查看应用程序日志，问题再次出现，分为两种问题状态：</p>
+<pre><code>C:WINDOWSTEMPZendLoader.MemoryBase@SYSTEM@3391924446
+拒绝访问。
+</code></pre>
+<p>和</p>
+<pre><code>Unable to write base address
+拒绝访问。</code></pre>
+
+                <div class="copyright-notice">
+<div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://www.shuizhongyueming.com/2013/10/23/the-description-for-event-id-5-from-source-zend-loader-cannot-be-found/" title="https://www.shuizhongyueming.com/2013/10/23/the-description-for-event-id-5-from-source-zend-loader-cannot-be-found/">https://www.shuizhongyueming.com/2013/10/23/the-description-for-event-id-5-from-source-zend-loader-cannot-be-found/</a></div>
+                </div>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2013/11/18/windows-modules-installer-is-making-my-computer-hang/" data-toggle="tooltip" data-placement="top"
+                           title="windows modules installer占用过多磁盘读写和CPU的解决方案">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2013/10/19/some-problem-in-use-userdata/" data-toggle="tooltip" data-placement="top"
+                           title="userData的一些坑">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr class="popular-posts-split">
+                <hr class="popular-posts-split">
+                <h2 class="popular-posts-title">相关推荐</h2>
+                <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2013/10/11/how-to-save-passowrd-for-git-push-under-the-windows/" title="windows下使用git,如何保存push到远程仓库时使用的密码" rel="bookmark">windows下使用git,如何保存push到远程仓库时使用的密码</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2013/04/04/the-server-did-not-register-with-dcom-within-the-required-timeout/" title="服务器没有在要求的超时时间内向 DCOM 注册" rel="bookmark">服务器没有在要求的超时时间内向 DCOM 注册</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2013/11/18/windows-modules-installer-is-making-my-computer-hang/" title="windows modules installer占用过多磁盘读写和CPU的解决方案" rel="bookmark">windows modules installer占用过多磁盘读写和CPU的解决方案</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2014/11/04/the-possible-reason-for-the-nginx-error-emerg-server-directive-is-not-allowed-here/" title="Nginx 错误[emerg] "server" directive is not allowed here的可能情况" rel="bookmark">Nginx 错误[emerg] "server" directive is not allowed here的可能情况</a></h3></div></li></ul>
+
+                <hr>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://refined-x.com/">前端路上</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shui-zhong-yue-ming-de-blog";
+    var disqus_config = function () {
+        this.page.url = "https://www.shuizhongyueming.com/2013/10/23/the-description-for-event-id-5-from-source-zend-loader-cannot-be-found/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "278 https://www.shuizhongyueming.com/?p=278"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var d = document;
+        var dsq = d.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.defer = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(dsq);
+    });
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/shuizhongyue91">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/水中月明">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/如风轻吟1991">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/shuizhongyueming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 水中月明的Blog 2022
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://www.shuizhongyueming.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+$('pre').each(function(i, tag) {
+    $(this).addClass('prettyprint')
+})
+</script>
+<script async src="https://cdn.imagehost.top/wp-content/uploads/2019/02/google-code-prettify/run_prettify.js?skin=desert"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="https://cdn.imagehost.top/ipic/t0yg1.png-q60">
+</body>
+
+</html>

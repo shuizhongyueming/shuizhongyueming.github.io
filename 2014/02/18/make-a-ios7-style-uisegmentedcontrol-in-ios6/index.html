@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="技术人的博客, 说技术人的事" />
+  <meta name="keyword" content="" />
+  <meta name="theme-color" content="#600090" />
+  <meta name="msapplication-navbutton-color" content="#600090" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="#600090" />
+  <link
+    rel="shortcut icon"
+    href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png"
+  />
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-NVHB3R');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <link
+    rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css"
+  />
+  <title>
+     在IOS6下制作IOS7风格的UISegmentedControl｜水中月明的Blog 
+  </title>
+
+  <link
+    rel="canonical"
+    href="https://www.shuizhongyueming.com/2014/02/18/make-a-ios7-style-uisegmentedcontrol-in-ios6/"
+  />
+
+  <!-- Bootstrap Core CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
+
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+  <!-- Pygments Github CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
+
+  <script
+    data-ad-client="ca-pub-3438190576149990"
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+  ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="" class="animated fadeIn">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true"
+    data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    水中月明的Blog
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    //    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function () {
+                // prevent frequently toggle
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+    <!-- Main Content -->
+    
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.imagehost.top/default-background-1920x640.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.imagehost.top/default-background-1920x640.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>在IOS6下制作IOS7风格的UISegmentedControl</h1>
+                    
+                    <span class="meta">
+                         作者 happyWang
+                        <span>
+                          日期 2014-02-18
+                         </span>
+                        <span id="busuanzi_container_page_pv">
+                         浏览量 <i id="busuanzi_value_page_pv"></i>
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#IOS7"
+                           title="IOS7">IOS7</a>
+                        
+                        <a class="tag" href="/tags/#IOS6"
+                           title="IOS6">IOS6</a>
+                        
+                        <a class="tag" href="/tags/#UISegmentedControl"
+                           title="UISegmentedControl">UISegmentedControl</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            在IOS6下制作IOS7风格的UISegmentedControl
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="起因">起因</h2>
+<p>现在 IOS 平台下的应用开发都已经趋向 IOS7 的风格，哪怕系统本身不是 IOS7 的。就比如我们这个应用，开始的时候使用按钮来实现类似 UISegmentedControl 的 UI 和功能，但是后期，需求一改，要求用原生的实现。整个应用都是 IOS7 风格的，在 IOS7 下，使用原生的倒也简单，但是在 IOS6 下面就困难了，立体化的控件是那样的突兀。</p>
+<p>没办法，只好在一起走上 Google 之路，不过总算有个好结果。</p>
+<h2 id="设置-UISegmentedControl-的背景">设置 UISegmentedControl 的背景</h2>
+<p>在看下文之前，先<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/10562300/customizing-left-right-uisegmentedcontrol-buttons">看这里</a>，没有这个在 stackoverflow 上面的精彩回答，也就不会有这篇文章了，万分感谢！</p>
+<p>有了上面的基本技术知识储备，再上一张最终效果图，方便描述思路</p>
+<p><img src="https://cdn.imagehost.top/wp-content/uploads/2014/02/UISegmentedControl-in-ios6.png" alt="最终效果图"></p>
+<p>从 stackoverflow 的那个回答，可以知道，自定义一个 UISegmentedControl 需要的素材有三种类型：选中时的按钮图片、没选中时候的按钮图片和两个按钮中间的图片(这里说的是只有左右两个按钮的情况)</p>
+<p>在那个回答中，作者很耐心的给出了针对性的 5 张图片，但是在我的最终效果里面，中间的那个线是一直不变的，不管两边如何变化，所以我只需要三张图片</p>
+<p><img src="https://cdn.imagehost.top/wp-content/uploads/2014/02/Materials-for-UISegmentedControl.png" alt="需要的素材"></p>
+<p>再然后就是复制修改代码了：</p>
+<pre><code>/* Unselected background */
+UIImage *unselectedBackgroundImage = [[UIImage
+imageNamed:@&quot;segment-unselected-item.png&quot;]
+resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+[[UISegmentedControl appearance] setBackgroundImage:unselectedBackgroundImage
+forState:UIControlStateNormal
+barMetrics:UIBarMetricsDefault];
+
+/* Selected background */
+UIImage *selectedBackgroundImage = [[UIImage
+imageNamed:@&quot;segment-selected-item.png&quot;]
+resizableImageWithCapInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+[[UISegmentedControl appearance] setBackgroundImage:selectedBackgroundImage
+forState:UIControlStateSelected
+barMetrics:UIBarMetricsDefault];
+
+/* Image between two unselected segments */
+UIImage *bothUnselectedImage = [[UIImage
+imageNamed:@&quot;segment-middle.png&quot;]
+resizableImageWithCapInsets:UIEdgeInsetsMake(15, 0, 15, 0)];
+[[UISegmentedControl appearance] setDividerImage:bothUnselectedImage
+forLeftSegmentState:UIControlStateNormal
+rightSegmentState:UIControlStateNormal
+barMetrics:UIBarMetricsDefault];
+
+/* Image between segment selected on the left and unselected on the right */
+UIImage *leftSelectedImage = [[UIImage
+imageNamed:@&quot;segment-middle.png&quot;]
+resizableImageWithCapInsets:UIEdgeInsetsMake(15, 0, 15, 0)];
+[[UISegmentedControl appearance] setDividerImage:leftSelectedImage
+forLeftSegmentState:UIControlStateSelected
+rightSegmentState:UIControlStateNormal
+barMetrics:UIBarMetricsDefault];
+
+/* Image between segment selected on the right and unselected on the left */
+UIImage *rightSelectedImage = [[UIImage
+imageNamed:@&quot;segment-middle.png&quot;]
+resizableImageWithCapInsets:UIEdgeInsetsMake(15, 0, 15, 0)];
+[[UISegmentedControl appearance] setDividerImage:rightSelectedImage
+forLeftSegmentState:UIControlStateNormal
+rightSegmentState:UIControlStateSelected
+barMetrics:UIBarMetricsDefault];
+</code></pre>
+<p>在完成上述代码之后，运行，就能看到 UISegmentedControl 的背景已经成功的 IOS7 风格化了</p>
+<p><img src="https://cdn.imagehost.top/wp-content/uploads/2014/02/finish-background-of-UISegmentedControl.png" alt="完成UISegmentedControl的背景"></p>
+<p>但还是有些瑕疵，在选中的 segment 上，字体是白色的，很难识别，而且字体对中文的支持不友好，一大一小的，所以还需要一些美化工作</p>
+<h2 id="一些美化">一些美化</h2>
+<p>万能的 stackoverflow，再次从它那边找到了<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/8426760/how-to-change-uisegmentcontrol-font-and-selected-segment-colour">完美方案</a>。对于中文，使用 Helvetica 字体是一个不错的选择，然后可以选择性的去掉不好看的阴影，别的设定就是看个人需要，随意增删了。下面给出我的设定：</p>
+<pre><code>NSDictionary *selectedAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+[UIFont fontWithName:@&quot;Helvetica&quot; size:14.0f], UITextAttributeFont,
+[UIColor colorWithRed:11/255.0 green:96/255.0 blue:175/255.0 alpha:1],
+UITextAttributeTextColor,
+[UIColor clearColor], UITextAttributeTextShadowColor,
+nil];
+[segment setTitleTextAttributes:selectedAttributes forState:UIControlStateSelected];
+
+NSDictionary *normalAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
+[UIFont fontWithName:@&quot;Helvetica&quot; size:14.0f], UITextAttributeFont,
+[UIColor whiteColor], UITextAttributeTextColor,
+[UIColor clearColor], UITextAttributeTextShadowColor,
+nil];
+[segment setTitleTextAttributes:normalAttributes forState:UIControlStateNormal];
+</code></pre>
+<p>好了，一个 IOS7 风格的 UISegmentedControl 完成了，下面看看实现的和真正原生的 IOS7 风格的 UISegmentedControl 有什么区别不</p>
+<p><img src="https://cdn.imagehost.top/wp-content/uploads/2014/02/diff-UISegmentedControl.png" alt="区别"></p>
+<p>边框的细线有点偏粗，字体偏大，圆角过小。这些还是明天再改吧，困了…</p>
+<h2 id="后续新增">后续新增</h2>
+<ul>
+<li>修改了 segment-unselected-item.png 的细线宽度，由 2px 改成 1px(@2x 的由 4px 改成 2px)</li>
+<li>字体尺寸修改为 12.0f</li>
+<li>修改 segment-unselected-item@2x.png 和 segment-selected-item@2x.png 这两张图片的圆角，由 5px 增加为 10px(根据 IOS7 的风格，UISegmentedControl 的圆角弧度是 10px)</li>
+</ul>
+<p>在上一张最终的结果比较</p>
+<p><img src="https://cdn.imagehost.top/wp-content/uploads/2014/02/last-diff.png" alt="最终比较"></p>
+
+                <div class="copyright-notice">
+<div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://www.shuizhongyueming.com/2014/02/18/make-a-ios7-style-uisegmentedcontrol-in-ios6/" title="https://www.shuizhongyueming.com/2014/02/18/make-a-ios7-style-uisegmentedcontrol-in-ios6/">https://www.shuizhongyueming.com/2014/02/18/make-a-ios7-style-uisegmentedcontrol-in-ios6/</a></div>
+                </div>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2014/02/20/some-conclusions-about-the-css-media-queries/" data-toggle="tooltip" data-placement="top"
+                           title="关于CSS Media Queries的一些总结">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2014/01/06/load-local-image-js-css-file-to-webview-in-xcode/" data-toggle="tooltip" data-placement="top"
+                           title="xcode,在webView中引入本地html,image,js,css文件的方法">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr class="popular-posts-split">
+                <hr class="popular-posts-split">
+                <h2 class="popular-posts-title">相关推荐</h2>
+                <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2013/12/09/fix-the-fullscreen-problem-for-phonegap-app-in-ios7/" title="修复在IOS7下面，PhoneGap App的全屏问题" rel="bookmark">修复在IOS7下面，PhoneGap App的全屏问题</a></h3></div></li></ul>
+
+                <hr>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%B7%E5%9B%A0"><span class="toc-text">起因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE-UISegmentedControl-%E7%9A%84%E8%83%8C%E6%99%AF"><span class="toc-text">设置 UISegmentedControl 的背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E4%BA%9B%E7%BE%8E%E5%8C%96"><span class="toc-text">一些美化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%8E%E7%BB%AD%E6%96%B0%E5%A2%9E"><span class="toc-text">后续新增</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://refined-x.com/">前端路上</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shui-zhong-yue-ming-de-blog";
+    var disqus_config = function () {
+        this.page.url = "https://www.shuizhongyueming.com/2014/02/18/make-a-ios7-style-uisegmentedcontrol-in-ios6/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "336 https://www.shuizhongyueming.com/?p=336"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var d = document;
+        var dsq = d.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.defer = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(dsq);
+    });
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/shuizhongyue91">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/水中月明">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/如风轻吟1991">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/shuizhongyueming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 水中月明的Blog 2022
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://www.shuizhongyueming.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+$('pre').each(function(i, tag) {
+    $(this).addClass('prettyprint')
+})
+</script>
+<script async src="https://cdn.imagehost.top/wp-content/uploads/2019/02/google-code-prettify/run_prettify.js?skin=desert"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="https://cdn.imagehost.top/ipic/t0yg1.png-q60">
+</body>
+
+</html>

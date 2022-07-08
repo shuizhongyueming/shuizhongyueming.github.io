@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="技术人的博客, 说技术人的事" />
+  <meta name="keyword" content="" />
+  <meta name="theme-color" content="#600090" />
+  <meta name="msapplication-navbutton-color" content="#600090" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="#600090" />
+  <link
+    rel="shortcut icon"
+    href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png"
+  />
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-NVHB3R');
+  </script>
+  <!-- End Google Tag Manager -->
+
+  <link
+    rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css"
+  />
+  <title>
+     纯CSS的流程条｜水中月明的Blog 
+  </title>
+
+  <link
+    rel="canonical"
+    href="https://www.shuizhongyueming.com/2013/04/16/pure-css-progress-bar/"
+  />
+
+  <!-- Bootstrap Core CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
+
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+  <!-- Pygments Github CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
+
+  <script
+    data-ad-client="ca-pub-3438190576149990"
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+  ></script>
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+<!-- hack iOS CSS :active style -->
+
+<body ontouchstart="" class="animated fadeIn">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true"
+    data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    水中月明的Blog
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    <li>
+                        <a href="/about">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    //    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function () {
+                // prevent frequently toggle
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+    <!-- Main Content -->
+    
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.imagehost.top/default-background-1920x640.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.imagehost.top/default-background-1920x640.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>纯CSS的流程条</h1>
+                    
+                    <span class="meta">
+                         作者 happyWang
+                        <span>
+                          日期 2013-04-16
+                         </span>
+                        <span id="busuanzi_container_page_pv">
+                         浏览量 <i id="busuanzi_value_page_pv"></i>
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#流程条"
+                           title="流程条">流程条</a>
+                        
+                        <a class="tag" href="/tags/#箭头"
+                           title="箭头">箭头</a>
+                        
+                        <a class="tag" href="/tags/#进度条"
+                           title="进度条">进度条</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            纯CSS的流程条
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="需求">需求</h2>
+<p>最近在忙公司的一个移动端充值的前端部分，今天主要是做页面。需要一个指示用户充值流程的流程条(进度条)，大致的效果如下：</p>
+<p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/progress-bar.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/progress-bar-300x28.png" alt="progress-bar"></a></p>
+<h2 id="思路">思路</h2>
+<p>如果是平时在pc端的开发，那么可能就会将箭头的区域切出五个状态：</p>
+<ol>
+<li>
+<p>箭头部分灰色，背景灰色 <a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-2.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-2.png" alt="arrow-2"></a></p>
+</li>
+<li>
+<p>箭头部分蓝色，背景灰色 <a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-1.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-1.png" alt="arrow-1"></a></p>
+</li>
+<li>
+<p>箭头部分灰色，背景蓝色 <a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-4.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-4.png" alt="arrow-4"></a></p>
+</li>
+<li>
+<p>箭头部分蓝色，背景透明 <a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-5.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-5.png" alt="arrow-5"></a></p>
+</li>
+<li>
+<p>箭头部分灰色，背景透明 <a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-3.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-3.png" alt="arrow-3"></a></p>
+<li>
+    <span class="cont"></span>
+    <span class="arrow-right"></span>
+</li>
+  <li class="on">
+    <span class="cont"></span>
+    <span class="arrow-right"></span>
+</li>
+  <li class="last">
+    <span class="cont"></span>
+    <span class="arrow-right"></span>
+</li>
+</li>
+</ol>
+<p>具体的写法就是：</p>
+<p>默认状态 li下面的.arrow-right显式为第一种：箭头灰色，背景灰色</p>
+<p>选中状态(.on) li下面的.arrow-right显示为第二种状态 箭头蓝色，背景灰色，同时用js实现它的previousSibling的.arrow-right显示为第三种状态：箭头灰色，背景蓝色</p>
+<p>最后一个箭头 因为背景色的不同，独立出来 默认状态是第四种 选中状态是第五种</p>
+<h2 id="需要修改的地方">需要修改的地方</h2>
+<h3 id="三角箭头的css方案">三角箭头的css方案</h3>
+<p>因为是做移动端开发，所以为这么个功能制作五张图片，哪怕是可以通过css sprite合并，可也是很不划算的。然后我就想起以前看到的一个用css实现三角浮动层尖角的文章，找出来翻了翻，箭头的css化问题就解决了。具体的制作方法我就重复写了，大家可以参看下面的链接：</p>
+<p><a target="_blank" rel="noopener" href="http://www.daqianduan.com/css-poptip/" title="CSS常用浮动层的写法">CSS常用浮动层的写法</a> <a target="_blank" rel="noopener" href="http://www.feelcss.com/three-pure-css-to-achieve-the-triangle-method.html" title="三种纯CSS实现三角形的方法">三种纯CSS实现三角形的方法</a></p>
+<h3 id="使用css相邻兄弟选择器替换js">使用css相邻兄弟选择器替换js</h3>
+<p>之前的思路是通过js来实现基于选中状态下li，修改相邻li的样式，可以实现，但是感觉上很啰嗦，不够优雅。</p>
+<p>这个项目是在移动端使用的，都是高级浏览器。所以很多平时在pc端网页开发时，因为顾及到IE6、7、8的兼容性而不能使用的css选择器，比如子选择器、相邻兄弟选择器都能够放心的使用了。</p>
+<p>在这个项目中使用到的就是相邻兄弟选择器，在选中状态下影响下一个兄弟节点的样式</p>
+<pre><code>.on + li&#123;&#125;
+</code></pre>
+<h2 id="最终的方案">最终的方案</h2>
+<h3 id="先上代码">先上代码</h3>
+<p>HTML：</p>
+<pre><code>&lt;ul class=&quot;progress&quot;&gt;
+
+  &lt;li class=&quot;on&quot;&gt;
+        &lt;span class=&quot;step first&quot;&gt;1.选择充值方式&lt;/span&gt;
+&lt;/li&gt;
+
+
+  &lt;li&gt;
+        &lt;span class=&quot;triangle triangle-left&quot;&gt;&lt;em&gt;&lt;/em&gt;&lt;i&gt;&lt;/i&gt;&lt;/span&gt;
+        &lt;span class=&quot;step&quot;&gt;2.第一步&lt;/span&gt;
+&lt;/li&gt;
+
+
+  &lt;li&gt;
+        &lt;span class=&quot;triangle triangle-left&quot;&gt;&lt;em&gt;&lt;/em&gt;&lt;i&gt;&lt;/i&gt;&lt;/span&gt;
+        &lt;span class=&quot;step&quot;&gt;3.第二步&lt;/span&gt;
+&lt;/li&gt;
+
+
+  &lt;li&gt;
+        &lt;span class=&quot;triangle triangle-left&quot;&gt;&lt;em&gt;&lt;/em&gt;&lt;i&gt;&lt;/i&gt;&lt;/span&gt;
+        &lt;span class=&quot;step&quot;&gt;4.第三步&lt;/span&gt;
+        &lt;span class=&quot;triangle triangle-right last&quot;&gt;&lt;em&gt;&lt;/em&gt;&lt;i&gt;&lt;/i&gt;&lt;/span&gt;
+&lt;/li&gt;
+
+&lt;/ul&gt;
+</code></pre>
+<p>CSS：</p>
+<pre><code>.progress &#123;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+&#125;
+.progress li &#123;
+  float: left;
+  margin: 0;
+  overflow: hidden;
+&#125;
+.progress span &#123;
+  display: block;
+  float: left;
+&#125;
+.progress .step &#123;
+  height: 2.2rem;
+  width: 10rem;
+  font: bold 1.4rem/2.2rem simsun, arial;
+  color: #999;
+  text-align: center;
+  background: #e3e3e3;
+&#125;
+/* 箭头区域-非箭头部分 背景色 默认灰色 */
+.progress .triangle &#123;
+  position: relative;
+  height: 2.2rem;
+  background: #e3e3e3;
+  width: 1.3rem;
+  overflow: hidden;
+&#125;
+.progress em,
+.progress i &#123;
+  display: block;
+  position: absolute;
+  top: -2px;
+  overflow: hidden;
+  width: 0;
+  height: 0;
+  border-width: 15px;
+  border-style: dashed solid dashed dashed;
+&#125;
+/* em 箭头区域-箭头部分 头部边框 白色 */
+.progress em &#123;
+  left: 0px;
+  border-color: transparent transparent transparent #FFF;
+&#125;
+/* i 箭头区域-箭头部分 背景颜色 默认灰色*/
+.progress i &#123;
+  left: -2px;
+  border-color: transparent transparent transparent #e3e3e3;
+&#125;
+.progress .first &#123;
+  width: 11rem;
+  border-radius: 5px 0 0 5px;
+&#125;
+/* 最后一个的背景色透明 */
+.progress .last &#123;
+  background: transparent;
+&#125;
+/* 选中状态下 当前节点 左边箭头区域-非箭头部分 颜色蓝色（形成箭尾） */
+.progress .on .triangle-left &#123;
+  background: #5fb3dc;
+&#125;
+/* 选中状态下 当前节点 右边箭头区域-箭头部分 颜色蓝色 */
+.progress .on .triangle-right i &#123;
+  border-color: transparent transparent transparent #5fb3dc;
+&#125;
+.progress .on .step &#123;
+  background: #5fb3dc;
+  color: #FFF;
+&#125;
+/* 选中状态下 下一个兄弟节点 左边箭头区域-箭头部分 颜色蓝色 */
+.progress .on + li .triangle-left i &#123;
+  border-color: transparent transparent transparent #5fb3dc;
+&#125;
+</code></pre>
+<p></p>
+<h3 id="描述">描述</h3>
+<p>总共三种li：</p>
+<ul>
+<li>左数第一个li 没有箭头区域</li>
+<li>右数第一个li 有左边箭头区域和右边箭头区域</li>
+<li>上述两个li中间的li 有左边箭头区域</li>
+</ul>
+<h4 id="左数第一个li">左数第一个li</h4>
+<p>默认状态 文本区域背景色灰色</p>
+<p>如果下一个兄弟节点也是默认状态，则其左边箭头区域-箭头灰色-非箭头灰色<a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/first-normal.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/first-normal.png" alt="first-normal"></a></p>
+<p>如果下一个兄弟节点选中状态，则其左边箭头区域-箭头灰色-非箭头蓝色<a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/first-normal-2.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/first-normal-2.png" alt="first-normal-2"></a></p>
+<p>两种状态下，都能保证左数第一个li和其下一个兄弟节点的左边箭头区域的箭头在视觉上成为一体</p>
+<p>选中状态 文本区域蓝色</p>
+<p>下一个兄弟节点只能是默认状态（在流程条中只有一个会是处在选中状态）<a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/first-on.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/first-on.png" alt="first-on"></a></p>
+<h4 id="中间li">中间li</h4>
+<p>默认状态 内容区域灰色 左边箭头区域-非箭头灰色</p>
+<p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-normal-3.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-normal-3-300x51.png" alt="middle-normal-3"></a></p>
+<p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-normal-4.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-normal-4-300x40.png" alt="middle-normal-4"></a></p>
+<p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-normal-2.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-normal-2-300x36.png" alt="middle-normal-2"></a></p>
+<blockquote>
+<blockquote>
+<p>注意：这种风格的流程条不存在同时两个选中状态的,但是样式上可以做到</p>
+</blockquote>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-normal-1.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-normal-1-300x36.png" alt="middle-normal-1"></a></p>
+<p>选中状态 左边箭头区域 非箭头部分蓝色 内容区域蓝色 下一个兄弟节点的左边箭头区域-箭头部分蓝色</p>
+<p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-on.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-on.png" alt="middle-on"></a></p>
+<h4 id="右数第一个li">右数第一个li</h4>
+<p>默认状态 左边箭头区域-非箭头部分灰色 内容区域灰色 右边箭头区域-箭头部分灰色</p>
+<p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/last-normal-2.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/last-normal-2.png" alt="last-normal-2"></a></p>
+<p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/last-normal-1.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/last-normal-1.png" alt="last-normal-1"></a></p>
+<p>选中状态 左边箭头区域-非箭头部分蓝色 内容区域蓝色 右边箭头区域-箭头部分蓝色</p>
+<p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/last-on.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/last-on.png" alt="last-on"></a></p>
+<h2 id="总结">总结</h2>
+<p>总的来说，对于任何一个li，它们的目的是为了形成一个箭的形状，所以必须保证箭尾、箭身和箭头这三者颜色保持一致。在我这个HTML结构里箭尾就是li自身内部的左侧箭头区域-非箭头部分，箭身就是内容区域，箭头就是下一个兄弟节点的左侧箭头区域的箭头部分或者自身右侧箭头区域的箭头部分，只要能保证三者颜色颜色保持一致，那么一个标准的流程条就出来了。:)</p>
+
+                <div class="copyright-notice">
+<div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://www.shuizhongyueming.com/2013/04/16/pure-css-progress-bar/" title="https://www.shuizhongyueming.com/2013/04/16/pure-css-progress-bar/">https://www.shuizhongyueming.com/2013/04/16/pure-css-progress-bar/</a></div>
+                </div>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2013/04/17/know-what-you-are-doing/" data-toggle="tooltip" data-placement="top"
+                           title="要明白自己在干什么">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2013/04/13/change-space/" data-toggle="tooltip" data-placement="top"
+                           title="换了空间">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr class="popular-posts-split">
+                <hr class="popular-posts-split">
+                <h2 class="popular-posts-title">相关推荐</h2>
+                
+
+                <hr>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82"><span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-text">思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E8%A6%81%E4%BF%AE%E6%94%B9%E7%9A%84%E5%9C%B0%E6%96%B9"><span class="toc-text">需要修改的地方</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E8%A7%92%E7%AE%AD%E5%A4%B4%E7%9A%84css%E6%96%B9%E6%A1%88"><span class="toc-text">三角箭头的css方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8css%E7%9B%B8%E9%82%BB%E5%85%84%E5%BC%9F%E9%80%89%E6%8B%A9%E5%99%A8%E6%9B%BF%E6%8D%A2js"><span class="toc-text">使用css相邻兄弟选择器替换js</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E7%9A%84%E6%96%B9%E6%A1%88"><span class="toc-text">最终的方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%88%E4%B8%8A%E4%BB%A3%E7%A0%81"><span class="toc-text">先上代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%8F%E8%BF%B0"><span class="toc-text">描述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B7%A6%E6%95%B0%E7%AC%AC%E4%B8%80%E4%B8%AAli"><span class="toc-text">左数第一个li</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4li"><span class="toc-text">中间li</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%B3%E6%95%B0%E7%AC%AC%E4%B8%80%E4%B8%AAli"><span class="toc-text">右数第一个li</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+
+                <!-- Friends Blog -->
+                
+                <div style="margin-top: 20px;">
+                    <h5 class="text-center">FRIENDS</h5>
+                    <ul class="list-inline text-center">
+                        
+                        <li><a target="_blank" rel="noopener" href="https://refined-x.com/">前端路上</a></li>
+                        
+                    </ul>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shui-zhong-yue-ming-de-blog";
+    var disqus_config = function () {
+        this.page.url = "https://www.shuizhongyueming.com/2013/04/16/pure-css-progress-bar/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "104 https://www.shuizhongyueming.com/?p=104"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var d = document;
+        var dsq = d.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.defer = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(dsq);
+    });
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/shuizhongyue91">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/水中月明">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/如风轻吟1991">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/shuizhongyueming">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 水中月明的Blog 2022
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://www.shuizhongyueming.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script>
+$('pre').each(function(i, tag) {
+    $(this).addClass('prettyprint')
+})
+</script>
+<script async src="https://cdn.imagehost.top/wp-content/uploads/2019/02/google-code-prettify/run_prettify.js?skin=desert"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="https://cdn.imagehost.top/ipic/t0yg1.png-q60">
+</body>
+
+</html>
