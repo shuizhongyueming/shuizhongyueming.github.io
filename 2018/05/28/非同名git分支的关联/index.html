@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -251,30 +247,27 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h2 id="重构">重构</h2>
-<p>最新在对之前开发的一个美食类的小程序《今天吃什么星人》做重构。这个是我做的头一款小程序，基于<a target="_blank" rel="noopener" href="https://github.com/maichong/labrador">labrador</a>框架来开发的。小程序开发上架之后，就没再动过。后面大家发现这款小程序慢慢有点人气，打算拿出来再优化优化看看</p>
+                <h2 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h2><p>最新在对之前开发的一个美食类的小程序《今天吃什么星人》做重构。这个是我做的头一款小程序，基于<a target="_blank" rel="noopener" href="https://github.com/maichong/labrador">labrador</a>框架来开发的。小程序开发上架之后，就没再动过。后面大家发现这款小程序慢慢有点人气，打算拿出来再优化优化看看</p>
 <p>大家重新设计了首页和美食页，然后轮到我这边来开发。</p>
-<p>从初次开发到这次打算改版，已经又进行过三个小程序的开发，也算积累了不少经验。labrador,</p>
-<p><a target="_blank" rel="noopener" href="http://mpvue.com/">mpvue</a>,</p>
-<p><a target="_blank" rel="noopener" href="https://tencent.github.io/wepy/">wepy</a></p>
-<p>这三款比较流行的框架都有接触和使用，其中最喜欢的算是mpvue了。</p>
-<p>这次的改版，改动没多大，主要在UI上，所以是没打算做架构上的大改动。可是重构的时候遇到一些编译上的问题解决不了，而labrador已经被开发者放弃，好几个月没更新了。再想想这个项目后续可能还会有不少的改动。最后还是决定使用mpvue来改写一遍。</p>
+<p>从初次开发到这次打算改版，已经又进行过三个小程序的开发，也算积累了不少经验。labrador, </p>
+<p><a target="_blank" rel="noopener" href="http://mpvue.com/">mpvue</a>, </p>
+<p><a target="_blank" rel="noopener" href="https://tencent.github.io/wepy/">wepy</a> </p>
+<p>这三款比较流行的框架都有接触和使用，其中最喜欢的算是mpvue了。 </p>
+<p>这次的改版，改动没多大，主要在UI上，所以是没打算做架构上的大改动。可是重构的时候遇到一些编译上的问题解决不了，而labrador已经被开发者放弃，好几个月没更新了。再想想这个项目后续可能还会有不少的改动。最后还是决定使用mpvue来改写一遍。 </p>
 <p>重构的时候，考虑到需要参照着之前的代码来改，就没用<code>git checkout --orphan</code>这样的方式新建分支，而是单独新建了一个同级文件夹来放置新代码。这样新旧代码可以同时参看，也可以使用微信开发者工具同时预览效果对比</p>
-<h2 id="代码提交">代码提交</h2>
-<p>很快，整个项目重构完成了。这个时候，想往之前的项目里面新建一个<code>new</code>分支，把当前的新版的<code>master</code>分支提交过去。</p>
-<p>一开始执行的<code>git push;git push --tags</code>, 提示<code>No configured push destination</code> 这才想起来，忘记配置项目的远程分支了：<code>git remote add origin git@git.coding.net:xxxxx.git</code></p>
-<p>然后再执行<code>git push</code>，提示被reject了。</p>
-<p>直接git push，默认是推送到origin的master分支，这两个版本的分支进度不一样，所以被拒绝了。</p>
-<p>调整命令，改成<code>git push origin new:master</code>。意思是推送本地的master分支到origin端的new分支</p>
+<h2 id="代码提交"><a href="#代码提交" class="headerlink" title="代码提交"></a>代码提交</h2><p>很快，整个项目重构完成了。这个时候，想往之前的项目里面新建一个<code>new</code>分支，把当前的新版的<code>master</code>分支提交过去。 </p>
+<p>一开始执行的<code>git push;git push --tags</code>, 提示<code>No configured push destination</code> 这才想起来，忘记配置项目的远程分支了：<code>git remote add origin git@git.coding.net:xxxxx.git</code> </p>
+<p>然后再执行<code>git push</code>，提示被reject了。 </p>
+<p>直接git push，默认是推送到origin的master分支，这两个版本的分支进度不一样，所以被拒绝了。 </p>
+<p>调整命令，改成<code>git push origin new:master</code>。意思是推送本地的master分支到origin端的new分支 </p>
 <p>推送成功，到coding的后台一看，也有新分支了。代码算是初步提交成功</p>
-<h2 id="后续优化">后续优化</h2>
-<p>接下来，执行<code>git branch -u origin/new</code></p>
-<p>使得本地的master分支能跟踪origin端的new分支，这样pull的时候，能顺利拉取。</p>
-<p>完成之后，再尝试了一次<code>git push</code>，发现还是reject，原来是我的全局git配置里面配置了git.default 为 current。其作用是设定git push的默认行为是把当前分支推送到origin端同名的分支。所以在当前场景下，就会被reject</p>
-<p>但是我又不想修改全局的配置。好在git是可以按项目来单独配置并覆盖全局配置的</p>
-<p>执行<code>git config push.default upstream</code>，这样就使得git</p>
-<p>push的默认行为是推送到跟踪的远端分支</p>
-<p>再执行<code>git push</code>，提示<code>Everything up-to-date</code>，成功!</p>
+<h2 id="后续优化"><a href="#后续优化" class="headerlink" title="后续优化"></a>后续优化</h2><p>接下来，执行<code>git branch -u origin/new</code> </p>
+<p>使得本地的master分支能跟踪origin端的new分支，这样pull的时候，能顺利拉取。 </p>
+<p>完成之后，再尝试了一次<code>git push</code>，发现还是reject，原来是我的全局git配置里面配置了git.default 为 current。其作用是设定git push的默认行为是把当前分支推送到origin端同名的分支。所以在当前场景下，就会被reject </p>
+<p>但是我又不想修改全局的配置。好在git是可以按项目来单独配置并覆盖全局配置的 </p>
+<p>执行<code>git config push.default upstream</code>，这样就使得git </p>
+<p>push的默认行为是推送到跟踪的远端分支 </p>
+<p>再执行<code>git push</code>，提示<code>Everything up-to-date</code>，成功! </p>
 <p>参考资料：</p>
 <ol>
 <li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/948354/default-behavior-of-git-push-without-a-branch-specified">https://stackoverflow.com/questions/948354/default-behavior-of-git-push-without-a-branch-specified</a></li>
@@ -372,7 +365,7 @@
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2018/05/28/%E9%9D%9E%E5%90%8C%E5%90%8Dgit%E5%88%86%E6%94%AF%E7%9A%84%E5%85%B3%E8%81%94/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd09f00lr0hbm861kc6fc"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdg3009jmsbm1m064la9"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

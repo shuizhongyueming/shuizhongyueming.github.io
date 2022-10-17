@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -240,8 +236,7 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <p>关于localStorage，在简单不过的接口，getItem,setItem,removeItem,clear,key.这些大家都很了解，可是也有一些细节，如果不注意的话也是可能导致一些问题的。</p>
-<h2 id="支持范围">支持范围</h2>
-<p>localStorage的支持范围比想象的要广很多，市面上手机端和PC端的浏览器，除开IE，几乎都支持(指从很低版本就开始支持)，而一向拖后腿的IE，在IE8中也是支持localStorage的。所以，放心使用吧！以下是各浏览器下的支持情况：</p>
+<h2 id="支持范围"><a href="#支持范围" class="headerlink" title="支持范围"></a>支持范围</h2><p>localStorage的支持范围比想象的要广很多，市面上手机端和PC端的浏览器，除开IE，几乎都支持(指从很低版本就开始支持)，而一向拖后腿的IE，在IE8中也是支持localStorage的。所以，放心使用吧！以下是各浏览器下的支持情况：</p>
 <table>
 <thead>
 <tr>
@@ -266,18 +261,14 @@
 </tr>
 </tbody>
 </table>
-<h2 id="来源限制">来源限制</h2>
-<p>localStorage对来源的认定是根据以下规则：协议+域名+端口</p>
-<h3 id="协议">协议</h3>
-<p>http:// 里面的数据和 https:// 里面的是分离的 所以http://www.demo-domain.com/下面localStorage里面的数据，在https://www.demo-domain.com/里面是没法访问到的</p>
-<h3 id="域名">域名</h3>
-<p>域名是必须完全一致的，下属的二级，三级域名都是没法访问根域名下面的数据的。</p>
-<p>所以http://t.www.demo-domain.com/是没法访问到http://www.demo-domain.com/页面里面localStorage的数据</p>
-<h3 id="端口">端口</h3>
-<p>这个比较少见，大部分对外公开的网站，都是默认的80端口。同域名和协议，但是端口不同的页面，也是没法共享localStorage的数据的</p>
+
+<h2 id="来源限制"><a href="#来源限制" class="headerlink" title="来源限制"></a>来源限制</h2><p>localStorage对来源的认定是根据以下规则：协议+域名+端口</p>
+<h3 id="协议"><a href="#协议" class="headerlink" title="协议"></a>协议</h3><p>http:&#x2F;&#x2F; 里面的数据和 https:&#x2F;&#x2F; 里面的是分离的 所以<a target="_blank" rel="noopener" href="http://www.demo-domain.com/%E4%B8%8B%E9%9D%A2localStorage%E9%87%8C%E9%9D%A2%E7%9A%84%E6%95%B0%E6%8D%AE%EF%BC%8C%E5%9C%A8https://www.demo-domain.com/%E9%87%8C%E9%9D%A2%E6%98%AF%E6%B2%A1%E6%B3%95%E8%AE%BF%E9%97%AE%E5%88%B0%E7%9A%84">http://www.demo-domain.com/下面localStorage里面的数据，在https://www.demo-domain.com/里面是没法访问到的</a></p>
+<h3 id="域名"><a href="#域名" class="headerlink" title="域名"></a>域名</h3><p>域名是必须完全一致的，下属的二级，三级域名都是没法访问根域名下面的数据的。 </p>
+<p>所以<a target="_blank" rel="noopener" href="http://t.www.demo-domain.com/%E6%98%AF%E6%B2%A1%E6%B3%95%E8%AE%BF%E9%97%AE%E5%88%B0http://www.demo-domain.com/%E9%A1%B5%E9%9D%A2%E9%87%8C%E9%9D%A2localStorage%E7%9A%84%E6%95%B0%E6%8D%AE">http://t.www.demo-domain.com/是没法访问到http://www.demo-domain.com/页面里面localStorage的数据</a></p>
+<h3 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h3><p>这个比较少见，大部分对外公开的网站，都是默认的80端口。同域名和协议，但是端口不同的页面，也是没法共享localStorage的数据的 </p>
 <p>比如：<a target="_blank" rel="noopener" href="http://www.demo-domain.com:8080/">http://www.demo-domain.com:8080/</a> 页面是没法访问 <a target="_blank" rel="noopener" href="http://www.demo-domain.com/">http://www.demo-domain.com/</a> 页面中的localStorage数据</p>
-<h2 id="浏览器的“模式”">浏览器的“模式”</h2>
-<p>现在很多浏览器都提供了“匿名访问”，“安全模式”，“隐身窗口”等等功能。在这种情况下，浏览器都是会重新建立一个新的localStorage，所以这些模式下的页面是没法访问在正常模式下的页面中的数据。</p>
+<h2 id="浏览器的“模式”"><a href="#浏览器的“模式”" class="headerlink" title="浏览器的“模式”"></a>浏览器的“模式”</h2><p>现在很多浏览器都提供了“匿名访问”，“安全模式”，“隐身窗口”等等功能。在这种情况下，浏览器都是会重新建立一个新的localStorage，所以这些模式下的页面是没法访问在正常模式下的页面中的数据。 </p>
 <p>借鉴的文章地址：</p>
 <p><a target="_blank" rel="noopener" href="http://htmlui.com/blog/2011-08-23-5-obscure-facts-about-html5-localstorage.html" title="http://htmlui.com/blog/2011-08-23-5-obscure-facts-about-html5-localstorage.html">http://htmlui.com/blog/2011-08-23-5-obscure-facts-about-html5-localstorage.html</a></p>
 
@@ -371,7 +362,7 @@
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2013/10/09/some-small-details-about-localstorage/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd08a00520hbmdxhq8py8"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfp0055msbmcj3u3sam"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

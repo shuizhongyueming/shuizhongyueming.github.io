@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -218,9 +214,9 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>今天工作上面需要对一个表单进行验证，需要判断中文。在网上看到了很多的方式</p>
+                <p>今天工作上面需要对一个表单进行验证，需要判断中文。在网上看到了很多的方式 </p>
 <ol>
-<li>GBK (GB2312/GB18030) x00-xff  GBK双字节编码范围 x20-x7f  ASCII xa1-xff  中文 x80-xff  中文</li>
+<li>GBK (GB2312&#x2F;GB18030) x00-xff  GBK双字节编码范围 x20-x7f  ASCII xa1-xff  中文 x80-xff  中文 </li>
 <li>UTF-8 (Unicode) u4e00-u9fa5 (中文) x3130-x318F (韩文 xAC00-xD7A3 (韩文) u0800-u4e00 (日文)</li>
 </ol>
 <p>ps: 韩文是大于[u9fa5]的字符</p>
@@ -229,7 +225,7 @@
 <p>2012年8月15日补充</p>
 <p>JavaScript的字符串是使用Unicode编码的，每个字符占用两个字节。编码的方式是Unicode 16，具体是Little-Endian还是Big-Endian则要看操作系统了。所以在针对JavaScript的字符串使用正则时，针对中文使用u4e00-u9fa5</p>
 <p>参考文章：</p>
-<p><a target="_blank" rel="noopener" href="http://demon.tw/programming/javascript-unicode-utf-8.html">http://demon.tw/programming/javascript-unicode-utf-8.html</a></p>
+<p><a target="_blank" rel="noopener" href="http://demon.tw/programming/javascript-unicode-utf-8.html">http://demon.tw/programming/javascript-unicode-utf-8.html</a> </p>
 <p>关于Unicode 16的Little-Endian和Big-Endian，可以参看维基百科：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/%E5%AD%97%E8%8A%82%E5%BA%8F">https://zh.wikipedia.org/wiki/%E5%AD%97%E8%8A%82%E5%BA%8F</a></p>
 
                 <div class="copyright-notice">
@@ -322,7 +318,7 @@
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2013/03/17/the-reg-parse-for-chinese-in-javascript/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd08z00ib0hbm30iwdnz7"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfr005smsbm7qgs4ja2"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

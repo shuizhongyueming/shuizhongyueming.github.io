@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -244,12 +240,12 @@
 &lt;/Switch&gt;
 </code></pre>
 <p>这个可以实现的时，未匹配的路由展现首页的内容，可是当前的url还是那个未被匹配的路由。这样的显示就会有点怪异。</p>
-<p>针对这个问题，可以使用react-router里面的另外一个组件<code>Redirect</code>。</p>
+<p>针对这个问题，可以使用react-router里面的另外一个组件<code>Redirect</code>。 </p>
 <p>基于Redirect新建如下组件：</p>
 <pre><code>const RouteFallback = (props) =&gt; &#123;
-    console.log('route fallback with location: ', props.location);
+    console.log(&#39;route fallback with location: &#39;, props.location);
     return &lt;Redirect to=&#123; &#123;
-        pathname: '/',
+        pathname: &#39;/&#39;,
         from: props.location
     &#125;&#125; /&gt;
 &#125;
@@ -354,7 +350,7 @@
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2017/12/04/%E5%AE%9E%E7%8E%B0react-router%E4%B8%8B%EF%BC%8C%E9%9D%9E%E6%B3%95%E8%B7%AF%E5%BE%84%E8%AE%BF%E9%97%AE%E8%B7%B3%E8%BD%AC%E9%A6%96%E9%A1%B5/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd09b00kw0hbm9oc9bypl"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfz008mmsbm5tpk576a"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

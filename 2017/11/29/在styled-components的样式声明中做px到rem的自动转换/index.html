@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -224,25 +220,25 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>最近在尝试使用<a target="_blank" rel="noopener" href="https://www.styled-components.com/">styled-components</a>来做React下的样式开发，这样可以利用js语言的灵活来增强css的能力。</p>
-<p>在多屏适配这块，一直是在使用淘宝的<a target="_blank" rel="noopener" href="https://github.com/amfe/lib-flexible/tree/master">lib-flexible</a>。</p>
+                <p>最近在尝试使用<a target="_blank" rel="noopener" href="https://www.styled-components.com/">styled-components</a>来做React下的样式开发，这样可以利用js语言的灵活来增强css的能力。 </p>
+<p>在多屏适配这块，一直是在使用淘宝的<a target="_blank" rel="noopener" href="https://github.com/amfe/lib-flexible/tree/master">lib-flexible</a>。 </p>
 <p>在用styled-components处理px到rem的转换时，有点问题了。styled-components自己本着基础库的原则，是没有附加这些复杂的配置，所以一开始想的是自己写一个函数来做单位换算：</p>
 <pre><code>function r(pxValue) &#123;
     const ratio = 20; // 根据项目配置比例的方式自行设定
     pxValue = parseInt(pxValue);
 
-    return pxValue / ratio + 'rem';
+    return pxValue / ratio + &#39;rem&#39;;
 &#125;
 </code></pre>
 <p>然后在写样式的时候这样写</p>
 <pre><code>// 保留了px的单位而不是传递数字，使得代码具有可读性，方便维护
 let AvatarImage = styled(Image)`
-    width: $&#123;r('132px')&#125;; 
-    height: $&#123;r('132px')&#125;;
+    width: $&#123;r(&#39;132px&#39;)&#125;; 
+    height: $&#123;r(&#39;132px&#39;)&#125;;
 `;
 </code></pre>
-<p>这样满足了基本需求。</p>
-<p>不过作为喜欢偷懒喜欢折腾的程序员，总觉得这样写很啰嗦，所以想着能不能也跟styled-components那样使用<a target="_blank" rel="noopener" href="http://es6.ruanyifeng.com/#docs/string#%E6%A0%87%E7%AD%BE%E6%A8%A1%E6%9D%BF">标签模版</a>的功能</p>
+<p>这样满足了基本需求。 </p>
+<p>不过作为喜欢偷懒喜欢折腾的程序员，总觉得这样写很啰嗦，所以想着能不能也跟styled-components那样使用<a target="_blank" rel="noopener" href="http://es6.ruanyifeng.com/#docs/string#%E6%A0%87%E7%AD%BE%E6%A8%A1%E6%9D%BF">标签模版</a>的功能 </p>
 <p>所以也就有了第二版的function r:</p>
 <pre><code>function r(pxValue) &#123;
     const ratio = 20; // 根据项目配置比例的方式自行设定
@@ -254,7 +250,7 @@ let AvatarImage = styled(Image)`
 
     pxValue = parseInt(pxValue);
 
-    return pxValue / ratio + 'rem';
+    return pxValue / ratio + &#39;rem&#39;;
 &#125;
 </code></pre>
 <p>在样式书写上，就可以这样写了：</p>
@@ -263,10 +259,10 @@ let AvatarImage = styled(Image)`
     height: $&#123;r`132px`&#125;;
 `;
 </code></pre>
-<p>少写了两个括号，看着也清晰多了。</p>
-<p>不过还是不太满意，因为样式里面如果数值一多，写起来还是有点费事。</p>
-<p>既然能够实现单个单位的换算，那用正则表达式匹配所有样式字符串里面的px值，再替换为rem值，再把计算的结果返回给styled-components不就可以了。</p>
-<p>想法是好的，不过在读取解析已有的样式模版字符串，正则匹配，还有如何把结果传递给styled-components这些方面，坑还是很多的，折腾了一个多小时，也总算解决了。</p>
+<p>少写了两个括号，看着也清晰多了。 </p>
+<p>不过还是不太满意，因为样式里面如果数值一多，写起来还是有点费事。 </p>
+<p>既然能够实现单个单位的换算，那用正则表达式匹配所有样式字符串里面的px值，再替换为rem值，再把计算的结果返回给styled-components不就可以了。 </p>
+<p>想法是好的，不过在读取解析已有的样式模版字符串，正则匹配，还有如何把结果传递给styled-components这些方面，坑还是很多的，折腾了一个多小时，也总算解决了。 </p>
 <p>这里面，最核心的解析已有的样式模版字符串，styled-components提供了一个helper: <a target="_blank" rel="noopener" href="https://www.styled-components.com/docs/api#helpers">css</a>，使得工作量大大减少。</p>
 <pre><code>function r(pxValue) &#123;
     const ratio = 20; // 根据项目配置比例的方式自行设定
@@ -278,14 +274,14 @@ let AvatarImage = styled(Image)`
 
     pxValue = parseInt(pxValue);
 
-    return pxValue / ratio + 'rem';
+    return pxValue / ratio + &#39;rem&#39;;
 &#125;
 
 // 把字符串样式里面的px单位换算成rem的
 // 支持多行匹配
 function transformPxToRem(style) &#123;
     // 避免处理了函数等情况
-    if (typeof style !== 'string') &#123;
+    if (typeof style !== &#39;string&#39;) &#123;
         return style;
     &#125;
 
@@ -309,12 +305,12 @@ function t(strings, ...interpolations) &#123;
     height: 132px;
 `);
 </code></pre>
-<p>以函数的形式调用styled-compoent，而不是标签模版的形式，同时解构t函数的返回值，这样的结果和styled-components直接计算标签模版是一样的。</p>
-<p>不过在实现这个功能之后，在写这篇文章的时候，发现lib-flexible不再用rem作为多端适配的方案了，而是改用的<a target="_blank" rel="noopener" href="https://www.w3cplus.com/css/vw-for-layout.html">vm</a></p>
-<p>不过最核心的预处理部分已经实现了，后面的调整还是很容易做的。</p>
-<p>后期的计划：</p>
-<p>现在css helper返回的是一个数组，可以考虑join成字符串，去掉多余的空白符，然后实现css to object和object to css。然后再加上plugin机制，使得整个系统更加灵活多变。</p>
-<p>说着说着，好像实现了一个简版的postCss。</p>
+<p>以函数的形式调用styled-compoent，而不是标签模版的形式，同时解构t函数的返回值，这样的结果和styled-components直接计算标签模版是一样的。 </p>
+<p>不过在实现这个功能之后，在写这篇文章的时候，发现lib-flexible不再用rem作为多端适配的方案了，而是改用的<a target="_blank" rel="noopener" href="https://www.w3cplus.com/css/vw-for-layout.html">vm</a> </p>
+<p>不过最核心的预处理部分已经实现了，后面的调整还是很容易做的。 </p>
+<p>后期的计划： </p>
+<p>现在css helper返回的是一个数组，可以考虑join成字符串，去掉多余的空白符，然后实现css to object和object to css。然后再加上plugin机制，使得整个系统更加灵活多变。 </p>
+<p>说着说着，好像实现了一个简版的postCss。 </p>
 <p>现在styled-components是有增加<a target="_blank" rel="noopener" href="https://www.styled-components.com/docs/tooling#preprocessing">babel plugin</a>的计划来打通postCss和styled-compoent，期待。</p>
 
                 <div class="copyright-notice">
@@ -407,7 +403,7 @@ function t(strings, ...interpolations) &#123;
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2017/11/29/%E5%9C%A8styled-components%E7%9A%84%E6%A0%B7%E5%BC%8F%E5%A3%B0%E6%98%8E%E4%B8%AD%E5%81%9Apx%E5%88%B0rem%E7%9A%84%E8%87%AA%E5%8A%A8%E8%BD%AC%E6%8D%A2/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd09800k70hbmhdwk6l7m"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfx007umsbmhevbe22s"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

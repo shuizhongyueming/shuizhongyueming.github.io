@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -227,28 +223,23 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h2 id="介绍">介绍</h2>
-<p>Array.sort([compareFunction]) 对Array里面的元素进行升序排序</p>
-<h2 id="关于排序的规则">关于排序的规则</h2>
-<h3 id="默认的排序">默认的排序</h3>
-<p>如果compareFunction没有提供的时候，默认把所有Array里面的元素转换为字符串，然后取第一个字符，比较它们的<code>Unicode</code>值，进行正序排序。 这个转为字符串再比较第一个字符的Unicode值，很关键，很多数字的比较，经常就是这样出错的。</p>
+                <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Array.sort([compareFunction]) 对Array里面的元素进行升序排序</p>
+<h2 id="关于排序的规则"><a href="#关于排序的规则" class="headerlink" title="关于排序的规则"></a>关于排序的规则</h2><h3 id="默认的排序"><a href="#默认的排序" class="headerlink" title="默认的排序"></a>默认的排序</h3><p>如果compareFunction没有提供的时候，默认把所有Array里面的元素转换为字符串，然后取第一个字符，比较它们的<code>Unicode</code>值，进行正序排序。 这个转为字符串再比较第一个字符的Unicode值，很关键，很多数字的比较，经常就是这样出错的。</p>
 <pre><code>[1,2,3].sort();  // ==&gt; [1,2,3]  正确
 
 [9, 80].sort();  // ==&gt; [9, 80]  错误
 
 [9, 80].sort();  // ==&gt; [80, 9]  正确
 </code></pre>
-<p>上面例子中，数组[9, 80]进行sort的时候，先转为为字符串 “9”, “80”, 再比较第一个字符， “9&quot;和&quot;8” 根据这个比较结果进行排序，所以最后80会在9前面，而不是按照它们的数值大小进行排序的。</p>
+<p>上面例子中，数组[9, 80]进行sort的时候，先转为为字符串 “9”, “80”, 再比较第一个字符， “9”和”8” 根据这个比较结果进行排序，所以最后80会在9前面，而不是按照它们的数值大小进行排序的。 </p>
 <p>想自行测试的，可以看看这个demo（<a target="_blank" rel="noopener" href="http://www.icondownloader.com/demo/sort-stable.html">http://www.icondownloader.com/demo/sort-stable.html</a>]</p>
-<h3 id="compareFunction的排序">compareFunction的排序</h3>
-<p>进行sort的时候，如果compareFunction提供了，会往compareFunction传两个数组的元素(类似<code>compareFunction(a, b)</code>)</p>
-<p>取compareFunction的返回值，如果小于0，则表明a小于b；大于0，则a大于b</p>
-<p>最后对结果进行升序排序，如果a小于b，则[a, b]; 如果a大于b 则[b, a]</p>
+<h3 id="compareFunction的排序"><a href="#compareFunction的排序" class="headerlink" title="compareFunction的排序"></a>compareFunction的排序</h3><p>进行sort的时候，如果compareFunction提供了，会往compareFunction传两个数组的元素(类似<code>compareFunction(a, b)</code>) </p>
+<p>取compareFunction的返回值，如果小于0，则表明a小于b；大于0，则a大于b </p>
+<p>最后对结果进行升序排序，如果a小于b，则[a, b]; 如果a大于b 则[b, a] </p>
 <p>这里有个技巧，在排序的时候，如果想实现<code>降序</code>排序，可以在compareFuction里面实现类似：<code>return !(a-b);</code></p>
-<h2 id="sort-stable">sort stable</h2>
-<p>关于排序，有个stable的说法，也就是，排序完成之后，对于<code>值相同</code>的元素，在排序结束之后，能否保留其在排序之前的顺序。</p>
-<p><img src="https://cdn.imagehost.top/wp-content/uploads/2015/05/Sorting_stability_playing_cards.png" alt="sort stable"></p>
-<p>具体的概念可以参考维基百科<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Sorting_algorithm#Stability">https://en.wikipedia.org/wiki/Sorting_algorithm#Stability</a></p>
+<h2 id="sort-stable"><a href="#sort-stable" class="headerlink" title="sort stable"></a>sort stable</h2><p>关于排序，有个stable的说法，也就是，排序完成之后，对于<code>值相同</code>的元素，在排序结束之后，能否保留其在排序之前的顺序。 </p>
+<p><img src="https://cdn.imagehost.top/wp-content/uploads/2015/05/Sorting_stability_playing_cards.png" alt="sort stable"> </p>
+<p>具体的概念可以参考维基百科<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Sorting_algorithm#Stability">https://en.wikipedia.org/wiki/Sorting_algorithm#Stability</a> </p>
 <p>目前的主流浏览器对stable的sort的支持情况如下：</p>
 <table>
 <thead>
@@ -296,9 +287,9 @@
 </tr>
 </tbody>
 </table>
-<p>可以参考此网站，检测浏览器的sort情况<a target="_blank" rel="noopener" href="http://ofb.net/~sethml/is-sort-stable.html">http://ofb.net/~sethml/is-sort-stable.html</a></p>
-<h2 id="sort的效率">sort的效率</h2>
-<p>可以尝试着对compare function在执行的时候，进行一个计数。这样可以知道每次sort，总共执行了多少次compare function。 我这边写了个demo，有兴趣的可以在自己本机的各个浏览器上测试看看。<a target="_blank" rel="noopener" href="http://www.icondownloader.com/demo/sort-compare-function-call-times.html">http://www.icondownloader.com/demo/sort-compare-function-call-times.html</a> 这边我贴出我自己Mac OSX Yosemite 10.10.4下的浏览器的运行结果</p>
+
+<p>可以参考此网站，检测浏览器的sort情况<a target="_blank" rel="noopener" href="http://ofb.net/~sethml/is-sort-stable.html">http://ofb.net/~sethml&#x2F;is-sort-stable.html</a></p>
+<h2 id="sort的效率"><a href="#sort的效率" class="headerlink" title="sort的效率"></a>sort的效率</h2><p>可以尝试着对compare function在执行的时候，进行一个计数。这样可以知道每次sort，总共执行了多少次compare function。 我这边写了个demo，有兴趣的可以在自己本机的各个浏览器上测试看看。<a target="_blank" rel="noopener" href="http://www.icondownloader.com/demo/sort-compare-function-call-times.html">http://www.icondownloader.com/demo/sort-compare-function-call-times.html</a> 这边我贴出我自己Mac OSX Yosemite 10.10.4下的浏览器的运行结果</p>
 <pre><code>## chrome 版本 42.0.2311.135 (64-bit)
 Array length is: 5 and sort call compare 7 times;
 Array length is: 10 and sort call compare 23 times;
@@ -343,22 +334,19 @@ Array length is: 10000 and sort call compare 114046 times;
 </code></pre>
 <p>从上面的数据可以看出两个结论：</p>
 <ol>
-<li>
-<p>chrome的执行效率明显高于Safari和Firefox。但是chrome的sort是unstable的，而Safari和Firefox是stable的。是不是可以认为，因为chrome不需要考虑stable，所以提高了执行效率。</p>
+<li><p>chrome的执行效率明显高于Safari和Firefox。但是chrome的sort是unstable的，而Safari和Firefox是stable的。是不是可以认为，因为chrome不需要考虑stable，所以提高了执行效率。</p>
 </li>
-<li>
-<p>可以看出随着数组长度的增加，比较的次数是指数增加的</p>
+<li><p>可以看出随着数组长度的增加，比较的次数是指数增加的</p>
 </li>
 </ol>
-<h2 id="用map来提高提高sort的性能">用map来提高提高sort的性能</h2>
-<p>从上面的结论2可以知道，在数组长度很长的时候，compareFunction的调用次数是很多的，这个时候，提高compareFunction的效率就很有必要性了。 现在咱们构建一个数组</p>
+<h2 id="用map来提高提高sort的性能"><a href="#用map来提高提高sort的性能" class="headerlink" title="用map来提高提高sort的性能"></a>用map来提高提高sort的性能</h2><p>从上面的结论2可以知道，在数组长度很长的时候，compareFunction的调用次数是很多的，这个时候，提高compareFunction的效率就很有必要性了。 现在咱们构建一个数组</p>
 <pre><code>var arr = \[\],
     arrLen = 1000,
     i = 0;
 
 function makeWord()&#123;
     var word = \[\],
-        words = \['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'\],
+        words = \[&#39;A&#39;,&#39;B&#39;,&#39;C&#39;,&#39;D&#39;,&#39;E&#39;,&#39;F&#39;,&#39;G&#39;,&#39;H&#39;,&#39;I&#39;,&#39;J&#39;,&#39;K&#39;,&#39;L&#39;,&#39;M&#39;,&#39;N&#39;,&#39;O&#39;,&#39;P&#39;,&#39;Q&#39;,&#39;R&#39;,&#39;S&#39;,&#39;T&#39;,&#39;U&#39;,&#39;V&#39;,&#39;W&#39;,&#39;X&#39;,&#39;Y&#39;,&#39;Z&#39;,&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;d&#39;,&#39;e&#39;,&#39;f&#39;,&#39;g&#39;,&#39;h&#39;,&#39;i&#39;,&#39;j&#39;,&#39;k&#39;,&#39;l&#39;,&#39;m&#39;,&#39;n&#39;,&#39;o&#39;,&#39;p&#39;,&#39;q&#39;,&#39;r&#39;,&#39;s&#39;,&#39;t&#39;,&#39;u&#39;,&#39;v&#39;,&#39;w&#39;,&#39;x&#39;,&#39;y&#39;,&#39;z&#39;\],
         wordsLength = words.length,
         arrMinLen = 3,
         arrLen = arrMinLen + Math.floor( Math.random()*9 ),
@@ -369,7 +357,7 @@ function makeWord()&#123;
         word.push( words\[Math.floor( Math.random()*wordsLength )\] );
     &#125;
 
-    return word.join('');
+    return word.join(&#39;&#39;);
 &#125;
 
 for (i = 0; i &lt; arrLen; i++) &#123;
@@ -418,12 +406,12 @@ for (i = 0; i &lt; len; i++) &#123;
     result\[i\] = arr\[tmpArr\[i\].index\];
 &#125;
 </code></pre>
-<p>具体的执行效果可以看看jsperf里面的这个地址<a target="_blank" rel="noopener" href="http://jsperf.com/arraysortperform">http://jsperf.com/arraysortperform</a></p>
-<p>参考文章：</p>
-<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort</a></p>
+<p>具体的执行效果可以看看jsperf里面的这个地址<a target="_blank" rel="noopener" href="http://jsperf.com/arraysortperform">http://jsperf.com/arraysortperform</a> </p>
+<p>参考文章： </p>
+<p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects&#x2F;Array&#x2F;sort</a> </p>
 <p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Unicode">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Unicode</a></p>
 <p><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#String_literals">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#String_literals</a></p>
-<p><a target="_blank" rel="noopener" href="http://ofb.net/~sethml/is-sort-stable.html">http://ofb.net/~sethml/is-sort-stable.html</a></p>
+<p><a target="_blank" rel="noopener" href="http://ofb.net/~sethml/is-sort-stable.html">http://ofb.net/~sethml&#x2F;is-sort-stable.html</a></p>
 <p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/3026281/array-sort-sorting-stability-in-different-browsers">http://stackoverflow.com/questions/3026281/array-sort-sorting-stability-in-different-browsers</a></p>
 
                 <div class="copyright-notice">
@@ -516,7 +504,7 @@ for (i = 0; i &lt; len; i++) &#123;
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2015/06/19/intro-to-the-method-sort-of-array-in-javascript/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd081002p0hbm9uue7vy1"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfi002pmsbmgkf62cg8"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

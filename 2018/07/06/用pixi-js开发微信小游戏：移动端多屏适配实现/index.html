@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -236,11 +232,11 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>一直都是做网页开发，对于移动端的多屏适配可以说是比较有经验了，不管是用rem还是vw。不过在写游戏的时候，有点头疼了，完全不知道如何着手。</p>
-<p>游戏里面元素的位置变化比较频繁多变，一开始是想的所有的位移都是基准屏幕(iPhone 6)的尺寸加上屏幕变化的比率。可这样，光想想就很头疼，这种不优雅的解决方式，一定不是最优解。</p>
-<p>在网上搜索一番之后，大概明白大致的实现方案了：<strong>把页面主要元素都放到一个rootStage里面，再等比缩放这个rootStage，因为缩放是自动计算的，其它的所有运动和碰撞都可以基于rootStage的尺寸来进行，不需要考虑多屏适配。</strong></p>
-<p>具体实现如下：</p>
-<p>在pixi.js里面，有一个最基础的由Application实例化过来的stage, 先取名叫做app。</p>
+                <p>一直都是做网页开发，对于移动端的多屏适配可以说是比较有经验了，不管是用rem还是vw。不过在写游戏的时候，有点头疼了，完全不知道如何着手。 </p>
+<p>游戏里面元素的位置变化比较频繁多变，一开始是想的所有的位移都是基准屏幕(iPhone 6)的尺寸加上屏幕变化的比率。可这样，光想想就很头疼，这种不优雅的解决方式，一定不是最优解。 </p>
+<p>在网上搜索一番之后，大概明白大致的实现方案了：<strong>把页面主要元素都放到一个rootStage里面，再等比缩放这个rootStage，因为缩放是自动计算的，其它的所有运动和碰撞都可以基于rootStage的尺寸来进行，不需要考虑多屏适配。</strong> </p>
+<p>具体实现如下： </p>
+<p>在pixi.js里面，有一个最基础的由Application实例化过来的stage, 先取名叫做app。 </p>
 <p>这个app里面可以放置场景内容，背景色或者背景图片什么的。需要保证这个app是完全全屏的：</p>
 <pre><code>app = new Application(&#123;
   width: windowWidth * pixelRatio,
@@ -255,8 +251,8 @@ app.renderer.autoResize = true;
 app.renderer.resize(windowWidth, windowHeight);
 </code></pre>
 <p>新增一个Container，叫做rootStage，这个rootStage的width和height，是设计稿的尺寸，像我们这边都是基于iPhone6，也就是375 x 667。</p>
-<p>基于这个尺寸和app的尺寸，计算出一个rootStage可以以<strong>cover</strong>形式放置的尺寸。(cover尺寸是指的rootStage等比缩放，在不发生裁剪的情况下，在app里面能展现出最大的尺寸）。</p>
-<p>基于cover尺寸和实际尺寸，计算出rootStage的scale，并调整rootStage的x和y，使得可以在app里面居中放置。</p>
+<p>基于这个尺寸和app的尺寸，计算出一个rootStage可以以<strong>cover</strong>形式放置的尺寸。(cover尺寸是指的rootStage等比缩放，在不发生裁剪的情况下，在app里面能展现出最大的尺寸）。 </p>
+<p>基于cover尺寸和实际尺寸，计算出rootStage的scale，并调整rootStage的x和y，使得可以在app里面居中放置。 </p>
 <pre><code>root = new Container();
 root.width = rootScreen.width;
 root.height = rootScreen.height;
@@ -267,8 +263,8 @@ root.x = (windowWidth - realScreen.width) / 2;
 root.y = (windowHeight - realScreen.height) / 2;
 app.stage.addChild(root)
 </code></pre>
-<p>现在rootStage已经配置好，后面所有游戏内的主要交互和运动的元素都可以放到这里面，计算都是基于375 x 667的舞台计算，不需要考虑多屏幕的适配问题。</p>
-<p>这是头一回正式的进行游戏开发，也没什么领路人，暂时只能想到这么多，如果有更好的办法，也欢迎大家告知</p>
+<p>现在rootStage已经配置好，后面所有游戏内的主要交互和运动的元素都可以放到这里面，计算都是基于375 x 667的舞台计算，不需要考虑多屏幕的适配问题。 </p>
+<p>这是头一回正式的进行游戏开发，也没什么领路人，暂时只能想到这么多，如果有更好的办法，也欢迎大家告知 </p>
 <p>参考资料：</p>
 <ol>
 <li><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/38fcbcaf2930">使用 pixi.js 开发微信小游戏</a></li>
@@ -366,7 +362,7 @@ app.stage.addChild(root)
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2018/07/06/%E7%94%A8pixi-js%E5%BC%80%E5%8F%91%E5%BE%AE%E4%BF%A1%E5%B0%8F%E6%B8%B8%E6%88%8F%EF%BC%9A%E7%A7%BB%E5%8A%A8%E7%AB%AF%E5%A4%9A%E5%B1%8F%E9%80%82%E9%85%8D%E5%AE%9E%E7%8E%B0/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd09d00lf0hbm9cpzdl67"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdg20097msbm2zhcfhd0"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

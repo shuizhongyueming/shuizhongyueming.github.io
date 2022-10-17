@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -218,19 +214,9 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>一直以来，但凡涉及到getElementById,getElementsByTagName，总是会习惯性的在前面加上document对象。就像昨天写的一个博客里面，有个关于清空指定id的后代节点中input type=&quot;text&quot;的内容的函数（<a target="_blank" rel="noopener" href="http://www.cnblogs.com/shuizhongyueming/archive/2012/08/09/the-enterkey-is-a-problem-in-traversal-DOM.html" title="JavaScript进行DOM操作时的一点点小经验">传送门</a>）。当我通过document.getElementById()获取指定的ID的对象之后，就开始很傻的一步步的遍历每个节点，看它是不是input type=“text”的；还看改节点有没有子节点，有的话，有几个，然后再考虑是否遍历查找。</p>
+                <p>一直以来，但凡涉及到getElementById,getElementsByTagName，总是会习惯性的在前面加上document对象。就像昨天写的一个博客里面，有个关于清空指定id的后代节点中input type&#x3D;”text”的内容的函数（<a target="_blank" rel="noopener" href="http://www.cnblogs.com/shuizhongyueming/archive/2012/08/09/the-enterkey-is-a-problem-in-traversal-DOM.html" title="JavaScript进行DOM操作时的一点点小经验">传送门</a>）。当我通过document.getElementById()获取指定的ID的对象之后，就开始很傻的一步步的遍历每个节点，看它是不是input type&#x3D;“text”的；还看改节点有没有子节点，有的话，有几个，然后再考虑是否遍历查找。 </p>
 <p>代码如下：</p>
-<p>/**<br>
-* [clearUserInput 根据元素的ID找到其子节点(包括子节点的子节点)<br>
-中的input元素并且type=“text”,将其value设为空]<br>
-* @param  {[type]} id [DOM对象或者字符串表示元素的id值]<br>
-* @return {[type]}    [description]<br>
-*/<br>
-function clearUserInput(id){<br>
-//参数校验<br>
-if(id === undefined){consoloe.log(“参数必须”);return 1;}//判断参数是否存在<br>
-id = ((typeof id) === “object”)?id:document.getElementById(id);//获取对象<br>
-if(id === null){consoloe.log(“未知对象”); return 2;}//typeof null === “object”</p>
+<p> &#x2F;**<br>  * [clearUserInput 根据元素的ID找到其子节点(包括子节点的子节点)<br>中的input元素并且type&#x3D;”text”,将其value设为空]<br>  * @param  {[type]} id [DOM对象或者字符串表示元素的id值]<br>  * @return {[type]}    [description]<br>  *&#x2F;<br> function clearUserInput(id){<br>     &#x2F;&#x2F;参数校验<br>     if(id &#x3D;&#x3D;&#x3D; undefined){consoloe.log(“参数必须”);return 1;}&#x2F;&#x2F;判断参数是否存在<br>     id &#x3D; ((typeof id) &#x3D;&#x3D;&#x3D; “object”)?id:document.getElementById(id);&#x2F;&#x2F;获取对象<br>     if(id &#x3D;&#x3D;&#x3D; null){consoloe.log(“未知对象”); return 2;}&#x2F;&#x2F;typeof null &#x3D;&#x3D;&#x3D; “object”</p>
 <pre><code> var childrens = id.childNodes,len=childrens.length; i=0;
  for(i;i&lt;len;i++)&#123;
      if(childrens\[i\] === undefined)&#123;return;&#125;//到达边界
@@ -243,9 +229,9 @@ if(id === null){consoloe.log(“未知对象”); return 2;}//typeof null === �
      &#125;
  &#125;
 </code></pre>
-<p>}</p>
-<p>最后，功能上面实现了，可是每次点击清除的时候，整个浏览器和卡机了差不多…遍历的计算次数太多了</p>
-<p>后来我偶然一下突然想了，既然document对象有getElementsByTagName()之类的方法，那其他的节点和document对象理论上应该是没差的，那它们是不是也应该有这些方法？</p>
+<p> }</p>
+<p>  最后，功能上面实现了，可是每次点击清除的时候，整个浏览器和卡机了差不多…..遍历的计算次数太多了 </p>
+<p>后来我偶然一下突然想了，既然document对象有getElementsByTagName()之类的方法，那其他的节点和document对象理论上应该是没差的，那它们是不是也应该有这些方法？ </p>
 <p>我就测试了下，果然一个div对象是有getElementsByTagName()的方法，可是没有getElementById()的方法</p>
 <p>元素类型</p>
 <p>节点类型</p>
@@ -259,15 +245,9 @@ if(id === null){consoloe.log(“未知对象”); return 2;}//typeof null === �
 <p>8</p>
 <p>文档</p>
 <p>9</p>
-<p>document.nodeType == 9 一般的HTML标签，如div，p等等，他们的DOM对象的nodeType == 1 就我所知的，nodeType == 1的DOM对象仅有getElementsByTagName()的方法</p>
+<p>document.nodeType &#x3D;&#x3D; 9 一般的HTML标签，如div，p等等，他们的DOM对象的nodeType &#x3D;&#x3D; 1 就我所知的，nodeType &#x3D;&#x3D; 1的DOM对象仅有getElementsByTagName()的方法 </p>
 <p>之后我根据这个修改了一下代码</p>
-<p>/**<br>
-* [clearUserInput 根据元素的ID找到其子节点(包括子节点的子节点)中的input元素并且type=“text”,将其value设为空]<br>
-* @param  {[type]} id [DOM对象或者字符串表示元素的id值]<br>
-* @return {[type]}    [description]<br>
-*/<br>
-function clearUserInput(id){<br>
-//参数校验</p>
+<p> &#x2F;**<br>  * [clearUserInput 根据元素的ID找到其子节点(包括子节点的子节点)中的input元素并且type&#x3D;”text”,将其value设为空]<br>  * @param  {[type]} id [DOM对象或者字符串表示元素的id值]<br>  * @return {[type]}    [description]<br>  *&#x2F;<br> function clearUserInput(id){<br>     &#x2F;&#x2F;参数校验</p>
 <pre><code> //判断参数是否存在
  if(id === undefined)&#123;return 1;&#125;
  //获取对象
@@ -285,7 +265,7 @@ function clearUserInput(id){<br>
      &#125;
  &#125;
 </code></pre>
-<p>}</p>
+<p> }</p>
 <p>效率果然显著提升</p>
 
                 <div class="copyright-notice">
@@ -378,7 +358,7 @@ function clearUserInput(id){<br>
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2013/03/17/getelementbytagname-is-not-only-belong-to-docuemnt/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd07x00220hbm56nx5qjd"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfg0022msbmfy7baa87"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -201,11 +197,9 @@
 
 本系列的文章都是在阅读《编写可维护的JavaScript》——Nicbolas C. Zakas 的基础上做的一些个人总结
 
-for-in 循环
-### 遍历对象
-对对象使用for in循环的时候，一般情况下，都应该使用hasOwnProperty()方法来进行过滤：
+for-in 循环### 遍历对象对对象使用for in循环的时候，一般情况下，都应该使用hasOwnProperty()方法来进行过滤：
 var prop,
- ..
+   ..
             </p>
         </div>
     </a>
@@ -230,9 +224,9 @@ var prop,
             <p>
                 很多时候，我们因为一些原因，要对页面进行刷新，这个时候，可以使用的方法有很多
 location.reload();
-location.href = location.href;
-window.location = location;
-location.replace( location.href..
+location.href &#x3D; location.href;
+window.location &#x3D; location;
+location.replace( loc..
             </p>
         </div>
     </a>
@@ -256,11 +250,8 @@ location.replace( location.href..
         <div class="post-content-preview">
             <p>
                 特别是在IE6下
-字符串的拼接
-不要用var str = “aaa”+“bbb” 会报错 arr.push arr.join 测试也是会报错 推荐 var str = ‘’;str += ‘aaa’; str += ‘bbb’;
-不要注释
-注释会影响解析，可能导致 缺少’}’ 之类的bug
-关于..
+字符串的拼接不要用var str &#x3D; “aaa”+”bbb” 会报错 arr.push arr.join 测试也是会报错 推荐 var str &#x3D; ‘’;str +&#x3D; ‘aaa’; str +&#x3D; ‘bbb’;
+不要注释注释会影响解析，可能..
             </p>
         </div>
     </a>
@@ -307,8 +298,7 @@ location.replace( location.href..
         <div class="post-content-preview">
             <p>
                 关于localStorage，在简单不过的接口，getItem,setItem,removeItem,clear,key.这些大家都很了解，可是也有一些细节，如果不注意的话也是可能导致一些问题的。
-支持范围
-localStorage的支持范围比想象的要广很多，市面上手机端和PC端的浏览器，除开I..
+支持范围localStorage的支持范围比想象的要广很多，市面上手机端和PC端的浏览器，除开IE..
             </p>
         </div>
     </a>
@@ -331,8 +321,7 @@ localStorage的支持范围比想象的要广很多，市面上手机端和PC端
         
         <div class="post-content-preview">
             <p>
-                起因
-今天在公司忙活着一个项目，涉及到表单提交，要求在表单提交之前判断几个input的值是否为空，如果是，则阻止表单提交。
+                起因今天在公司忙活着一个项目，涉及到表单提交，要求在表单提交之前判断几个input的值是否为空，如果是，则阻止表单提交。 
 我的做法是给form添加了一个submit事件绑定，然后判断，如果有input的值为空则return false 阻止提交。判断input值是否为空，这一块走的正常，可是在..
             </p>
         </div>
@@ -357,10 +346,9 @@ localStorage的支持范围比想象的要广很多，市面上手机端和PC端
         <div class="post-content-preview">
             <p>
                 最近在看《JavaScript权威指南(第六版)》，里面有个例子，是说的
-“a” &lt; “b”     // =&gt; true
+“a” &lt; “b”     &#x2F;&#x2F; &#x3D;&gt; true
 然后我就想了，那中文字符可以进行这样的比较吗，然后就在Chrome的控制台里面测试了一下
-“大” &lt; “小”     // =&gt; true
-“小” ..
+“大” &lt; “小”     &#x..
             </p>
         </div>
     </a>
@@ -383,10 +371,10 @@ localStorage的支持范围比想象的要广很多，市面上手机端和PC端
         
         <div class="post-content-preview">
             <p>
-                今天工作上面需要对一个表单进行验证，需要判断中文。在网上看到了很多的方式
+                今天工作上面需要对一个表单进行验证，需要判断中文。在网上看到了很多的方式 
 
-GBK (GB2312/GB18030) x00-xff  GBK双字节编码范围 x20-x7f  ASCII xa1-xff  中文 x80-xff  中文
-UTF-8 (Unicode) u4e00-u9fa5 (中..
+GBK (GB2312&#x2F;GB18030) x00-xff  GBK双字节编码范围 x20-x7f  ASCII xa1-xff  中文 x80-xff  中文 
+UTF-8 (Unicode) u4e00-u..
             </p>
         </div>
     </a>
@@ -409,7 +397,7 @@ UTF-8 (Unicode) u4e00-u9fa5 (中..
         
         <div class="post-content-preview">
             <p>
-                一直以来，但凡涉及到getElementById,getElementsByTagName，总是会习惯性的在前面加上document对象。就像昨天写的一个博客里面，有个关于清空指定id的后代节点中input type=&quot;text&quot;的内容的函数（传送门）。当我通过documen..
+                一直以来，但凡涉及到getElementById,getElementsByTagName，总是会习惯性的在前面加上document对象。就像昨天写的一个博客里面，有个关于清空指定id的后代节点中input type&#x3D;”text”的内容的函数（传送门）。当我通过document.get..
             </p>
         </div>
     </a>

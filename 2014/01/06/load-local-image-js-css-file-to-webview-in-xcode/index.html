@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -200,6 +196,9 @@
                         <a class="tag" href="/tags/#网页"
                            title="网页">网页</a>
                         
+                        <a class="tag" href="/tags/#html"
+                           title="html">html</a>
+                        
                         <a class="tag" href="/tags/#baseURL"
                            title="baseURL">baseURL</a>
                         
@@ -217,9 +216,6 @@
                         
                         <a class="tag" href="/tags/#css"
                            title="css">css</a>
-                        
-                        <a class="tag" href="/tags/#html"
-                           title="html">html</a>
                         
                         <a class="tag" href="/tags/#image"
                            title="image">image</a>
@@ -260,13 +256,14 @@
                 <h2>项目需求</h2>
 最近开发的项目，需要一个webView，同时这个webView会需要引入一些项目中的资源：
 <ul>
- 	<li>一个本地的html文件，作为webView的模板</li>
- 	<li>两张loading图片，在图片未加载的时候进行占位</li>
- 	<li>jquery.js,scrollLoading.js 也是本地的，实现滚动加载图片功能</li>
+     <li>一个本地的html文件，作为webView的模板</li>
+     <li>两张loading图片，在图片未加载的时候进行占位</li>
+     <li>jquery.js,scrollLoading.js 也是本地的，实现滚动加载图片功能</li>
 </ul>
 然后就开始了漫长的Google历程。
 <h2>在webView中引入本地的html文件</h2>
 这里最主要的一个webView的方法是：<code>loadHTMLString:baseURL:</code> 把HTML文件的内容以字符串的形式加载到webView里面，然后解析。
+
 <pre><code>// get the model which is a html file for the webView
 NSString * htmlPath = [[NSBundle mainBundle] pathForResource:@&quot;index&quot; ofType:@&quot;html&quot;];
 NSString * htmlCont = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF8StringEncoding error:nil];
@@ -277,6 +274,7 @@ NSString * htmlCont = [NSString stringWithContentsOfFile:htmlPath encoding:NSUTF
 <p>通过上述方法，很方便的就能把一个HTML文件加载到webView中，很简单吧，接下来，来点进阶功能！</p>
 <h2>在webView中引入本地的image文件</h2>
 这个功能的实现，很大程度上是借鉴了这篇文章：<a target="_blank" rel="noopener" href="http://iphoneincubator.com/blog/windows-views/uiwebview-revisited">UIWebView – Loading External Images and CSS</a>。大家可以去看看这篇文章，或者看我下面的继续描述。
+
 <p>这个功能的实现是承接上面那个方法的进一步扩展，最关键的是那个<code>baseURL</code>。先看实现代码：</p>
 <pre><code>// get the model which is a html file for the webView
 NSString * htmlPath = [[NSBundle mainBundle] pathForResource:@&quot;index&quot; ofType:@&quot;html&quot;];
@@ -296,24 +294,24 @@ NSURL *baseURL = [NSURL fileURLWithPath:path];
 <p>要注意的是：<strong>所有在应用内的资源文件都是在baseURL的根目录也就是此代码中的bundlePath的根目录</strong>，所以图片资源，不管在项目里面放在哪个目录结构下，在HTML内引用的时候，都是直接根目录的。</p>
 <blockquote>
   baseURL到底是什么东西？对此，我也很好奇，所以我NSLog了代码里面的baseURL，然后得到的结果是：file:///Users/(用户名)/Library/Application%20Support/iPhone%20Simulator/7.0.3/Applications/(一些大写字母加连字符加数字的序列号)/(应用名).app/ 。然后我在终端里面找到这个目录，打开一看，发现都是一些HTML，image，txt等静态资源。</blockquote>
+
 <p>至此，在webView中插入本地image资源的功能已经实现了，下面是更有挑战性的功能：添加js文件</p>
 <h2>添加本地js文件到webView中</h2>
 这个实现说起来其实很简单，因为不需要任何代码层面上的修改，只需要按上面添加image的方式，在script的src里面直接写js的文件名即可。
+
 <p>但是如果直接这样写，你就会发现js资源根本没有被加载。到底image和js有什么区别？看上面的图片，可以看到默认在<code>bundlePath</code>里面是没有我引入到工程里面的jquery.js和scrollLoading.js的。那么，这个是不是导致js资源没有被正确加载的原因？</p>
 <p>在这篇文章：<a target="_blank" rel="noopener" href="http://mentormate.com/blog/iphone-uiwebview-class-local-css-javascript-resources/">How to load a local .CSS file &amp; JavaScript resources using iPhone UIWebView Class</a>和这篇文章<a target="_blank" rel="noopener" href="http://keywind.me/blog/2011/04/24/iphoneji-yu-lightboxde-tu-pian-fang-da-te-xiao-he-wang-ye-bu-ju/">iPhone基于lightbox的图片放大特效和网页布局</a>中，都提及到一个</p>
 <blockquote>
     Select .js file and in the "Detail" view unselect the bullseye column indicating it is compiled code
-<p>In the “Groups &amp; files” view expand the “Targets” tree and expand the application then go to “Copy Bundle Resources” and drag the *.js files into it.</blockquote><br>
-方法是有了，可是这种英文的描述，还没有附加图片，实在是让人看不懂，大致知道的就是：<strong>js文件在xcode里面，默认是一种需要被编译的文件，这就导致它不会被放到我们刚刚放到的<code>BundlePath</code>(更专业的名称应该是Bundle Resources)里</strong>。</p>
+
+<p>In the “Groups &amp; files” view expand the “Targets” tree and expand the application then go to “Copy Bundle Resources” and drag the *.js files into it.</blockquote><br>方法是有了，可是这种英文的描述，还没有附加图片，实在是让人看不懂，大致知道的就是：<strong>js文件在xcode里面，默认是一种需要被编译的文件，这就导致它不会被放到我们刚刚放到的<code>BundlePath</code>(更专业的名称应该是Bundle Resources)里</strong>。</p>
 <p>所以要解决的问题是，怎样才能使得js文件不被编译并且放到<code>Bundle Resources</code>中。</p>
 <p>期间为了理解上面那两句英文而Google的经历就不说了，直接说结果吧。</p>
 <p>在xcode里面，每个project都有至少一个<code>Targets</code>(多个的也有，但是我不懂)，在<code>Targets</code>里面(打开Targets的方式是在左侧栏，点击project，在中间的内容区，就会出现project和Targets)，存放了一些资源文件</p>
 <p>在<code>Build Phases</code>下可以看到，跟本次内容关联最大的有两项：<code>Compile Sources</code>和<code>Copy Bundle Resources</code>。</p>
 <p>在没修改的情况下，展开<code>Compile Sources</code>就能看到找了很久的jquery.js和scrollLoading.js</p>
-<p>打开Targets(基于xcode5的界面)<br>
-<img src="https://cdn.imagehost.top/wp-content/uploads/2014/01/QQ20140106-4@2x.png" alt="打开Targets(基于xcode5的界面)"></p>
-<p>展开Compile Sources后能看到两个js文件<br>
-<img src="https://cdn.imagehost.top/wp-content/uploads/2014/01/QQ20140106-3@2x.png" alt="展开Compile Sources后能看到两个js文件"></p>
+<p>打开Targets(基于xcode5的界面)<br><img src="https://cdn.imagehost.top/wp-content/uploads/2014/01/QQ20140106-4@2x.png" alt="打开Targets(基于xcode5的界面)"></p>
+<p>展开Compile Sources后能看到两个js文件<br><img src="https://cdn.imagehost.top/wp-content/uploads/2014/01/QQ20140106-3@2x.png" alt="展开Compile Sources后能看到两个js文件"></p>
 <p>接下来要做的很简单，从<code>Compile Sources</code>中删除两个js文件，再在<code>Copy Bundle Resources中</code>添加这两个文件，一切搞定。</p>
 <p>想来(偷懒，不想Google继续深入了解了)，<code>Compile Sources</code>是放置那些需要被编译的文件，.h,.m和冤枉的.js文件等等，而<code>Copy Bundle Resources</code>里面放的是一些资源文件，在程序在运行时会引入的，同时在项目打包之后也依旧存在的文件。</p>
 <p>其他格式的资源文件，在添加的时候也大致就是这个流程，不重复说了。</p>
@@ -344,7 +342,7 @@ NSURL *baseURL = [NSURL fileURLWithPath:path];
                 <hr class="popular-posts-split">
                 <hr class="popular-posts-split">
                 <h2 class="popular-posts-title">相关推荐</h2>
-                <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2014/05/21/experiences-on-encountered-missing-localized-screenshots-when-upload-app-on-itunes-connect/" title="在提交应用时候遇到missing localized screenshots的经历" rel="bookmark">在提交应用时候遇到missing localized screenshots的经历</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2014/04/25/how-to-clear-mobileprovision-file-in-xcode/" title="如何清除xcode里面的mobileprovision文件" rel="bookmark">如何清除xcode里面的mobileprovision文件</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2013/11/24/flash-on-chrome-under-mac-do-not-work-or-no-sound/" title="mac下chrome浏览器的flash插件失效或者没有声音" rel="bookmark">mac下chrome浏览器的flash插件失效或者没有声音</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2018/06/01/微信网页jssdk分享，图片不显示的问题/" title="微信网页jssdk分享，图片不显示的问题" rel="bookmark">微信网页jssdk分享，图片不显示的问题</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2018/05/24/微信小程序里面scroll-view组件的scroll-into-view属性失效问题/" title="微信小程序里面scroll-view组件的scroll-into-view属性失效问题" rel="bookmark">微信小程序里面scroll-view组件的scroll-into-view属性失效问题</a></h3></div></li></ul>
+                <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2014/05/21/experiences-on-encountered-missing-localized-screenshots-when-upload-app-on-itunes-connect/" title="在提交应用时候遇到missing localized screenshots的经历" rel="bookmark">在提交应用时候遇到missing localized screenshots的经历</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2014/04/25/how-to-clear-mobileprovision-file-in-xcode/" title="如何清除xcode里面的mobileprovision文件" rel="bookmark">如何清除xcode里面的mobileprovision文件</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2013/11/24/flash-on-chrome-under-mac-do-not-work-or-no-sound/" title="mac下chrome浏览器的flash插件失效或者没有声音" rel="bookmark">mac下chrome浏览器的flash插件失效或者没有声音</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2018/06/01/微信网页jssdk分享，图片不显示的问题/" title="微信网页jssdk分享，图片不显示的问题" rel="bookmark">微信网页jssdk分享，图片不显示的问题</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2014/06/05/how-to-set-icon-when-add-web-site-to-home-in-iphone-by-safari/" title="在iPhone的safari中，保存网站到桌面，修改icon的方法" rel="bookmark">在iPhone的safari中，保存网站到桌面，修改icon的方法</a></h3></div></li></ul>
 
                 <hr>
 
@@ -409,7 +407,7 @@ NSURL *baseURL = [NSURL fileURLWithPath:path];
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2014/01/06/load-local-image-js-css-file-to-webview-in-xcode/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd082002z0hbm1etl88j6"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfj0035msbm2tz8ao7k"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

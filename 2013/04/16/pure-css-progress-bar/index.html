@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -221,57 +217,48 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h2 id="需求">需求</h2>
-<p>最近在忙公司的一个移动端充值的前端部分，今天主要是做页面。需要一个指示用户充值流程的流程条(进度条)，大致的效果如下：</p>
+                <h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>最近在忙公司的一个移动端充值的前端部分，今天主要是做页面。需要一个指示用户充值流程的流程条(进度条)，大致的效果如下：</p>
 <p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/progress-bar.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/progress-bar-300x28.png" alt="progress-bar"></a></p>
-<h2 id="思路">思路</h2>
-<p>如果是平时在pc端的开发，那么可能就会将箭头的区域切出五个状态：</p>
+<h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>如果是平时在pc端的开发，那么可能就会将箭头的区域切出五个状态：</p>
 <ol>
-<li>
-<p>箭头部分灰色，背景灰色 <a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-2.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-2.png" alt="arrow-2"></a></p>
+<li><p>箭头部分灰色，背景灰色 <a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-2.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-2.png" alt="arrow-2"></a></p>
 </li>
-<li>
-<p>箭头部分蓝色，背景灰色 <a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-1.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-1.png" alt="arrow-1"></a></p>
+<li><p>箭头部分蓝色，背景灰色 <a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-1.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-1.png" alt="arrow-1"></a></p>
 </li>
-<li>
-<p>箭头部分灰色，背景蓝色 <a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-4.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-4.png" alt="arrow-4"></a></p>
+<li><p>箭头部分灰色，背景蓝色 <a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-4.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-4.png" alt="arrow-4"></a></p>
 </li>
-<li>
-<p>箭头部分蓝色，背景透明 <a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-5.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-5.png" alt="arrow-5"></a></p>
+<li><p>箭头部分蓝色，背景透明 <a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-5.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-5.png" alt="arrow-5"></a></p>
 </li>
-<li>
-<p>箭头部分灰色，背景透明 <a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-3.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-3.png" alt="arrow-3"></a></p>
+<li><p>箭头部分灰色，背景透明 <a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-3.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/arrow-3.png" alt="arrow-3"></a></p>
 <li>
     <span class="cont"></span>
     <span class="arrow-right"></span>
 </li>
+
+
   <li class="on">
     <span class="cont"></span>
     <span class="arrow-right"></span>
 </li>
+
+
   <li class="last">
     <span class="cont"></span>
     <span class="arrow-right"></span>
-</li>
-</li>
+</li></li>
 </ol>
-<p>具体的写法就是：</p>
+<p>具体的写法就是： </p>
 <p>默认状态 li下面的.arrow-right显式为第一种：箭头灰色，背景灰色</p>
 <p>选中状态(.on) li下面的.arrow-right显示为第二种状态 箭头蓝色，背景灰色，同时用js实现它的previousSibling的.arrow-right显示为第三种状态：箭头灰色，背景蓝色</p>
 <p>最后一个箭头 因为背景色的不同，独立出来 默认状态是第四种 选中状态是第五种</p>
-<h2 id="需要修改的地方">需要修改的地方</h2>
-<h3 id="三角箭头的css方案">三角箭头的css方案</h3>
-<p>因为是做移动端开发，所以为这么个功能制作五张图片，哪怕是可以通过css sprite合并，可也是很不划算的。然后我就想起以前看到的一个用css实现三角浮动层尖角的文章，找出来翻了翻，箭头的css化问题就解决了。具体的制作方法我就重复写了，大家可以参看下面的链接：</p>
+<h2 id="需要修改的地方"><a href="#需要修改的地方" class="headerlink" title="需要修改的地方"></a>需要修改的地方</h2><h3 id="三角箭头的css方案"><a href="#三角箭头的css方案" class="headerlink" title="三角箭头的css方案"></a>三角箭头的css方案</h3><p>因为是做移动端开发，所以为这么个功能制作五张图片，哪怕是可以通过css sprite合并，可也是很不划算的。然后我就想起以前看到的一个用css实现三角浮动层尖角的文章，找出来翻了翻，箭头的css化问题就解决了。具体的制作方法我就重复写了，大家可以参看下面的链接：</p>
 <p><a target="_blank" rel="noopener" href="http://www.daqianduan.com/css-poptip/" title="CSS常用浮动层的写法">CSS常用浮动层的写法</a> <a target="_blank" rel="noopener" href="http://www.feelcss.com/three-pure-css-to-achieve-the-triangle-method.html" title="三种纯CSS实现三角形的方法">三种纯CSS实现三角形的方法</a></p>
-<h3 id="使用css相邻兄弟选择器替换js">使用css相邻兄弟选择器替换js</h3>
-<p>之前的思路是通过js来实现基于选中状态下li，修改相邻li的样式，可以实现，但是感觉上很啰嗦，不够优雅。</p>
-<p>这个项目是在移动端使用的，都是高级浏览器。所以很多平时在pc端网页开发时，因为顾及到IE6、7、8的兼容性而不能使用的css选择器，比如子选择器、相邻兄弟选择器都能够放心的使用了。</p>
-<p>在这个项目中使用到的就是相邻兄弟选择器，在选中状态下影响下一个兄弟节点的样式</p>
+<h3 id="使用css相邻兄弟选择器替换js"><a href="#使用css相邻兄弟选择器替换js" class="headerlink" title="使用css相邻兄弟选择器替换js"></a>使用css相邻兄弟选择器替换js</h3><p>之前的思路是通过js来实现基于选中状态下li，修改相邻li的样式，可以实现，但是感觉上很啰嗦，不够优雅。 </p>
+<p>这个项目是在移动端使用的，都是高级浏览器。所以很多平时在pc端网页开发时，因为顾及到IE6、7、8的兼容性而不能使用的css选择器，比如子选择器、相邻兄弟选择器都能够放心的使用了。 </p>
+<p>在这个项目中使用到的就是相邻兄弟选择器，在选中状态下影响下一个兄弟节点的样式 </p>
 <pre><code>.on + li&#123;&#125;
 </code></pre>
-<h2 id="最终的方案">最终的方案</h2>
-<h3 id="先上代码">先上代码</h3>
-<p>HTML：</p>
+<h2 id="最终的方案"><a href="#最终的方案" class="headerlink" title="最终的方案"></a>最终的方案</h2><h3 id="先上代码"><a href="#先上代码" class="headerlink" title="先上代码"></a>先上代码</h3><p>HTML：</p>
 <pre><code>&lt;ul class=&quot;progress&quot;&gt;
 
   &lt;li class=&quot;on&quot;&gt;
@@ -299,7 +286,7 @@
 
 &lt;/ul&gt;
 </code></pre>
-<p>CSS：</p>
+<p>  CSS：</p>
 <pre><code>.progress &#123;
   list-style-type: none;
   margin: 0;
@@ -377,42 +364,37 @@
   border-color: transparent transparent transparent #5fb3dc;
 &#125;
 </code></pre>
-<p></p>
-<h3 id="描述">描述</h3>
-<p>总共三种li：</p>
+<p> </p>
+<h3 id="描述"><a href="#描述" class="headerlink" title="描述"></a>描述</h3><p>总共三种li：</p>
 <ul>
 <li>左数第一个li 没有箭头区域</li>
 <li>右数第一个li 有左边箭头区域和右边箭头区域</li>
 <li>上述两个li中间的li 有左边箭头区域</li>
 </ul>
-<h4 id="左数第一个li">左数第一个li</h4>
-<p>默认状态 文本区域背景色灰色</p>
-<p>如果下一个兄弟节点也是默认状态，则其左边箭头区域-箭头灰色-非箭头灰色<a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/first-normal.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/first-normal.png" alt="first-normal"></a></p>
-<p>如果下一个兄弟节点选中状态，则其左边箭头区域-箭头灰色-非箭头蓝色<a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/first-normal-2.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/first-normal-2.png" alt="first-normal-2"></a></p>
-<p>两种状态下，都能保证左数第一个li和其下一个兄弟节点的左边箭头区域的箭头在视觉上成为一体</p>
-<p>选中状态 文本区域蓝色</p>
+<h4 id="左数第一个li"><a href="#左数第一个li" class="headerlink" title="左数第一个li"></a>左数第一个li</h4><p>默认状态 文本区域背景色灰色</p>
+<p>如果下一个兄弟节点也是默认状态，则其左边箭头区域-箭头灰色-非箭头灰色<a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/first-normal.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/first-normal.png" alt="first-normal"></a> </p>
+<p>如果下一个兄弟节点选中状态，则其左边箭头区域-箭头灰色-非箭头蓝色<a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/first-normal-2.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/first-normal-2.png" alt="first-normal-2"></a> </p>
+<p>两种状态下，都能保证左数第一个li和其下一个兄弟节点的左边箭头区域的箭头在视觉上成为一体 </p>
+<p>选中状态 文本区域蓝色 </p>
 <p>下一个兄弟节点只能是默认状态（在流程条中只有一个会是处在选中状态）<a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/first-on.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/first-on.png" alt="first-on"></a></p>
-<h4 id="中间li">中间li</h4>
-<p>默认状态 内容区域灰色 左边箭头区域-非箭头灰色</p>
-<p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-normal-3.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-normal-3-300x51.png" alt="middle-normal-3"></a></p>
-<p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-normal-4.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-normal-4-300x40.png" alt="middle-normal-4"></a></p>
+<h4 id="中间li"><a href="#中间li" class="headerlink" title="中间li"></a>中间li</h4><p>默认状态 内容区域灰色 左边箭头区域-非箭头灰色</p>
+<p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-normal-3.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-normal-3-300x51.png" alt="middle-normal-3"></a> </p>
+<p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-normal-4.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-normal-4-300x40.png" alt="middle-normal-4"></a> </p>
 <p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-normal-2.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-normal-2-300x36.png" alt="middle-normal-2"></a></p>
 <blockquote>
 <blockquote>
-<p>注意：这种风格的流程条不存在同时两个选中状态的,但是样式上可以做到</p>
+<p>注意：这种风格的流程条不存在同时两个选中状态的,但是样式上可以做到 </p>
 </blockquote>
 </blockquote>
 <p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-normal-1.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-normal-1-300x36.png" alt="middle-normal-1"></a></p>
 <p>选中状态 左边箭头区域 非箭头部分蓝色 内容区域蓝色 下一个兄弟节点的左边箭头区域-箭头部分蓝色</p>
 <p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-on.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/middle-on.png" alt="middle-on"></a></p>
-<h4 id="右数第一个li">右数第一个li</h4>
-<p>默认状态 左边箭头区域-非箭头部分灰色 内容区域灰色 右边箭头区域-箭头部分灰色</p>
-<p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/last-normal-2.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/last-normal-2.png" alt="last-normal-2"></a></p>
-<p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/last-normal-1.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/last-normal-1.png" alt="last-normal-1"></a></p>
-<p>选中状态 左边箭头区域-非箭头部分蓝色 内容区域蓝色 右边箭头区域-箭头部分蓝色</p>
+<h4 id="右数第一个li"><a href="#右数第一个li" class="headerlink" title="右数第一个li"></a>右数第一个li</h4><p>默认状态 左边箭头区域-非箭头部分灰色 内容区域灰色 右边箭头区域-箭头部分灰色 </p>
+<p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/last-normal-2.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/last-normal-2.png" alt="last-normal-2"></a> </p>
+<p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/last-normal-1.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/last-normal-1.png" alt="last-normal-1"></a> </p>
+<p>选中状态 左边箭头区域-非箭头部分蓝色 内容区域蓝色 右边箭头区域-箭头部分蓝色 </p>
 <p><a target="_blank" rel="noopener" href="https://cdn.imagehost.top/wp-content/uploads/2013/04/last-on.png"><img src="https://cdn.imagehost.top/wp-content/uploads/2013/04/last-on.png" alt="last-on"></a></p>
-<h2 id="总结">总结</h2>
-<p>总的来说，对于任何一个li，它们的目的是为了形成一个箭的形状，所以必须保证箭尾、箭身和箭头这三者颜色保持一致。在我这个HTML结构里箭尾就是li自身内部的左侧箭头区域-非箭头部分，箭身就是内容区域，箭头就是下一个兄弟节点的左侧箭头区域的箭头部分或者自身右侧箭头区域的箭头部分，只要能保证三者颜色颜色保持一致，那么一个标准的流程条就出来了。:)</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>总的来说，对于任何一个li，它们的目的是为了形成一个箭的形状，所以必须保证箭尾、箭身和箭头这三者颜色保持一致。在我这个HTML结构里箭尾就是li自身内部的左侧箭头区域-非箭头部分，箭身就是内容区域，箭头就是下一个兄弟节点的左侧箭头区域的箭头部分或者自身右侧箭头区域的箭头部分，只要能保证三者颜色颜色保持一致，那么一个标准的流程条就出来了。:)</p>
 
                 <div class="copyright-notice">
 <div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
@@ -504,7 +486,7 @@
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2013/04/16/pure-css-progress-bar/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd08600420hbm6edwghye"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfm0044msbmc4t145ok"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

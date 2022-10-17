@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -236,8 +232,7 @@
                 <p>今天在做一个发票列表的页面，整个项目是基于<code>TypeScript</code>, <code>React</code>, <code>AntDesign</code>来开发。</p>
 <p>有个功能是这样的：对于其中的每一个发票，在此发票拥有指定状态，同时访问此页面的用户拥有指定权限的时候。改用户可以变更发票的挂账月份。</p>
 <p>这个功能在开发的时候，我就注意到了，在我之前做发票的详情页的时候已经做过了这个功能。</p>
-<h2 id="发票详情页的挂账月份修改功能的实现">发票详情页的挂账月份修改功能的实现</h2>
-<p>首先配置了一个发票状态和修改权限的配置表</p>
+<h2 id="发票详情页的挂账月份修改功能的实现"><a href="#发票详情页的挂账月份修改功能的实现" class="headerlink" title="发票详情页的挂账月份修改功能的实现"></a>发票详情页的挂账月份修改功能的实现</h2><p>首先配置了一个发票状态和修改权限的配置表</p>
 <pre><code>export const InvoiceModifyAuthority = &#123;
   toPayDate: &#123;
     status: [STATUS_1],
@@ -264,35 +259,29 @@
 <li>在render里面确认能够修改的时候，显示一个修改按钮。</li>
 <li>按钮上绑定了click事件。点击之后设置调用showModalDatePicker，使得ModalDatePicker可见。</li>
 <li>在弹窗ModalDatePicker上，用户选择取消，则隐藏弹窗不做任何事情，而如果进行了时间筛选并确定，就会调用handleDateModify方法，把用户选择好的时间传递过去。</li>
-<li>handleDateModify会
-<ol>
+<li>handleDateModify会<ol>
 <li>调用hideModalDatePicker隐藏弹窗</li>
 <li>调用updateInvoice方法使用invoiceId和传递过来的日期来更新发票信息</li>
 <li>updateInvoice处理完毕之后调用message告知用户</li>
 </ol>
 </li>
 </ol>
-<h2 id="现有实现的问题">现有实现的问题</h2>
-<p>现在，发票列表页也需要同样的修改账期的功能。</p>
+<h2 id="现有实现的问题"><a href="#现有实现的问题" class="headerlink" title="现有实现的问题"></a>现有实现的问题</h2><p>现在，发票列表页也需要同样的修改账期的功能。</p>
 <p>直接复制粘贴的方法来迁移这个功能相关代码，是一种实现方案，但很明显不是一个明智的选择。各种依赖的管理，冗余的代码，对功能变化的承受能力还有再遇到类似功能时候的快速实施方面都不理想。</p>
 <p>为什么已经实现过的功能再别处需要使用的时候会这么麻烦。因为最初实现里面包含了太多的细节：权限判断，交互实现，更新的功能实现，操作结果的反馈。</p>
 <p>这么多的细节，那功能的迁移上自然也就无法简化。</p>
-<h2 id="重构">重构</h2>
-<h3 id="封装">封装</h3>
-<p>要方便功能的复用，我们要做的就是封装，让一切我们不需要关注的细节被隐藏起来。</p>
+<h2 id="重构"><a href="#重构" class="headerlink" title="重构"></a>重构</h2><h3 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h3><p>要方便功能的复用，我们要做的就是封装，让一切我们不需要关注的细节被隐藏起来。</p>
 <p>让我们尝试着回到最开始，来重新解刨一下整个需求。 我们最直接的需求是什么：修改账期。</p>
 <p>我们期待的方式应该是，有一个<code>ModifyGzDate</code>的组件，我们提供<code>invoiceStatus</code>, <code>invoiceId</code>, <code>currentInvoiceGzDate</code>和一个可选的<code>onUpdateFinish</code>方法。而这个组件会自行完成权限和状态校验，自行处理用户修改挂账月份的操作并在处理完成之后，在设定了onUpdateFinish时，调用onUpdateFinish并传递最新值。</p>
 <p>这样这个功能的迁移成本就非常的低廉。</p>
 <p>在有现有功能的情况下，封装这个需求还是比较容易实现的</p>
-<h3 id="拆分和组合">拆分和组合</h3>
-<p>上面的ModifyGzDate是能很好的满足修改挂账月份这个需求的，可是如果我现在还需要一个修改发票的付款月份的功能呢。</p>
+<h3 id="拆分和组合"><a href="#拆分和组合" class="headerlink" title="拆分和组合"></a>拆分和组合</h3><p>上面的ModifyGzDate是能很好的满足修改挂账月份这个需求的，可是如果我现在还需要一个修改发票的付款月份的功能呢。</p>
 <p>所以上面的ModifyGzDate需要进行一些拆分，可以拆分成三个部分：权限判断，交互，接口。</p>
 <p>实现一个<code>DateUpdater</code>的组件，接受<code>initDate</code>和<code>handleDateChange</code>两个属性，把弹窗显隐，时间筛选等细节封装进去。</p>
 <p>再基于DateUpdater来具象化一个<code>InvoiceDateUpdater</code>组件，接受<code>initDate</code>, <code>invoiceId</code>, <code>modifyKey</code>和可选的<code>onUpdateFinish</code>。这个组件主要是具像化了DateUpdater的handleDateChange, 根据invoiceId, modifyKey和最新的日期值来调用updateInvoice更新发票信息。并在完成之后看情况回调onUpdateFinish。</p>
 <p>最后就是重构<code>ModifyGzDate</code>，根据传入的invoiceStatus来判断是否有权限修改挂账月份，如果有，则调用InvoiceDateUpdater组件</p>
 <p>再这样的重构完成之后，如果要新增修改付款月份的功能。就类似ModifyGzDate一样，完成权限判断之后，根据情况调用InvoiceDateUpdater。</p>
-<h2 id="总结">总结</h2>
-<p>上述的重构完成之后，对于后续发票这块的功能的复用和扩展来说就是很方便了。里面用到的主要的设计思想就是单一职责的原理。尽可能的去拆分你的逻辑，让每个模块的功能尽可能的单一，这样就可以在需要的时候，轻易的组合和封装这些单一的模块，从而实现一些特定场景下的功能组件。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>上述的重构完成之后，对于后续发票这块的功能的复用和扩展来说就是很方便了。里面用到的主要的设计思想就是单一职责的原理。尽可能的去拆分你的逻辑，让每个模块的功能尽可能的单一，这样就可以在需要的时候，轻易的组合和封装这些单一的模块，从而实现一些特定场景下的功能组件。</p>
 
                 <div class="copyright-notice">
 <div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
@@ -384,7 +373,7 @@
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2019/03/15/%E4%B8%80%E4%B8%AA%E5%8F%91%E7%A5%A8%E6%8C%82%E8%B4%A6%E6%9C%88%E4%BB%BD%E4%BF%AE%E6%94%B9%E5%8A%9F%E8%83%BD%E5%BC%95%E5%8F%91%E7%9A%84%E5%B0%8F%E9%87%8D%E6%9E%84/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd09500ju0hbm0tsa704s"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfv0077msbm9ezkdwin"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

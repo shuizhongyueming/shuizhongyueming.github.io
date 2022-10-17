@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -234,28 +230,28 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <p>最近在看Google的机器学习速成课程<a target="_blank" rel="noopener" href="https://developers.google.cn/machine-learning/crash-course/">MLCC</a></p>
-<p>中午的时候在看关于<code>pandas</code>这个数据分析库的<a target="_blank" rel="noopener" href="https://colab.research.google.com/notebooks/mlcc/intro_to_pandas.ipynb?hl=zh-cn#scrollTo=nqndFVXVlbPN">介绍</a></p>
+<p>中午的时候在看关于<code>pandas</code>这个数据分析库的<a target="_blank" rel="noopener" href="https://colab.research.google.com/notebooks/mlcc/intro_to_pandas.ipynb?hl=zh-cn#scrollTo=nqndFVXVlbPN">介绍</a> </p>
 <p>中间有一个用直方图显示数据集的代码：</p>
 <pre><code>import pandas as pd
 california_housing_dataframe = pd.read_csv(&quot;https://storage.googleapis.com/mledu-datasets/california_housing_train.csv&quot;, sep=&quot;,&quot;)
-california_housing_dataframe.hist('housing_median_age')
+california_housing_dataframe.hist(&#39;housing_median_age&#39;)
 </code></pre>
-<p>在这个介绍里面可以执行代码显示出好看的直方图出来。</p>
-<p>我这边想本地也能执行出这样的效果，就依次安装了<code>pandas</code>和<code>matplotlib</code>，然后执行上述代码</p>
+<p>在这个介绍里面可以执行代码显示出好看的直方图出来。 </p>
+<p>我这边想本地也能执行出这样的效果，就依次安装了<code>pandas</code>和<code>matplotlib</code>，然后执行上述代码 </p>
 <p>结果只返回了一句：</p>
 <blockquote>
-<p>array([[&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1072c14e0&gt;]], dtype=object)</p>
+<p>array([[&lt;matplotlib.axes._subplots.AxesSubplot object at 0x1072c14e0&gt;]], dtype&#x3D;object)</p>
 </blockquote>
-<p>按照matplotlib官网对于macosx下图形不显示的一个修复<a target="_blank" rel="noopener" href="https://matplotlib.org/faq/osx_framework.html">指南</a>折腾了一个下午，还是不显示</p>
-<p>最后偶然在stackoverflow上看到一个<a target="_blank" rel="noopener" href="https://stackoverflow.com/a/16522626/2279763">方案</a></p>
+<p>按照matplotlib官网对于macosx下图形不显示的一个修复<a target="_blank" rel="noopener" href="https://matplotlib.org/faq/osx_framework.html">指南</a>折腾了一个下午，还是不显示 </p>
+<p>最后偶然在stackoverflow上看到一个<a target="_blank" rel="noopener" href="https://stackoverflow.com/a/16522626/2279763">方案</a> </p>
 <p>在代码前方加上<code>matplotlib.pyplot</code>的引用：</p>
 <pre><code>import matplotlib.pyplot as plt
 </code></pre>
 <p>再在执行hist完成之后加上：</p>
 <pre><code>plt.show()
 </code></pre>
-<p>最终执行，就会新出一个图形弹窗显示直方图：</p>
-<p><img src="https://cdn.imagehost.top/ipic/vpcu6.png" alt=""></p>
+<p>最终执行，就会新出一个图形弹窗显示直方图： </p>
+<p><img src="https://cdn.imagehost.top/ipic/vpcu6.png"> </p>
 <p>同时底下也有人对这个情况做出了解释：</p>
 <blockquote>
 <p>Inside a GUI such as an IPython notebook, you may not need to call plt.show() depending on how the GUI is configured. If you run the Python script from the command line, then you would have to call plt.show()</p>
@@ -352,7 +348,7 @@ california_housing_dataframe.hist('housing_median_age')
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2018/06/01/matplotlib%E7%9A%84%E7%BB%98%E5%9B%BE%E5%9C%A8%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%B8%AD%E4%B8%8D%E6%98%BE%E7%A4%BA%E7%9A%84%E9%97%AE%E9%A2%98/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd086003z0hbmfvlobtrn"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfk003kmsbmhvj95900"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

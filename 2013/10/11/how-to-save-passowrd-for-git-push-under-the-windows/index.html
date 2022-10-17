@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -254,42 +250,37 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h2 id="方法一-git-credential-winstore">方法一: git-credential-winstore</h2>
-<p>今天在做一个兼容且可跨越的 localStorage 的实施方案，打算使用 github 进行项目的代码管理和版本控制。工作环境是 Windows，用的 git 工具是 msysgit。</p>
-<p>git clone,git commit,git push。这一套下来工作的很流畅，很正常，可是有一点比较麻烦，就是每次 push 的时候，总是要输入一次在 github 上面的帐号和密码。就想着能不能在本地存储这个帐号和密码，每次 push 的时候就自动提交这个去验证。</p>
-<p>Google 了一下，在一个 github 的帮助教程的<a target="_blank" rel="noopener" href="https://webcache.googleusercontent.com/search?q=cache:7t94PvW7qDkJ:https://help.github.com/articles/set-up-git+&amp;cd=1&amp;hl=zh-CN&amp;ct=clnk&amp;gl=cn&amp;lr=lang_zh-CN%7Clang_en" title="快照">快照</a>上面看到了详细的关于如何在 push 到远程仓库时，不同系统下面如何去保存验证信息。</p>
+                <h2 id="方法一-git-credential-winstore"><a href="#方法一-git-credential-winstore" class="headerlink" title="方法一: git-credential-winstore"></a>方法一: git-credential-winstore</h2><p>今天在做一个兼容且可跨越的 localStorage 的实施方案，打算使用 github 进行项目的代码管理和版本控制。工作环境是 Windows，用的 git 工具是 msysgit。 </p>
+<p>git clone,git commit,git push。这一套下来工作的很流畅，很正常，可是有一点比较麻烦，就是每次 push 的时候，总是要输入一次在 github 上面的帐号和密码。就想着能不能在本地存储这个帐号和密码，每次 push 的时候就自动提交这个去验证。 </p>
+<p>Google 了一下，在一个 github 的帮助教程的<a target="_blank" rel="noopener" href="https://webcache.googleusercontent.com/search?q=cache:7t94PvW7qDkJ:https://help.github.com/articles/set-up-git+&cd=1&hl=zh-CN&ct=clnk&gl=cn&lr=lang_zh-CN%7Clang_en" title="快照">快照</a>上面看到了详细的关于如何在 push 到远程仓库时，不同系统下面如何去保存验证信息。</p>
 <p>其中提到了一个软件：git-credential-winstore，这个是专门在 Windows 下面用来管理 git 的验证信息的。然后在 github 的官方帮助文档：<a target="_blank" rel="noopener" href="https://help.github.com/articles/set-up-git#password-caching" title="https://help.github.com/articles/set-up-git#password-caching"></a>上面，找到了软件的<a target="_blank" rel="noopener" href="http://gitcredentialstore.codeplex.com/" title="官方地址">官方地址</a>(其实上面那个快照对应的就是下面那个地址的，可能是 github 更新了，所以内容有些不同，过段时间，Google 那边更新快照之后应该就相同了)</p>
-<p>可是在安装 git-credential-winstore.exe 的时候出了问题，会提示无法识别 git，软件里面给的解决方式有两种：</p>
+<p> 可是在安装 git-credential-winstore.exe 的时候出了问题，会提示无法识别 git，软件里面给的解决方式有两种：</p>
 <ol>
 <li>在系统的环境变量 PATH 里面加上 git 的安装目录</li>
 <li>通过 cmd 进行安装 安装使用如下命令行</li>
 </ol>
 <p>明确的指定 git 所在位置</p>
 <p>git-credential-winstore.exe -i C:Program Files(x86)Gitcmdgit.exe</p>
-<p>可惜这两种方式我试过了都失败了。最后在<a target="_blank" rel="noopener" href="http://44ux.com/blog/2012/10/13/why-is-git-always-asking-for-my-password/" title="这个文章">这个文章</a>上才找到解决方式:git-credential-winstore.exe 必须放到 git 的安装目录里面，在 bin/文件夹下。 安装这篇文章里面指示的放置文件之后，双击安装，还是报之前的错误。不过幸运的是，通过 cmd 的方式进行安装成功了。</p>
-<p>原因应该是我的环境变量设定有问题吧，不清楚 C:Program Files(x86)Gitcmd 和 C:Program Files(x86)Gitbin 应该使用哪一个，这两个目录下面都是有 git.exe 的。</p>
+<p>可惜这两种方式我试过了都失败了。最后在<a target="_blank" rel="noopener" href="http://44ux.com/blog/2012/10/13/why-is-git-always-asking-for-my-password/" title="这个文章">这个文章</a>上才找到解决方式:git-credential-winstore.exe 必须放到 git 的安装目录里面，在 bin&#x2F;文件夹下。 安装这篇文章里面指示的放置文件之后，双击安装，还是报之前的错误。不过幸运的是，通过 cmd 的方式进行安装成功了。</p>
+<p> 原因应该是我的环境变量设定有问题吧，不清楚 C:Program Files(x86)Gitcmd 和 C:Program Files(x86)Gitbin 应该使用哪一个，这两个目录下面都是有 git.exe 的。 </p>
 <p>安装完成之后，就是如何在 git 里面配置和使用了。 在最开始看的那篇文章里面，说的配置是这样的</p>
-<p>git config --global credential.helper cache</p>
-<p>作用是启用验证信息缓存功能 可是我按上面的配置之后，在 push 的时候，却提示：<em>‘credential-cache’ is not a git command</em></p>
-<p>很明显，配置有问题的，可是 git 实在是新手，只好再次 Google 之，然后在 Stack Overflow 上面看到了这个帖子<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/11693074/git-credential-cache-is-not-a-git-command" title="http://stackoverflow.com/questions/11693074/git-credential-cache-is-not-a-git-command"></a>：</p>
+<p>git config –global credential.helper cache</p>
+<p>作用是启用验证信息缓存功能 可是我按上面的配置之后，在 push 的时候，却提示：_’credential-cache’ is not a git command_</p>
+<p> 很明显，配置有问题的，可是 git 实在是新手，只好再次 Google 之，然后在 Stack Overflow 上面看到了这个帖子<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/11693074/git-credential-cache-is-not-a-git-command" title="http://stackoverflow.com/questions/11693074/git-credential-cache-is-not-a-git-command"></a>： </p>
 <p>说在 Windows 下面，那个配置中的 cache 应该改成 winstore，正确的命令应该是这样的：</p>
-<p>git config --global credential.helper winstore</p>
-<p>按照这个命令重新执行了下，果然可以，在第一次 push 的时候，会有个弹窗，让你输入在 github 上面的帐号和密码，然后再次 push 的时候，就不必再输入帐号和密码了。</p>
+<p>git config –global credential.helper winstore</p>
+<p>按照这个命令重新执行了下，果然可以，在第一次 push 的时候，会有个弹窗，让你输入在 github 上面的帐号和密码，然后再次 push 的时候，就不必再输入帐号和密码了。 </p>
 <p>估计那篇文章里面使用 cache，是指的在 Linux 下的吧，而在 Windows 下面使用 git-credential-winstore 来管理验证信息，所以 credential.helper 就应该是 winstore</p>
-<h2 id="方法二-netrc">方法二: _netrc</h2>
-<p>昨天（20150310），有个同事介绍了一个我认为使用上虽然啰嗦一点但是更便捷的方法，虽然在安全性上，有点无法保障。在这里跟大家介绍一下，也可以看这里<a target="_blank" rel="noopener" href="http://segmentfault.net/blog/sunchengli/1190000000757283">原文地址</a>。</p>
-<p>直接进入正题，步骤如下：</p>
+<h2 id="方法二-netrc"><a href="#方法二-netrc" class="headerlink" title="方法二: _netrc"></a>方法二: _netrc</h2><p>昨天（20150310），有个同事介绍了一个我认为使用上虽然啰嗦一点但是更便捷的方法，虽然在安全性上，有点无法保障。在这里跟大家介绍一下，也可以看这里<a target="_blank" rel="noopener" href="http://segmentfault.net/blog/sunchengli/1190000000757283">原文地址</a>。</p>
+<p> 直接进入正题，步骤如下：</p>
 <p>1. <code>Windows</code>中添加一个<code>用户变量</code>(开始-系统-高级系统设置-环境变量)，名称为：<code>HOME</code>,值为<code>%USERPROFILE%</code>。 <img src="https://cdn.imagehost.top/wp-content/uploads/2013/10/a.jpeg" alt="设置用户变量"></p>
 <p>2. 在“开始-运行”中输入<code>%Home%</code>后确定，在打开的文件夹下新建一个名为<code>_netrc</code>的文件。 <img src="https://cdn.imagehost.top/wp-content/uploads/2013/10/b.jpeg" alt="运行%Home%"> <img src="https://cdn.imagehost.top/wp-content/uploads/2013/10/c.png" alt="新建_netrc文件"></p>
-<p>3. 用记事本打开<code>_netrc</code>文件，输入 Git 服务器名、用户名、密码，并保存，例如：</p>
-<p>machine <a target="_blank" rel="noopener" href="http://git.yourserver.org">git.yourserver.org</a> ---- git服务器名称<br>
-login <a href="mailto:yourlogin@email.com">yourlogin@email.com</a> ---- git用户名<br>
-password yourpassword123 ---- git账号密码</p>
+<p> 3. 用记事本打开<code>_netrc</code>文件，输入 Git 服务器名、用户名、密码，并保存，例如：</p>
+<p>  machine git.yourserver.org —- git服务器名称<br>  login <a href="mailto:&#x79;&#111;&#x75;&#114;&#108;&#111;&#x67;&#105;&#110;&#x40;&#101;&#109;&#x61;&#105;&#x6c;&#x2e;&#99;&#111;&#109;">&#x79;&#111;&#x75;&#114;&#108;&#111;&#x67;&#105;&#110;&#x40;&#101;&#109;&#x61;&#105;&#x6c;&#x2e;&#99;&#111;&#109;</a> —- git用户名<br>  password yourpassword123 —- git账号密码</p>
 <p>不过这样有一个缺点就是你的帐号和密码会以明文的方式存储了</p>
-<h2 id="方法三-Git-Credential-Manager-for-Windows">方法三: Git Credential Manager for Windows</h2>
-<p>这个是今天(20180530)在自己的新 windows 设备上尝试提交代码，一直需要帐号密码，前面两个方法都觉得麻烦，所以重新搜索了新的在 windows 下 git 凭据本地存储的方法。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Microsoft/Git-Credential-Manager-for-Windows">Git Credential Manager for Windows</a>这个管理器在 2.11.0 版本开始就已经在 git 的安装包里面了，不过前提是你安装的时候有勾选(默认没勾选)</p>
-<p><img src="https://cdn.imagehost.top/wp-content/uploads/2013/10/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20180530005649-300x232.png" alt=""></p>
+<h2 id="方法三-Git-Credential-Manager-for-Windows"><a href="#方法三-Git-Credential-Manager-for-Windows" class="headerlink" title="方法三: Git Credential Manager for Windows"></a>方法三: Git Credential Manager for Windows</h2><p>这个是今天(20180530)在自己的新 windows 设备上尝试提交代码，一直需要帐号密码，前面两个方法都觉得麻烦，所以重新搜索了新的在 windows 下 git 凭据本地存储的方法。</p>
+<p> <a target="_blank" rel="noopener" href="https://github.com/Microsoft/Git-Credential-Manager-for-Windows">Git Credential Manager for Windows</a>这个管理器在 2.11.0 版本开始就已经在 git 的安装包里面了，不过前提是你安装的时候有勾选(默认没勾选)</p>
+<p><img src="https://cdn.imagehost.top/wp-content/uploads/2013/10/%E5%BE%AE%E4%BF%A1%E6%88%AA%E5%9B%BE_20180530005649-300x232.png"></p>
 <p>如上图所示，安装的时候，对应勾选即可。</p>
 <p>在安装成功之后，打开 Git Bash，然后输入命令<code>git config --global credential.helper manager</code> 完事！它会自动的在你需要的时候提供相关的凭据来跟远端服务器做校验</p>
 <p>我认为第三个方法是相对而言最方便和安全的方案，推荐大家使用</p>
@@ -385,7 +376,7 @@ password yourpassword123 ---- git账号密码</p>
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2013/10/11/how-to-save-passowrd-for-git-push-under-the-windows/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd080002a0hbmfhxjc54u"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfh002hmsbmbuzv1dci"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -216,21 +212,19 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <p>最近在看《JavaScript权威指南(第六版)》，里面有个例子，是说的</p>
-<p>“a” &lt; “b”     // =&gt; true</p>
+<p>“a” &lt; “b”     &#x2F;&#x2F; &#x3D;&gt; true</p>
 <p>然后我就想了，那中文字符可以进行这样的比较吗，然后就在Chrome的控制台里面测试了一下</p>
-<p>“大” &lt; “小”     // =&gt; true<br>
-“小” &lt; “大”     // =&gt; false</p>
+<p>“大” &lt; “小”     &#x2F;&#x2F; &#x3D;&gt; true<br>“小” &lt; “大”     &#x2F;&#x2F; &#x3D;&gt; false</p>
 <p>那它们是如何比较的？ 书里面有这样一句话：</p>
 <blockquote>
 <p>Unicode允许使用多种方法对同一个字符进行编码。比如，字符“é”可以使用Unicode字符u00E9表示，也可以使用普通的ASCII字符e跟随一个语调符u0301。在文本编辑器中，这两种编码的显示结果一模一样，但它们的二进制编码表示是不一样的，在计算机里也不相等。Unicode标准为所有字符定义了一个首选的编码格式，并给出了一个标准化的处理方式将文本转换为一种适合比较的标准格式，JavaScript会认为它正在解析的程序代码已经是这种标准格式，不会再对其标识符、字符串或正则表达式作标准化处理。</p>
 </blockquote>
-<p>对这句话不是很理解，看的很晕。是说的在JavaScript解析之前，已经有程序把它的所有代码转变成了另一种格式的编码吗，而且还不是二进制的</p>
-<p>后来偶然看到有encodeURICompent()这样个函数，一般是用来处理URI里面的数据，把一些特殊字符和中文等等进行十六进制编码，以便在不同平台上面数据都能很好使用</p>
+<p>对这句话不是很理解，看的很晕。是说的在JavaScript解析之前，已经有程序把它的所有代码转变成了另一种格式的编码吗，而且还不是二进制的 </p>
+<p>后来偶然看到有encodeURICompent()这样个函数，一般是用来处理URI里面的数据，把一些特殊字符和中文等等进行十六进制编码，以便在不同平台上面数据都能很好使用 </p>
 <p>然后我就试了下</p>
-<p>encodeURIComponent(“大”);        // =&gt;%E5%A4%A7<br>
-encodeURIComponent(“小”);        // =&gt;%E5%B0%8F</p>
-<p>很明显，转化成十六进制之后，&quot;小&quot;的值是大于&quot;大&quot;的</p>
-<p>我想，是不是在JavaScript解析之前，浏览器就根据Unicode标准用类似的方式把代码进行了编码，所以等到JavaScript解析的时候，比较&quot;大&quot;&gt;“小”，实际上是类似于在比较&quot;%E5%A4%A7&quot;&gt;“%E5%B0%8F”</p>
+<p>encodeURIComponent(“大”);        &#x2F;&#x2F; &#x3D;&gt;%E5%A4%A7<br>encodeURIComponent(“小”);        &#x2F;&#x2F; &#x3D;&gt;%E5%B0%8F</p>
+<p>很明显，转化成十六进制之后，”小”的值是大于”大”的 </p>
+<p>我想，是不是在JavaScript解析之前，浏览器就根据Unicode标准用类似的方式把代码进行了编码，所以等到JavaScript解析的时候，比较”大”&gt;”小”，实际上是类似于在比较”%E5%A4%A7”&gt;”%E5%B0%8F” </p>
 <p>不知道有人能跟我讲解一下这方面的知识不，感激不尽</p>
 
                 <div class="copyright-notice">
@@ -323,7 +317,7 @@ encodeURIComponent(“小”);        // =&gt;%E5%B0%8F</p>
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2013/03/17/how-the-code-be-encode-before-the-javascript-parse-it/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd07z00280hbmfpo77z08"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfg002amsbm1et496r8"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

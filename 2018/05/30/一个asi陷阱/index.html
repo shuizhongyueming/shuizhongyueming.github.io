@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -245,14 +241,13 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h2 id="使用es6学canvas游戏开发">使用es6学canvas游戏开发</h2>
-<p>最新在看一本书《HTML5+JavaScript动画基础》, 基于这本书来学习Canvas游戏制作的。书很不错，介绍了很多游戏的基础概念。不过书里面的代码都是基于ES5编写的，现在是2018年了，所以打算边看边改写书里面的代码为ES6版本的。</p>
+                <h2 id="使用es6学canvas游戏开发"><a href="#使用es6学canvas游戏开发" class="headerlink" title="使用es6学canvas游戏开发"></a>使用es6学canvas游戏开发</h2><p>最新在看一本书《HTML5+JavaScript动画基础》, 基于这本书来学习Canvas游戏制作的。书很不错，介绍了很多游戏的基础概念。不过书里面的代码都是基于ES5编写的，现在是2018年了，所以打算边看边改写书里面的代码为ES6版本的。 </p>
 <p>前天晚上在做<code>ch03/01-rotate-to-mouse.html</code>这个例子，当时的代码大致如下：</p>
-<pre><code>    import &#123;captureMouse&#125; from '../include/utils.js'
-    import Arrow from './classes/arrow.js'
+<pre><code>    import &#123;captureMouse&#125; from &#39;../include/utils.js&#39;
+    import Arrow from &#39;./classes/arrow.js&#39;
     window.onload = () =&gt; &#123;
-      const canvas = document.getElementById('canvas')
-      const context = canvas.getContext('2d')
+      const canvas = document.getElementById(&#39;canvas&#39;)
+      const context = canvas.getContext(&#39;2d&#39;)
       let mouse = captureMouse(canvas)
       let arrow = new Arrow()
 
@@ -266,19 +261,18 @@
       &#125;())
     &#125;;
 </code></pre>
-<h2 id="诡异的问题">诡异的问题</h2>
-<p>上面看着是没有任何问题的，可是执行的时候，一直报错：</p>
+<h2 id="诡异的问题"><a href="#诡异的问题" class="headerlink" title="诡异的问题"></a>诡异的问题</h2><p>上面看着是没有任何问题的，可是执行的时候，一直报错：</p>
 <blockquote>
 <p>Uncaught ReferenceError: arrow is not defined</p>
 </blockquote>
-<p>当时就有点懵，没道理啊，drawFrame跟arrow的定义在同一个作用域，那drawFrame函数内部作用域里面肯定是能访问到外部作用域的arrow的，怎么可能没定义</p>
-<p>当时有点怀疑自己是不是ES6没学好，这种IIFE的自执行函数难到在严格模式下有什么特殊的行为？</p>
+<p>当时就有点懵，没道理啊，drawFrame跟arrow的定义在同一个作用域，那drawFrame函数内部作用域里面肯定是能访问到外部作用域的arrow的，怎么可能没定义 </p>
+<p>当时有点怀疑自己是不是ES6没学好，这种IIFE的自执行函数难到在严格模式下有什么特殊的行为？ </p>
 <p>为了证实自己的猜测，改写了一下代码：</p>
-<pre><code>    import &#123;captureMouse&#125; from '../include/utils.js'
-    import Arrow from './classes/arrow.js'
+<pre><code>    import &#123;captureMouse&#125; from &#39;../include/utils.js&#39;
+    import Arrow from &#39;./classes/arrow.js&#39;
     window.onload = () =&gt; &#123;
-      const canvas = document.getElementById('canvas')
-      const context = canvas.getContext('2d')
+      const canvas = document.getElementById(&#39;canvas&#39;)
+      const context = canvas.getContext(&#39;2d&#39;)
       let mouse = captureMouse(canvas)
       let arrow = new Arrow()
 
@@ -293,8 +287,8 @@
       drawFrame()
     &#125;;
 </code></pre>
-<p>果然，代码顺利运行了。</p>
-<p>然后我就以es6, scope, function, iife, variable, let这几个关键词苦苦Google，查了一堆网页，可就是没找到到底这个作用域是怎么影响的</p>
+<p>果然，代码顺利运行了。 </p>
+<p>然后我就以es6, scope, function, iife, variable, let这几个关键词苦苦Google，查了一堆网页，可就是没找到到底这个作用域是怎么影响的 </p>
 <p>为看缩小问题范围，于是重新写了一个demo:</p>
 <pre><code>    function foo()&#123;
       var a = 1
@@ -307,10 +301,9 @@
     console.log(foo());
 </code></pre>
 <p>结果a能被正确log出来，b还是<code>not defined</code> 这下更证明自己的猜想了。可是其中的原理还是不懂</p>
-<h2 id="stackoverflow上的大牛">stackoverflow上的大牛</h2>
-<p>无奈之下，在stackoverflow上面发起了一个问题：<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/50570309/a-variable-defined-with-let-is-not-defined-in-a-same-scope-iife">a variable defined with let is not defined in a same scope IIFE</a></p>
-<p>很快就有一个热心的大牛<a target="_blank" rel="noopener" href="https://stackoverflow.com/users/157247/t-j-crowder">T.J. Crowder</a>帮忙给编辑了一下问题，修复了一些语法上的错误，优化了代码展示。</p>
-<p>然后这位大牛又顺便给解答了问题</p>
+<h2 id="stackoverflow上的大牛"><a href="#stackoverflow上的大牛" class="headerlink" title="stackoverflow上的大牛"></a>stackoverflow上的大牛</h2><p>无奈之下，在stackoverflow上面发起了一个问题：<a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/50570309/a-variable-defined-with-let-is-not-defined-in-a-same-scope-iife">a variable defined with let is not defined in a same scope IIFE</a> </p>
+<p>很快就有一个热心的大牛<a target="_blank" rel="noopener" href="https://stackoverflow.com/users/157247/t-j-crowder">T.J. Crowder</a>帮忙给编辑了一下问题，修复了一些语法上的错误，优化了代码展示。 </p>
+<p>然后这位大牛又顺便给解答了问题 </p>
 <p>答案跟我一直猜想的方向完全不一致，一切都是ASI(Automatic Semicolon Insertion)导致的。demo里面的代码，在实际被解析的时候，是大致长这样的：</p>
 <pre><code>    function foo()&#123;
       var a = 1
@@ -322,14 +315,12 @@
     console.log(foo());
 </code></pre>
 <p>b的赋值和iife的执行连接到一起了，这也就是为什么函数体内b是not defined的原因，iife的执行先于b的定义</p>
-<h2 id="深入理解">深入理解</h2>
-<p>关于ASI，是有了解的，不过这个知识点在我脑海里是跟代码压缩绑定在一起。初学js的时候，遇到过分号缺失导致的压缩代码执行错误，所以在js文件里面写代码的时候，会很注意这方面。</p>
-<p>而这次是在html的script标签里面写代码，想着这些代码又不会被手动压缩，自然就没想过ASI的问题。</p>
-<p>可实际上，任何js代码在解析执行的时候，都会在必要的时候经由解析器执行ASI来&quot;补全分号&quot;</p>
-<h2 id="总结">总结</h2>
-<p>只要你在写js, 不管是在js文件里面还是script标签里面，分号都是一个值得严肃对待的事情</p>
-<p>关于ASI的详细描述，可以参看以下两篇文章（我也是刚刚看的）:</p>
-<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000002955405">备胎的自我修养——趣谈 JavaScript 中的 ASI (Automatic Semicolon Insertion)</a></p>
+<h2 id="深入理解"><a href="#深入理解" class="headerlink" title="深入理解"></a>深入理解</h2><p>关于ASI，是有了解的，不过这个知识点在我脑海里是跟代码压缩绑定在一起。初学js的时候，遇到过分号缺失导致的压缩代码执行错误，所以在js文件里面写代码的时候，会很注意这方面。 </p>
+<p>而这次是在html的script标签里面写代码，想着这些代码又不会被手动压缩，自然就没想过ASI的问题。 </p>
+<p>可实际上，任何js代码在解析执行的时候，都会在必要的时候经由解析器执行ASI来”补全分号”</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>只要你在写js, 不管是在js文件里面还是script标签里面，分号都是一个值得严肃对待的事情 </p>
+<p>关于ASI的详细描述，可以参看以下两篇文章（我也是刚刚看的）: </p>
+<p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000002955405">备胎的自我修养——趣谈 JavaScript 中的 ASI (Automatic Semicolon Insertion)</a> </p>
 <p><a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000004548664">JavaScript ASI 机制详解</a></p>
 
                 <div class="copyright-notice">
@@ -422,7 +413,7 @@
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2018/05/30/%E4%B8%80%E4%B8%AAasi%E9%99%B7%E9%98%B1/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd09400jo0hbm5b3k6hyv"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfv0075msbm6f7u2vpd"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -225,35 +221,28 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <p>这份读书笔记是看了阮一峰的《<a target="_blank" rel="noopener" href="http://www.ruanyifeng.com/blog/2015/03/react.html">React 入门实例教程</a>》之后撰写的，留作记录。需要看原文的可以点击前面的书名访问对应链接。</p>
-<h2 id="这篇文章的目的">这篇文章的目的</h2>
-<ul>
+<h2 id="这篇文章的目的"><a href="#这篇文章的目的" class="headerlink" title="这篇文章的目的"></a>这篇文章的目的</h2><ul>
 <li>介绍react</li>
 <li>如何下载react</li>
 <li>如何安装react</li>
 <li>如何使用react</li>
 </ul>
-<h2 id="文章的组织架构">文章的组织架构</h2>
-<p>从易到难的开始介绍。</p>
-<h3 id="react在页面的部署">react在页面的部署</h3>
-<ol>
+<h2 id="文章的组织架构"><a href="#文章的组织架构" class="headerlink" title="文章的组织架构"></a>文章的组织架构</h2><p>从易到难的开始介绍。</p>
+<h3 id="react在页面的部署"><a href="#react在页面的部署" class="headerlink" title="react在页面的部署"></a>react在页面的部署</h3><ol>
 <li>依赖的两个js</li>
 <li>jsx 模板的标签规范</li>
 <li>模板的编译应该放到服务器完成</li>
 </ol>
-<h3 id="模板语法">模板语法</h3>
-<ol>
+<h3 id="模板语法"><a href="#模板语法" class="headerlink" title="模板语法"></a>模板语法</h3><ol>
 <li>React.render() 转换模板为HTML并插入节点</li>
-<li>允许HTML和javascript混写。
-<ol>
+<li>允许HTML和javascript混写。<ol>
 <li>规则是：遇到HTML标签（以&lt;开头）则视为HTML，遇到代码块（以{）开头，视为javascript</li>
 <li>HTML内容可以直接写在javascript变量里</li>
 <li>javascript变量可以直接插入到模板。如果变量是数组，则自动展开这个数组的所有成员</li>
 </ol>
 </li>
 </ol>
-<h3 id="组件">组件</h3>
-<h4 id="组件介绍">组件介绍</h4>
-<ol>
+<h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><h4 id="组件介绍"><a href="#组件介绍" class="headerlink" title="组件介绍"></a>组件介绍</h4><ol>
 <li>用React.createClass来生成组件类</li>
 <li>createClass的传参对象，需要一个render方法，用来描述组件的渲染</li>
 <li>组件类以大驼峰方式书写</li>
@@ -265,18 +254,15 @@
 <li>this.props的属性和组件HTML属性一一对应，但是this.props.children例外，它表示组件的子节点</li>
 <li>在用双标签的方式调用组件的时候，标签之间的HTML即为组件的子节点，完全和原生HTML一致</li>
 </ol>
-<h4 id="组件的特性">组件的特性</h4>
-<ol>
-<li>findDOMNode
-<ol>
+<h4 id="组件的特性"><a href="#组件的特性" class="headerlink" title="组件的特性"></a>组件的特性</h4><ol>
+<li>findDOMNode<ol>
 <li>virtual DOM</li>
 <li>virtual DOM 通过 DOM diff算法映射到真实DOM上</li>
 <li>findDOMNode用于获取跟组件关联的真实DOM的节点</li>
 <li>只有在virtual DOM插入文档之后才能起作用</li>
 </ol>
 </li>
-<li>this.state
-<ol>
+<li>this.state<ol>
 <li>类似状态机的概念</li>
 <li>getInitialState方法来设定初始状态</li>
 <li>通过用户互动修改状态，一般是对应的event function来setState</li>
@@ -287,18 +273,15 @@
 </ol>
 </li>
 </ol>
-<h4 id="组件生命周期">组件生命周期</h4>
-<ol>
-<li>三个状态
-<ol>
+<h4 id="组件生命周期"><a href="#组件生命周期" class="headerlink" title="组件生命周期"></a>组件生命周期</h4><ol>
+<li>三个状态<ol>
 <li>Mounting 已插入真实DOM</li>
 <li>Updating 正在被重新渲染</li>
 <li>Unmounting 已移出真实DOM</li>
 </ol>
 </li>
 <li>每个状态提供两个回调函数，will在进入状态之前调用，did在进入状态之后调用</li>
-<li>三个状态共计五种回调函数，书写方式component是前缀，will/did是行为，Mount/Update/Unmount是状态
-<ol>
+<li>三个状态共计五种回调函数，书写方式component是前缀，will&#x2F;did是行为，Mount&#x2F;Update&#x2F;Unmount是状态<ol>
 <li>componentWillMount()</li>
 <li>componentDidMount()</li>
 <li>componentWillUpdate(object nextProps, object nextState)</li>
@@ -306,21 +289,18 @@
 <li>componentWillUnmount()   为什么没有componentDidUnmount() ?</li>
 </ol>
 </li>
-<li>特殊状态的回调
-<ol>
+<li>特殊状态的回调<ol>
 <li>componentWillReceiveProps(object nextProps) 已加载组件收到新参数</li>
 <li>shouldComponentUpdate(object nextProps, object nextState) 组件判断是否重新渲染时调用 不明白</li>
 </ol>
 </li>
 </ol>
-<h3 id="结合其他库或者框架使用">结合其他库或者框架使用</h3>
-<ol>
+<h3 id="结合其他库或者框架使用"><a href="#结合其他库或者框架使用" class="headerlink" title="结合其他库或者框架使用"></a>结合其他库或者框架使用</h3><ol>
 <li>react没有任何依赖</li>
 <li>react只关注表现层</li>
 <li>如果希望对组件的DOM进行操作，尽量在componentDidMount中进行，保证真实DOM已经存在</li>
 </ol>
-<h2 id="主旨">主旨</h2>
-<p>React是一个关注表现层，以组件来构建内容，以状态机来完成交互的UI改变的，可以在浏览器端和服务器端同时运行的前端框架。</p>
+<h2 id="主旨"><a href="#主旨" class="headerlink" title="主旨"></a>主旨</h2><p>React是一个关注表现层，以组件来构建内容，以状态机来完成交互的UI改变的，可以在浏览器端和服务器端同时运行的前端框架。</p>
 
                 <div class="copyright-notice">
 <div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
@@ -412,7 +392,7 @@
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2015/06/05/react%E5%85%A5%E9%97%A8%E5%AE%9E%E4%BE%8B%E6%95%99%E7%A8%8B%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd088004g0hbm0023hubx"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfn004jmsbmgzypc5ra"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -194,9 +190,6 @@
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#localStorage"
-                           title="localStorage">localStorage</a>
-                        
                         <a class="tag" href="/tags/#Document Limit"
                            title="Document Limit">Document Limit</a>
                         
@@ -205,6 +198,9 @@
                         
                         <a class="tag" href="/tags/#flashCookie"
                            title="flashCookie">flashCookie</a>
+                        
+                        <a class="tag" href="/tags/#localStorage"
+                           title="localStorage">localStorage</a>
                         
                         <a class="tag" href="/tags/#userData"
                            title="userData">userData</a>
@@ -227,10 +223,9 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>最近在做兼容多浏览器能跨域访问的本地存储实施方案。一开始打算是用localStorage加userData的方式实现，支持localStorage的使用localStorage，不支持的(IE6,7)使用userData；本域下的直接调用，需要跨域的则加载对应域名下的crossdomain.html作为iframe，然后调用iframe里面的contentWindow来实现。</p>
+                <p>最近在做兼容多浏览器能跨域访问的本地存储实施方案。一开始打算是用localStorage加userData的方式实现，支持localStorage的使用localStorage，不支持的(IE6,7)使用userData；本域下的直接调用，需要跨域的则加载对应域名下的crossdomain.html作为iframe，然后调用iframe里面的contentWindow来实现。 </p>
 <p>想法是很好的，也实现了很多功能，但是在实现之后的的评审和准备应用阶段，却发现了很多开发的时候没有注意到的问题。</p>
-<h2 id="Document-Limit-Doamin-Limit">Document Limit/Doamin Limit</h2>
-<p>可以看看下面的表格，在每个域名下的存储限制是1M，这个很多很令人满意，但是还有个Document Limit在当初使用的时候却忽略了。userData的实现方式就是加载一个放在用户文件夹下的XML文件，在里面进行I/O操作。这每一个XML文件就是一个Document。而操作的时候，必须明确指定加载哪个XML文件。这就和localStorage的实现方式上有了很大的差别，不利于统一。而且单个Document的大小是128KB，这个很难保证后期能否足够使用。</p>
+<h2 id="Document-Limit-x2F-Doamin-Limit"><a href="#Document-Limit-x2F-Doamin-Limit" class="headerlink" title="Document Limit&#x2F;Doamin Limit"></a>Document Limit&#x2F;Doamin Limit</h2><p>可以看看下面的表格，在每个域名下的存储限制是1M，这个很多很令人满意，但是还有个Document Limit在当初使用的时候却忽略了。userData的实现方式就是加载一个放在用户文件夹下的XML文件，在里面进行I&#x2F;O操作。这每一个XML文件就是一个Document。而操作的时候，必须明确指定加载哪个XML文件。这就和localStorage的实现方式上有了很大的差别，不利于统一。而且单个Document的大小是128KB，这个很难保证后期能否足够使用。</p>
 <table>
 <thead>
 <tr>
@@ -267,16 +262,14 @@
 </tr>
 </tbody>
 </table>
-<h2 id="same-directory-and-same-protocol-to-access">same directory and same protocol to access</h2>
-<p>上面那个文档的大小限制和明确指定加载的XML文件，还不算很坑的。因为短时间内128KB肯定是足够使用的，也可以在实施方案里面统一各域名下加载同一个名称的XML就好了。也就是看起来像每个域名下只有128kb的存储空间。</p>
-<p>可是下面这个限制就很坑了。</p>
-<p>对于userData，数据之间的划分，不单单是域名，协议和端口号这三个。它还更加严格的以文档路径进行划分，对的，不用怀疑:<a target="_blank" rel="noopener" href="http://www.demo-domain.com/test/index.html%E6%98%AF%E6%B2%A1%E6%B3%95%E8%AE%BF%E9%97%AE%E5%88%B0http://www.demo-domain.com/test2/index.html%E9%87%8C%E9%9D%A2%E7%9A%84userData%E6%95%B0%E6%8D%AE%E7%9A%84%E3%80%82">http://www.demo-domain.com/test/index.html是没法访问到http://www.demo-domain.com/test2/index.html里面的userData数据的。</a></p>
-<p>当然，这个也能绕开，就是在使用userData的情况下，所有的I/O操作都是走的iframe，哪怕是同域名下。然后给所有域名的根域放置一个crossdomain.html。但是这样的实施方法确实有点复杂</p>
-<h2 id="can’t-be-set-get-in-head">can’t be set/get in <head></h2>
-<p>接着还有问题，这个问题是个使用上的限制。在公司的应用环境里，有些情况，需要在加载head的时候，就能读到本地的数据，然后做一个是否跳转的判断。而userData绑定的标签是不包括head里面能放置的那些。所以很不幸userData无法实现</p>
+
+<h2 id="same-directory-and-same-protocol-to-access"><a href="#same-directory-and-same-protocol-to-access" class="headerlink" title="same directory and same protocol to access"></a>same directory and same protocol to access</h2><p>上面那个文档的大小限制和明确指定加载的XML文件，还不算很坑的。因为短时间内128KB肯定是足够使用的，也可以在实施方案里面统一各域名下加载同一个名称的XML就好了。也就是看起来像每个域名下只有128kb的存储空间。 </p>
+<p>可是下面这个限制就很坑了。 </p>
+<p>对于userData，数据之间的划分，不单单是域名，协议和端口号这三个。它还更加严格的以文档路径进行划分，对的，不用怀疑:<a target="_blank" rel="noopener" href="http://www.demo-domain.com/test/index.html%E6%98%AF%E6%B2%A1%E6%B3%95%E8%AE%BF%E9%97%AE%E5%88%B0http://www.demo-domain.com/test2/index.html%E9%87%8C%E9%9D%A2%E7%9A%84userData%E6%95%B0%E6%8D%AE%E7%9A%84%E3%80%82">http://www.demo-domain.com/test/index.html是没法访问到http://www.demo-domain.com/test2/index.html里面的userData数据的。</a> </p>
+<p>当然，这个也能绕开，就是在使用userData的情况下，所有的I&#x2F;O操作都是走的iframe，哪怕是同域名下。然后给所有域名的根域放置一个crossdomain.html。但是这样的实施方法确实有点复杂</p>
+<h2 id="can’t-be-set-x2F-get-in"><a href="#can’t-be-set-x2F-get-in" class="headerlink" title="can’t be set&#x2F;get in "></a>can’t be set&#x2F;get in <head></h2><p>接着还有问题，这个问题是个使用上的限制。在公司的应用环境里，有些情况，需要在加载head的时候，就能读到本地的数据，然后做一个是否跳转的判断。而userData绑定的标签是不包括head里面能放置的那些。所以很不幸userData无法实现 </p>
 <p>而且通常的使用方式是认为的createElement，然后在这个element上面进行文档的绑定。而在IE6下，向文档插入dom是必须要在document.ready之后进行的，不然会容易出现问题</p>
-<h2 id="can’t-clear-and-Traversal-like-function-key-in-localStorage">can’t clear and Traversal(like function key in localStorage)</h2>
-<p>最后一个问题，在实施方案里面，公开的接口都是仿造localStorage的接口。其中有两个接口clear(清空所有内容)和key(遍历本地数据)。这两个接口使用的场景不多，但是肯定是会有使用到的时候，可惜userData的官方文档里面并没有看到有这相关的接口提供。</p>
+<h2 id="can’t-clear-and-Traversal-like-function-key-in-localStorage"><a href="#can’t-clear-and-Traversal-like-function-key-in-localStorage" class="headerlink" title="can’t clear and Traversal(like function key in localStorage)"></a>can’t clear and Traversal(like function key in localStorage)</h2><p>最后一个问题，在实施方案里面，公开的接口都是仿造localStorage的接口。其中有两个接口clear(清空所有内容)和key(遍历本地数据)。这两个接口使用的场景不多，但是肯定是会有使用到的时候，可惜userData的官方文档里面并没有看到有这相关的接口提供。 </p>
 <p>所以，因为上面这么多的问题，只好忍痛放弃已经开发完的localStorage和userData的组合，改为使用localStorage和FlashCookie的组合。</p>
 
                 <div class="copyright-notice">
@@ -328,7 +321,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Document-Limit-Doamin-Limit"><span class="toc-text">Document Limit&#x2F;Doamin Limit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#same-directory-and-same-protocol-to-access"><span class="toc-text">same directory and same protocol to access</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#can%E2%80%99t-be-set-get-in-head"><span class="toc-text">can’t be set&#x2F;get in </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#can%E2%80%99t-clear-and-Traversal-like-function-key-in-localStorage"><span class="toc-text">can’t clear and Traversal(like function key in localStorage)</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Document-Limit-x2F-Doamin-Limit"><span class="toc-text">Document Limit&#x2F;Doamin Limit</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#same-directory-and-same-protocol-to-access"><span class="toc-text">same directory and same protocol to access</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#can%E2%80%99t-be-set-x2F-get-in"><span class="toc-text">can’t be set&#x2F;get in </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#can%E2%80%99t-clear-and-Traversal-like-function-key-in-localStorage"><span class="toc-text">can’t clear and Traversal(like function key in localStorage)</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -369,7 +362,7 @@
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2013/10/19/some-problem-in-use-userdata/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd08y00hz0hbm6nxt42to"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfp0051msbmdxfk0tdm"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -231,20 +227,13 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <p>针对文章<a target="_blank" rel="noopener" href="https://overreacted.io/how-does-react-tell-a-class-from-a-function/">https://overreacted.io/how-does-react-tell-a-class-from-a-function/</a>的摘录</p>
-<h2 id="为什么要区分">为什么要区分</h2>
-<p>从两种形式的Component中获取node节点的方式不一样，Function的直接调用，Class的需要实例化，再调用实例的render方法。</p>
-<p>没法针对Function和Class都调用<code>new</code>操作符 + <code>arrow function</code>调用new会报错 + Function的返回值可能不是对象，调用new得到的不会是预期的对象 + Function里面的this不是实例对象，使得最终调用new之后的结果不是预期的</p>
+<h2 id="为什么要区分"><a href="#为什么要区分" class="headerlink" title="为什么要区分"></a>为什么要区分</h2><p>从两种形式的Component中获取node节点的方式不一样，Function的直接调用，Class的需要实例化，再调用实例的render方法。 </p>
+<p>没法针对Function和Class都调用<code>new</code>操作符 + <code>arrow function</code>调用new会报错 + Function的返回值可能不是对象，调用new得到的不会是预期的对象 + Function里面的this不是实例对象，使得最终调用new之后的结果不是预期的 </p>
 <p>没法针对Function和Class都直接调用 + 一些babel的处理中，针对构造函数的直接调用会报错 + 未被babel转译过的ES6形式的Class，直接调用会报错</p>
-<h2 id="如何区分">如何区分</h2>
-<h3 id="instanceof-运算符">instanceof 运算符</h3>
-<h4 id="关于prototype和-proto-的区别">关于<code>prototype</code>和<code>__proto__</code>的区别</h4>
-<p>__proto__ 是指向一个对象的原型 prototype是Function和Class才具有的，是指向的经由Function和Class实例化出来的实例的 __proto__</p>
-<h4 id="为什么不能使用-instanceof来区分">为什么不能使用 instanceof来区分</h4>
-<p>因为早起的一些实践，导致同一个页面可能同时出现多个React, 这个时候instanceof可能就会出错</p>
-<h3 id="static属性">static属性</h3>
-<p>一些Class的实现中，并不会拷贝Class的static属性给实例</p>
-<h3 id="prototype属性">prototype属性</h3>
-<pre><code>class Component&#123;&#125;
+<h2 id="如何区分"><a href="#如何区分" class="headerlink" title="如何区分"></a>如何区分</h2><h3 id="instanceof-运算符"><a href="#instanceof-运算符" class="headerlink" title="instanceof 运算符"></a>instanceof 运算符</h3><h4 id="关于prototype和-proto-的区别"><a href="#关于prototype和-proto-的区别" class="headerlink" title="关于prototype和__proto__的区别"></a>关于<code>prototype</code>和<code>__proto__</code>的区别</h4><p>__proto__ 是指向一个对象的原型 prototype是Function和Class才具有的，是指向的经由Function和Class实例化出来的实例的 __proto__</p>
+<h4 id="为什么不能使用-instanceof来区分"><a href="#为什么不能使用-instanceof来区分" class="headerlink" title="为什么不能使用 instanceof来区分"></a>为什么不能使用 instanceof来区分</h4><p>因为早起的一些实践，导致同一个页面可能同时出现多个React, 这个时候instanceof可能就会出错</p>
+<h3 id="static属性"><a href="#static属性" class="headerlink" title="static属性"></a>static属性</h3><p>一些Class的实现中，并不会拷贝Class的static属性给实例</p>
+<h3 id="prototype属性"><a href="#prototype属性" class="headerlink" title="prototype属性"></a>prototype属性</h3><pre><code>class Component&#123;&#125;
 Component.prototype.isReactComponent = &#123;&#125;
 
 class Greeting extends Component &#123;&#125;
@@ -342,7 +331,7 @@ console.log(Greeting.prototype.isReactComponent); // yes
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2018/12/05/how-does-react-tell-a-class-from-a-function/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd080002f0hbm5ihq0z44"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfg0028msbm0o65fkwo"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

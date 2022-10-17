@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -198,10 +194,8 @@
         <div class="post-content-preview">
             <p>
                 In MainViewController.m, add:
-- (void)viewDidLayoutSubviews{
-if ([self respondsToSelector:@selector(topLayoutGuide)]) // iOS 7 or above
-{
-CGFloat to..
+- (void)viewDidLayoutSubviews{ 
+  if ([self respondsToSelector:@selector(topLayoutGuide)]) &#x2F;&#x2F; iOS 7 or above..
             </p>
         </div>
     </a>
@@ -224,9 +218,9 @@ CGFloat to..
         
         <div class="post-content-preview">
             <p>
-                最近因为工作的原因，开始使用mac进行开发。这也算是往头一回进行ios环境下的开发，也是着实遇到了一些问题。就比如chrome下的flash。
+                最近因为工作的原因，开始使用mac进行开发。这也算是往头一回进行ios环境下的开发，也是着实遇到了一些问题。就比如chrome下的flash。 
 chrome是自带flash的，按理说，不管那个平台下面（手机端不算），flash都是能正常工作的，可是偏偏就是有问题了。 在网上看了下解决方式：
-第一..
+第..
             </p>
         </div>
     </a>
@@ -249,8 +243,8 @@ chrome是自带flash的，按理说，不管那个平台下面（手机端不算
         
         <div class="post-content-preview">
             <p>
-                这两天，在虚拟机上开始用ubuntu进行开发，代码就保存到github上面(非核心代码)。之前在Windows上面用了很长一段时间的git，很方便。按理说在Linux上面应该更加方便，可是有个问题干扰了我很久，严重干扰了项目的开发。
-在ubuntu上面，git clone，git pull这两个..
+                这两天，在虚拟机上开始用ubuntu进行开发，代码就保存到github上面(非核心代码)。之前在Windows上面用了很长一段时间的git，很方便。按理说在Linux上面应该更加方便，可是有个问题干扰了我很久，严重干扰了项目的开发。 
+在ubuntu上面，git clone，git pull这两..
             </p>
         </div>
     </a>
@@ -273,10 +267,10 @@ chrome是自带flash的，按理说，不管那个平台下面（手机端不算
         
         <div class="post-content-preview">
             <p>
-                用windwos8/8.1的时候，虽然电脑很新，性能也还算不错，可总是经常用了一会儿之后，突然的变得非常的卡。
-今天又是这样，才开机一个小时左右的，又卡的不得了。决心解决这个问题。
-打开任务管理器，看了下进程。发现有个叫windows
-modules installer的占用了很多的磁盘读写和C..
+                用windwos8&#x2F;8.1的时候，虽然电脑很新，性能也还算不错，可总是经常用了一会儿之后，突然的变得非常的卡。 
+今天又是这样，才开机一个小时左右的，又卡的不得了。决心解决这个问题。 
+打开任务管理器，看了下进程。发现有个叫windows 
+modules installer的占用了很..
             </p>
         </div>
     </a>
@@ -374,8 +368,7 @@ modules installer的占用了很多的磁盘读写和C..
         
         <div class="post-content-preview">
             <p>
-                方法一: git-credential-winstore
-今天在做一个兼容且可跨越的 localStorage 的实施方案，打算使用 github 进行项目的代码管理和版本控制。工作环境是 Windows，用的 git 工具是 msysgit。
+                方法一: git-credential-winstore今天在做一个兼容且可跨越的 localStorage 的实施方案，打算使用 github 进行项目的代码管理和版本控制。工作环境是 Windows，用的 git 工具是 msysgit。 
 git clone,git commit,git ..
             </p>
         </div>
@@ -400,8 +393,7 @@ git clone,git commit,git ..
         <div class="post-content-preview">
             <p>
                 关于localStorage，在简单不过的接口，getItem,setItem,removeItem,clear,key.这些大家都很了解，可是也有一些细节，如果不注意的话也是可能导致一些问题的。
-支持范围
-localStorage的支持范围比想象的要广很多，市面上手机端和PC端的浏览器，除开I..
+支持范围localStorage的支持范围比想象的要广很多，市面上手机端和PC端的浏览器，除开IE..
             </p>
         </div>
     </a>
@@ -424,12 +416,10 @@ localStorage的支持范围比想象的要广很多，市面上手机端和PC端
         
         <div class="post-content-preview">
             <p>
-                起因
-在知乎上面看一个关于回调函数的帖子时,有人为了表明观点,就给了个链接说是代码示例.好奇心强大,就点了过去.然后就发现了这么个前端代码在线调试和分享的利器–jsFiddle
-jsFiddle的主要用途
-个人觉得jsFiddle有下面几个使用场景：
+                起因在知乎上面看一个关于回调函数的帖子时,有人为了表明观点,就给了个链接说是代码示例.好奇心强大,就点了过去.然后就发现了这么个前端代码在线调试和分享的利器–jsFiddle
+jsFiddle的主要用途个人觉得jsFiddle有下面几个使用场景：
 
-写代码的时候，（可能是html,可能是cs..
+写代码的时候，（可能是html,可能是css,..
             </p>
         </div>
     </a>

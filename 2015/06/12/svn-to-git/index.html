@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -222,24 +218,22 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <p>本文参考自：<a target="_blank" rel="noopener" href="http://git-scm.com/book/zh/v1/Git-%E4%B8%8E%E5%85%B6%E4%BB%96%E7%B3%BB%E7%BB%9F-%E8%BF%81%E7%A7%BB%E5%88%B0-Git">Git-与其他系统-迁移到-Git</a>。 也建议阅读之前，先看看此文章，本文主要是对里面方法的一个补充和完善，保证可用性</p>
-<h2 id="第一步：把之前svn的提交者的信息映射为git需要的">第一步：把之前svn的提交者的信息映射为git需要的</h2>
-<p>在本地的svn目录，执行以下命令: <code>svn log ^/ --xml | grep &quot;^&lt;author&quot; | sort -u | perl -pe 's/&lt;author&gt;(.*?)&lt;/author&gt;/$1 = /' &gt; users.txt</code></p>
+<h2 id="第一步：把之前svn的提交者的信息映射为git需要的"><a href="#第一步：把之前svn的提交者的信息映射为git需要的" class="headerlink" title="第一步：把之前svn的提交者的信息映射为git需要的"></a>第一步：把之前svn的提交者的信息映射为git需要的</h2><p>在本地的svn目录，执行以下命令: <code>svn log ^/ --xml | grep &quot;^&lt;author&quot; | sort -u | perl -pe &#39;s/&lt;author&gt;(.*?)&lt;/author&gt;/$1 = /&#39; &gt; users.txt</code></p>
 <blockquote>
 <p>显而易见，本方法要求主机上安装了grep，sort 和 perl.</p>
 </blockquote>
-<p>最后得到的user.txt 是所有svn提交者的name。</p>
+<p>最后得到的user.txt 是所有svn提交者的name。 </p>
 <p>在对应等号后面加上Email地址。 最终变成如下格式：</p>
-<p>schacon = Scott Chacon selse = Someo Nelse</p>
-<h2 id="第二步：使用svn2git来导入">第二步：使用svn2git来导入</h2>
-<p>在一个新的打算放置导入成功之后的git项目的目录（最后也把上一步的users.txt拷贝到此处）</p>
-<p>前往github上面的<a target="_blank" rel="noopener" href="https://github.com/nirvdrum/svn2git">svn2git</a>项目，安装这个工具，能比较方便的进行svn到git的导入</p>
-<p>执行以下命令： <code>svn2git svn://yourdomain.com/your/path/to/svn --username xingwang --verbose --authors users.txt</code></p>
-<p>解释一下几个参数:</p>
-<p><code>--username</code>:</p>
-<p>设定你在svn里面的用户名，方便执行svn co</p>
-<p><code>--verbose</code>:</p>
-<p>debug模式，能够了解svn2git执行了哪些命令，方便出问题的时候调试</p>
-<p><code>--authors</code>:</p>
+<p>schacon &#x3D; Scott Chacon selse &#x3D; Someo Nelse </p>
+<h2 id="第二步：使用svn2git来导入"><a href="#第二步：使用svn2git来导入" class="headerlink" title="第二步：使用svn2git来导入"></a>第二步：使用svn2git来导入</h2><p>在一个新的打算放置导入成功之后的git项目的目录（最后也把上一步的users.txt拷贝到此处） </p>
+<p>前往github上面的<a target="_blank" rel="noopener" href="https://github.com/nirvdrum/svn2git">svn2git</a>项目，安装这个工具，能比较方便的进行svn到git的导入 </p>
+<p>执行以下命令： <code>svn2git svn://yourdomain.com/your/path/to/svn --username xingwang --verbose --authors users.txt</code> </p>
+<p>解释一下几个参数: </p>
+<p><code>--username</code>: </p>
+<p>设定你在svn里面的用户名，方便执行svn co </p>
+<p><code>--verbose</code>: </p>
+<p>debug模式，能够了解svn2git执行了哪些命令，方便出问题的时候调试 </p>
+<p><code>--authors</code>: </p>
 <p>用来设定提交者信息，也就是上一步生成的users.txt</p>
 
                 <div class="copyright-notice">
@@ -332,7 +326,7 @@
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2015/06/12/svn-to-git/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd08y00i10hbm4ysy1wzd"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfq005dmsbm4p8mdlen"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

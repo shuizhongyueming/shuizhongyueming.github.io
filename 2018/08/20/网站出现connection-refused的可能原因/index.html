@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -230,17 +226,17 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>今天，网站又一次挂了，基于docker跑的mysql不知道怎么就坏了。</p>
-<p>登上服务器，试过stop, kill, restart，都不能正确重启这个docker container。无奈之下，只要拿出重启大法</p>
-<p>执行reboot命令，ssh断开，间隔三分钟之后重新登录。</p>
+                <p>今天，网站又一次挂了，基于docker跑的mysql不知道怎么就坏了。 </p>
+<p>登上服务器，试过stop, kill, restart，都不能正确重启这个docker container。无奈之下，只要拿出重启大法 </p>
+<p>执行reboot命令，ssh断开，间隔三分钟之后重新登录。 </p>
 <p>使用docker stats {container_name} 查看，发现mysql正常了，再启动wordpress对应的container(不知道这个container为啥没能自动启动)。</p>
 <p>重新刷新网页，提示：Connection refused 以为还是mysql或者wordpress这两个container的问题，再次执行了针对这两个container的restart命令，没效果。</p>
-<p>使用tail -f来监听nginx的access.log，然后本地和服务器上反复执行ping和curl，发现也没有新的日志。</p>
+<p> 使用tail -f来监听nginx的access.log，然后本地和服务器上反复执行ping和curl，发现也没有新的日志。</p>
 <p>怀疑是防火墙的问题，去vulter的后台确认了平台这边的防火墙没问题，再使用firewall-cmd查看服务器自身配置的防火墙，发现也没问题，80端口都是开着的。</p>
-<p>继续找资料，无意间看到这篇文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhu_xun/article/details/41115389">linux中某个端口拒绝远程主机连接原因及解决方法</a></p>
-<p>就在服务器上执行了<code>netstat -anp | grep 80</code>，发现本地并没有任何程序监听此端口。</p>
-<p>瞬间灵光一闪，明白了，重启之后Nginx还没启动。</p>
-<p>手动执行nginx，然后刷新网页，一切正常了…</p>
+<p>继续找资料，无意间看到这篇文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/zhu_xun/article/details/41115389">linux中某个端口拒绝远程主机连接原因及解决方法</a> </p>
+<p>就在服务器上执行了<code>netstat -anp | grep 80</code>，发现本地并没有任何程序监听此端口。 </p>
+<p>瞬间灵光一闪，明白了，重启之后Nginx还没启动。 </p>
+<p>手动执行nginx，然后刷新网页，一切正常了….</p>
 
                 <div class="copyright-notice">
 <div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
@@ -332,7 +328,7 @@
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2018/08/20/%E7%BD%91%E7%AB%99%E5%87%BA%E7%8E%B0connection-refused%E7%9A%84%E5%8F%AF%E8%83%BD%E5%8E%9F%E5%9B%A0/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd09e00ll0hbmhx6dbtad"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdg2009dmsbmbz1jhn09"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

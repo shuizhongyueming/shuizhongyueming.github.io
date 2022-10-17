@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -227,32 +223,30 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>这两天公司开始发力做APP的推广，很多活动页和移动端站点需要加上打开APP的功能，如果没安装则提示用户下载。</p>
-<p>首先，<strong>基于隐私保护的目的，浏览器是不会提供接口给网页去获取系统上安装了的APP的列表</strong>。</p>
+                <p>这两天公司开始发力做APP的推广，很多活动页和移动端站点需要加上打开APP的功能，如果没安装则提示用户下载。 </p>
+<p>首先，<strong>基于隐私保护的目的，浏览器是不会提供接口给网页去获取系统上安装了的APP的列表</strong>。 </p>
 <p>然后很多产品经理会在提需求的时候有一种洁癖，希望网页上那个可供用户点击的按钮，在已安装APP的时候是<strong>打开</strong>，在未安装的时候是<strong>下载</strong>。</p>
-<h2 id="早先的做法">早先的做法</h2>
-<p>为了应对这样的需求，前端程序员们想出了一个很棒的方法，利用<strong>浏览器进驻后台之后会暂停js的执行</strong>这一特性，顺利实现了对是否安装了自己公司APP的探测。具体实现如下：</p>
-<p>在用户点击或者进入页面时候，记录一个当前时间<strong>time1</strong>，然后设置一个300ms的timeout，在timeout的回调里面记录时间<strong>time2</strong>，接着就用location.href直接指向对应APP已经配置的url scheme。</p>
-<p>如果<strong>time1</strong>与<strong>time2</strong>的时间差超过400ms(考虑到setTimeout本身的误差)就认为安装了APP，不需要处理，否则则是没安装，提示下载或者自动下载。</p>
-<p>因为，如果用户安装了对应的APP，那么会自动的跳转到APP的界面，浏览器这边的计时会被中断，等下次用户偶然再使用浏览器的时候，计时继续，会触发setTimeout的回调，不过这个时候<strong>time1</strong>与<strong>time2</strong>的时间差就远大于300ms了。</p>
-<p>如果用户没有安装对应APP就不会发生跳转，setTimeout也就自然在规定时间内运行回调了。</p>
-<p>这种方法曾经是非常有效果的，不过现在会有些问题了。</p>
-<p>首先是安卓下，有些浏览器，比如UC会在网页试图打开APP的时候阻断这个行为并弹出一个select弹窗，让用户选择是否打开，是否始终打开等等。</p>
-<p><img src="https://cdn.imagehost.top/ipic/bccre.jpg" alt="UC的select弹窗"></p>
-<p>但是这个弹窗并没有像alert那样阻塞js的执行，也就是说setTimeout会正常进行，在用户犹豫怎么选择的时候，300ms就过了，页面就自动跳转了下载页。</p>
-<p>接着是IOS这边，到IOS10之后，如果已经安装了对应的APP，浏览器也会在网页尝试打开APP的时候弹出一个confirm窗，让用户选择是否打开对应的APP。</p>
-<p><img src="https://cdn.imagehost.top/ipic/t5533.jpg" alt="已安装：确认窗提示是否打开APP"></p>
-<p>如果没有安装对应APP，就会实现一个很丑陋的网页无法打开此链家的错误alert窗。</p>
-<p><img src="https://cdn.imagehost.top/ipic/csl1i.jpg" alt="未安装：提示网址无效"></p>
-<p>而且这两个窗口也是没有阻断js脚本的执行的，setTimeout也是同样正常进行中。</p>
+<h2 id="早先的做法"><a href="#早先的做法" class="headerlink" title="早先的做法"></a>早先的做法</h2><p>为了应对这样的需求，前端程序员们想出了一个很棒的方法，利用<strong>浏览器进驻后台之后会暂停js的执行</strong>这一特性，顺利实现了对是否安装了自己公司APP的探测。具体实现如下： </p>
+<p>在用户点击或者进入页面时候，记录一个当前时间<strong>time1</strong>，然后设置一个300ms的timeout，在timeout的回调里面记录时间<strong>time2</strong>，接着就用location.href直接指向对应APP已经配置的url scheme。 </p>
+<p>如果<strong>time1</strong>与<strong>time2</strong>的时间差超过400ms(考虑到setTimeout本身的误差)就认为安装了APP，不需要处理，否则则是没安装，提示下载或者自动下载。 </p>
+<p>因为，如果用户安装了对应的APP，那么会自动的跳转到APP的界面，浏览器这边的计时会被中断，等下次用户偶然再使用浏览器的时候，计时继续，会触发setTimeout的回调，不过这个时候<strong>time1</strong>与<strong>time2</strong>的时间差就远大于300ms了。 </p>
+<p>如果用户没有安装对应APP就不会发生跳转，setTimeout也就自然在规定时间内运行回调了。 </p>
+<p>这种方法曾经是非常有效果的，不过现在会有些问题了。 </p>
+<p>首先是安卓下，有些浏览器，比如UC会在网页试图打开APP的时候阻断这个行为并弹出一个select弹窗，让用户选择是否打开，是否始终打开等等。 </p>
+<p><img src="https://cdn.imagehost.top/ipic/bccre.jpg" alt="UC的select弹窗"> </p>
+<p>但是这个弹窗并没有像alert那样阻塞js的执行，也就是说setTimeout会正常进行，在用户犹豫怎么选择的时候，300ms就过了，页面就自动跳转了下载页。 </p>
+<p>接着是IOS这边，到IOS10之后，如果已经安装了对应的APP，浏览器也会在网页尝试打开APP的时候弹出一个confirm窗，让用户选择是否打开对应的APP。 </p>
+<p><img src="https://cdn.imagehost.top/ipic/t5533.jpg" alt="已安装：确认窗提示是否打开APP"> </p>
+<p>如果没有安装对应APP，就会实现一个很丑陋的网页无法打开此链家的错误alert窗。 </p>
+<p><img src="https://cdn.imagehost.top/ipic/csl1i.jpg" alt="未安装：提示网址无效"> </p>
+<p>而且这两个窗口也是没有阻断js脚本的执行的，setTimeout也是同样正常进行中。 </p>
 <p>尝试过把300ms的时间改成3000ms，去预想用户可以在3秒内在浏览器的选择窗内做好选择。可是仔细一想，这种预想又是非常不靠谱的，永远没法猜测用户的未知行为，而且3000ms的响应延迟也是非常不好的交互体验。</p>
-<h2 id="是时候去调整思路了">是时候去调整思路了</h2>
-<p><strong>如果浏览器不希望我们知道设备上是否已经安装了对应的APP，那就不尝试去知晓。</strong></p>
-<p>目前我们的做法是：在用户通过点击或者别的行为触发了打开APP的策略的时候，首先是尝试直接访问url scheme，在这同时，展现一个弹窗，里面包含一个APP的介绍文案，然后底部是两个按钮，<code>下载APP</code>和<code>打开APP</code>。</p>
-<p>下面是天猫的做法，很值得借鉴：</p>
-<p><img src="https://cdn.imagehost.top/ipic/xn9qr.jpg" alt="先尝试跳转"></p>
-<p><img src="https://cdn.imagehost.top/ipic/85ywo.jpg" alt="同时显示下载和打开"></p>
-<p>这样做的好处是：如果用户已经安装了APP，那么就直接跳转了，弹窗对用户不会有任何的影响；如果没有安装，或者用户安装了，但是因为不想跳转或者误操作没有跳转，则用户在关闭了浏览器的错误提示之后，看到弹窗，能大概理解之前的浏览器的行为是什么意思，同时可以再次选择打开或者下载APP。</p>
+<h2 id="是时候去调整思路了"><a href="#是时候去调整思路了" class="headerlink" title="是时候去调整思路了"></a>是时候去调整思路了</h2><p><strong>如果浏览器不希望我们知道设备上是否已经安装了对应的APP，那就不尝试去知晓。</strong> </p>
+<p>目前我们的做法是：在用户通过点击或者别的行为触发了打开APP的策略的时候，首先是尝试直接访问url scheme，在这同时，展现一个弹窗，里面包含一个APP的介绍文案，然后底部是两个按钮，<code>下载APP</code>和<code>打开APP</code>。 </p>
+<p>下面是天猫的做法，很值得借鉴： </p>
+<p><img src="https://cdn.imagehost.top/ipic/xn9qr.jpg" alt="先尝试跳转"> </p>
+<p><img src="https://cdn.imagehost.top/ipic/85ywo.jpg" alt="同时显示下载和打开"> </p>
+<p>这样做的好处是：如果用户已经安装了APP，那么就直接跳转了，弹窗对用户不会有任何的影响；如果没有安装，或者用户安装了，但是因为不想跳转或者误操作没有跳转，则用户在关闭了浏览器的错误提示之后，看到弹窗，能大概理解之前的浏览器的行为是什么意思，同时可以再次选择打开或者下载APP。 </p>
 <p>同时，如果是进入页面立马就跳转的行为，最好能有一个次数限制，不然一个高频访问的页面，每进入一次都有这样一个弹窗，明摆着是想赶用户走了啊</p>
 
                 <div class="copyright-notice">
@@ -345,7 +339,7 @@
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2017/03/31/web%E7%AB%AF%E6%89%93%E5%BC%80app%E5%8A%9F%E8%83%BD%E7%9A%84%E5%AE%9E%E7%8E%B0/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd09300je0hbm9cbp8zmc"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfu006zmsbm1zohdd3z"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

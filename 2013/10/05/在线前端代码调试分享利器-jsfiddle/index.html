@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -215,51 +211,44 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h2 id="起因">起因</h2>
-<p>在知乎上面看一个关于回调函数的帖子时,有人为了表明观点,就给了个链接说是代码示例.好奇心强大,就点了过去.然后就发现了这么个前端代码在线调试和分享的利器–<a target="_blank" rel="noopener" href="http://www.jsfiddle.net/" title="jsFiddle">jsFiddle</a></p>
-<h2 id="jsFiddle的主要用途">jsFiddle的主要用途</h2>
-<p>个人觉得jsFiddle有下面几个使用场景：</p>
+                <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>在知乎上面看一个关于回调函数的帖子时,有人为了表明观点,就给了个链接说是代码示例.好奇心强大,就点了过去.然后就发现了这么个前端代码在线调试和分享的利器–<a target="_blank" rel="noopener" href="http://www.jsfiddle.net/" title="jsFiddle">jsFiddle</a></p>
+<h2 id="jsFiddle的主要用途"><a href="#jsFiddle的主要用途" class="headerlink" title="jsFiddle的主要用途"></a>jsFiddle的主要用途</h2><p>个人觉得jsFiddle有下面几个使用场景：</p>
 <ul>
-<li>写代码的时候，（可能是html,可能是css,也可能是js,有些东西没把握或者不清楚,但是现有的工程复杂度太高,不好直接拿来测试.重新建立个html文件然后写doctype,html,head…这个过程又太麻烦。可能环境搭建好，想法也没了。这个时候比较直接的方式就是打开浏览器，<a target="_blank" rel="noopener" href="http://xn--jsFiddle-gf6ml29bbfl97rnm3g.net">地址栏输入jsFiddle.net</a>。然后立马开始需要进行的测试工程。</li>
+<li>写代码的时候，（可能是html,可能是css,也可能是js,有些东西没把握或者不清楚,但是现有的工程复杂度太高,不好直接拿来测试.重新建立个html文件然后写doctype,html,head…这个过程又太麻烦。可能环境搭建好，想法也没了。这个时候比较直接的方式就是打开浏览器，地址栏输入jsFiddle.net。然后立马开始需要进行的测试工程。</li>
 <li>写技术博客或者回复评论(前提是这个评论支持加入iframe)的时候，需要展示一些代码。需要面临两个问题：一个是好的代码高亮，二是代码的实际运行结果。有些网站有这个功能(也许wordpress也有这样的插件，只是我还没接触到)，一个展示代码的文本框，下面一个按钮“运行代码”，点击就会跳转到另一个页面看代码的实际运行效果。但是在jsFiddle的代码分享就有个比较好的地方，通过tab选项卡的方式可以方便的切换显示html,css,js的代码和实际的运行效果。当然，这个对于小片段的代码最有优势，如果是太复杂的效果则肯能不是很适合了</li>
 <li>jsFiddle还有一个git思想的fork功能，这样就很方便你在查看别人代码的同时，能进行简单的修改调试，这样能进一步的理解</li>
 </ul>
-<h2 id="一些使用方面的技巧">一些使用方面的技巧</h2>
-<p>jsFiddle网站本身也提供了很详细的使用文档,不过只有英文版的,英文还不错的同学可以<a target="_blank" rel="noopener" href="http://doc.jsfiddle.net/index.html" title="jsFiddle官方说明文档">看这里</a></p>
-<h3 id="界面介绍">界面介绍</h3>
-<p>界面有两种状态，一种是没保存前也就是通过地址直接访问的时候，一种是在前一种状态中点击顶部菜单中的&quot;save&quot;之后</p>
+<h2 id="一些使用方面的技巧"><a href="#一些使用方面的技巧" class="headerlink" title="一些使用方面的技巧"></a>一些使用方面的技巧</h2><p>jsFiddle网站本身也提供了很详细的使用文档,不过只有英文版的,英文还不错的同学可以<a target="_blank" rel="noopener" href="http://doc.jsfiddle.net/index.html" title="jsFiddle官方说明文档">看这里</a></p>
+<h3 id="界面介绍"><a href="#界面介绍" class="headerlink" title="界面介绍"></a>界面介绍</h3><p>界面有两种状态，一种是没保存前也就是通过地址直接访问的时候，一种是在前一种状态中点击顶部菜单中的”save”之后 </p>
 <p>两种状态的主要区别也是在顶部菜单栏。</p>
-<h4 id="两种状态下的菜单栏">两种状态下的菜单栏</h4>
-<p><img src="https://cdn.imagehost.top/wp-content/uploads/2013/06/before-save.png" alt="保存之前的菜单"></p>
+<h4 id="两种状态下的菜单栏"><a href="#两种状态下的菜单栏" class="headerlink" title="两种状态下的菜单栏"></a>两种状态下的菜单栏</h4><p><img src="https://cdn.imagehost.top/wp-content/uploads/2013/06/before-save.png" alt="保存之前的菜单"> </p>
 <p>保存之前的菜单</p>
-<p><img src="https://cdn.imagehost.top/wp-content/uploads/2013/06/after-save.png" alt="保存之后的菜单"></p>
-<p>保存之后的菜单</p>
-<p>第一种状态中特殊的按钮是&quot;save&quot;,可以把当前编辑的项目保持到jsFiddle的服务器上面,这样方便再次查看和分享</p>
-<p>第二种状态中特殊的按钮有&quot;update&quot;,“fork”,“base”/“set as base&quot;和&quot;share”</p>
-<p>像&quot;update&quot;和&quot;fork&quot;都是类似github的方式</p>
-<p>&quot;update&quot;就是将当前状态保存为一个版本，方便调试(只有初始版本和update版本，这两个版本).</p>
-<p>&quot;fork&quot;就是把当前的项目复制到一个新建项目中</p>
-<p>&quot;base&quot;按钮出现在没有进行过&quot;update&quot;或者最初版本的项目中，表明这是最初始的版本，点击没效果，只是标识作用 &quot;set as base&quot;相反，出现在非初始版本的项目中。可点击，作用是把当前版本变成最初版本，原先的初始版本会被删除</p>
-<p>&quot;share&quot;点击之后会展开一个面板，提供三种形式的分享方式</p>
+<p><img src="https://cdn.imagehost.top/wp-content/uploads/2013/06/after-save.png" alt="保存之后的菜单"> </p>
+<p>保存之后的菜单 </p>
+<p>第一种状态中特殊的按钮是”save”,可以把当前编辑的项目保持到jsFiddle的服务器上面,这样方便再次查看和分享</p>
+<p>第二种状态中特殊的按钮有”update”,”fork”,”base”&#x2F;“set as base”和”share”</p>
+<p>像”update”和”fork”都是类似github的方式 </p>
+<p>“update”就是将当前状态保存为一个版本，方便调试(只有初始版本和update版本，这两个版本). </p>
+<p>“fork”就是把当前的项目复制到一个新建项目中 </p>
+<p>“base”按钮出现在没有进行过”update”或者最初版本的项目中，表明这是最初始的版本，点击没效果，只是标识作用 “set as base”相反，出现在非初始版本的项目中。可点击，作用是把当前版本变成最初版本，原先的初始版本会被删除</p>
+<p>“share”点击之后会展开一个面板，提供三种形式的分享方式</p>
 <ul>
 <li>一个是当前项目的地址，进入后看到的和作者当前看到的内容一样</li>
 <li>一个是全屏的tab选项卡展示代码和结果。不过默认提供的只是结果的展示。需要了解url的规则才好自定义</li>
 <li>第三种其实就是用iframe引用的第二个的地址。</li>
 </ul>
-<p>还有4个公用的菜单按钮*</p>
+<p>还有4个公用的菜单按钮*   </p>
 <p>“run” 是执行代码,点击之后就能在右下角的result区域看到代码执行的结果</p>
 <ul>
 <li>“debug on mobile”(就是那个类似手机上表示信号的图标), 是用来进行手机端调试使用的</li>
 <li>“TidyUp” 是整洁代码</li>
 <li>“JSHint” 是js的错误检查</li>
 </ul>
-<h4 id="代码编辑区">代码编辑区</h4>
-<p><img src="https://cdn.imagehost.top/wp-content/uploads/2013/06/code-area.png" alt="代码编辑区"></p>
+<h4 id="代码编辑区"><a href="#代码编辑区" class="headerlink" title="代码编辑区"></a>代码编辑区</h4><p><img src="https://cdn.imagehost.top/wp-content/uploads/2013/06/code-area.png" alt="代码编辑区"> </p>
 <p>代码编辑区</p>
-<p>分为四个区块,分别是html,css,js的输入区域,和代码运行的结果展示区域result</p>
+<p>分为四个区块,分别是html,css,js的输入区域,和代码运行的结果展示区域result </p>
 <p>可以拖动区块直接的框去控制各个区块的大小</p>
-<h4 id="功能区">功能区</h4>
-<p><img src="https://cdn.imagehost.top/wp-content/uploads/2013/06/sidebar.png" alt="功能区"></p>
+<h4 id="功能区"><a href="#功能区" class="headerlink" title="功能区"></a>功能区</h4><p><img src="https://cdn.imagehost.top/wp-content/uploads/2013/06/sidebar.png" alt="功能区"></p>
 <p>功能区在代码编辑区的左侧 Framework&amp;Extensions 是程序需要用到的类库,有jQuery,YUI,ExtJs,Dojo等等,但是很可惜,国内的KISSY貌似没有的 Fiddle Options</p>
 <ul>
 <li>Name,Description 是对当前代码的一个命名和描述,方便以后在个人平台上面查看</li>
@@ -268,21 +257,17 @@
 <li>DTD 定义html文档的类型申明,默认是html5的</li>
 <li>Framework attribute 用来定义加载类库的script标签上面的一些属性</li>
 </ul>
-<h3 id="编写代码">编写代码</h3>
-<h4 id="草稿">草稿</h4>
-<p>对于登录的用户，对于当前正在编辑的jsfiddle里面的代码，只要你点击过run，<a target="_blank" rel="noopener" href="http://xn--jsfiddle-ik0mu4co23a18x3j5l11lt9ar3dm83b.net/draft/">那么就可以通过访问jsfiddle.net/draft/</a></p>
-<p>来查看看看运行过的代码的执行页面，展示的内容和result里面一样。</p>
+<h3 id="编写代码"><a href="#编写代码" class="headerlink" title="编写代码"></a>编写代码</h3><h4 id="草稿"><a href="#草稿" class="headerlink" title="草稿"></a>草稿</h4><p>对于登录的用户，对于当前正在编辑的jsfiddle里面的代码，只要你点击过run，那么就可以通过访问jsfiddle.net&#x2F;draft&#x2F; </p>
+<p>来查看看看运行过的代码的执行页面，展示的内容和result里面一样。 </p>
 <p>这样做的一个很大的好处是：能够方便的比较在不同浏览器下，代码的执行结果的不同，当然，前提是在不同的浏览器下，得先登录了。</p>
-<h3 id="分享代码">分享代码</h3>
-<p>jsFiddle里面，除了能够很方便开发者去写一些demo之外，很大的一个好处就是高度可自定义的设定分享的展示方式。</p>
+<h3 id="分享代码"><a href="#分享代码" class="headerlink" title="分享代码"></a>分享代码</h3><p>jsFiddle里面，除了能够很方便开发者去写一些demo之外，很大的一个好处就是高度可自定义的设定分享的展示方式。</p>
 <p>在点击save按钮之后，得到的页面地址，只要把这个地址发送给你想分享的对象，那么对方就能通过这个地址看到和你save之后一模一样的界面。</p>
-<p>同时，点击share按钮，在弹出菜单里面Share link里面的值也就是这个值。Embed on your page，这个里面是一个html代码，可以放在你的文章里面，方便在文章中添加代码。就比如我这个 还有一种http://jsfiddle.net/shuizhongyueming/L49jh/embedded/result/。</p>
+<p>同时，点击share按钮，在弹出菜单里面Share link里面的值也就是这个值。Embed on your page，这个里面是一个html代码，可以放在你的文章里面，方便在文章中添加代码。就比如我这个 还有一种<a target="_blank" rel="noopener" href="http://jsfiddle.net/shuizhongyueming/L49jh/embedded/result/%E3%80%82">http://jsfiddle.net/shuizhongyueming/L49jh/embedded/result/。</a></p>
 <p>这个地址是可以配置的，在地址的embedded后面，有四种无序参数：html,css,js,result 以逗号分隔，只要在地址里面按需加入需要的即可。</p>
 <p>同样，那个IFrame的src值也是可以这样设定的</p>
-<p>比如，如果我想向人分享我的demo里面的js和result。那么我可以http://jsfiddle.net/shuizhongyueming/L49jh/embedded/js,result/。</p>
+<p>比如，如果我想向人分享我的demo里面的js和result。那么我可以<a target="_blank" rel="noopener" href="http://jsfiddle.net/shuizhongyueming/L49jh/embedded/js,result/%E3%80%82">http://jsfiddle.net/shuizhongyueming/L49jh/embedded/js,result/。</a></p>
 <p>那么demo的展示页面里面，就会有两个tab页，顺序和地址里面的顺序一致。</p>
-<h3 id="结语">结语</h3>
-<p>以上差不多是我所知的关于jsfiddle的全部东西了。欢迎指正和补充</p>
+<h3 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h3><p>以上差不多是我所知的关于jsfiddle的全部东西了。欢迎指正和补充</p>
 
                 <div class="copyright-notice">
 <div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
@@ -374,7 +359,7 @@
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2013/10/05/%E5%9C%A8%E7%BA%BF%E5%89%8D%E7%AB%AF%E4%BB%A3%E7%A0%81%E8%B0%83%E8%AF%95%E5%88%86%E4%BA%AB%E5%88%A9%E5%99%A8-jsfiddle/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd09900ka0hbmb2xn2w7b"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfx007zmsbmalucbmao"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

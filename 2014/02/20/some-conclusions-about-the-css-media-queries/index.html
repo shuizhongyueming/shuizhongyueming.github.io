@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -234,20 +230,17 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <p>这篇文章主要是自己需要通过Media Queries完成一些工作时候，Google到的一些基本知识储备。所以总结的大部分会是一个链接，指向别的网站。</p>
-<h2 id="起因">起因</h2>
-<p>昨天，因为工作的需要，在文章页底部留白用来展示广告，而广告是第三方的，会根据iPad和iPhone的不同而有不同的尺寸，所以对应的底部留白也需要不同的尺寸。</p>
-<h2 id="关于语法">关于语法</h2>
-<p>请大家移步到这个<a target="_blank" rel="noopener" href="http://blog.chinaunix.net/uid-13164110-id-3226993.html">博客</a>一看，里面对Media Queries的语法描述的还是很不错的。 总结起来有以下几个要关注的：</p>
+<h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>昨天，因为工作的需要，在文章页底部留白用来展示广告，而广告是第三方的，会根据iPad和iPhone的不同而有不同的尺寸，所以对应的底部留白也需要不同的尺寸。</p>
+<h2 id="关于语法"><a href="#关于语法" class="headerlink" title="关于语法"></a>关于语法</h2><p>请大家移步到这个<a target="_blank" rel="noopener" href="http://blog.chinaunix.net/uid-13164110-id-3226993.html">博客</a>一看，里面对Media Queries的语法描述的还是很不错的。 总结起来有以下几个要关注的：</p>
 <ul>
 <li>语法结构 @media [media_query] media_type and media_feature</li>
 <li>[media_query] 有not和only两种，但是是可选项</li>
 <li>media_type 因为现在大多数开发都是基于屏幕设备进行的，所以一般来说写screen</li>
 <li>and media_feature 这个补充的关于设备的一些描述是可以重复添加的</li>
 </ul>
-<p>文章中虽然也说明了Media Queries的一些兼容性问题，不过说的不是很全面，介意是到<a target="_blank" rel="noopener" href="http://caniuse.com/#search=media%20queries">Can I Use</a>这个网址去看看</p>
+<p>文章中虽然也说明了Media Queries的一些兼容性问题，不过说的不是很全面，介意是到<a target="_blank" rel="noopener" href="http://caniuse.com/#search=media%20queries">Can I Use</a>这个网址去看看 </p>
 <p>后面将基于这个语法进行一些深入的了解</p>
-<h2 id="关于屏幕的一些概念">关于屏幕的一些概念</h2>
-<p>在设定media_feature的时候，device-width到底是什么，这个让我纠结了很久，后面总算是有点突破。其中的概念的区分，主要得益于这两篇文章：“<a target="_blank" rel="noopener" href="http://voices.yahoo.com/the-relationship-between-screen-size-resolution-8815795.html?cat=15">The Relationship Between Screen Size and Resolution</a>”和“<a target="_blank" rel="noopener" href="http://www.javascriptkit.com/dhtmltutors/cssmediaqueries2.shtml">width versus device-width</a>”。 一般关于屏幕，有三种说法 Screen Size(屏幕尺寸)</p>
+<h2 id="关于屏幕的一些概念"><a href="#关于屏幕的一些概念" class="headerlink" title="关于屏幕的一些概念"></a>关于屏幕的一些概念</h2><p>在设定media_feature的时候，device-width到底是什么，这个让我纠结了很久，后面总算是有点突破。其中的概念的区分，主要得益于这两篇文章：“<a target="_blank" rel="noopener" href="http://voices.yahoo.com/the-relationship-between-screen-size-resolution-8815795.html?cat=15">The Relationship Between Screen Size and Resolution</a>”和“<a target="_blank" rel="noopener" href="http://www.javascriptkit.com/dhtmltutors/cssmediaqueries2.shtml">width versus device-width</a>”。 一般关于屏幕，有三种说法 Screen Size(屏幕尺寸)</p>
 <blockquote>
 <p>按对角线的方式测量屏幕得到的，一般咱们说的4英寸屏幕、5英寸屏幕，说的就是这个</p>
 </blockquote>
@@ -260,9 +253,8 @@
 <p>这个概念就比较麻烦一点，因为牵扯到了Screen Resolution。比如iPhone4的屏幕分辨率是320x480，而它的分辨率是640x960。这是因为iPhone的retina屏的缘故，使得在实际宽度为320像素的屏幕上，一行能显示640个像素点。这样能够使得显示的画面在同样尺寸上面比一般的屏幕更加精致。</p>
 </blockquote>
 <p>而CSS中使用Media Queries的时候，device-width指的是Screen Resolution——屏幕分辨率</p>
-<h2 id="针对iPhone2G-4s-iPhone5-iPad几个设备进行区分的Media-Queries">针对iPhone2G-4s,iPhone5,iPad几个设备进行区分的Media Queries</h2>
-<p>关于区分设备的Media Queries，在上面提到的<a target="_blank" rel="noopener" href="http://www.javascriptkit.com/dhtmltutors/cssmediaqueries2.shtml">width versus device-width</a>这篇文章中已经有了一些说明。但是“<a target="_blank" rel="noopener" href="http://stephen.io/mediaqueries/">CSS Media Queries for iPads &amp; iPhones</a>”这篇文章实在是很齐全，很明晰，而且页面设计的超赞！</p>
-<p>不过对他使用min-device-width和max-device-width的方式感觉有些不是很理解。比如iPhone4，屏幕分辨率是320x480，通过min-device-width:320px和max-device-width:480px就能确定到iPhone4。按我的理解是这样的做法考虑到了横屏和竖屏两种情况，可是在作者专门为iPhone4横屏情况下写的Media Queries的min-device-width和max-device-width还是没有变化，这就让我很是不理解。</p>
+<h2 id="针对iPhone2G-4s-iPhone5-iPad几个设备进行区分的Media-Queries"><a href="#针对iPhone2G-4s-iPhone5-iPad几个设备进行区分的Media-Queries" class="headerlink" title="针对iPhone2G-4s,iPhone5,iPad几个设备进行区分的Media Queries"></a>针对iPhone2G-4s,iPhone5,iPad几个设备进行区分的Media Queries</h2><p>关于区分设备的Media Queries，在上面提到的<a target="_blank" rel="noopener" href="http://www.javascriptkit.com/dhtmltutors/cssmediaqueries2.shtml">width versus device-width</a>这篇文章中已经有了一些说明。但是“<a target="_blank" rel="noopener" href="http://stephen.io/mediaqueries/">CSS Media Queries for iPads &amp; iPhones</a>”这篇文章实在是很齐全，很明晰，而且页面设计的超赞！ </p>
+<p>不过对他使用min-device-width和max-device-width的方式感觉有些不是很理解。比如iPhone4，屏幕分辨率是320x480，通过min-device-width:320px和max-device-width:480px就能确定到iPhone4。按我的理解是这样的做法考虑到了横屏和竖屏两种情况，可是在作者专门为iPhone4横屏情况下写的Media Queries的min-device-width和max-device-width还是没有变化，这就让我很是不理解。 </p>
 <p>不过代码是的确很有用，先记着，等随后有时间再来测试一下看看。当然如果有明白的，也希望能告知一下</p>
 
                 <div class="copyright-notice">
@@ -355,7 +347,7 @@
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2014/02/20/some-conclusions-about-the-css-media-queries/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd08y00i20hbm8kpz13rh"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfo004umsbm4q1j8voa"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

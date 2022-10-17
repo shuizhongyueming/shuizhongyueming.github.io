@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -227,10 +223,8 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h2 id="TL-DR">TL;DR</h2>
-<p>请确认失效路由的上一级路由配置<code>path</code>的时候，附带了后缀<code>/*</code></p>
-<h2 id="出错代码">出错代码</h2>
-<pre><code>// App.tsx
+                <h2 id="TL-DR"><a href="#TL-DR" class="headerlink" title="TL;DR"></a>TL;DR</h2><p>请确认失效路由的上一级路由配置<code>path</code>的时候，附带了后缀<code>/*</code></p>
+<h2 id="出错代码"><a href="#出错代码" class="headerlink" title="出错代码"></a>出错代码</h2><pre><code>// App.tsx
 const NotFound = (props: RouteComponentProps) =&gt; &lt;p&gt;Sorry, nothing here&lt;/p&gt;
 
   &lt;Router&gt;
@@ -259,11 +253,10 @@ const NotFound = (props: RouteComponentProps) =&gt; &lt;p&gt;Sorry, nothing here
     &lt;NotFound default=&#123;true&#125; /&gt;
   &lt;/Router&gt;
 </code></pre>
-<h2 id="问题解决">问题解决</h2>
-<p>后面在官网的<a target="_blank" rel="noopener" href="https://reach.tech/router/example/embedded-routers">demo</a>中，终于发现问题所在。</p>
-<p>为了方便路由的灵活构建，@reach/router是支持在任意地方构建router，但是前提是父级的router的path，在书写上需要补充一个后缀<code>/*</code></p>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><p>后面在官网的<a target="_blank" rel="noopener" href="https://reach.tech/router/example/embedded-routers">demo</a>中，终于发现问题所在。 </p>
+<p>为了方便路由的灵活构建，@reach&#x2F;router是支持在任意地方构建router，但是前提是父级的router的path，在书写上需要补充一个后缀<code>/*</code></p>
 <blockquote>
-<p>make sure to use /* so child routes have a chance to match</p>
+<p>make sure to use &#x2F;* so child routes have a chance to match</p>
 </blockquote>
 <p>最开始的代码，做如下修改：</p>
 <pre><code>// App.tsx
@@ -374,7 +367,7 @@ const NotFound = (props: RouteComponentProps) =&gt; &lt;p&gt;Sorry, nothing here
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2018/11/07/reach-router%E7%9A%84%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1%E5%A4%B1%E6%95%88%E7%9A%84%E5%8F%AF%E8%83%BD%E5%8E%9F%E5%9B%A0/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd08700480hbmbqdmcu9h"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfn004dmsbm12e2fqaa"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

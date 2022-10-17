@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -230,31 +226,27 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h2 id="起因">起因</h2>
-<p>18+1大，因为作死的还一直开着我的ss，然后连同着博客一起被墙了。</p>
-<p>想上服务器做一些修改，试过各种ssh的代理方法，就是不行。在调用这些手段的时候，突然发现有人提到VPS可以做到月费5$，有点惊呆了。<a target="_blank" rel="noopener" href="https://www.diycode.cc/topics/738">https://www.diycode.cc/topics/738</a></p>
+                <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>18+1大，因为作死的还一直开着我的ss，然后连同着博客一起被墙了。 </p>
+<p>想上服务器做一些修改，试过各种ssh的代理方法，就是不行。在调用这些手段的时候，突然发现有人提到VPS可以做到月费5$，有点惊呆了。<a target="_blank" rel="noopener" href="https://www.diycode.cc/topics/738">https://www.diycode.cc/topics/738</a> </p>
 <p>仔细想想，自己现在这个EC2，每个月开销已经到$10了，其实自己也没怎么用，主要就是挂博客和放代理，那还不如索性乘这个机会迁到更符合实际需求单VPS上。</p>
-<h2 id="目标">目标</h2>
-<p>这次迁站，主要两件事情，一个是搭建ss-server，一个就是wordpress和mysql数据的迁移。</p>
-<p>wordpress和mysql都是基于docker部署的，算是其中的一个小难点</p>
+<h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>这次迁站，主要两件事情，一个是搭建ss-server，一个就是wordpress和mysql数据的迁移。 </p>
+<p>wordpress和mysql都是基于docker部署的，算是其中的一个小难点 </p>
 <p>先在vultr.com上面创建了instance，等安装好了之后，用给的帐号密码登录指定服务器，成功。</p>
-<h2 id="ss-server搭建">ss-server搭建</h2>
-<p>使用上面说的文章梨提供的一键安装脚本，ss-server顺利安装成功。</p>
-<p>在本地建好配置文件(<code>config.json</code>)之后，使用<code>pip3 install shadowsocks</code>快速安装了客户端，然后<code>ss-local -c config.json</code>启动</p>
-<p>可是一直连不上，ss-local里面的日志都是connecting</p>
+<h2 id="ss-server搭建"><a href="#ss-server搭建" class="headerlink" title="ss-server搭建"></a>ss-server搭建</h2><p>使用上面说的文章梨提供的一键安装脚本，ss-server顺利安装成功。 </p>
+<p>在本地建好配置文件(<code>config.json</code>)之后，使用<code>pip3 install shadowsocks</code>快速安装了客户端，然后<code>ss-local -c config.json</code>启动 </p>
+<p>可是一直连不上，ss-local里面的日志都是connecting </p>
 <p>在网上找了一圈之后，发现可能是本机没开放对应端口，使用命令：</p>
 <pre><code> firewall-cmd --zone=public --list-ports
 </code></pre>
-<p>查看了一下现有开放的端口，发现ss默认使用的8989是开放的，不知道是为啥还被禁。</p>
+<p>查看了一下现有开放的端口，发现ss默认使用的8989是开放的，不知道是为啥还被禁。 </p>
 <p>最后的解决方式是：kill掉ss-server, 修改配置文件，更换端口到8083(随便选的)，然后启动ss-server。在防火墙这块：</p>
 <pre><code>firewall-cmd --zone=public --add-port=8083/tcp
 firewall-cmd --reload
 </code></pre>
-<p>再尝试，可以顺利链接了。</p>
-<p>代理配置好之后，我本地也是能方便的使用Google，为接下来查看怎么迁移Docker做了准备。</p>
+<p>再尝试，可以顺利链接了。 </p>
+<p>代理配置好之后，我本地也是能方便的使用Google，为接下来查看怎么迁移Docker做了准备。 </p>
 <p>上面关于firewall-cmd相关的知识，是来自: <a target="_blank" rel="noopener" href="http://www.111cn.net/sys/CentOS/103509.htm">http://www.111cn.net/sys/CentOS/103509.htm</a></p>
-<h2 id="迁移站点">迁移站点</h2>
-<p>因为vultr准备的这个instance是一个最小的CentOS安装包，所以得自己使用yum安装了vim和nginx:</p>
+<h2 id="迁移站点"><a href="#迁移站点" class="headerlink" title="迁移站点"></a>迁移站点</h2><p>因为vultr准备的这个instance是一个最小的CentOS安装包，所以得自己使用yum安装了vim和nginx:</p>
 <pre><code>yum install vim
 yum install nginx
 </code></pre>
@@ -262,26 +254,25 @@ yum install nginx
 <pre><code>firewall-cmd --zone=public --add-port=80/tcp
 firewall-cmd --reload
 </code></pre>
-<p>关于docker的迁移，我一开始主要参照这篇文章：<a target="_blank" rel="noopener" href="http://www.pangxie.space/?p=263">Docker 容器迁移</a>，可真按照这个完成之后，得到的是一个完全新的博客，能顺利运行，但是之前的数据都没了。</p>
-<p>无奈之下，我又单独去了解了一下Docker Mysql的数据迁移，主要参照的这篇文章：<a target="_blank" rel="noopener" href="http://www.adocker.cn/archives/3065">Docker Mysql容器间数据简单迁移</a>。这次就靠谱多了，同时还学会了怎么在主机和docker之间互相拷贝文件。</p>
-<p>在顺利从docker里面导出sql文件到主机后，再使用scp命令在vultr和aws之间传递文件（忘记说了，登录上vultr之后，我成功的基于vultr的主机ssh上了aws的主机，机智）</p>
-<p>scp命令如果遇到错误: <strong>Permission denied</strong>，可以参照这篇文章: <a target="_blank" rel="noopener" href="http://blog.csdn.net/xlgen157387/article/details/49818259">ssh使用scp: /目录: Permission denied</a></p>
+<p>关于docker的迁移，我一开始主要参照这篇文章：<a target="_blank" rel="noopener" href="http://www.pangxie.space/?p=263">Docker 容器迁移</a>，可真按照这个完成之后，得到的是一个完全新的博客，能顺利运行，但是之前的数据都没了。 </p>
+<p>无奈之下，我又单独去了解了一下Docker Mysql的数据迁移，主要参照的这篇文章：<a target="_blank" rel="noopener" href="http://www.adocker.cn/archives/3065">Docker Mysql容器间数据简单迁移</a>。这次就靠谱多了，同时还学会了怎么在主机和docker之间互相拷贝文件。 </p>
+<p>在顺利从docker里面导出sql文件到主机后，再使用scp命令在vultr和aws之间传递文件（忘记说了，登录上vultr之后，我成功的基于vultr的主机ssh上了aws的主机，机智） </p>
+<p>scp命令如果遇到错误: <strong>Permission denied</strong>，可以参照这篇文章: <a target="_blank" rel="noopener" href="http://blog.csdn.net/xlgen157387/article/details/49818259">ssh使用scp: &#x2F;目录: Permission denied</a></p>
 <p>不过这篇文章在目标数据库恢复数据这块，说的不够清楚，用文章里面的方法始终没办法在mysql里面出现一个叫wordpress的数据库。</p>
-<p>继续google，找到了一个在sql文件导入导出方面比较专业的文章: <a target="_blank" rel="noopener" href="http://blog.csdn.net/myron_sqh/article/details/13016945">linux命令行下导出导入.sql文件</a>，原来导入之前是得先新建对应的数据库，在进入数据库之后，再执行<code>source data.sql</code>就能顺利的导入了。</p>
-<p>数据库导入之后，再查看网站，已经能正确展示了，不过一些图片资源报了404，看了看资源路径，在<code>wp-content</code>目录里面。</p>
-<p>用<code>docker exec</code>进入wordpress所在的docker里面，看了一下wp-content目录，空的，看来跟mysql一样，也是迁移的有问题的。</p>
-<p>用了之前从mysql的docker里面导出sql文件的方法，从旧网站的docker里面把wp-content目录给导出来，然后scp下载到vultr主机，再复制到新网站的docker里面(好累)，资源顺利加载。</p>
-<p>不过一些插件报错了：**Call to undefined function wp_get_upload_dir() **</p>
-<p>这种错误，我是不想去debug了，很明显，光拷贝wp-content是不行的，索性，那就完全贝把。把docker里面的<code>/var/www/html/</code>完全拷贝出来，再覆盖现有的。覆盖的时候，是打算</p>
+<p>继续google，找到了一个在sql文件导入导出方面比较专业的文章: <a target="_blank" rel="noopener" href="http://blog.csdn.net/myron_sqh/article/details/13016945">linux命令行下导出导入.sql文件</a>，原来导入之前是得先新建对应的数据库，在进入数据库之后，再执行<code>source data.sql</code>就能顺利的导入了。 </p>
+<p>数据库导入之后，再查看网站，已经能正确展示了，不过一些图片资源报了404，看了看资源路径，在<code>wp-content</code>目录里面。 </p>
+<p>用<code>docker exec</code>进入wordpress所在的docker里面，看了一下wp-content目录，空的，看来跟mysql一样，也是迁移的有问题的。 </p>
+<p>用了之前从mysql的docker里面导出sql文件的方法，从旧网站的docker里面把wp-content目录给导出来，然后scp下载到vultr主机，再复制到新网站的docker里面(好累)，资源顺利加载。 </p>
+<p>不过一些插件报错了：**Call to undefined function wp_get_upload_dir() **  </p>
+<p>这种错误，我是不想去debug了，很明显，光拷贝wp-content是不行的，索性，那就完全贝把。把docker里面的<code>/var/www/html/</code>完全拷贝出来，再覆盖现有的。覆盖的时候，是打算 </p>
 <pre><code>mv html hml-bk
 tar zxf html.tar.gz
 </code></pre>
-<p>这样来做的，不过不让直接重命名现有的html目录，提示** mv: cannot move ‘html’ to ‘html-bk’: Device or resource busy**</p>
-<p>那就只好先新建个文件把旧网站的html目录放进去，然后一个个文件夹的替换。替换完成之后。</p>
+<p>这样来做的，不过不让直接重命名现有的html目录，提示** mv: cannot move ‘html’ to ‘html-bk’: Device or resource busy** </p>
+<p>那就只好先新建个文件把旧网站的html目录放进去，然后一个个文件夹的替换。替换完成之后。 </p>
 <p>运气不错，现在新网站顺利运行了。</p>
-<h2 id="总结">总结</h2>
-<p>这次的站点迁移，跟想像的优雅略有差别，以为用上Docker之后，这种迁移会是很轻松的一件事情，却没想到折腾了这么久。</p>
-<p>应该是我自己在Docker这块了解的还是太少吧，等以后有时间再好好看看这块。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这次的站点迁移，跟想像的优雅略有差别，以为用上Docker之后，这种迁移会是很轻松的一件事情，却没想到折腾了这么久。 </p>
+<p>应该是我自己在Docker这块了解的还是太少吧，等以后有时间再好好看看这块。 </p>
 <p>对了，顺便放上我的Vultr的推广链接：<a target="_blank" rel="noopener" href="https://www.vultr.com/?ref=7256603">https://www.vultr.com/?ref=7256603</a>，有需要VPS的朋友可以考虑一下点我的链接去注册哈，在此谢谢了</p>
 
                 <div class="copyright-notice">
@@ -374,7 +365,7 @@ tar zxf html.tar.gz
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2017/11/06/%E5%8D%9A%E5%AE%A2%E6%90%AC%E8%BF%812017/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd09600k20hbm6xt5cmwx"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfx007rmsbmdfrbcp5u"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

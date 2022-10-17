@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -230,11 +226,11 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>最近使用<a target="_blank" rel="noopener" href="https://github.com/nestjs/nest">Nestjs</a>来搭建梦支点的后台服务，头一回正式的尝试用NodeJs来做一次项目，很多后端的面向对象的概念，弄的有点窒息。看文档的几天，着实头大。</p>
-<p>不过好在抗了过来，顺利进入项目开发阶段。</p>
-<p>在执行<code>npm run start:watch</code>完成项目的开发之后，打算就按现有完成的功能先把后台上线了让大家使用，然后出了问题。</p>
-<p>整个开发过程中，没有尝试过去编译和基于上线环境执行，真到这一步的时候就不行了。</p>
-<p>执行<code>npm run prestart:prod</code>，基于tsc来编译项目，一切正常。</p>
+                <p>最近使用<a target="_blank" rel="noopener" href="https://github.com/nestjs/nest">Nestjs</a>来搭建梦支点的后台服务，头一回正式的尝试用NodeJs来做一次项目，很多后端的面向对象的概念，弄的有点窒息。看文档的几天，着实头大。 </p>
+<p>不过好在抗了过来，顺利进入项目开发阶段。 </p>
+<p>在执行<code>npm run start:watch</code>完成项目的开发之后，打算就按现有完成的功能先把后台上线了让大家使用，然后出了问题。 </p>
+<p>整个开发过程中，没有尝试过去编译和基于上线环境执行，真到这一步的时候就不行了。 </p>
+<p>执行<code>npm run prestart:prod</code>，基于tsc来编译项目，一切正常。 </p>
 <p>再执行命令<code>npm run start:prod</code>，基于编译完的代码来启动服务，失败了。错误大致如下：</p>
 <pre><code>npm run start:prod
 
@@ -247,7 +243,7 @@
 
 [Nest] 41866   - 2018-1-28 14:17:30   [ExceptionHandler] Unexpected token import
 /path/to/project/src/entites/exchange-orders.entity.ts:1
-(function (exports, require, module, __filename, __dirname) &#123; import &#123;Entity, Column, PrimaryGeneratedColumn&#125; from 'typeorm';
+(function (exports, require, module, __filename, __dirname) &#123; import &#123;Entity, Column, PrimaryGeneratedColumn&#125; from &#39;typeorm&#39;;
                                                               ^^^^^^
 
 SyntaxError: Unexpected token import
@@ -260,8 +256,8 @@ SyntaxError: Unexpected token import
     at Function.Module._load (module.js:491:3)
     at Module.require (module.js:587:17)
 </code></pre>
-<p>看错误，是nodejs识别不了<code>import</code>这个标识符，可是编译之后的代码没有import了。而且我这边的代码执行，是都执行的编译之后<code>dist</code>目录的，为啥会依赖了<code>src</code>目录下的文件，还报错了？</p>
-<p>仔细看了一下dist目录里面的文件，都是相对路径引用相关模块，不存在会引用到src。</p>
+<p>看错误，是nodejs识别不了<code>import</code>这个标识符，可是编译之后的代码没有import了。而且我这边的代码执行，是都执行的编译之后<code>dist</code>目录的，为啥会依赖了<code>src</code>目录下的文件，还报错了？ </p>
+<p>仔细看了一下dist目录里面的文件，都是相对路径引用相关模块，不存在会引用到src。 </p>
 <p>在网上用搜索一番之后，把问题定位到了<a target="_blank" rel="noopener" href="https://github.com/typeorm/typeorm" title="typeorm">typeorm</a>上。在这个项目里面，按照官方在sql上的最佳实践，使用typeorm来管理数据。为了方便管理mysql连接的相关配置，就在项目根目录新建了一个<code>ormconfig.json</code>：</p>
 <pre><code>&#123;
   &quot;type&quot;: &quot;mysql&quot;,
@@ -274,13 +270,13 @@ SyntaxError: Unexpected token import
   &quot;synchronize&quot;: true
 &#125;
 </code></pre>
-<p>基于<code>entities</code>指定的通配符，就能实现entity的自动加载。</p>
-<p>看来问题也就出现在这个配置上了，肯定是在production环境下，typeorm还是加载了src目录下的entity，这样自然就出了问题。</p>
-<p>所以解决方法就是如何能让这个配置根据环境自动去调整entities的值，找到了typeorm上关于这个配置文件的<a target="_blank" rel="noopener" href="http://typeorm.io/#/using-ormconfig" title="Using ormconfig.json">文档</a>,</p>
-<p>里面说到可以以js文件的方式输出配置。</p>
-<p>这样一来就可以动态了。</p>
+<p>基于<code>entities</code>指定的通配符，就能实现entity的自动加载。 </p>
+<p>看来问题也就出现在这个配置上了，肯定是在production环境下，typeorm还是加载了src目录下的entity，这样自然就出了问题。 </p>
+<p>所以解决方法就是如何能让这个配置根据环境自动去调整entities的值，找到了typeorm上关于这个配置文件的<a target="_blank" rel="noopener" href="http://typeorm.io/#/using-ormconfig" title="Using ormconfig.json">文档</a>, </p>
+<p>里面说到可以以js文件的方式输出配置。 </p>
+<p>这样一来就可以动态了。 </p>
 <p>修改后的<code>ormconfig.js</code>如下：</p>
-<pre><code>const SOURCE_PATH = process.env.NODE_ENV === 'production' ? 'dist' : 'src';
+<pre><code>const SOURCE_PATH = process.env.NODE_ENV === &#39;production&#39; ? &#39;dist&#39; : &#39;src&#39;;
 module.exports = &#123;
   &quot;type&quot;: &quot;mysql&quot;,
   &quot;host&quot;: &quot;localhost&quot;,
@@ -387,7 +383,7 @@ module.exports = &#123;
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2018/01/28/nestjs-syntaxerror-unexpected-token-import/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd085003q0hbm686m9wrt"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfl003vmsbmb3jtcjez"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

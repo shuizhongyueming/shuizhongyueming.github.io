@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -233,19 +229,17 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h2 id="起因">起因</h2>
-<p>今天尝试使用webpck的<code>import()</code>来做代码分割。</p>
+                <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>今天尝试使用webpck的<code>import()</code>来做代码分割。 </p>
 <p>代码类似如下：</p>
-<pre><code>import('./nice-scroll').then(init =&gt; init(dom))
+<pre><code>import(&#39;./nice-scroll&#39;).then(init =&gt; init(dom))
 </code></pre>
 <p>结果报错：</p>
 <blockquote>
-<p>ERROR in ./js/utils/auto-set-height.js Module build failed: SyntaxError: ‘import’ and ‘export’ may only appear at the top level (20:8)</p>
+<p>ERROR in .&#x2F;js&#x2F;utils&#x2F;auto-set-height.js Module build failed: SyntaxError: ‘import’ and ‘export’ may only appear at the top level (20:8)</p>
 </blockquote>
-<h2 id="分析">分析</h2>
-<p>在package.json里面确认了一下，我用的webpack版本是<code>^3.5.4</code>，这个是一定支持import()方法的，那么问题应该就出在babel上了。 先截取我的<code>babel-loader</code>的部分配置：</p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>在package.json里面确认了一下，我用的webpack版本是<code>^3.5.4</code>，这个是一定支持import()方法的，那么问题应该就出在babel上了。 先截取我的<code>babel-loader</code>的部分配置：</p>
 <pre><code>use: &#123;
-    loader: 'babel-loader',
+    loader: &#39;babel-loader&#39;,
     options: &#123;
         // 不采用.babelrc的配置
         &quot;babelrc&quot;: false,
@@ -260,10 +254,10 @@
     &#125;
 &#125;
 </code></pre>
-<p>一开始我的猜想是plugin <code>es2015</code>里面的<code>transform-es2015-modules-commonjs</code>先于webpack处理了代码，所以报错。</p>
+<p>一开始我的猜想是plugin <code>es2015</code>里面的<code>transform-es2015-modules-commonjs</code>先于webpack处理了代码，所以报错。 </p>
 <p>找了一下禁用的方法，改配置如下：</p>
 <pre><code>use: &#123;
-    loader: 'babel-loader',
+    loader: &#39;babel-loader&#39;,
     options: &#123;
         // 不采用.babelrc的配置
         &quot;babelrc&quot;: false,
@@ -278,24 +272,23 @@
     &#125;
 &#125;
 </code></pre>
-<p>还是不行。</p>
+<p>还是不行。 </p>
 <p>后面一直各种关键词的搜索，偶然在github上面找到这个问题<a target="_blank" rel="noopener" href="https://github.com/webpack/webpack/issues/5663#issuecomment-338112684">Dynamic `import()` crashing in `ModuleConcatenationPlugin`</a>的一个回答：</p>
 <blockquote>
 <p>Nope; babel will always process the code before webpack ever sees it; unless for some reason the file itself is being excluded from being processed by babel-loader. This error is unrelated to babel; it’s a webpack issue.</p>
 </blockquote>
-<p>这个回答，里面说到在webpack面对的代码都是babel处理过的，这个让我坚信问题还是在babel这块，继续搜索。</p>
-<p>意外找到这个这篇文章：<a target="_blank" rel="noopener" href="http://zhangxiaoxu.leanote.com/post/6f9123092ce5">代码分离 - 使用import()</a>。里面说到了一个插件：<a target="_blank" rel="noopener" href="https://babeljs.io/docs/plugins/syntax-dynamic-import/#installation">syntax-dynamic-import</a></p>
+<p>这个回答，里面说到在webpack面对的代码都是babel处理过的，这个让我坚信问题还是在babel这块，继续搜索。 </p>
+<p>意外找到这个这篇文章：<a target="_blank" rel="noopener" href="http://zhangxiaoxu.leanote.com/post/6f9123092ce5">代码分离 - 使用import()</a>。里面说到了一个插件：<a target="_blank" rel="noopener" href="https://babeljs.io/docs/plugins/syntax-dynamic-import/#installation">syntax-dynamic-import</a> </p>
 <p>Babel官方关于这个插件的描述是：</p>
 <blockquote>
 <p>Syntax only This plugin only allows Babel to parse this syntax. If you want to transform it then see dynamic-import-webpack or dynamic-import-node.</p>
 </blockquote>
 <p>显然这是一个语法解析的插件，使得babel能够理解dynamic import的语法。再联系上面的报错信息里面的<strong>SyntaxError</strong>，结果有点明显了。</p>
-<h2 id="解决">解决</h2>
-<pre><code>npm install --save-dev babel-plugin-syntax-dynamic-import
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><pre><code>npm install --save-dev babel-plugin-syntax-dynamic-import
 </code></pre>
 <p>然后调整babel-loader配置如下：</p>
 <pre><code>use: &#123;
-    loader: 'babel-loader',
+    loader: &#39;babel-loader&#39;,
     options: &#123;
         // 不采用.babelrc的配置
         &quot;babelrc&quot;: false,
@@ -403,7 +396,7 @@
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2017/11/28/webpack-dynamic-import%E5%87%BA%E9%94%99-syntaxerror-import-and-export-may-only-appear-at-the-top-level/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd09200j40hbmejd92jt1"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdft006tmsbm8jz4c6v7"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

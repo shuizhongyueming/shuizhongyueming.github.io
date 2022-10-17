@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -221,16 +217,14 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h2 id="起因">起因</h2>
-<p>现在 IOS 平台下的应用开发都已经趋向 IOS7 的风格，哪怕系统本身不是 IOS7 的。就比如我们这个应用，开始的时候使用按钮来实现类似 UISegmentedControl 的 UI 和功能，但是后期，需求一改，要求用原生的实现。整个应用都是 IOS7 风格的，在 IOS7 下，使用原生的倒也简单，但是在 IOS6 下面就困难了，立体化的控件是那样的突兀。</p>
+                <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>现在 IOS 平台下的应用开发都已经趋向 IOS7 的风格，哪怕系统本身不是 IOS7 的。就比如我们这个应用，开始的时候使用按钮来实现类似 UISegmentedControl 的 UI 和功能，但是后期，需求一改，要求用原生的实现。整个应用都是 IOS7 风格的，在 IOS7 下，使用原生的倒也简单，但是在 IOS6 下面就困难了，立体化的控件是那样的突兀。</p>
 <p>没办法，只好在一起走上 Google 之路，不过总算有个好结果。</p>
-<h2 id="设置-UISegmentedControl-的背景">设置 UISegmentedControl 的背景</h2>
-<p>在看下文之前，先<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/10562300/customizing-left-right-uisegmentedcontrol-buttons">看这里</a>，没有这个在 stackoverflow 上面的精彩回答，也就不会有这篇文章了，万分感谢！</p>
-<p>有了上面的基本技术知识储备，再上一张最终效果图，方便描述思路</p>
-<p><img src="https://cdn.imagehost.top/wp-content/uploads/2014/02/UISegmentedControl-in-ios6.png" alt="最终效果图"></p>
-<p>从 stackoverflow 的那个回答，可以知道，自定义一个 UISegmentedControl 需要的素材有三种类型：选中时的按钮图片、没选中时候的按钮图片和两个按钮中间的图片(这里说的是只有左右两个按钮的情况)</p>
-<p>在那个回答中，作者很耐心的给出了针对性的 5 张图片，但是在我的最终效果里面，中间的那个线是一直不变的，不管两边如何变化，所以我只需要三张图片</p>
-<p><img src="https://cdn.imagehost.top/wp-content/uploads/2014/02/Materials-for-UISegmentedControl.png" alt="需要的素材"></p>
+<h2 id="设置-UISegmentedControl-的背景"><a href="#设置-UISegmentedControl-的背景" class="headerlink" title="设置 UISegmentedControl 的背景"></a>设置 UISegmentedControl 的背景</h2><p>在看下文之前，先<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/10562300/customizing-left-right-uisegmentedcontrol-buttons">看这里</a>，没有这个在 stackoverflow 上面的精彩回答，也就不会有这篇文章了，万分感谢！ </p>
+<p>有了上面的基本技术知识储备，再上一张最终效果图，方便描述思路 </p>
+<p><img src="https://cdn.imagehost.top/wp-content/uploads/2014/02/UISegmentedControl-in-ios6.png" alt="最终效果图"> </p>
+<p>从 stackoverflow 的那个回答，可以知道，自定义一个 UISegmentedControl 需要的素材有三种类型：选中时的按钮图片、没选中时候的按钮图片和两个按钮中间的图片(这里说的是只有左右两个按钮的情况) </p>
+<p>在那个回答中，作者很耐心的给出了针对性的 5 张图片，但是在我的最终效果里面，中间的那个线是一直不变的，不管两边如何变化，所以我只需要三张图片 </p>
+<p><img src="https://cdn.imagehost.top/wp-content/uploads/2014/02/Materials-for-UISegmentedControl.png" alt="需要的素材"> </p>
 <p>再然后就是复制修改代码了：</p>
 <pre><code>/* Unselected background */
 UIImage *unselectedBackgroundImage = [[UIImage
@@ -275,11 +269,10 @@ forLeftSegmentState:UIControlStateNormal
 rightSegmentState:UIControlStateSelected
 barMetrics:UIBarMetricsDefault];
 </code></pre>
-<p>在完成上述代码之后，运行，就能看到 UISegmentedControl 的背景已经成功的 IOS7 风格化了</p>
-<p><img src="https://cdn.imagehost.top/wp-content/uploads/2014/02/finish-background-of-UISegmentedControl.png" alt="完成UISegmentedControl的背景"></p>
+<p>在完成上述代码之后，运行，就能看到 UISegmentedControl 的背景已经成功的 IOS7 风格化了 </p>
+<p><img src="https://cdn.imagehost.top/wp-content/uploads/2014/02/finish-background-of-UISegmentedControl.png" alt="完成UISegmentedControl的背景"> </p>
 <p>但还是有些瑕疵，在选中的 segment 上，字体是白色的，很难识别，而且字体对中文的支持不友好，一大一小的，所以还需要一些美化工作</p>
-<h2 id="一些美化">一些美化</h2>
-<p>万能的 stackoverflow，再次从它那边找到了<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/8426760/how-to-change-uisegmentcontrol-font-and-selected-segment-colour">完美方案</a>。对于中文，使用 Helvetica 字体是一个不错的选择，然后可以选择性的去掉不好看的阴影，别的设定就是看个人需要，随意增删了。下面给出我的设定：</p>
+<h2 id="一些美化"><a href="#一些美化" class="headerlink" title="一些美化"></a>一些美化</h2><p>万能的 stackoverflow，再次从它那边找到了<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/8426760/how-to-change-uisegmentcontrol-font-and-selected-segment-colour">完美方案</a>。对于中文，使用 Helvetica 字体是一个不错的选择，然后可以选择性的去掉不好看的阴影，别的设定就是看个人需要，随意增删了。下面给出我的设定：</p>
 <pre><code>NSDictionary *selectedAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
 [UIFont fontWithName:@&quot;Helvetica&quot; size:14.0f], UITextAttributeFont,
 [UIColor colorWithRed:11/255.0 green:96/255.0 blue:175/255.0 alpha:1],
@@ -295,16 +288,15 @@ NSDictionary *normalAttributes = [NSDictionary dictionaryWithObjectsAndKeys:
 nil];
 [segment setTitleTextAttributes:normalAttributes forState:UIControlStateNormal];
 </code></pre>
-<p>好了，一个 IOS7 风格的 UISegmentedControl 完成了，下面看看实现的和真正原生的 IOS7 风格的 UISegmentedControl 有什么区别不</p>
-<p><img src="https://cdn.imagehost.top/wp-content/uploads/2014/02/diff-UISegmentedControl.png" alt="区别"></p>
+<p>好了，一个 IOS7 风格的 UISegmentedControl 完成了，下面看看实现的和真正原生的 IOS7 风格的 UISegmentedControl 有什么区别不 </p>
+<p><img src="https://cdn.imagehost.top/wp-content/uploads/2014/02/diff-UISegmentedControl.png" alt="区别"> </p>
 <p>边框的细线有点偏粗，字体偏大，圆角过小。这些还是明天再改吧，困了…</p>
-<h2 id="后续新增">后续新增</h2>
-<ul>
+<h2 id="后续新增"><a href="#后续新增" class="headerlink" title="后续新增"></a>后续新增</h2><ul>
 <li>修改了 segment-unselected-item.png 的细线宽度，由 2px 改成 1px(@2x 的由 4px 改成 2px)</li>
 <li>字体尺寸修改为 12.0f</li>
-<li>修改 segment-unselected-item@2x.png 和 segment-selected-item@2x.png 这两张图片的圆角，由 5px 增加为 10px(根据 IOS7 的风格，UISegmentedControl 的圆角弧度是 10px)</li>
+<li>修改 <a href="mailto:&#115;&#101;&#x67;&#109;&#101;&#x6e;&#116;&#x2d;&#117;&#110;&#x73;&#101;&#x6c;&#x65;&#99;&#x74;&#x65;&#100;&#x2d;&#x69;&#x74;&#101;&#x6d;&#x40;&#50;&#120;&#x2e;&#112;&#x6e;&#103;">&#115;&#101;&#x67;&#109;&#101;&#x6e;&#116;&#x2d;&#117;&#110;&#x73;&#101;&#x6c;&#x65;&#99;&#x74;&#x65;&#100;&#x2d;&#x69;&#x74;&#101;&#x6d;&#x40;&#50;&#120;&#x2e;&#112;&#x6e;&#103;</a> 和 <a href="mailto:&#x73;&#x65;&#x67;&#x6d;&#101;&#110;&#x74;&#x2d;&#115;&#x65;&#x6c;&#101;&#x63;&#x74;&#x65;&#100;&#x2d;&#105;&#x74;&#101;&#109;&#64;&#50;&#120;&#x2e;&#x70;&#110;&#x67;">&#x73;&#x65;&#x67;&#x6d;&#101;&#110;&#x74;&#x2d;&#115;&#x65;&#x6c;&#101;&#x63;&#x74;&#x65;&#100;&#x2d;&#105;&#x74;&#101;&#109;&#64;&#50;&#120;&#x2e;&#x70;&#110;&#x67;</a> 这两张图片的圆角，由 5px 增加为 10px(根据 IOS7 的风格，UISegmentedControl 的圆角弧度是 10px)</li>
 </ul>
-<p>在上一张最终的结果比较</p>
+<p>在上一张最终的结果比较 </p>
 <p><img src="https://cdn.imagehost.top/wp-content/uploads/2014/02/last-diff.png" alt="最终比较"></p>
 
                 <div class="copyright-notice">
@@ -397,7 +389,7 @@ nil];
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2014/02/18/make-a-ios7-style-uisegmentedcontrol-in-ios6/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd083003a0hbm041e7tsk"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfk003imsbm2q01efoe"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

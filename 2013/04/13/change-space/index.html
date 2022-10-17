@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -218,25 +214,17 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h2 id="为什么要换空间">为什么要换空间</h2>
-<p>之前使用的空间是刚刚打算建立博客，对相关的事务都不熟悉，谨慎起见，就找了个免费空间，打算试试看看，就算不行也没的损失。可事实证明，很多时候，免费其实比收费还要亏的。</p>
-<p>免费的空间使用期限是一个月，要到处给空间服务商打广告才可能延期，这我是没有时间的，所以打算在一个月快要到期的时候升级到收费空间。傻傻的充了30块钱，可是到处都找不到升级空间的入口，发邮件给空间服务商提供的邮箱，也是石沉大海——没的半点回音。</p>
+                <h2 id="为什么要换空间"><a href="#为什么要换空间" class="headerlink" title="为什么要换空间"></a>为什么要换空间</h2><p>之前使用的空间是刚刚打算建立博客，对相关的事务都不熟悉，谨慎起见，就找了个免费空间，打算试试看看，就算不行也没的损失。可事实证明，很多时候，免费其实比收费还要亏的。 </p>
+<p>免费的空间使用期限是一个月，要到处给空间服务商打广告才可能延期，这我是没有时间的，所以打算在一个月快要到期的时候升级到收费空间。傻傻的充了30块钱，可是到处都找不到升级空间的入口，发邮件给空间服务商提供的邮箱，也是石沉大海——没的半点回音。 </p>
 <p>无奈之下，为了防止到期之后空间删除会连着自己的网站也没了，只好另找一家。</p>
-<h2 id="空间的选择">空间的选择</h2>
-<p>托对网站建设比较了解的同事推荐一下，自己也顺便找找看。</p>
-<p>同事推荐了一个，挺便宜的，空间大小，数据库大小也比自己找的好。可是一看是Windows的，服务器是IIS，就有点不情愿了。因为之前那个免费的空间也是用的IIS，弄的我没法自定义个性化的文章链接，每个链接都是要包含个index.php，看着不舒服，对seo也不好。</p>
-<p>找到最后又找回当初申请域名的西部数码，申请了个港台虚拟主机，最便宜的那种198元/年，100M空间和50M MySQL数据库，想想自己的博客才刚刚开通，这样的配置到也过的去，而且这次学聪明了，专门向客服打听了能不能升级。客服的回应是只要补足当月的差价就行，所以心里也是更加放心了。</p>
+<h2 id="空间的选择"><a href="#空间的选择" class="headerlink" title="空间的选择"></a>空间的选择</h2><p>托对网站建设比较了解的同事推荐一下，自己也顺便找找看。 </p>
+<p>同事推荐了一个，挺便宜的，空间大小，数据库大小也比自己找的好。可是一看是Windows的，服务器是IIS，就有点不情愿了。因为之前那个免费的空间也是用的IIS，弄的我没法自定义个性化的文章链接，每个链接都是要包含个index.php，看着不舒服，对seo也不好。 </p>
+<p>找到最后又找回当初申请域名的西部数码，申请了个港台虚拟主机，最便宜的那种198元&#x2F;年，100M空间和50M MySQL数据库，想想自己的博客才刚刚开通，这样的配置到也过的去，而且这次学聪明了，专门向客服打听了能不能升级。客服的回应是只要补足当月的差价就行，所以心里也是更加放心了。 </p>
 <p>选用的是Linux系统和Apache2.2的，这种虚拟主机可以自定义的配置很少，系统的选择上关系不是很大，不过对于Linux总是有种亲切感。支持.htaccess，可以自定义URL。</p>
-<h2 id="空间的迁移">空间的迁移</h2>
-<h3 id="文件内容的迁移">文件内容的迁移</h3>
-<p>西部这边提供了一个“网站搬家”的功能，就是提供ftp的ip，用户名和密码，他就主动的去把对应目录里面的内容下载到空间里。这样比自己手动下载然后上传要方便不少。</p>
-<h3 id="数据库的迁移">数据库的迁移</h3>
-<p>在迁移之前已经把wordpress相关的数据导出成sql文件了，再次导入也很简单，可以使用西部这边提供的工具，也可以进入phpmyadmin手动的导入。导入之后，因为数据库名，用户名和密码和原先的网站有所不同，这个时候只要打开根目录下面的wp-config.php修改相应的配置就可以了。</p>
-<h3 id="域名的迁移">域名的迁移</h3>
-<p>因为是自己第一次迁移，也不知道自己的方法对不对。我的做法是先在域名管理商这边把原先域名指向的IP删除，然后连上西部给定的二级域名（西部这边不是提供的ip地址而是一个二级域名，不过都能正常访问，只是不知道这样的处理对网站的seo优化有没有影响，如果有的话，到时候就需要花上100去弄个独立ip了。</p>
-<h2 id="迁移完成后">迁移完成后</h2>
-<p>迁移完成之后，访问网站，可是却总是提示的首页循环重定向，不明白出这样的原因是什么，最后在<a target="_blank" rel="noopener" href="http://www.xiangguoqi.com/read/247.html">http://www.xiangguoqi.com/read/247.html</a>这个网站找到了几种解决方案，试了下第一个方法：<br>
-修改wp-include/template-loader.php</p>
+<h2 id="空间的迁移"><a href="#空间的迁移" class="headerlink" title="空间的迁移"></a>空间的迁移</h2><h3 id="文件内容的迁移"><a href="#文件内容的迁移" class="headerlink" title="文件内容的迁移"></a>文件内容的迁移</h3><p>西部这边提供了一个“网站搬家”的功能，就是提供ftp的ip，用户名和密码，他就主动的去把对应目录里面的内容下载到空间里。这样比自己手动下载然后上传要方便不少。</p>
+<h3 id="数据库的迁移"><a href="#数据库的迁移" class="headerlink" title="数据库的迁移"></a>数据库的迁移</h3><p>在迁移之前已经把wordpress相关的数据导出成sql文件了，再次导入也很简单，可以使用西部这边提供的工具，也可以进入phpmyadmin手动的导入。导入之后，因为数据库名，用户名和密码和原先的网站有所不同，这个时候只要打开根目录下面的wp-config.php修改相应的配置就可以了。</p>
+<h3 id="域名的迁移"><a href="#域名的迁移" class="headerlink" title="域名的迁移"></a>域名的迁移</h3><p>因为是自己第一次迁移，也不知道自己的方法对不对。我的做法是先在域名管理商这边把原先域名指向的IP删除，然后连上西部给定的二级域名（西部这边不是提供的ip地址而是一个二级域名，不过都能正常访问，只是不知道这样的处理对网站的seo优化有没有影响，如果有的话，到时候就需要花上100去弄个独立ip了。</p>
+<h2 id="迁移完成后"><a href="#迁移完成后" class="headerlink" title="迁移完成后"></a>迁移完成后</h2><p>迁移完成之后，访问网站，可是却总是提示的首页循环重定向，不明白出这样的原因是什么，最后在<a target="_blank" rel="noopener" href="http://www.xiangguoqi.com/read/247.html">http://www.xiangguoqi.com/read/247.html</a>这个网站找到了几种解决方案，试了下第一个方法：<br>修改wp-include&#x2F;template-loader.php</p>
 <pre><code>/\*\*
  \* Loads the correct template based on the visitor’s url
  \* @package WordPress
@@ -250,7 +238,7 @@ if(defined(‘WP\_USE\_THEMES’)&amp;&amp; WP\_USE\_THEMES )
  do\_action(‘template\_redirect’);
 */
 </code></pre>
-<p>保存之后再次访问网站，正常。</p>
+<p>保存之后再次访问网站，正常。 </p>
 <p>至此，整个网站迁移完毕。而且相比于之前的美国主机，港台主机在网站访问速度上面有着较明显的提升</p>
 
                 <div class="copyright-notice">
@@ -343,7 +331,7 @@ if(defined(‘WP\_USE\_THEMES’)&amp;&amp; WP\_USE\_THEMES )
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2013/04/13/change-space/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd07s001k0hbmc84l3k06"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfd001imsbm4fi7elys"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

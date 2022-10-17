@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -213,46 +209,39 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <p>回到目录：<a href="https://www.shuizhongyueming.com/2015/04/the-use-of-sublime-text/">Sublime Text的使用</a></p>
-<h2 id="Package-Control">Package Control</h2>
-<p>Package Control，是一个方便的管理Sublime Text插件的包管理器，几乎是必备的Sublime 工具</p>
-<h3 id="安装">安装</h3>
-<p>从菜单 View - Show Console 或者 ctrl + ~ 快捷键，调出 console。将以下 Python 代码粘贴进去并 enter 执行，不出意外即完成安装。 Sublime Text 3</p>
-<pre><code>import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = 
+<h2 id="Package-Control"><a href="#Package-Control" class="headerlink" title="Package Control"></a>Package Control</h2><p>Package Control，是一个方便的管理Sublime Text插件的包管理器，几乎是必备的Sublime 工具</p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>从菜单 View - Show Console 或者 ctrl + ~ 快捷键，调出 console。将以下 Python 代码粘贴进去并 enter 执行，不出意外即完成安装。 Sublime Text 3</p>
+<pre><code>import urllib.request,os; pf = &#39;Package Control.sublime-package&#39;; ipp = 
 sublime.installed_packages_path(); urllib.request.install_opener( 
 urllib.request.build_opener( urllib.request.ProxyHandler()) ); 
-open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 
-'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())
+open(os.path.join(ipp, pf), &#39;wb&#39;).write(urllib.request.urlopen( 
+&#39;http://sublime.wbond.net/&#39; + pf.replace(&#39; &#39;,&#39;%20&#39;)).read())
 </code></pre>
 <p>Sublime Text 2</p>
-<pre><code>import urllib2,os; pf='Package Control.sublime-package'; ipp = 
+<pre><code>import urllib2,os; pf=&#39;Package Control.sublime-package&#39;; ipp = 
 sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) 
 else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler( 
-))); open( os.path.join( ipp, pf), 'wb' ).write( urllib2.urlopen( 
-'http://sublime.wbond.net/' +pf.replace( ' ','%20' )).read()); print( 'Please 
-restart Sublime Text to finish installation')
+))); open( os.path.join( ipp, pf), &#39;wb&#39; ).write( urllib2.urlopen( 
+&#39;http://sublime.wbond.net/&#39; +pf.replace( &#39; &#39;,&#39;%20&#39; )).read()); print( &#39;Please 
+restart Sublime Text to finish installation&#39;)
 </code></pre>
-<h2 id="使用">使用</h2>
-<p>使用的时候使用快捷键 <code>Ctrl</code> + <code>Shift</code> + <code>P</code> (Windows) 或者 <code>Command</code> + <code>Shift</code> + <code>P</code>(Mac) 调用命令输入界面（注意，此界面非Package Control专有）</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>使用的时候使用快捷键 <code>Ctrl</code> + <code>Shift</code> + <code>P</code> (Windows) 或者 <code>Command</code> + <code>Shift</code> + <code>P</code>(Mac) 调用命令输入界面（注意，此界面非Package Control专有） </p>
 <p><img src="https://cdn.imagehost.top/wp-content/uploads/2015/04/QQ20150418-1@2x.png" alt="Package Control"></p>
-<p>在输入框里面，输入<code>Package Control</code>就能看到所有Package Control相关的命令</p>
-<h2 id="相关命令">相关命令</h2>
-<h3 id="Package-Control-Install-Package">Package Control: Install Package</h3>
-<p>一般输入install就能通过模糊匹配查找到</p>
-<p>会列出Sublime Text官网上的所有包供浏览</p>
-<p>能根据输入的内容进行模糊查找相关的包</p>
-<p>点击需要的包，就能自动安装。</p>
-<p>PS: 已经安装的包不会在此展示</p>
+<p> 在输入框里面，输入<code>Package Control</code>就能看到所有Package Control相关的命令</p>
+<h2 id="相关命令"><a href="#相关命令" class="headerlink" title="相关命令"></a>相关命令</h2><h3 id="Package-Control-Install-Package"><a href="#Package-Control-Install-Package" class="headerlink" title="Package Control: Install Package"></a>Package Control: Install Package</h3><p>一般输入install就能通过模糊匹配查找到 </p>
+<p>会列出Sublime Text官网上的所有包供浏览 </p>
+<p>能根据输入的内容进行模糊查找相关的包 </p>
+<p>点击需要的包，就能自动安装。 </p>
+<p>PS: 已经安装的包不会在此展示 </p>
 <p><img src="https://cdn.imagehost.top/wp-content/uploads/2015/04/QQ20150418-2@2x.png" alt="搜索Less相关的包"></p>
-<h3 id="Package-Control-List-Package">Package Control: List Package</h3>
-<p>列出当前已经安装的包，在命令行里面输入list，也能模糊匹配到，不需要整个命令全部输入</p>
-<p>也能支持模糊匹配相应安装的包</p>
-<p>点击对应的包，会打开文件夹指向对应包的目录。</p>
-<p>这个时候，可以看这个包里面的文件和相关说明（一般包的文件里面都会包含一个readme.md用来进行使用方面的相关说明）</p>
+<h3 id="Package-Control-List-Package"><a href="#Package-Control-List-Package" class="headerlink" title="Package Control: List Package"></a>Package Control: List Package</h3><p>列出当前已经安装的包，在命令行里面输入list，也能模糊匹配到，不需要整个命令全部输入 </p>
+<p>也能支持模糊匹配相应安装的包 </p>
+<p>点击对应的包，会打开文件夹指向对应包的目录。 </p>
+<p>这个时候，可以看这个包里面的文件和相关说明（一般包的文件里面都会包含一个readme.md用来进行使用方面的相关说明） </p>
 <p><img src="https://cdn.imagehost.top/wp-content/uploads/2015/04/QQ20150418-3@2x.png" alt="Mac下JSHint包的文件内容"></p>
-<h3 id="Package-Control-Remove-Package">Package Control: Remove Package</h3>
-<p>删除安装的包</p>
-<p>通过remove</p>
-<p>也能快速模糊匹配到</p>
+<h3 id="Package-Control-Remove-Package"><a href="#Package-Control-Remove-Package" class="headerlink" title="Package Control: Remove Package"></a>Package Control: Remove Package</h3><p>删除安装的包 </p>
+<p>通过remove </p>
+<p>也能快速模糊匹配到 </p>
 <p>会列出当前已经安装的包，点击选中的包，就能删除（慎重）</p>
 
                 <div class="copyright-notice">
@@ -345,7 +334,7 @@ restart Sublime Text to finish installation')
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2015/04/19/the-use-of-sublime-text-of-the-package-control/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd09000ik0hbmdr67b65s"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfs0064msbmc2z19cpf"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

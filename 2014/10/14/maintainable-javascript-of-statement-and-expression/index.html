@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -231,9 +227,7 @@
 <blockquote>
 <p>本系列的文章都是在阅读《编写可维护的JavaScript》——Nicbolas C. Zakas 的基础上做的一些个人总结</p>
 </blockquote>
-<h2 id="for-in-循环">for-in 循环</h2>
-<h2 id="遍历对象">### 遍历对象</h2>
-<p>对对象使用<code>for in</code>循环的时候，一般情况下，都应该使用<code>hasOwnProperty()</code>方法来进行过滤：</p>
+<h2 id="for-in-循环"><a href="#for-in-循环" class="headerlink" title="for-in 循环"></a>for-in 循环</h2><h2 id="遍历对象"><a href="#遍历对象" class="headerlink" title="### 遍历对象"></a>### 遍历对象</h2><p>对对象使用<code>for in</code>循环的时候，一般情况下，都应该使用<code>hasOwnProperty()</code>方法来进行过滤：</p>
 <pre><code>var prop,
     obj = &#123;
         a: &quot;aaa&quot;,
@@ -259,8 +253,7 @@ for (prop in obj) &#123; // 包含对原型链的遍历
     console.log(&quot;Property value is &quot; + obj\[prop\]);
 &#125;
 </code></pre>
-<h2 id="不要使用for-in-来遍历数组">### 不要使用for in 来遍历数组</h2>
-<pre><code>// 不好的用法
+<h2 id="不要使用for-in-来遍历数组"><a href="#不要使用for-in-来遍历数组" class="headerlink" title="### 不要使用for in 来遍历数组"></a>### 不要使用for in 来遍历数组</h2><pre><code>// 不好的用法
 var values = \[ 1, 2, 3, 4, 5, 6, 7\],
     i;
     
@@ -269,10 +262,10 @@ for (i in values) &#123;
 &#125;
 </code></pre>
 <p>不使用for in来遍历数组，是因为这样会造成一些潜在的错误，同时会有性能上面的影响。 潜在的错误：</p>
-<pre><code>var arr = \[ 'a', 'b', 'c'\],
+<pre><code>var arr = \[ &#39;a&#39;, &#39;b&#39;, &#39;c&#39;\],
     i;
 
-arr.test = 'ddd';
+arr.test = &#39;ddd&#39;;
 
 for ( i in arr )&#123;
     console.log(i,arr\[i\]);
@@ -368,6 +361,7 @@ console.log(timeEnd - timeStart);
 </tr>
 </tbody>
 </table>
+
 <p>虽然在实际项目中，数组的长度不会那么长，但是能提高一点效率总是好的</p>
 
                 <div class="copyright-notice">
@@ -460,7 +454,7 @@ console.log(timeEnd - timeStart);
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2014/10/14/maintainable-javascript-of-statement-and-expression/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd08300370hbm7jcx3b1q"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfk003emsbm0wfjgeed"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

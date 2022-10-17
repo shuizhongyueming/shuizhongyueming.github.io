@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -233,16 +229,14 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h2 id="起因">起因</h2>
-<p>今天在学习《HTML5+Javascript动画基础》这本书的时候，在第八章的第三节讲到如何用三个弹簧连接三个点来做拉伸运动。</p>
-<p>在做完例子之后，就想到如果是四个点，五个点，怎么样。</p>
-<p>就改写了一下代码，把点的数目变量化。最终的效果是能实现各个点最终的拉伸运动到平衡，可是点之间的连线不是很好看，有些是交叉的。</p>
-<p><img src="https://cdn.imagehost.top/wp-content/uploads/2018/06/%E8%AF%A1%E5%BC%82%E7%9A%84%E5%A4%9A%E8%BE%B9%E5%BD%A2%E8%BF%9E%E7%BA%BF-300x234.png" alt=""></p>
+                <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>今天在学习《HTML5+Javascript动画基础》这本书的时候，在第八章的第三节讲到如何用三个弹簧连接三个点来做拉伸运动。 </p>
+<p>在做完例子之后，就想到如果是四个点，五个点，怎么样。 </p>
+<p>就改写了一下代码，把点的数目变量化。最终的效果是能实现各个点最终的拉伸运动到平衡，可是点之间的连线不是很好看，有些是交叉的。 </p>
+<p><img src="https://cdn.imagehost.top/wp-content/uploads/2018/06/%E8%AF%A1%E5%BC%82%E7%9A%84%E5%A4%9A%E8%BE%B9%E5%BD%A2%E8%BF%9E%E7%BA%BF-300x234.png"> </p>
 <p>于是就想着能不能优化这一块。</p>
-<h2 id="旋转连线">旋转连线</h2>
-<p>前面例子里面的点，都是随机位置，所以连线不可控。所以想先从这块着手。</p>
-<p>先以某一个点为参照点，获得其他点相对于这个点的角度。</p>
-<p>然后按照角度从小到大的去连接这些点，这样就能画出一个正常的多边形了。</p>
+<h2 id="旋转连线"><a href="#旋转连线" class="headerlink" title="旋转连线"></a>旋转连线</h2><p>前面例子里面的点，都是随机位置，所以连线不可控。所以想先从这块着手。 </p>
+<p>先以某一个点为参照点，获得其他点相对于这个点的角度。 </p>
+<p>然后按照角度从小到大的去连接这些点，这样就能画出一个正常的多边形了。 </p>
 <p>大致实现代码如下：</p>
 <pre><code>let balls = [];
 let ballNum = 6;
@@ -269,21 +263,19 @@ balls = balls.sort((ballA, ballB) =&gt; &#123;
   return ballA.angle - ballB.angle
 &#125;)
 </code></pre>
-<p>这样在最后绘制连线的时候，遍历数组就能按照角度从小到大来绘制了。</p>
-<p>效果如下：</p>
-<p><img src="https://cdn.imagehost.top/wp-content/uploads/2018/06/%E5%A4%9A%E8%BE%B9%E5%BD%A2%E4%B8%8D%E4%BA%A4%E5%8F%89-300x158.png" alt=""></p>
-<p>这样是能极大的减少交叉线的情况，可还是无法完全避免。</p>
+<p>这样在最后绘制连线的时候，遍历数组就能按照角度从小到大来绘制了。 </p>
+<p>效果如下： </p>
+<p><img src="https://cdn.imagehost.top/wp-content/uploads/2018/06/%E5%A4%9A%E8%BE%B9%E5%BD%A2%E4%B8%8D%E4%BA%A4%E5%8F%89-300x158.png"> </p>
+<p>这样是能极大的减少交叉线的情况，可还是无法完全避免。 </p>
 <p>接下来，想尝试优化这个方案，比如angle用Math.abs来取正，或者每一个点都找夹角最小的点来连线。可是结果都不行，无法避免交叉线。</p>
-<h2 id="基于中心点旋转">基于中心点旋转</h2>
-<p>后面又想到一个思路，如果能确定多边形的中心点，那么分别计算所有点相对于中心点的夹角，就能以顺时针或者逆时针来连接这些点。</p>
-<p>可是在网上找了半天，所有点算法里面，都是要求有一系列按某个时针顺序排列的点。</p>
+<h2 id="基于中心点旋转"><a href="#基于中心点旋转" class="headerlink" title="基于中心点旋转"></a>基于中心点旋转</h2><p>后面又想到一个思路，如果能确定多边形的中心点，那么分别计算所有点相对于中心点的夹角，就能以顺时针或者逆时针来连接这些点。 </p>
+<p>可是在网上找了半天，所有点算法里面，都是要求有一系列按某个时针顺序排列的点。 </p>
 <p>可是如果我有这些点，就已经能绘制多边形了。只好放弃</p>
-<h2 id="X轴两极点分割">X轴两极点分割</h2>
-<p>无奈之下只好找Google，然后就发现了知乎上的一个答案挺好的：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/27497617/answer/36880449">如何将平面上无序的一组点连成一个简单多边形？</a></p>
-<p>具体算法描述，大家看那个答案就好，我就不赘述了。</p>
-<p>不过在连接上链和下链的时候，其实只要保证上链是X轴降序连接，下链是X轴升序连接即可（以逆时针方向绘制）。至于X轴相同的点，不管是优先Y轴大的还是小的都可以。</p>
-<p>实现的时候，是严格按照答案里面的算法实现的。</p>
-<p>在判断一个点是属于上链还是下链的时候，一开始想的是基于两点确定直线的函数方程，再引入点的坐标来计算。不过后面想到，所有的点都以最左边的极点来计算斜角，然后根据角度大小来划分，视觉上更好理解。</p>
+<h2 id="X轴两极点分割"><a href="#X轴两极点分割" class="headerlink" title="X轴两极点分割"></a>X轴两极点分割</h2><p>无奈之下只好找Google，然后就发现了知乎上的一个答案挺好的：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/27497617/answer/36880449">如何将平面上无序的一组点连成一个简单多边形？</a> </p>
+<p>具体算法描述，大家看那个答案就好，我就不赘述了。 </p>
+<p>不过在连接上链和下链的时候，其实只要保证上链是X轴降序连接，下链是X轴升序连接即可（以逆时针方向绘制）。至于X轴相同的点，不管是优先Y轴大的还是小的都可以。 </p>
+<p>实现的时候，是严格按照答案里面的算法实现的。 </p>
+<p>在判断一个点是属于上链还是下链的时候，一开始想的是基于两点确定直线的函数方程，再引入点的坐标来计算。不过后面想到，所有的点都以最左边的极点来计算斜角，然后根据角度大小来划分，视觉上更好理解。 </p>
 <p>大致代码如下：</p>
 <pre><code>let balls = [];
 let tempBalls = [];
@@ -366,11 +358,11 @@ balls = balls.map((ball, i) =&gt; &#123;
   return ball
 &#125;)
 </code></pre>
-<p>最终返回的balls，就是按逆时针排序的多边形的点了。</p>
-<p>效果如下：</p>
-<p><img src="https://cdn.imagehost.top/wp-content/uploads/2018/06/%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C%E5%9B%BE.png" alt="最终效果图"></p>
-<p>各个球的内部状态如下：</p>
-<p><img src="https://cdn.imagehost.top/wp-content/uploads/2018/06/%E5%90%84%E4%B8%AA%E7%90%83%E7%9A%84%E7%8A%B6%E6%80%81.png" alt="各个球的状态"></p>
+<p>最终返回的balls，就是按逆时针排序的多边形的点了。 </p>
+<p>效果如下： </p>
+<p><img src="https://cdn.imagehost.top/wp-content/uploads/2018/06/%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C%E5%9B%BE.png" alt="最终效果图"> </p>
+<p>各个球的内部状态如下： </p>
+<p><img src="https://cdn.imagehost.top/wp-content/uploads/2018/06/%E5%90%84%E4%B8%AA%E7%90%83%E7%9A%84%E7%8A%B6%E6%80%81.png" alt="各个球的状态"> </p>
 <p>有兴趣的，欢迎看看在github上面查看<a target="_blank" rel="noopener" href="https://github.com/shuizhongyueming/html5-animation/blob/master/custom/examples/ch08/16-multi-spring.html">完整源代码</a></p>
 
                 <div class="copyright-notice">
@@ -463,7 +455,7 @@ balls = balls.map((ball, i) =&gt; &#123;
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2018/06/13/canvas%E9%87%8C%E9%9D%A2%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8E%E9%9A%8F%E6%9C%BA%E7%82%B9%E7%BB%98%E5%88%B6%E4%B8%80%E4%B8%AA%E5%A4%9A%E8%BE%B9%E5%BD%A2/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd07s001f0hbm00rg8rot"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfd001fmsbm0ey7d8tt"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

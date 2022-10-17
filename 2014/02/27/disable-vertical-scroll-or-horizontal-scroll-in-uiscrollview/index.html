@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -224,25 +220,20 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h2 id="原理">原理</h2>
-<p>UIScrollView的滚动，真正滚动的不是scrollView本身，而是它的content。scrollView根据自身的frame.size和它的content的size，从而计算content的滚动。正常情况下，content的size是大雨scrollView的，这样就能够任意的滚动</p>
-<p><img src="https://cdn.imagehost.top/wp-content/uploads/2014/02/all-able.png" alt="任意滚动"></p>
-<p>所以在scrollView的content的宽度小于或等于scrollView.frame.size.width的时候，没有办法做横向的滚动，因为content已经全部展示在scrollView中了，没有滚动的必要。</p>
-<p><img src="https://cdn.imagehost.top/wp-content/uploads/2014/02/disable-vertical.png" alt="禁止了横向滚动"></p>
-<p>同理，在scrollView的content的高度小于或等于scrollView.frame.size.height的时候，没有办法做纵向的滚动。</p>
+                <h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>UIScrollView的滚动，真正滚动的不是scrollView本身，而是它的content。scrollView根据自身的frame.size和它的content的size，从而计算content的滚动。正常情况下，content的size是大雨scrollView的，这样就能够任意的滚动 </p>
+<p><img src="https://cdn.imagehost.top/wp-content/uploads/2014/02/all-able.png" alt="任意滚动"> </p>
+<p>所以在scrollView的content的宽度小于或等于scrollView.frame.size.width的时候，没有办法做横向的滚动，因为content已经全部展示在scrollView中了，没有滚动的必要。 </p>
+<p><img src="https://cdn.imagehost.top/wp-content/uploads/2014/02/disable-vertical.png" alt="禁止了横向滚动"> </p>
+<p>同理，在scrollView的content的高度小于或等于scrollView.frame.size.height的时候，没有办法做纵向的滚动。 </p>
 <p><img src="https://cdn.imagehost.top/wp-content/uploads/2014/02/horizontal-disable.png" alt="禁止了纵向滚动"></p>
-<h2 id="实现">实现</h2>
-<p>现在咱们要做的就是在代码里面针对性的进行修改，以禁止竖向滚动为例：</p>
-<p>- (void)viewDidLoad<br>
-{<br>
-[super viewDidLoad];</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>现在咱们要做的就是在代码里面针对性的进行修改，以禁止竖向滚动为例：</p>
+<p>- (void)viewDidLoad<br>{<br>    [super viewDidLoad];</p>
 <pre><code>// 使得contentSize的height等于_scroller的高度，就能禁用纵向滚动
 self.scroller.contentSize = CGSizeMake(640, _scroller.frame.size.height);
 _scroller.delegate = self;
 </code></pre>
 <p>}</p>
-<h2 id="参考文献">参考文献</h2>
-<p><a target="_blank" rel="noopener" href="https://developer.apple.com/library/ios/documentation/uikit/reference/UIScrollView_Class/Reference/UIScrollView.html#//apple_ref/doc/uid/TP40006922-CH3-SW86" title="UIScrollView Class Reference">UIScrollView Class Reference</a></p>
+<h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p><a target="_blank" rel="noopener" href="https://developer.apple.com/library/ios/documentation/uikit/reference/UIScrollView_Class/Reference/UIScrollView.html#//apple_ref/doc/uid/TP40006922-CH3-SW86" title="UIScrollView Class Reference">UIScrollView Class Reference</a> </p>
 <p><a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/5095713/disabling-vertical-scrolling-in-uiscrollview" title="Disabling vertical scrolling in UIScrollView">Disabling vertical scrolling in UIScrollView</a></p>
 
                 <div class="copyright-notice">
@@ -335,7 +326,7 @@ _scroller.delegate = self;
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2014/02/27/disable-vertical-scroll-or-horizontal-scroll-in-uiscrollview/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd07s001i0hbm2xgd95de"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfd001kmsbmd30eccv8"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

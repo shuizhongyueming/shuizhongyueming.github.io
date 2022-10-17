@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -236,18 +232,16 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h2 id="为什么需要ES5的代码">为什么需要ES5的代码</h2>
-<p>最近在开发公司的一个项目时，为了最小化代码文件，就上手尝试了一下<a target="_blank" rel="noopener" href="https://svelte.dev/">svelte</a>，这个目前号称编译后代码包最小的框架，通过把大部分的计算放在编译时进行，而不是在运行时进行，从而极大程度上减少了运行时库文件的大小</p>
+                <h2 id="为什么需要ES5的代码"><a href="#为什么需要ES5的代码" class="headerlink" title="为什么需要ES5的代码"></a>为什么需要ES5的代码</h2><p>最近在开发公司的一个项目时，为了最小化代码文件，就上手尝试了一下<a target="_blank" rel="noopener" href="https://svelte.dev/">svelte</a>，这个目前号称编译后代码包最小的框架，通过把大部分的计算放在编译时进行，而不是在运行时进行，从而极大程度上减少了运行时库文件的大小</p>
 <p>目前来说，效果很棒，完成一些简单的功能开发之后，整个production模式下编译的代码包在70KB左右，gzip之后的体积是26.5KB，可以说是很惊艳了。不跟<code>React</code>比，跟同样号称代码包很小的<code>Vue.js</code>比，Vue.js项目，不说业务代码，单单库文件(v2.6.10版本)就有83KB了。</p>
 <p>不过有一点问题是，svelte官方认为目前浏览器大部分都已经支持了ES6，所以他们提交到npm的runtime的代码也是直接输出的es6的代码。</p>
 <p>一开始我也比较认可这个说法的，自己的项目代码也输出的es6，然后上线了。</p>
 <p>之后我发现国外的浏览器跟国内还是不一样的进化程度。这个项目是有用<a target="_blank" rel="noopener" href="https://www.fundebug.com/">fundebug</a>来做错误监控的，上线没多久之后，错误就一直不断</p>
-<p><img src="http://cdn.imagehost.top/ipic/fzndn.png-q60" alt=""></p>
+<p><img src="http://cdn.imagehost.top/ipic/fzndn.png-q60"></p>
 <p>所以还是需要面对现实，代码还是ES5的香，就像当初为了兼容IE6,7时候写ES3的代码一样</p>
-<h2 id="事情没那么简单">事情没那么简单</h2>
-<p>首先是自己的业务代码，是基于<code>babel</code>进行代码转换的，用的<code>@babel/preset-env</code>，配置的targets值为<code>&gt; 2% in CN, last 2 major versions, not dead</code></p>
+<h2 id="事情没那么简单"><a href="#事情没那么简单" class="headerlink" title="事情没那么简单"></a>事情没那么简单</h2><p>首先是自己的业务代码，是基于<code>babel</code>进行代码转换的，用的<code>@babel/preset-env</code>，配置的targets值为<code>&gt; 2% in CN, last 2 major versions, not dead</code></p>
 <p>不过可能我们业务面对的用户群跟 browserslist-compatible 收集的数据不太匹配，编译后的代码里面const, arrow function, spread等等特性的代码都还在，没办法，又只好手动指定来一些plugin，最终的.babelrc内容如下：</p>
-<pre><code class="language-json">&#123;
+<pre><code class="json">&#123;
   &quot;presets&quot;: [
     [
       &quot;@babel/preset-env&quot;,
@@ -270,21 +264,20 @@
 <p>这番配置之后，业务代码是已经都转换为ES5的了，可是从svelte import过来的代码，却没有被正确转换为ES5的。</p>
 <p>在网上搜了一些解决方案，一个svelte-loader里面的<a target="_blank" rel="noopener" href="https://github.com/sveltejs/svelte-loader/issues/62">issue</a>给了一个解决方案，思路是使用loader进行相应格式文件处理的时候，把<code>node_modules/svelte/</code>模块下的文件也处理一下</p>
 <p>尝试了一下，发现并不可以，也不知道是svelte的版本升级之后不兼容，还是我这边配置有问题</p>
-<h2 id="自行编译svelte">自行编译svelte</h2>
-<p>最后我想，既然我没法在项目里面把svelte的runtime代码丢给babel处理，那不如从源头解决这个问题。git clone下来svelte，编译为es5的代码，然后在用yarn link的方式引用到业务项目里面</p>
+<h2 id="自行编译svelte"><a href="#自行编译svelte" class="headerlink" title="自行编译svelte"></a>自行编译svelte</h2><p>最后我想，既然我没法在项目里面把svelte的runtime代码丢给babel处理，那不如从源头解决这个问题。git clone下来svelte，编译为es5的代码，然后在用yarn link的方式引用到业务项目里面</p>
 <p>因为svelte是基于typescript编写的，当时在我看来，改编译为es5很简单，直接在<code>tsconfig.json</code>里面把targets改成es5，然后运行<code>npm run build</code>命令来重新编译即可。</p>
 <p>可是不行。</p>
 <p>再仔细看了一下rollup.config.js</p>
-<pre><code class="language-javascript">import sucrase from 'rollup-plugin-sucrase';
-import typescript from 'rollup-plugin-typescript';
+<pre><code class="javascript">import sucrase from &#39;rollup-plugin-sucrase&#39;;
+import typescript from &#39;rollup-plugin-typescript&#39;;
 const ts_plugin = is_publish
-	? typescript(&#123;
-		include: 'src/**',
-		typescript: require('typescript')
-	&#125;)
-	: sucrase(&#123;
-		transforms: ['typescript']
-	&#125;);
+    ? typescript(&#123;
+        include: &#39;src/**&#39;,
+        typescript: require(&#39;typescript&#39;)
+    &#125;)
+    : sucrase(&#123;
+        transforms: [&#39;typescript&#39;]
+    &#125;);
 </code></pre>
 <p>在publish环境下使用typescript来编译ts文件，其他情况下使用<a target="_blank" rel="noopener" href="https://github.com/alangpierce/sucrase">Sucrase</a>来编译ts文件</p>
 <p>很奇怪的是，build命令并没有设定环境为publish。而Sucrase，看了一下，是一个Babel的替代品，为了加快编译速度，编译出来的代码都是面向现代浏览器，也就是没有什么语法转换和polyfill的。</p>
@@ -383,7 +376,7 @@ const ts_plugin = is_publish
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2019/08/13/%E5%A6%82%E4%BD%95%E4%BD%BF%E5%BE%97Svelte%E9%A1%B9%E7%9B%AE%E8%BE%93%E5%87%BAES5%E4%BB%A3%E7%A0%81/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd09a00ks0hbmd2er3kji"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfz008imsbm96ti1ekf"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

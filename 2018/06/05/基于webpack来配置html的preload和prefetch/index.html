@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -236,176 +232,168 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h2 id="起因">起因</h2>
-<p>最近在做一个手机站点，服务器用的Google Cloud，但是用户多是国内的。所以在提升页面加载和响应速度这块，是很重视的。</p>
-<p>一开始是想使用manifest.json来做Application Cache, 不过后面发现Google和FireFox都有提到打算废弃这个标准并建议大家改用Service Worker。</p>
-<p>可是我要做到站点是文章居多的偏新闻性质的，而且交互也不多，用Service Worker来做PWA，感觉有点大材小用。所以想找一些更好实践，而且对于css和js资源的缓存和快速加载有意义的方案。</p>
+                <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>最近在做一个手机站点，服务器用的Google Cloud，但是用户多是国内的。所以在提升页面加载和响应速度这块，是很重视的。 </p>
+<p>一开始是想使用manifest.json来做Application Cache, 不过后面发现Google和FireFox都有提到打算废弃这个标准并建议大家改用Service Worker。 </p>
+<p>可是我要做到站点是文章居多的偏新闻性质的，而且交互也不多，用Service Worker来做PWA，感觉有点大材小用。所以想找一些更好实践，而且对于css和js资源的缓存和快速加载有意义的方案。 </p>
 <p>prefetch和preload就出现在眼前了。</p>
-<h2 id="关于prefetch和preload">关于prefetch和preload</h2>
-<p>具体的技术介绍，这里就不详述，大家可以看看MDN的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content">这篇文章</a></p>
-<p>这里说一下preload和prefetch的区别：</p>
-<p>preload是<strong>通知浏览器尽快的去加载当前页面现在或者将来需要的一些资源文件</strong>(css,js,image,viedo,audio,fonts等等)，这个加载跟页面解析是并行的，不会阻塞页面本身的加载。</p>
+<h2 id="关于prefetch和preload"><a href="#关于prefetch和preload" class="headerlink" title="关于prefetch和preload"></a>关于prefetch和preload</h2><p>具体的技术介绍，这里就不详述，大家可以看看MDN的<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Preloading_content">这篇文章</a> </p>
+<p>这里说一下preload和prefetch的区别： </p>
+<p>preload是<strong>通知浏览器尽快的去加载当前页面现在或者将来需要的一些资源文件</strong>(css,js,image,viedo,audio,fonts等等)，这个加载跟页面解析是并行的，不会阻塞页面本身的加载。 </p>
 <p>prefetch是一种预测，预测访问当前页面A的用户很可能会访问页面B，所以<strong>在页面A提前告知浏览器去加载页面B的资源</strong>。这个提前加载的优先级最低，不会干扰页面的正常资源的加载解析，也不会干扰preload。</p>
-<h2 id="兼容性">兼容性</h2>
-<p>preload在pc上，chrome和firefox支持比较好,</p>
-<p>eage是还在开发状态，safari的最新版本也已经支持了。在手机端的支持就不是很好，Andriod 需要5之后的webview才支持，国内的UC，QQ和Baidu都不支持；iOS是最新的11.3开始支持</p>
-<p>具体参看：<a target="_blank" rel="noopener" href="https://caniuse.com/#search=preload">caniuse preload</a></p>
-<p>prefetch的兼容性，相对好点，除了MacOS和iOS上的safari不支持之外，其他浏览器都支持了。</p>
-<p>具体参看：<a target="_blank" rel="noopener" href="https://caniuse.com/#search=prefetch">caniuse prefetch</a></p>
+<h2 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h2><p>preload在pc上，chrome和firefox支持比较好, </p>
+<p>eage是还在开发状态，safari的最新版本也已经支持了。在手机端的支持就不是很好，Andriod 需要5之后的webview才支持，国内的UC，QQ和Baidu都不支持；iOS是最新的11.3开始支持 </p>
+<p>具体参看：<a target="_blank" rel="noopener" href="https://caniuse.com/#search=preload">caniuse preload</a> </p>
+<p>prefetch的兼容性，相对好点，除了MacOS和iOS上的safari不支持之外，其他浏览器都支持了。 </p>
+<p>具体参看：<a target="_blank" rel="noopener" href="https://caniuse.com/#search=prefetch">caniuse prefetch</a> </p>
 <p>另外，<strong>preload和prefetch都是申明性质的，所以就算不支持，也不会影响现有页面的任何功能</strong></p>
-<h2 id="关于站点的webpack配置">关于站点的webpack配置</h2>
-<p>为了方便js和css资源的缓存，在nginx上是配置了很长的过期时间，所以对应的，css和js的编译后的文件名都做了hash后缀。这样，线上的更新，都是文件的替换而不是刷新缓存。</p>
-<p>为了方便的实现html里面css和js资源文件能在编译后自动更新路径，使用了<a target="_blank" rel="noopener" href="https://webpack.js.org/plugins/html-webpack-plugin/">HtmlWebpackPlugin</a>来实现html的编译和输出</p>
+<h2 id="关于站点的webpack配置"><a href="#关于站点的webpack配置" class="headerlink" title="关于站点的webpack配置"></a>关于站点的webpack配置</h2><p>为了方便js和css资源的缓存，在nginx上是配置了很长的过期时间，所以对应的，css和js的编译后的文件名都做了hash后缀。这样，线上的更新，都是文件的替换而不是刷新缓存。 </p>
+<p>为了方便的实现html里面css和js资源文件能在编译后自动更新路径，使用了<a target="_blank" rel="noopener" href="https://webpack.js.org/plugins/html-webpack-plugin/">HtmlWebpackPlugin</a>来实现html的编译和输出 </p>
 <p>而在HtmlWebpackPlugin本身也有插件机制，其中一个由GoogleChromeLabs开发的插件<a target="_blank" rel="noopener" href="https://github.com/GoogleChromeLabs/preload-webpack-plugin">PreloadWebpackPlugin</a>，就能方便的给编译的html文件添加相关资源的preload和pretch</p>
-<h2 id="具体实现-针对多页面多Entry情况">具体实现(针对多页面多Entry情况)</h2>
-<p>如果你是一个单页面应用，那么一切都很简单，就不多说了。这里主要说一下在处理多页面的输出时的注意点</p>
+<h2 id="具体实现-针对多页面多Entry情况"><a href="#具体实现-针对多页面多Entry情况" class="headerlink" title="具体实现(针对多页面多Entry情况)"></a>具体实现(针对多页面多Entry情况)</h2><p>如果你是一个单页面应用，那么一切都很简单，就不多说了。这里主要说一下在处理多页面的输出时的注意点 </p>
 <p>首先，说一下我的几个module的版本：</p>
 <pre><code>&quot;webpack&quot;: &quot;^4.10.2&quot;,
 &quot;html-webpack-plugin&quot;: &quot;^3.2.0&quot;,
 &quot;preload-webpack-plugin&quot;: &quot;^3.0.0-alpha.3&quot;,
 </code></pre>
 <p>PreloadWebpackPlugin，我一开始用的是正式版的<code>v2.3.0</code>，可是我的webpack是4.x版本，有点不兼容。按照官方issues上的解决方案，改为安装了<code>preload-webpack-plugin@latest</code>，然后才可以的。</p>
-<h3 id="HtmlWebpackPlugin多页面配置">HtmlWebpackPlugin多页面配置</h3>
-<p>首先，你需要配置好HtmlWebpackPlugin，不同的页面使用不同的template，编译到不同的filename，同时还要指定哪些chunks需要加载到页面里面。</p>
+<h3 id="HtmlWebpackPlugin多页面配置"><a href="#HtmlWebpackPlugin多页面配置" class="headerlink" title="HtmlWebpackPlugin多页面配置"></a>HtmlWebpackPlugin多页面配置</h3><p>首先，你需要配置好HtmlWebpackPlugin，不同的页面使用不同的template，编译到不同的filename，同时还要指定哪些chunks需要加载到页面里面。 </p>
 <p>我的站点是目前包括四个页面index.html, book.html, content.html和search.html，对应配置如下：</p>
 <pre><code>    new HtmlWebpackPlugin(&#123;
-      title: 'index',
-      template: './src/pages/index/index.html',
-      filename: 'index.html',
-      chunks: ['index']
+      title: &#39;index&#39;,
+      template: &#39;./src/pages/index/index.html&#39;,
+      filename: &#39;index.html&#39;,
+      chunks: [&#39;index&#39;]
     &#125;),
     new HtmlWebpackPlugin(&#123;
-      title: 'book',
-      template: './src/pages/book/book.html',
-      filename: 'book.html',
-      chunks: ['book']
+      title: &#39;book&#39;,
+      template: &#39;./src/pages/book/book.html&#39;,
+      filename: &#39;book.html&#39;,
+      chunks: [&#39;book&#39;]
     &#125;),
     new HtmlWebpackPlugin(&#123;
-      title: 'content',
-      template: './src/pages/content/content.html',
-      filename: 'content.html',
-      chunks: ['content']
+      title: &#39;content&#39;,
+      template: &#39;./src/pages/content/content.html&#39;,
+      filename: &#39;content.html&#39;,
+      chunks: [&#39;content&#39;]
     &#125;),
     new HtmlWebpackPlugin(&#123;
-      title: 'search',
-      template: './src/pages/search/search.html',
-      filename: 'search.html',
-      chunks: ['search']
+      title: &#39;search&#39;,
+      template: &#39;./src/pages/search/search.html&#39;,
+      filename: &#39;search.html&#39;,
+      chunks: [&#39;search&#39;]
     &#125;),
 </code></pre>
 <p>完成这一步之后，编译，dist目录应该有对应的四个文件，里面的资源也能正确加载。接下来就是配置preload了</p>
-<h3 id="preload配置">preload配置</h3>
-<p>PreloadWebpackPlugin这个插件更适用于单页面应用，对于多页面应用，在配置上比较繁琐一点。</p>
-<p>首先，需要使用<code>excludeHtmlNames</code>来反向排除所有页面，只关联你要配置的那个页面，</p>
-<p>再然后，使用<code>include</code>选项来明确指定哪些资源要被preload</p>
-<p>最后，每一个页面对应添加一个PreloadWebpackPlugin的实例</p>
-<p>还有一点需要补充说明一下，在webpack配置的plugins里面，PreloadWebpackPlugin的配置需要在HtmlWebpackPlugin之后，不然PreloadWebpackPlugin找不到HtmlWebpackPlugin提供的hooks，会报错。</p>
+<h3 id="preload配置"><a href="#preload配置" class="headerlink" title="preload配置"></a>preload配置</h3><p>PreloadWebpackPlugin这个插件更适用于单页面应用，对于多页面应用，在配置上比较繁琐一点。 </p>
+<p>首先，需要使用<code>excludeHtmlNames</code>来反向排除所有页面，只关联你要配置的那个页面， </p>
+<p>再然后，使用<code>include</code>选项来明确指定哪些资源要被preload </p>
+<p>最后，每一个页面对应添加一个PreloadWebpackPlugin的实例 </p>
+<p>还有一点需要补充说明一下，在webpack配置的plugins里面，PreloadWebpackPlugin的配置需要在HtmlWebpackPlugin之后，不然PreloadWebpackPlugin找不到HtmlWebpackPlugin提供的hooks，会报错。 </p>
 <p>完成上面这一步之后的配置如下：</p>
 <pre><code>    new HtmlWebpackPlugin(&#123;
-      title: 'index',
-      template: './src/pages/index/index.html',
-      filename: 'index.html',
-      chunks: ['index']
+      title: &#39;index&#39;,
+      template: &#39;./src/pages/index/index.html&#39;,
+      filename: &#39;index.html&#39;,
+      chunks: [&#39;index&#39;]
     &#125;),
     new HtmlWebpackPlugin(&#123;
-      title: 'book',
-      template: './src/pages/book/book.html',
-      filename: 'book.html',
-      chunks: ['book']
+      title: &#39;book&#39;,
+      template: &#39;./src/pages/book/book.html&#39;,
+      filename: &#39;book.html&#39;,
+      chunks: [&#39;book&#39;]
     &#125;),
     new HtmlWebpackPlugin(&#123;
-      title: 'content',
-      template: './src/pages/content/content.html',
-      filename: 'content.html',
-      chunks: ['content']
+      title: &#39;content&#39;,
+      template: &#39;./src/pages/content/content.html&#39;,
+      filename: &#39;content.html&#39;,
+      chunks: [&#39;content&#39;]
     &#125;),
     new HtmlWebpackPlugin(&#123;
-      title: 'search',
-      template: './src/pages/search/search.html',
-      filename: 'search.html',
-      chunks: ['search']
+      title: &#39;search&#39;,
+      template: &#39;./src/pages/search/search.html&#39;,
+      filename: &#39;search.html&#39;,
+      chunks: [&#39;search&#39;]
     &#125;),
     new PreloadWebpackPlugin(&#123;
-      rel: 'preload',
-      excludeHtmlNames: ['book.html', 'content.html', 'search.html'],
-      include: ['index']
+      rel: &#39;preload&#39;,
+      excludeHtmlNames: [&#39;book.html&#39;, &#39;content.html&#39;, &#39;search.html&#39;],
+      include: [&#39;index&#39;]
     &#125;),
     new PreloadWebpackPlugin(&#123;
-      rel: 'preload',
-      excludeHtmlNames: ['index.html', 'content.html', 'search.html'],
-      include: ['book']
+      rel: &#39;preload&#39;,
+      excludeHtmlNames: [&#39;index.html&#39;, &#39;content.html&#39;, &#39;search.html&#39;],
+      include: [&#39;book&#39;]
     &#125;),
     new PreloadWebpackPlugin(&#123;
-      rel: 'preload',
-      excludeHtmlNames: ['index.html', 'book.html', 'search.html'],
-      include: ['content']
+      rel: &#39;preload&#39;,
+      excludeHtmlNames: [&#39;index.html&#39;, &#39;book.html&#39;, &#39;search.html&#39;],
+      include: [&#39;content&#39;]
     &#125;),
     new PreloadWebpackPlugin(&#123;
-      rel: 'preload',
-      excludeHtmlNames: ['index.html', 'book.html', 'content.html'],
-      include: ['search']
+      rel: &#39;preload&#39;,
+      excludeHtmlNames: [&#39;index.html&#39;, &#39;book.html&#39;, &#39;content.html&#39;],
+      include: [&#39;search&#39;]
     &#125;),
 </code></pre>
 <p>可以看到，在excludeHtmlNames的配置上比较繁琐，如果页面多的话，最好写个函数来实现过滤。</p>
-<h3 id="prefetch的配置">prefetch的配置</h3>
-<p>一个PreloadWebpackPlugin实例同时只能干一件事情，根据rel字段区分，要么是preload，要么是prefetch。所以，还得新增PreloadWebpackPlugin的实例。</p>
-<p>不过不着急，先想好如何配置prefetch。在我的这个站点里面，在index页面，大部分的链接都是指向的book页面，所以可以在index页面prefetch book页面的资源。同样的还有，在book页面prefetch content页面的资源。</p>
-<p>定好之后，就是配置了，跟preload的配置比较类似，需要区分的就是rel和include这两个选项</p>
-<p>rel需要改成prefetch，这不用多说。include，这个时候需要改成你打算prefetch的页面的资源，而不是当前页面的资源。</p>
+<h3 id="prefetch的配置"><a href="#prefetch的配置" class="headerlink" title="prefetch的配置"></a>prefetch的配置</h3><p>一个PreloadWebpackPlugin实例同时只能干一件事情，根据rel字段区分，要么是preload，要么是prefetch。所以，还得新增PreloadWebpackPlugin的实例。 </p>
+<p>不过不着急，先想好如何配置prefetch。在我的这个站点里面，在index页面，大部分的链接都是指向的book页面，所以可以在index页面prefetch book页面的资源。同样的还有，在book页面prefetch content页面的资源。 </p>
+<p>定好之后，就是配置了，跟preload的配置比较类似，需要区分的就是rel和include这两个选项 </p>
+<p>rel需要改成prefetch，这不用多说。include，这个时候需要改成你打算prefetch的页面的资源，而不是当前页面的资源。 </p>
 <p>最终的配置如下：</p>
 <pre><code>    new HtmlWebpackPlugin(&#123;
-      title: 'index',
-      template: './src/pages/index/index.html',
-      filename: 'index.html',
-      chunks: ['index']
+      title: &#39;index&#39;,
+      template: &#39;./src/pages/index/index.html&#39;,
+      filename: &#39;index.html&#39;,
+      chunks: [&#39;index&#39;]
     &#125;),
     new HtmlWebpackPlugin(&#123;
-      title: 'book',
-      template: './src/pages/book/book.html',
-      filename: 'book.html',
-      chunks: ['book']
+      title: &#39;book&#39;,
+      template: &#39;./src/pages/book/book.html&#39;,
+      filename: &#39;book.html&#39;,
+      chunks: [&#39;book&#39;]
     &#125;),
     new HtmlWebpackPlugin(&#123;
-      title: 'content',
-      template: './src/pages/content/content.html',
-      filename: 'content.html',
-      chunks: ['content']
+      title: &#39;content&#39;,
+      template: &#39;./src/pages/content/content.html&#39;,
+      filename: &#39;content.html&#39;,
+      chunks: [&#39;content&#39;]
     &#125;),
     new HtmlWebpackPlugin(&#123;
-      title: 'search',
-      template: './src/pages/search/search.html',
-      filename: 'search.html',
-      chunks: ['search']
+      title: &#39;search&#39;,
+      template: &#39;./src/pages/search/search.html&#39;,
+      filename: &#39;search.html&#39;,
+      chunks: [&#39;search&#39;]
     &#125;),
     new PreloadWebpackPlugin(&#123;
-      rel: 'preload',
-      excludeHtmlNames: ['book.html', 'content.html', 'search.html'],
-      include: ['index']
+      rel: &#39;preload&#39;,
+      excludeHtmlNames: [&#39;book.html&#39;, &#39;content.html&#39;, &#39;search.html&#39;],
+      include: [&#39;index&#39;]
     &#125;),
     new PreloadWebpackPlugin(&#123;
-      rel: 'prefetch',
-      excludeHtmlNames: ['book.html', 'content.html', 'search.html'],
-      include: ['book']
+      rel: &#39;prefetch&#39;,
+      excludeHtmlNames: [&#39;book.html&#39;, &#39;content.html&#39;, &#39;search.html&#39;],
+      include: [&#39;book&#39;]
     &#125;),
     new PreloadWebpackPlugin(&#123;
-      rel: 'preload',
-      excludeHtmlNames: ['index.html', 'content.html', 'search.html'],
-      include: ['book']
+      rel: &#39;preload&#39;,
+      excludeHtmlNames: [&#39;index.html&#39;, &#39;content.html&#39;, &#39;search.html&#39;],
+      include: [&#39;book&#39;]
     &#125;),
     new PreloadWebpackPlugin(&#123;
-      rel: 'prefetch',
-      excludeHtmlNames: ['index.html', 'content.html', 'search.html'],
-      include: ['content']
+      rel: &#39;prefetch&#39;,
+      excludeHtmlNames: [&#39;index.html&#39;, &#39;content.html&#39;, &#39;search.html&#39;],
+      include: [&#39;content&#39;]
     &#125;),
     new PreloadWebpackPlugin(&#123;
-      rel: 'preload',
-      excludeHtmlNames: ['index.html', 'book.html', 'search.html'],
-      include: ['content']
+      rel: &#39;preload&#39;,
+      excludeHtmlNames: [&#39;index.html&#39;, &#39;book.html&#39;, &#39;search.html&#39;],
+      include: [&#39;content&#39;]
     &#125;),
     new PreloadWebpackPlugin(&#123;
-      rel: 'preload',
-      excludeHtmlNames: ['index.html', 'book.html', 'content.html'],
-      include: ['search']
+      rel: &#39;preload&#39;,
+      excludeHtmlNames: [&#39;index.html&#39;, &#39;book.html&#39;, &#39;content.html&#39;],
+      include: [&#39;search&#39;]
     &#125;),
 </code></pre>
 <p>以上，就能顺利的实现，在webpack编译过程中，在html页面里面自动配置上preload和prefetch。希望能帮到大家</p>
@@ -500,7 +488,7 @@
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2018/06/05/%E5%9F%BA%E4%BA%8Ewebpack%E6%9D%A5%E9%85%8D%E7%BD%AEhtml%E7%9A%84preload%E5%92%8Cprefetch/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd09900kd0hbm7nkq2p5n"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfy0087msbm5x0y0a02"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -230,17 +226,17 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>今天把最近一直在开发的小程序放安卓手机上测试一下，结果某个页面就一直报错：<code>Uncaught TypeError: Converting circular structure to JSON</code></p>
-<p>先说一下基本的环境：</p>
-<p>系统：Android 6.0.1</p>
-<p>手机：小米4</p>
-<p>微信版本：6.6.6</p>
-<p>小程序基于mpvue开发</p>
-<p>在看到这个错误的时候，明白导致的原因应该是<strong>因为一个对象里面有循环引用，然后这个对象不幸的被JSON.stringify给调用了</strong></p>
-<p>比如下图这样的：</p>
-<p><img src="https://cdn.imagehost.top/wp-content/uploads/2018/05/%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8.png" alt="循环引用示例"></p>
-<p>可是这个有循环引用的对象在哪就不清楚了。</p>
-<p>一开始想的是vue对象的data，因为小程序里面，jscore会把这个data stringify之后发送给webview来渲染页面。一直沿着这个思路在debug</p>
+                <p>今天把最近一直在开发的小程序放安卓手机上测试一下，结果某个页面就一直报错：<code>Uncaught TypeError: Converting circular structure to JSON</code> </p>
+<p>先说一下基本的环境： </p>
+<p>系统：Android 6.0.1 </p>
+<p>手机：小米4 </p>
+<p>微信版本：6.6.6 </p>
+<p>小程序基于mpvue开发 </p>
+<p>在看到这个错误的时候，明白导致的原因应该是<strong>因为一个对象里面有循环引用，然后这个对象不幸的被JSON.stringify给调用了</strong> </p>
+<p>比如下图这样的： </p>
+<p><img src="https://cdn.imagehost.top/wp-content/uploads/2018/05/%E5%BE%AA%E7%8E%AF%E5%BC%95%E7%94%A8.png" alt="循环引用示例"> </p>
+<p>可是这个有循环引用的对象在哪就不清楚了。 </p>
+<p>一开始想的是vue对象的data，因为小程序里面，jscore会把这个data stringify之后发送给webview来渲染页面。一直沿着这个思路在debug </p>
 <p>而我出错的那个页面的data很简单</p>
 <pre><code>&#123;
   list: [],
@@ -250,15 +246,15 @@
   isLoading: false
 &#125;
 </code></pre>
-<p>唯一可能出问题的地方也就list了，可是试了很多方法，都证明了list不是有循环引用的点。</p>
-<p>无奈只好google看看大家的解决方案，然后在mpvue的github的issues里面发现有一个类似的错误的<a target="_blank" rel="noopener" href="https://github.com/Meituan-Dianping/mpvue/issues/519">issue</a></p>
-<p>虽然引发错误的原因不一样，不过最后最底下</p>
+<p>唯一可能出问题的地方也就list了，可是试了很多方法，都证明了list不是有循环引用的点。 </p>
+<p>无奈只好google看看大家的解决方案，然后在mpvue的github的issues里面发现有一个类似的错误的<a target="_blank" rel="noopener" href="https://github.com/Meituan-Dianping/mpvue/issues/519">issue</a> </p>
+<p>虽然引发错误的原因不一样，不过最后最底下 </p>
 <p><a target="_blank" rel="noopener" href="https://github.com/anchengjian">@anchengjian</a>的一个提示给了我另外一个方向:</p>
 <blockquote>
 <p>除了JSON.stringify之外，console也可能导致类似的错误。</p>
 </blockquote>
-<p>根据这个新的思路，从新读了一遍代码，发现了一句<code>console.log(this)</code>，当初调试的时候，为了方便，把整个vue的实例给log了。注释掉这一行，重新编译，在安卓上预览，果然，一切正常了。</p>
-<p>这个console.log在开发者工具和ios上都没问题，可到安卓上出了问题。可能是安卓上，微信的x5实现console.log的时候，先调用了JSON.stringify吧</p>
+<p>根据这个新的思路，从新读了一遍代码，发现了一句<code>console.log(this)</code>，当初调试的时候，为了方便，把整个vue的实例给log了。注释掉这一行，重新编译，在安卓上预览，果然，一切正常了。 </p>
+<p>这个console.log在开发者工具和ios上都没问题，可到安卓上出了问题。可能是安卓上，微信的x5实现console.log的时候，先调用了JSON.stringify吧 </p>
 <p>这个问题不想深究了，不过被这种问题耽搁了半天又无益于技术进步，想想还是记录下来，方便后来者。</p>
 
                 <div class="copyright-notice">
@@ -351,7 +347,7 @@
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2018/05/23/%E5%B0%8F%E7%A8%8B%E5%BA%8F%E6%8A%A5%E9%94%99-uncaught-typeerror-converting-circular-structure-to-json/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd09b00kz0hbm4149do5n"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfz008qmsbmbd865evb"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -227,33 +223,31 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h2 id="起因">起因</h2>
-<p>今天上午把双十二活动相关的页面给上线了，这次的发版，涉及的内容点比较多，上线的时候，没仔细想，打了一个tag就直接在线上git pull，然后活动页挂了…</p>
-<h2 id="糟糕的一连串操作">糟糕的一连串操作</h2>
-<p>我是用的<code>pm2 list</code>查看的项目的状态，发现状态变成<code>errored</code>才知道出了问题。</p>
-<p>这时候一回想才意识到，有些模块没安装。</p>
-<p>在本地执行<code>tig -- package.json</code>，快速的查找两个版本之间都安装过哪些模块，然后对应的在线上npm install。但是一直被<code>webpakc</code>的<code>uglifyjs-webpack-plugin</code>干扰的没法正常安装。 一狠心，<code>rm -rf webpack</code>直接把webpack给移除了。再次执行安装，还是同样的错误，再找到<code>node_modules/.bin/webpack</code>，移除（后面才知道用npm rm/uninstall 才是更正确的做法）。</p>
-<p>webpack的错误总算没了，然后安装又报403的错误，自有的npm服务<code>verdaccio</code>出错了。</p>
+                <h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>今天上午把双十二活动相关的页面给上线了，这次的发版，涉及的内容点比较多，上线的时候，没仔细想，打了一个tag就直接在线上git pull，然后活动页挂了…</p>
+<h2 id="糟糕的一连串操作"><a href="#糟糕的一连串操作" class="headerlink" title="糟糕的一连串操作"></a>糟糕的一连串操作</h2><p>我是用的<code>pm2 list</code>查看的项目的状态，发现状态变成<code>errored</code>才知道出了问题。 </p>
+<p>这时候一回想才意识到，有些模块没安装。 </p>
+<p>在本地执行<code>tig -- package.json</code>，快速的查找两个版本之间都安装过哪些模块，然后对应的在线上npm install。但是一直被<code>webpakc</code>的<code>uglifyjs-webpack-plugin</code>干扰的没法正常安装。 一狠心，<code>rm -rf webpack</code>直接把webpack给移除了。再次执行安装，还是同样的错误，再找到<code>node_modules/.bin/webpack</code>，移除（后面才知道用npm rm&#x2F;uninstall 才是更正确的做法）。 </p>
+<p>webpack的错误总算没了，然后安装又报403的错误，自有的npm服务<code>verdaccio</code>出错了。 </p>
 <p>这时候终于意识到，问题不是一会儿能解决的，时间来来回回也过了十分钟，赶紧回滚服务到稳定版不：</p>
 <ol>
 <li><code>git checkout v1.18.1</code>，把代码回滚到之前稳定版本。</li>
 <li>修改pm2的配置文件<code>ecosystem.config.js</code>，配置关闭watch模式，这样后面安装模块和分支切换不会干扰正在运行的服务</li>
 <li>用<code>pm2 restart</code>来重启服务，顺利关闭watch模式，服务本身也没有报错。</li>
 </ol>
-<p>回滚完成。</p>
+<p>回滚完成。 </p>
 <p>接下来先是登上内网服务器来修复npm服务的问题：</p>
 <ol>
 <li><code>ps aux | grep verdaccio</code>找到verdaccio的进程号，kill掉</li>
 <li>verdaccio &amp; 重启verdaccio</li>
 <li>在线上尝试npm install一个模块，还是有问题</li>
 <li>发现线上访问npm服务用的域名是之前废弃的</li>
-<li>编辑~/.npmrc 调整相关配置</li>
+<li>编辑~&#x2F;.npmrc 调整相关配置</li>
 <li>再次安装，成功通过</li>
 </ol>
-<p>现在npm服务正常，开始来面对之前出现的webpack出错的问题。我这个是线上服务器，是用不上webpack的，在安装模块的时候，出现这样的问题，很不正常。</p>
-<p>Google了一下，发现可以用<code>npm install --only=production</code>来让npm只安装<code>package.json</code>里面<code>dependencies</code>部分的模块。</p>
-<p>编辑package.json，整理dependencies和<code>devDependencies</code>，使得对应的模块在对应的分类中。</p>
-<p>执行<code>npm install --only=production</code>安装所有更新，之前查package.json的编辑历史那一步是多余的。</p>
+<p>现在npm服务正常，开始来面对之前出现的webpack出错的问题。我这个是线上服务器，是用不上webpack的，在安装模块的时候，出现这样的问题，很不正常。 </p>
+<p>Google了一下，发现可以用<code>npm install --only=production</code>来让npm只安装<code>package.json</code>里面<code>dependencies</code>部分的模块。 </p>
+<p>编辑package.json，整理dependencies和<code>devDependencies</code>，使得对应的模块在对应的分类中。 </p>
+<p>执行<code>npm install --only=production</code>安装所有更新，之前查package.json的编辑历史那一步是多余的。 </p>
 <p>更新完毕之后，</p>
 <ol>
 <li><code>git checkout .</code>去掉所有临时修改的文件。</li>
@@ -262,17 +256,15 @@
 <li>用<code>pm2 list</code>和<code>pm2 log</code>来检测状态和日志</li>
 </ol>
 <p>一切正常，完成上线。</p>
-<h2 id="后续操作">后续操作</h2>
-<p>在本地，重新审查了一遍package.json，一个模块一个模块的查找，去掉代码里面已经没有使用的模块，划分清除相关模块归属。</p>
-<p>编辑ecosystem.config.js，配置development环境里面开启watch模式，production环境禁用。</p>
-<p>打tag。</p>
+<h2 id="后续操作"><a href="#后续操作" class="headerlink" title="后续操作"></a>后续操作</h2><p>在本地，重新审查了一遍package.json，一个模块一个模块的查找，去掉代码里面已经没有使用的模块，划分清除相关模块归属。 </p>
+<p>编辑ecosystem.config.js，配置development环境里面开启watch模式，production环境禁用。 </p>
+<p>打tag。 </p>
 <p>整个操作算是完成。</p>
-<h2 id="总结">总结</h2>
-<p>这次的发版算是一次当头棒喝，在尝试用NodeJs来做后端的前台服务这么久，一直顺风顺水，有点忘却应有的严谨。</p>
-<p>后端代码的线上环境没法跟前端这样明确，很多时候一个git pull没法解决所有问题。</p>
-<p>需要一个持续集成的好的工作流。</p>
-<p>这次出问题的一个主要原因就是太长时间的一个大的任务分支，导致整个项目跨度太大，这样在合并主分支并上线的时候风险自然就大了。</p>
-<p>下次上线，一个正确的更新应该类似这样：<code>git pull;npm install --only=production;pm2 restart &#123;server&#125;</code> 还是不打算把node_modules/目录的内容放到git仓库里，虽然这样可以保证模块的同步，可是会增加仓库的体积，也会对其他成员的开发环境造成干扰。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这次的发版算是一次当头棒喝，在尝试用NodeJs来做后端的前台服务这么久，一直顺风顺水，有点忘却应有的严谨。 </p>
+<p>后端代码的线上环境没法跟前端这样明确，很多时候一个git pull没法解决所有问题。 </p>
+<p>需要一个持续集成的好的工作流。 </p>
+<p>这次出问题的一个主要原因就是太长时间的一个大的任务分支，导致整个项目跨度太大，这样在合并主分支并上线的时候风险自然就大了。 </p>
+<p>下次上线，一个正确的更新应该类似这样：<code>git pull;npm install --only=production;pm2 restart &#123;server&#125;</code> 还是不打算把node_modules&#x2F;目录的内容放到git仓库里，虽然这样可以保证模块的同步，可是会增加仓库的体积，也会对其他成员的开发环境造成干扰。 </p>
 <p>或许可以考虑用Docker来包裹服务，保证其代码和环境的一致性。</p>
 
                 <div class="copyright-notice">
@@ -365,7 +357,7 @@
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2017/12/01/%E5%85%B3%E4%BA%8Enodejs%E9%A1%B9%E7%9B%AE%E5%8F%91%E7%89%88%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd09500jr0hbm8m9j8b1v"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfv007dmsbmfw8x3wt6"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

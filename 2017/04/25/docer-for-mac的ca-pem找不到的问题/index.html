@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -233,25 +229,23 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>之前安装过Docker Toolbox来实现在Mac上面跑Docker，后来Docker又出了一个Docker for Mac，好奇心一起就卸了Docker Toolbox，装了它。</p>
-<p>愿意尝试的原因是Docker Toolbox主要是用VirtualBox来放container，Mac环境里面相关的docker命令其实都是代理，最终的实现是在VirtualBox里面。而Docker for Mac用的是macOS的一个框架<strong>HyperKit</strong>来实现的，不需要使用VirtualBox来做中间代理，性能上会有很大的提升。当然，前提是你的系统是升级到了macOS10.11。</p>
+                <p>之前安装过Docker Toolbox来实现在Mac上面跑Docker，后来Docker又出了一个Docker for Mac，好奇心一起就卸了Docker Toolbox，装了它。 </p>
+<p>愿意尝试的原因是Docker Toolbox主要是用VirtualBox来放container，Mac环境里面相关的docker命令其实都是代理，最终的实现是在VirtualBox里面。而Docker for Mac用的是macOS的一个框架<strong>HyperKit</strong>来实现的，不需要使用VirtualBox来做中间代理，性能上会有很大的提升。当然，前提是你的系统是升级到了macOS10.11。 </p>
 <p>顺利安装和启动Docker for Mac之后，在命令行运行<code>docker info</code>命令，会出现如下错误。</p>
 <pre><code>could not read CA certificate &quot;/Users/&#123; &#123;username&#125;&#125;/.docker/ca.pem&quot;: open /Users/&#123; &#123;username&#125;&#125;/.docker/ca.pem: no such file or directory
 </code></pre>
 <p>在网上找了不少解决方式，</p>
-<h2 id="bash-profile">bash_profile</h2>
-<p>尝试了下这个网址里面说的<a target="_blank" rel="noopener" href="https://github.com/boot2docker/osx-installer/issues/126">https://github.com/boot2docker/osx-installer/issues/126</a>_</p>
+<h2 id="bash-profile"><a href="#bash-profile" class="headerlink" title="bash_profile"></a>bash_profile</h2><p>尝试了下这个网址里面说的<a target="_blank" rel="noopener" href="https://github.com/boot2docker/osx-installer/issues/126">https://github.com/boot2docker/osx-installer/issues/126</a>_  </p>
 <p>我的用户目录下没有<code>.bash_profile</code>的文件，我是用的zsh，所以在<code>.zsh_rc</code>找了找(安装Docker Toolbox是很久之前的事情了，根本不记得当初怎么安装的)，意外的也找到了当初配置的一些DOCKER_*的环境变量。注释，重启zsh，再次运行<code>docker info</code>，还是不行。</p>
-<h2 id="docker-machine">docker machine</h2>
-<p>然后又继续尝试上面网址里面，后续给的方法：</p>
+<h2 id="docker-machine"><a href="#docker-machine" class="headerlink" title="docker machine"></a>docker machine</h2><p>然后又继续尝试上面网址里面，后续给的方法：</p>
 <pre><code>docker-machine regenerate-certs default
 
  egenerate TLS machine certs?  Warning: this is irreversible. (y/n): y
  Regenerating TLS certificates
  Host does not exist: &quot;default&quot;
 </code></pre>
-<p>失败。</p>
-<p>既然是说<code>default</code>不存在，那我就来创建一个</p>
+<p>失败。 </p>
+<p>既然是说<code>default</code>不存在，那我就来创建一个 </p>
 <p>查看了<code>docker-machine</code>相关的命令，刚好有一个<code>create</code>命令，执行了一下：</p>
 <pre><code>docker-machine create default
  Creating CA: /Users/&#123; &#123;username&#125;&#125;/.docker/machine/certs/ca.pem
@@ -259,13 +253,12 @@
  Running pre-create checks...
  Error with pre-create check: &quot;exit status 126&quot;
 </code></pre>
-<p>搜了一下关于<code>exit status 126 </code>的相关错误，说的是没安装VirtualBox，这时候我觉得不对劲了，因为跑Docker for Mac是不需要VirtualBox的啊。</p>
-<p>正式看了一下docker machine是什么东西，原来是一个用来方便的管理多种类型的docker主机的一个工具，可以是虚拟机，本地主机和云平台，具体可以看看这个链接：<a target="_blank" rel="noopener" href="https://yeasy.gitbooks.io/docker_practice/content/machine/usage.html">https://yeasy.gitbooks.io/docker_practice/content/machine/usage.html</a></p>
-<p>顺便推荐一下这本电子书<a target="_blank" rel="noopener" href="https://www.gitbook.com/book/yeasy/docker_practice/details">《Docker —— 从入门到实践》</a></p>
+<p>搜了一下关于<code>exit status 126 </code>的相关错误，说的是没安装VirtualBox，这时候我觉得不对劲了，因为跑Docker for Mac是不需要VirtualBox的啊。 </p>
+<p>正式看了一下docker machine是什么东西，原来是一个用来方便的管理多种类型的docker主机的一个工具，可以是虚拟机，本地主机和云平台，具体可以看看这个链接：<a target="_blank" rel="noopener" href="https://yeasy.gitbooks.io/docker_practice/content/machine/usage.html">https://yeasy.gitbooks.io/docker_practice&#x2F;content&#x2F;machine&#x2F;usage.html</a> </p>
+<p>顺便推荐一下这本电子书<a target="_blank" rel="noopener" href="https://www.gitbook.com/book/yeasy/docker_practice/details">《Docker —— 从入门到实践》</a> </p>
 <p>看完docker machine的作用，可以看的出来，这和我现在想做的事情和遇到的问题，没有太大干系。我是安装完了Docker的环境，然后在执行docker命令的时候出现了问题，不是在已经有container的时候在维护上出了问题。</p>
-<h2 id="环境变量">环境变量</h2>
-<p>这时候我开始回到官网来追根溯源了，很幸运的找到一篇深入比较Docker for Mac和Docker Toolbox的文章：<a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/docker-toolbox/">Docker for Mac vs. Docker Toolbox</a>。</p>
-<p>这个对于Docker for Mac和Docker Toolbox各自的实现机制说的十分透彻，同时还意外的有一个<strong>Setting up to run Docker for Mac</strong>章节，说了如何配置Docker for Mac的环境，在你已经或者曾经安装过Docker Toolbox的情况下。</p>
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><p>这时候我开始回到官网来追根溯源了，很幸运的找到一篇深入比较Docker for Mac和Docker Toolbox的文章：<a target="_blank" rel="noopener" href="https://docs.docker.com/docker-for-mac/docker-toolbox/">Docker for Mac vs. Docker Toolbox</a>。 </p>
+<p>这个对于Docker for Mac和Docker Toolbox各自的实现机制说的十分透彻，同时还意外的有一个<strong>Setting up to run Docker for Mac</strong>章节，说了如何配置Docker for Mac的环境，在你已经或者曾经安装过Docker Toolbox的情况下。 </p>
 <p>按照上面说的执行命令</p>
 <pre><code>env | grep DOCKER
 </code></pre>
@@ -394,7 +387,7 @@ Default Runtime: runc
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2017/04/25/docer-for-mac%E7%9A%84ca-pem%E6%89%BE%E4%B8%8D%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd07t001n0hbmciqf26gt"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfe001nmsbm3al7h5pw"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

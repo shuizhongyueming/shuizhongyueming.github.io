@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -227,23 +223,21 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h2 id="前情">前情</h2>
-<p>最近在做活动编辑器的时候，考虑到运营人员很多都没有图片上传的权限，所以想在活动编辑器里面内置一个这样的功能，让运营可以使用上传控件或者托拽的方式上传图片到服务器，并在上传成功之后，自动把地址放到文本框里。</p>
-<p>第一步要做的就是尝试着实现用FTP来上传一个文件到服务器的指定目录，同时基于文件的sha1值来命名上传之后的文件。</p>
+                <h2 id="前情"><a href="#前情" class="headerlink" title="前情"></a>前情</h2><p>最近在做活动编辑器的时候，考虑到运营人员很多都没有图片上传的权限，所以想在活动编辑器里面内置一个这样的功能，让运营可以使用上传控件或者托拽的方式上传图片到服务器，并在上传成功之后，自动把地址放到文本框里。 </p>
+<p>第一步要做的就是尝试着实现用FTP来上传一个文件到服务器的指定目录，同时基于文件的sha1值来命名上传之后的文件。 </p>
 <p>手上现有的两种实现路径是<strong>NodeJs</strong>和<strong>Python</strong>，不过想到最近刚学Python，正需要这样一个机会，就先尝试python的方式。</p>
-<h2 id="开发">开发</h2>
-<p>先是Google了一下，知道了一个<code>ftplib</code>的内置模块可以用来做FTP相关的功能。然后是之前在即刻上有看到<strong>余弦</strong>发的一个文章，说到用Python一句话查看文件的哈希值，上去找了找，也很快找到了那篇文章里面的相关代码。</p>
+<h2 id="开发"><a href="#开发" class="headerlink" title="开发"></a>开发</h2><p>先是Google了一下，知道了一个<code>ftplib</code>的内置模块可以用来做FTP相关的功能。然后是之前在即刻上有看到<strong>余弦</strong>发的一个文章，说到用Python一句话查看文件的哈希值，上去找了找，也很快找到了那篇文章里面的相关代码。 </p>
 <p>折腾一下之后，实现代码如下：</p>
 <pre><code>import ftplib
 import hashlib
 import os
 
-host = 'YOUR HOST'
-username = 'YOUR NAME'
-pwd = 'YOUR PWD'
+host = &#39;YOUR HOST&#39;
+username = &#39;YOUR NAME&#39;
+pwd = &#39;YOUR PWD&#39;
 port = 21
-filePath = 'some/path/to/img.jpg'
-serverPath = '/where/to/store/your/file/on/the/server/'
+filePath = &#39;some/path/to/img.jpg&#39;
+serverPath = &#39;/where/to/store/your/file/on/the/server/&#39;
 
 session = ftplib.FTP()
 
@@ -253,7 +247,7 @@ session.login(username, pwd)
 
 session.cwd(serverPath)
 
-file = open(filePath, 'rb')
+file = open(filePath, &#39;rb&#39;)
 
 filename, file_extension = os.path.splitext(filePath)
 
@@ -261,29 +255,28 @@ str_hash = hashlib.sha1(file.read()).hexdigest()
 
 target_file_name = str_hash[:16]+file_extension
 
-session.storbinary('STOR '+target_file_name, file)
+session.storbinary(&#39;STOR &#39;+target_file_name, file)
 
 file.close()
 
 session.quit()
 </code></pre>
 <p>代码写完，就顺手执行看了下效果：文件顺利按的传到了预设的目录，也重命名为了指定的文件名。但是，文件的体积是0</p>
-<h2 id="调试">调试</h2>
-<p>在Python的<strong>IDEL</strong>环境里面使用<code>help</code>命令查看了<code>file</code>相关的各种文档，最后把问题的方向指向了<code>file.read</code>。因为当时在IDEL环境里面，使用file.read读取了要上传的文件内容之后，再次调用file.read时，返回的内容为空。</p>
-<p>于是在Google上面用<strong>python file read twice</strong>作为搜索词搜索了一下。果然找到了问题，文件里面有一个指针指向上一次读取的位置，默认是在最开始，也就是0。file.read会读取文件的全部内容，完成之后，指针就指向文件的最末尾。</p>
-<p>所以，在调用过一次file.read之后，再次调用file.read，会从文件最末尾开始获取内容，这获取的内容自然就是空了。而<code>ftp.storbinary</code>在上传文件的时候，内部应该也是会使用类似file.read类似的方法来获取要上传的文件内容并传递给服务器。这个时候也自然就没法正常获取正确的文件内容</p>
-<p>解决方式是在file.read之后，使用<code>file.seek(0)</code>来把文件的指针指回最开始。</p>
+<h2 id="调试"><a href="#调试" class="headerlink" title="调试"></a>调试</h2><p>在Python的<strong>IDEL</strong>环境里面使用<code>help</code>命令查看了<code>file</code>相关的各种文档，最后把问题的方向指向了<code>file.read</code>。因为当时在IDEL环境里面，使用file.read读取了要上传的文件内容之后，再次调用file.read时，返回的内容为空。 </p>
+<p>于是在Google上面用<strong>python file read twice</strong>作为搜索词搜索了一下。果然找到了问题，文件里面有一个指针指向上一次读取的位置，默认是在最开始，也就是0。file.read会读取文件的全部内容，完成之后，指针就指向文件的最末尾。 </p>
+<p>所以，在调用过一次file.read之后，再次调用file.read，会从文件最末尾开始获取内容，这获取的内容自然就是空了。而<code>ftp.storbinary</code>在上传文件的时候，内部应该也是会使用类似file.read类似的方法来获取要上传的文件内容并传递给服务器。这个时候也自然就没法正常获取正确的文件内容 </p>
+<p>解决方式是在file.read之后，使用<code>file.seek(0)</code>来把文件的指针指回最开始。 </p>
 <p>最终代码：</p>
 <pre><code>import ftplib
 import hashlib
 import os
 
-host = 'YOUR HOST'
-username = 'YOUR NAME'
-pwd = 'YOUR PWD'
+host = &#39;YOUR HOST&#39;
+username = &#39;YOUR NAME&#39;
+pwd = &#39;YOUR PWD&#39;
 port = 21
-filePath = 'some/path/to/img.jpg'
-serverPath = '/where/to/store/your/file/on/the/server/'
+filePath = &#39;some/path/to/img.jpg&#39;
+serverPath = &#39;/where/to/store/your/file/on/the/server/&#39;
 
 session = ftplib.FTP()
 
@@ -293,7 +286,7 @@ session.login(username, pwd)
 
 session.cwd(serverPath)
 
-file = open(filePath, 'rb')
+file = open(filePath, &#39;rb&#39;)
 
 filename, file_extension = os.path.splitext(filePath)
 
@@ -305,18 +298,17 @@ target_file_name = str_hash[:16]+file_extension
 # 如果不手动调整指针的话，后面的文件上传，就会是一个空文件
 file.seek(0)
 
-session.storbinary('STOR '+target_file_name, file)
+session.storbinary(&#39;STOR &#39;+target_file_name, file)
 
 file.close()
 
 session.quit()
 </code></pre>
-<h2 id="参考文档">参考文档</h2>
-<ol>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><ol>
 <li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/12613797/python-script-uploading-files-via-ftp">Python Script Uploading files via FTP</a></li>
 <li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/541390/extracting-extension-from-filename-in-python">Extracting extension from filename in Python</a></li>
 <li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/3906137/why-cant-i-call-read-twice-on-an-open-file">Why can’t I call read() twice on an open file?</a></li>
-<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzA3NTEzMTUwNA%3D%3D&amp;mid=2651081246&amp;idx=1&amp;sn=c891a5e5770f1bd31f80c31e33144965#wechat_redirect">我是如何 Python 一句话校验软件哈希值的</a></li>
+<li><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzA3NTEzMTUwNA==&mid=2651081246&idx=1&sn=c891a5e5770f1bd31f80c31e33144965#wechat_redirect">我是如何 Python 一句话校验软件哈希值的</a></li>
 </ol>
 
                 <div class="copyright-notice">
@@ -409,7 +401,7 @@ session.quit()
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2017/05/27/%E7%94%A8python%E5%AE%9E%E7%8E%B0ftp%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd09e00lj0hbmb98s52sb"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdg2009bmsbm3dl4fxh3"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

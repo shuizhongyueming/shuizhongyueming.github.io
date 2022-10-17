@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -233,35 +229,31 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <h2 id="问题">问题</h2>
-<p>今天在重构之前写的一个小程序页面，在修改scroll-view组件之后，发现之前的scroll-into-view的跳转失效了</p>
+                <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>今天在重构之前写的一个小程序页面，在修改scroll-view组件之后，发现之前的scroll-into-view的跳转失效了 </p>
 <p>之前的页面是一直正常的，所以官方的关于scroll-view的一些<a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/component/scroll-view.html">tips</a>是不会关联了</p>
 <blockquote>
 <p>tip: 请勿在 scroll-view 中使用 textarea、map、canvas、video 组件 tip: scroll-into-view 的优先级高于 scroll-top tip: 在滚动 scroll-view 时会阻止页面回弹，所以在 scroll-view 中滚动，是无法触发 onPullDownRefresh tip: 若要使用下拉刷新，请使用页面的滚动，而不是 scroll-view ，这样也能通过点击顶部状态栏回到页面顶部</p>
 </blockquote>
-<p>再仔细看官方的说明，发现有这么一句</p>
-<p><code>使用竖向滚动时，需要给&lt;scroll-view/&gt;一个固定高度，通过 WXSS 设置 height。</code></p>
-<p>当前我的页面的scroll-view是能滚动的，不过说不定问题可能出在这里，<strong>因为高度设定的100%</strong></p>
+<p>再仔细看官方的说明，发现有这么一句 </p>
+<p><code>使用竖向滚动时，需要给&lt;scroll-view/&gt;一个固定高度，通过 WXSS 设置 height。</code> </p>
+<p>当前我的页面的scroll-view是能滚动的，不过说不定问题可能出在这里，<strong>因为高度设定的100%</strong> </p>
 <p>先尝试着手动把scroll-view改成一个比较小的高度，再试试调整scroll-into-view的值，发现可以了，那问题就出在height上了。</p>
-<h2 id="原因">原因</h2>
-<p>在旧版本小程序里面navBar是系统自带的，设置height: 100%是能正确展示。</p>
-<p>而新版本里面，在<code>app.json</code>里面配置了<code>navigationStyle: 'custom'</code>，自己实现了一个自定义样式的导航栏。在调整样式的时候，会让内容区域<code>margin-top: 128px;</code>，这样就不会跟自定义的navBar冲突。</p>
-<p>问题应该就出在这了。</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>在旧版本小程序里面navBar是系统自带的，设置height: 100%是能正确展示。 </p>
+<p>而新版本里面，在<code>app.json</code>里面配置了<code>navigationStyle: &#39;custom&#39;</code>，自己实现了一个自定义样式的导航栏。在调整样式的时候，会让内容区域<code>margin-top: 128px;</code>，这样就不会跟自定义的navBar冲突。 </p>
+<p>问题应该就出在这了。 </p>
 <p><strong>scroll-view的父级只有margin-top，没有一个固定的高度，使得scroll-view的<code>height: 100%</code>失效，只要能重新计算出一个准确的高度，那问题就能完美解决。</strong></p>
-<h2 id="解决">解决</h2>
-<p>本来有想过调整scroll-view的父级，不过会是一个比较罗嗦的方法，所以想试试一些css里面的新技术：</p>
+<h2 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h2><p>本来有想过调整scroll-view的父级，不过会是一个比较罗嗦的方法，所以想试试一些css里面的新技术：</p>
 <pre><code>scroll-view &#123;
   height: calc(100vh - 128px);
 &#125;
 </code></pre>
-<p>基于<code>calc()</code>和<code>vh</code>来动态计算scroll-view的高度</p>
-<p>试了下效果，正确运行！</p>
-<p>为了保证在各个设备和系统下能正确工作，查了一下caniuse:</p>
-<p><a target="_blank" rel="noopener" href="https://caniuse.com/#search=vh">vh</a></p>
-<p><a target="_blank" rel="noopener" href="https://caniuse.com/#search=calc">calc</a></p>
+<p>基于<code>calc()</code>和<code>vh</code>来动态计算scroll-view的高度 </p>
+<p>试了下效果，正确运行！ </p>
+<p>为了保证在各个设备和系统下能正确工作，查了一下caniuse: </p>
+<p><a target="_blank" rel="noopener" href="https://caniuse.com/#search=vh">vh</a> </p>
+<p><a target="_blank" rel="noopener" href="https://caniuse.com/#search=calc">calc</a> </p>
 <p>可以看到这两个特性在iOS和Andriod下都是早早就支持了，可以安心使用的</p>
-<h2 id="总结">总结</h2>
-<p>scroll-view需要一个明确的高度，这个高度的实现方式有两种：</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>scroll-view需要一个明确的高度，这个高度的实现方式有两种：</p>
 <ul>
 <li>自身的css样式里面设置了明确的高度，vh, px, rem, em等等都可以</li>
 <li>自身的css样式里面height: 100%;同时直接父级有一个明确的高度</li>
@@ -357,7 +349,7 @@
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2018/05/24/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E9%87%8C%E9%9D%A2scroll-view%E7%BB%84%E4%BB%B6%E7%9A%84scroll-into-view%E5%B1%9E%E6%80%A7%E5%A4%B1%E6%95%88%E9%97%AE%E9%A2%98/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd09c00lc0hbmht3wfwjt"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdg0008tmsbm0lqnbsz3"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

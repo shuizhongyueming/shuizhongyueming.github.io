@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -222,15 +218,11 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <p>特别是在IE6下</p>
-<h3 id="字符串的拼接">字符串的拼接</h3>
-<p>不要用var str = “aaa”+“bbb” 会报错 arr.push arr.join 测试也是会报错 推荐 var str = ‘’;str += ‘aaa’; str += ‘bbb’;</p>
-<h3 id="不要注释">不要注释</h3>
-<p>注释会影响解析，可能导致 缺少’}’ 之类的bug</p>
-<h3 id="关于返回值">关于返回值</h3>
-<p>不要类似直接return ‘a’ 这样直接返回一个临时创建的字符而应该是 var str = ‘not’; return not;</p>
+<h3 id="字符串的拼接"><a href="#字符串的拼接" class="headerlink" title="字符串的拼接"></a>字符串的拼接</h3><p>不要用var str &#x3D; “aaa”+”bbb” 会报错 arr.push arr.join 测试也是会报错 推荐 var str &#x3D; ‘’;str +&#x3D; ‘aaa’; str +&#x3D; ‘bbb’;</p>
+<h3 id="不要注释"><a href="#不要注释" class="headerlink" title="不要注释"></a>不要注释</h3><p>注释会影响解析，可能导致 缺少’}’ 之类的bug</p>
+<h3 id="关于返回值"><a href="#关于返回值" class="headerlink" title="关于返回值"></a>关于返回值</h3><p>不要类似直接return ‘a’ 这样直接返回一个临时创建的字符而应该是 var str &#x3D; ‘not’; return not; </p>
 <p>这些说法没有严谨的进行验证，只是在最近和flash进行交互的时候，在ie下遇到错误，总是查找不到，最后一点点的回滚代码测试错误的时候，发现的。也没法描述其中的原理是什么。仅供参考</p>
-<h2 id="2014年6月5日补充">2014年6月5日补充</h2>
-<p>以上情况只适用于这种情况：使用swfobject.js来加载flash，会以flashvar的形式给flash传递一个js的回调函数。出问题的原因是：swfobject.js会把这个js的回调函数的代码复制然后写入标签的flashvar属性中。这种复制会导致下面的问题。</p>
+<h2 id="2014年6月5日补充"><a href="#2014年6月5日补充" class="headerlink" title="2014年6月5日补充"></a>2014年6月5日补充</h2><p>以上情况只适用于这种情况：使用swfobject.js来加载flash，会以flashvar的形式给flash传递一个js的回调函数。出问题的原因是：swfobject.js会把这个js的回调函数的代码复制然后写入标签的flashvar属性中。这种复制会导致下面的问题。</p>
 
                 <div class="copyright-notice">
 <div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
@@ -322,7 +314,7 @@
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2014/06/05/something-should-be-notice-for-js-functions-that-called-by-flash/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd08y00hy0hbme1zb28a3"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfp0059msbme7cnfjts"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

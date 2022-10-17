@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -226,9 +222,9 @@ set modelines=0     &quot; CVE-2007-2438
 set nocompatible    &quot; Use Vim defaults instead of 100% vi compatibility
 set backspace=2     &quot; more powerful backspacing
 
-&quot; Don't write backup file if vim is being called by &quot;crontab -e&quot;
+&quot; Don&#39;t write backup file if vim is being called by &quot;crontab -e&quot;
 au BufWrite /private/tmp/crontab.* set nowritebackup
-&quot; Don't write backup file if vim is being called by &quot;chpass&quot;
+&quot; Don&#39;t write backup file if vim is being called by &quot;chpass&quot;
 au BufWrite /private/etc/pw.* set nowritebackup
 
 &quot; 自动语法高亮
@@ -287,13 +283,13 @@ set ofu=syntaxcomplete#Complete
 &quot;共享剪贴板
 &quot;set clipboard+=unnamed
 
-&quot; 实现 (、[、&#123;、&quot;、'  输入后自动补全右边部分，光标也会位于中间位置
+&quot; 实现 (、[、&#123;、&quot;、&#39;  输入后自动补全右边部分，光标也会位于中间位置
 inoremap ( ()i
 inoremap [ []i
 inoremap &#123; &#123;&#125;i
 inoremap &lt; &lt;&gt;i
 inoremap &quot; &quot;&quot;i
-inoremap ' ''i
+inoremap &#39; &#39;&#39;i
 
 &quot; 高亮显示匹配的括号
 set showmatch
@@ -327,7 +323,8 @@ au BufNewFile,BufRead *.less set filetype=less
 &quot; 始终显示状态行
 set ls=2 
 &quot;命令行补全以增强模式运行
-set wildmenu </code></pre>
+set wildmenu 
+</code></pre>
 
                 <div class="copyright-notice">
 <div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
@@ -419,7 +416,7 @@ set wildmenu </code></pre>
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2014/07/22/share-my-vim-config/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd088004d0hbmfn1vhewa"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfo004mmsbm08f6dte8"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -234,11 +230,12 @@ NSMutableAttributedString * info = [[NSMutableAttributedString alloc] initWithSt
                                   blue:247/250 
                                 alpha:1];
 </code></pre>
-<p>文字就一直都显示为黑色，没有半点作用。 后面仔细看了下，才明白，UIColor的colorWithRed:green:blue:方法，接受的参数是CGFloat，而30/250的结果不是CGFloat，因此正确的定义方式应该是这样：</p>
+<p>文字就一直都显示为黑色，没有半点作用。 后面仔细看了下，才明白，UIColor的colorWithRed:green:blue:方法，接受的参数是CGFloat，而30&#x2F;250的结果不是CGFloat，因此正确的定义方式应该是这样：</p>
 <pre><code>UIColor * blue = [UIColor colorWithRed:30.0f/250.0f 
                                 green:181.0f/250.0f 
                                   blue:247.0f/250.0f 
-                                alpha:1];</code></pre>
+                                alpha:1];
+</code></pre>
 
                 <div class="copyright-notice">
 <div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
@@ -330,7 +327,7 @@ NSMutableAttributedString * info = [[NSMutableAttributedString alloc] initWithSt
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2014/03/11/possible-causes-the-failure-of-uicolor/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd086003w0hbm47eh1rtr"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfm0041msbm4n7jfl3b"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

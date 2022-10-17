@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -225,31 +221,18 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <p>最近升级 Wordpress 的主题到 twentyfifteen，清爽的界面看着果然高大上。然后问题来了，一直工作很好的分享工具 JiaThis 和 uJian 出问题了。找了客服问了下（自己太懒，不愿意 debug），解决了 JiaThis 的问题，然后按照发现的问题的思路，顺便解决了 uJian 的问题。</p>
-<h2 id="JiaThis-的分享按钮过小的问题">JiaThis 的分享按钮过小的问题</h2>
-<p>最开始的分享按钮是这样的 <img src="https://cdn.imagehost.top/wp-content/uploads/2015/01/QQ20150122-1.png" alt="按钮很小"> 加上如下样式：</p>
-<p>.jiathis_style img {<br>
-max-width: 26px;<br>
-}</p>
+<h2 id="JiaThis-的分享按钮过小的问题"><a href="#JiaThis-的分享按钮过小的问题" class="headerlink" title="JiaThis 的分享按钮过小的问题"></a>JiaThis 的分享按钮过小的问题</h2><p>最开始的分享按钮是这样的 <img src="https://cdn.imagehost.top/wp-content/uploads/2015/01/QQ20150122-1.png" alt="按钮很小"> 加上如下样式：</p>
+<p>.jiathis_style img {<br>max-width: 26px;<br>}</p>
 <p>即可修复，变成 <img src="https://cdn.imagehost.top/wp-content/uploads/2015/01/QQ20150122-6.png" alt="按钮正常"></p>
-<h2 id="JiaThis-的分享渠道面板">JiaThis 的分享渠道面板</h2>
-<p>最开始的样式 <img src="https://cdn.imagehost.top/wp-content/uploads/2015/01/QQ20150122-7.png" alt="无法展开"> 面板在鼠标放到按钮上的时候无法展开 加上如下样式：</p>
-<p>.jiathis_style table{<br>
-table-layout: auto;<br>
-}</p>
+<h2 id="JiaThis-的分享渠道面板"><a href="#JiaThis-的分享渠道面板" class="headerlink" title="JiaThis 的分享渠道面板"></a>JiaThis 的分享渠道面板</h2><p>最开始的样式 <img src="https://cdn.imagehost.top/wp-content/uploads/2015/01/QQ20150122-7.png" alt="无法展开"> 面板在鼠标放到按钮上的时候无法展开 加上如下样式：</p>
+<p>.jiathis_style table{<br>table-layout: auto;<br>}</p>
 <p>使得表格的宽度计算方法恢复为默认的按内容来计算，样式就正常了</p>
-<h2 id="uJian-的展开样式">uJian 的展开样式</h2>
-<p>最开始是这样的扭曲 <img src="https://cdn.imagehost.top/wp-content/uploads/2015/01/QQ20150122-9.png" alt="变形的uJian"> 加上和上面 JiaThis 的面板同样的样式之后</p>
-<p>.jiathis_style table, #ujian-side table {<br>
-table-layout: auto;<br>
-}</p>
+<h2 id="uJian-的展开样式"><a href="#uJian-的展开样式" class="headerlink" title="uJian 的展开样式"></a>uJian 的展开样式</h2><p>最开始是这样的扭曲 <img src="https://cdn.imagehost.top/wp-content/uploads/2015/01/QQ20150122-9.png" alt="变形的uJian"> 加上和上面 JiaThis 的面板同样的样式之后</p>
+<p>.jiathis_style table, #ujian-side table {<br>table-layout: auto;<br>}</p>
 <p>可以看的下去一点了 <img src="https://cdn.imagehost.top/wp-content/uploads/2015/01/QQ20150122-8.png" alt="好一点的面板"> 再加上如下这段</p>
-<p>#ujian-side a {<br>
-box-sizing: content-box;<br>
-}</p>
-<p>解决盒模型的计算方法 最终正常了： 效果？ 看右侧的分享 ===============================&gt; 所有的样式收集整理如下：</p>
-<p>.jiathis_style img{ max-width:26px;}<br>
-.jiathis_style table,#ujian-side table{table-layout: auto;}<br>
-#ujian-side a{box-sizing: content-box;}</p>
+<p>#ujian-side a {<br>box-sizing: content-box;<br>}</p>
+<p>解决盒模型的计算方法 最终正常了： 效果？ 看右侧的分享 &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&gt; 所有的样式收集整理如下：</p>
+<p>.jiathis_style img{ max-width:26px;}<br>.jiathis_style table,#ujian-side table{table-layout: auto;}<br>#ujian-side a{box-sizing: content-box;}</p>
 
                 <div class="copyright-notice">
 <div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
@@ -341,7 +324,7 @@ box-sizing: content-box;<br>
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2015/01/22/fix-the-layout-of-jiathis-and-ujian-under-wordpress-with-theme-twentyfifteen/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd07u001x0hbmgtoy0e6s"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdff001xmsbm5lx66nhi"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

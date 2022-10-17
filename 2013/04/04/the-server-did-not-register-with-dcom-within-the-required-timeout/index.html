@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -258,22 +254,11 @@ Provider
   Level 2 
 </code></pre>
 <p>在网上找到有个人跟我系统差不多同时也是遇到同样问题的，链接如下：</p>
-<p><a target="_blank" rel="noopener" href="http://answers.microsoft.com/en-us/windows/forum/windows_7-performance/error-microsoft-windows-distributedcom-id10010/481acdc3-3402-40ac-af9a-330908fd5754" title="Error Microsoft-Windows-DistributedCOM; id10010 - Microsoft Community">http://answers.microsoft.com/en-us/windows/forum/windows_7-performance/error-microsoft-windows-distributedcom-id10010/481acdc3-3402-40ac-af9a-330908fd5754</a></p>
-<p>具体的方式是通过给 Network Service 角色添加相应的权限，步骤如下：</p>
-<p>A.   在“运行”里面输入命令dcomcnfg<br>
-B.   双击“组件服务”-&gt;双击“计算机”<br>
-C.   右键点击“我的电脑”，选择“属性”<br>
-D.   点击“COM安全”菜单项<br>
-E.   在“启动和激活权限”的区域内，点击“编辑默认值”<br>
-F.   点击“添加” ，在“输入对象名称来选择”下方区域内输入“Network Service” ，可点击右侧的“检查名称”来规范正确的输入，之后点击“确定”<br>
-G.   确保选中了“NETWORK SERVICE”，点击下方的复选框，保证如下权限的“允许”是选中的：<br>
-H.   本地启动<br>
-I.   远程启动<br>
-J.   本地激活<br>
-K.   远程激活<br>
-L.   “确定”-&gt;“确定”</p>
+<p> <a target="_blank" rel="noopener" href="http://answers.microsoft.com/en-us/windows/forum/windows_7-performance/error-microsoft-windows-distributedcom-id10010/481acdc3-3402-40ac-af9a-330908fd5754" title="Error Microsoft-Windows-DistributedCOM; id10010 - Microsoft Community">http://answers.microsoft.com/en-us/windows/forum/windows_7-performance&#x2F;error-microsoft-windows-distributedcom-id10010&#x2F;481acdc3-3402-40ac-af9a-330908fd5754</a></p>
+<p> 具体的方式是通过给 Network Service 角色添加相应的权限，步骤如下： </p>
+<p>A.   在“运行”里面输入命令dcomcnfg<br>B.   双击“组件服务”-&gt;双击“计算机”<br>C.   右键点击“我的电脑”，选择“属性”<br>D.   点击“COM安全”菜单项<br>E.   在“启动和激活权限”的区域内，点击“编辑默认值”<br>F.   点击“添加” ，在“输入对象名称来选择”下方区域内输入“Network Service” ，可点击右侧的“检查名称”来规范正确的输入，之后点击“确定”<br>G.   确保选中了“NETWORK SERVICE”，点击下方的复选框，保证如下权限的“允许”是选中的：<br>H.   本地启动<br>I.   远程启动<br>J.   本地激活<br>K.   远程激活<br>L.   “确定”-&gt;“确定”</p>
 <p>下面的链接是微软官方对Event ID 10010的说明</p>
-<p><a target="_blank" rel="noopener" href="http://technet.microsoft.com/en-us/library/cc774175(WS.10).aspx" title="http://technet.microsoft.com/en-us/library/cc774175(WS.10).aspx">http://technet.microsoft.com/en-us/library/cc774175(WS.10).aspx</a></p>
+<p><a target="_blank" rel="noopener" href="http://technet.microsoft.com/en-us/library/cc774175(WS.10).aspx" title="http://technet.microsoft.com/en-us/library/cc774175(WS.10).aspx">http://technet.microsoft.com/en-us/library/cc774175(WS.10).aspx</a> </p>
 <p>机器就按上述的设置了，具体的效果等随后一段时间看看是否还会有上述问题发生，来确定设置是否有效</p>
 
                 <div class="copyright-notice">
@@ -366,7 +351,7 @@ L.   “确定”-&gt;“确定”</p>
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2013/04/04/the-server-did-not-register-with-dcom-within-the-required-timeout/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd09000if0hbmftzy69rt"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfr005wmsbm15h7acq1"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -221,10 +217,9 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>翻译自：<a target="_blank" rel="noopener" href="http://learn.jquery.com/performance/optimize-selectors/">http://learn.jquery.com/performance/optimize-selectors/</a></p>
+                <p>翻译自：<a target="_blank" rel="noopener" href="http://learn.jquery.com/performance/optimize-selectors/">http://learn.jquery.com/performance/optimize-selectors/</a> </p>
 <p>在越来越多的浏览器支持<code>document.querySelectorAll()</code>之后，使得查找DOM的压力从jQuery转移到浏览器，选择器的优化，已经没有以往那么重要。然而，仍然有一些小技巧要记住。</p>
-<h2 id="基于ID的选择器（ID-Based-Selectors）">基于ID的选择器（ID-Based Selectors）</h2>
-<p>基于ID进行查找永远是最好的方法。</p>
+<h2 id="基于ID的选择器（ID-Based-Selectors）"><a href="#基于ID的选择器（ID-Based-Selectors）" class="headerlink" title="基于ID的选择器（ID-Based Selectors）"></a>基于ID的选择器（ID-Based Selectors）</h2><p>基于ID进行查找永远是最好的方法。</p>
 <pre><code>// 快速:
 $( &quot;#container div.robotarm&quot; );
 
@@ -232,29 +227,27 @@ $( &quot;#container div.robotarm&quot; );
 $( &quot;#container&quot; ).find( &quot;div.robotarm&quot; );
 </code></pre>
 <p>使用.find()的方法更快，因为第一个选择器是没法脱离Sizzle选择器引擎的处理 - 而只有一个ID不包含其他类型的选择器，是直接由document.getElementById来处理的，这个是原生方法，超级快</p>
-<h2 id="特异性（Specificity）">特异性（Specificity）</h2>
-<p>把更特异的选择器放右侧，更简单的选择器放左侧。（Sizzle选择器在某些情况下，是会从右往左进行查找，这个时候，右侧的特异性，使得查找出来的结果集很小，然后再往上遍历查找符合条件的父级，效率就会很高 – 编者译）</p>
+<h2 id="特异性（Specificity）"><a href="#特异性（Specificity）" class="headerlink" title="特异性（Specificity）"></a>特异性（Specificity）</h2><p>把更特异的选择器放右侧，更简单的选择器放左侧。（Sizzle选择器在某些情况下，是会从右往左进行查找，这个时候，右侧的特异性，使得查找出来的结果集很小，然后再往上遍历查找符合条件的父级，效率就会很高 – 编者译）</p>
 <pre><code>// 没优化的:
 $( &quot;div.data .gonzalez&quot; );
 
 // 优化了的:
 $( &quot;.data td.gonzalez&quot; );
 </code></pre>
-<h2 id="避免过度特异性（Avoid-Excessive-Specificity）">避免过度特异性（Avoid Excessive Specificity）</h2>
-<pre><code>$( &quot;.data table.attendees td.gonzalez&quot; );
+<h2 id="避免过度特异性（Avoid-Excessive-Specificity）"><a href="#避免过度特异性（Avoid-Excessive-Specificity）" class="headerlink" title="避免过度特异性（Avoid Excessive Specificity）"></a>避免过度特异性（Avoid Excessive Specificity）</h2><pre><code>$( &quot;.data table.attendees td.gonzalez&quot; );
 
 // 更好的: 如果可以尽量去除中间的多余的条件
 $( &quot;.data td.gonzalez&quot; );
 </code></pre>
 <p>一个轻简的DOM有助于提升选择器的性能（原文是：A “flatter” DOM also helps improve selector performance，不太好翻译），因为这样可以在查找dom的时候，减少需要检索的层级</p>
-<h2 id="避免全部选择器（Avoid-the-Universal-Selector）">避免全部选择器（Avoid the Universal Selector）</h2>
-<p>如果明确的或隐晦的的全部选择器（结果如果是会匹配绝大多数的DOM），这样的选择器会非常的缓慢</p>
+<h2 id="避免全部选择器（Avoid-the-Universal-Selector）"><a href="#避免全部选择器（Avoid-the-Universal-Selector）" class="headerlink" title="避免全部选择器（Avoid the Universal Selector）"></a>避免全部选择器（Avoid the Universal Selector）</h2><p>如果明确的或隐晦的的全部选择器（结果如果是会匹配绝大多数的DOM），这样的选择器会非常的缓慢</p>
 <pre><code>$( &quot;.buttons &gt; *&quot; ); // 非常耗性能
 $( &quot;.buttons&quot; ).children(); // 更好的方式
 
 $( &quot;.category :radio&quot; ); // 隐晦的全部选择器
 $( &quot;.category *:radio&quot; ); // 和上面的效果一样，只是更加明确
-$( &quot;.category input:radio&quot; ); // 更好的写法</code></pre>
+$( &quot;.category input:radio&quot; ); // 更好的写法
+</code></pre>
 
                 <div class="copyright-notice">
 <div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
@@ -346,7 +339,7 @@ $( &quot;.category input:radio&quot; ); // 更好的写法</code></pre>
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2015/01/18/jquery-optimize-selectors/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd081002j0hbmhlhvbnac"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfi002xmsbm43k1d62f"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

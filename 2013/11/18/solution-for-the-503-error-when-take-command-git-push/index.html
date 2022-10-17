@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -224,23 +220,23 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>这两天，在虚拟机上开始用ubuntu进行开发，代码就保存到github上面(非核心代码)。之前在Windows上面用了很长一段时间的git，很方便。按理说在Linux上面应该更加方便，可是有个问题干扰了我很久，严重干扰了项目的开发。</p>
+                <p>这两天，在虚拟机上开始用ubuntu进行开发，代码就保存到github上面(非核心代码)。之前在Windows上面用了很长一段时间的git，很方便。按理说在Linux上面应该更加方便，可是有个问题干扰了我很久，严重干扰了项目的开发。 </p>
 <p>在ubuntu上面，git clone，git pull这两个获取远程仓库上面代码的命令都工作的很正常，可是在使用git push提交代码的时候，总是不行</p>
 <pre><code>error: The requested URL returned error: 503 while accessing https://github.com/shuizhongyueming/yaoyao.git/info/refs
 
 fatal: HTTP request failed
 </code></pre>
-<p>开始还怀疑是不是github被墙了，可要是墙了，是不会clone和pull成功的。然后也排除了github服务器出问题这个可能性，因为问题发生了好几天，要是真有这个问题，早就闹翻天了。</p>
-<p>所以，最后只能是我这边的问题，我也只好安心Google了</p>
-<p>万能的<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed" title="pushing-to-git-returning-error-code-403-fatal-http-request-failed">Stack Overflow</a>再次给我找了解决方案。虽然提问人的错误代码跟我的不一样，是403，但是很奇怪，错误内容跟我的一模一样。可能这是github后来修改了返回的错误代码吧。</p>
-<p>想要能够针对远程仓库的代码具有read和write的权限，有两种途径，一种是ssh，一种是用带有你的用户名的远程仓库的地址进行push。</p>
+<p>开始还怀疑是不是github被墙了，可要是墙了，是不会clone和pull成功的。然后也排除了github服务器出问题这个可能性，因为问题发生了好几天，要是真有这个问题，早就闹翻天了。 </p>
+<p>所以，最后只能是我这边的问题，我也只好安心Google了 </p>
+<p>万能的<a target="_blank" rel="noopener" href="http://stackoverflow.com/questions/7438313/pushing-to-git-returning-error-code-403-fatal-http-request-failed" title="pushing-to-git-returning-error-code-403-fatal-http-request-failed">Stack Overflow</a>再次给我找了解决方案。虽然提问人的错误代码跟我的不一样，是403，但是很奇怪，错误内容跟我的一模一样。可能这是github后来修改了返回的错误代码吧。 </p>
+<p>想要能够针对远程仓库的代码具有read和write的权限，有两种途径，一种是ssh，一种是用带有你的用户名的远程仓库的地址进行push。 </p>
 <p>第一种途径的做法是：</p>
 <pre><code>git remote set-url origin ssh://git@github.com/your-user-name/your-project-name.git
 </code></pre>
-<p>改https协议为ssh协议，github.com改为git@github.com 第二种途径的做法是：</p>
+<p>改https协议为ssh协议，github.com改为<a href="mailto:&#103;&#x69;&#116;&#64;&#x67;&#105;&#x74;&#x68;&#117;&#x62;&#x2e;&#99;&#111;&#x6d;">&#103;&#x69;&#116;&#64;&#x67;&#105;&#x74;&#x68;&#117;&#x62;&#x2e;&#99;&#111;&#x6d;</a> 第二种途径的做法是：</p>
 <pre><code>git remote set-url origin https://your-user-name@github.com/your-user-name/your-project-name.git
 </code></pre>
-<p>改github.com为your-user-name@github.com 以上两种方式，我通过第二种方式是顺利的push了，有同样问题的同学，可以尝试着使用第一种看看行不行，也希望能把结果和我分享一下</p>
+<p>改github.com为<a href="mailto:&#x79;&#111;&#x75;&#x72;&#x2d;&#x75;&#x73;&#x65;&#x72;&#45;&#x6e;&#97;&#109;&#101;&#64;&#x67;&#105;&#x74;&#x68;&#x75;&#x62;&#x2e;&#99;&#x6f;&#x6d;">&#x79;&#111;&#x75;&#x72;&#x2d;&#x75;&#x73;&#x65;&#x72;&#45;&#x6e;&#97;&#109;&#101;&#64;&#x67;&#105;&#x74;&#x68;&#x75;&#x62;&#x2e;&#99;&#x6f;&#x6d;</a> 以上两种方式，我通过第二种方式是顺利的push了，有同样问题的同学，可以尝试着使用第一种看看行不行，也希望能把结果和我分享一下</p>
 
                 <div class="copyright-notice">
 <div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
@@ -332,7 +328,7 @@ fatal: HTTP request failed
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2013/11/18/solution-for-the-503-error-when-take-command-git-push/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd089004u0hbm0f66ch9m"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfo004rmsbm5se49a9l"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {

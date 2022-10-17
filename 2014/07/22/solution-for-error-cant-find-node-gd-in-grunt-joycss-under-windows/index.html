@@ -63,12 +63,8 @@
   
 <link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
 
-  <script
-    data-ad-client="ca-pub-3438190576149990"
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-  ></script>
-<meta name="generator" content="Hexo 5.4.2"></head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
 
 <!-- hack iOS CSS :active style -->
 
@@ -234,31 +230,26 @@
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
                 <p>在<code>grunt-joycss</code>或者独立的npm的joycss运行在windows下时，经常会报php gd库未安装，或者can’t find node-gd 这个时候<code>npm install node-gd</code>是注定失败的，因为就连作者本身都说了他没法实现在widows下面安装node-gd，而且问题本身不在这，因为joycss是可以调用php的gd库来实现拼图的。</p>
-<h2 id="开启php的gd的方法">开启php的gd的方法</h2>
-<p>joycss是通过cli的方式来调用php（也就是命令行的模式），这个和传统的浏览网页时，由apache来调用是不一样的。</p>
-<h3 id="把php加入环境变量">把php加入环境变量</h3>
-<p>找到你安装的php，把php.exe所在文件夹的绝对路径，复制一份，放到计算机-&gt;属性-&gt;高级系统设置-&gt;环境变量-&gt;Path(底下的)里，注意用英文的分号(;)来区分别的路径。</p>
+<h2 id="开启php的gd的方法"><a href="#开启php的gd的方法" class="headerlink" title="开启php的gd的方法"></a>开启php的gd的方法</h2><p>joycss是通过cli的方式来调用php（也就是命令行的模式），这个和传统的浏览网页时，由apache来调用是不一样的。</p>
+<h3 id="把php加入环境变量"><a href="#把php加入环境变量" class="headerlink" title="把php加入环境变量"></a>把php加入环境变量</h3><p>找到你安装的php，把php.exe所在文件夹的绝对路径，复制一份，放到计算机-&gt;属性-&gt;高级系统设置-&gt;环境变量-&gt;Path(底下的)里，注意用英文的分号(;)来区分别的路径。 </p>
 <p>这样做是为了能够在命令行里面调用php</p>
-<h3 id="查看配置文件地址">查看配置文件地址</h3>
-<p>可以通过在CMD窗口里面输入 <code>php --ini</code> (php 5.3版本之后支持) 查看 <code>Loaded configuration file:</code> 就是apache调用的php的ini文件的地址 <code>configuration file(php.ini) path:</code></p>
+<h3 id="查看配置文件地址"><a href="#查看配置文件地址" class="headerlink" title="查看配置文件地址"></a>查看配置文件地址</h3><p>可以通过在CMD窗口里面输入 <code>php --ini</code> (php 5.3版本之后支持) 查看 <code>Loaded configuration file:</code> 就是apache调用的php的ini文件的地址 <code>configuration file(php.ini) path:</code> </p>
 <p>这个是cli模式下在哪个文件夹下寻找php.ini文件（一般情况下这个目录是没有php.ini文件，这就是很多时候，明明修改了配置文件，但是在命令行下就是不生效的问题）</p>
-<h3 id="修改配置文件">修改配置文件</h3>
-<ol>
+<h3 id="修改配置文件"><a href="#修改配置文件" class="headerlink" title="修改配置文件"></a>修改配置文件</h3><ol>
 <li>首先是开启GD库</li>
 </ol>
 <p>找到<code>extension=php_gd2.dll</code>，把它前面的分号去掉</p>
 <ol>
 <li>修改extension_dir的地址</li>
 </ol>
-<p>在某些集成套件的设定里面，extension_dir是相对路径的。</p>
-<p>默认情况下，这样的extension_dir也是能正常的在apache调用的时候工作，因为只有一个配置文件，相对路径也没问题。</p>
+<p>在某些集成套件的设定里面，extension_dir是相对路径的。 </p>
+<p>默认情况下，这样的extension_dir也是能正常的在apache调用的时候工作，因为只有一个配置文件，相对路径也没问题。 </p>
 <p>但是后面是需要把配置文件复制一份到刚刚上一步找到的<code>configuration file(php.ini) path:</code>目录下，所以extension_dir必须改成到ext文件夹的绝对路径，例如：<code>d:/usr/local/php5/ext</code></p>
 <ol>
 <li>复制配置文件</li>
 </ol>
 <p>复制刚刚修改完毕的配置文件，粘贴到<code>configuration file(php.ini) path:</code>指定的目录，一般是：<code>C:windows</code>。然后重命名为php.ini（某些集成套件里面，配置文件可能默认的名字不是php.ini）</p>
-<h3 id="重启电脑">重启电脑</h3>
-<p>试过重启apache，但是对之前的修改貌似没有效果，暂时也不知道是重启哪个服务能让之前的修改生效。所以，重启电脑吧！（如果有别的更好的方法，也欢迎指正）</p>
+<h3 id="重启电脑"><a href="#重启电脑" class="headerlink" title="重启电脑"></a>重启电脑</h3><p>试过重启apache，但是对之前的修改貌似没有效果，暂时也不知道是重启哪个服务能让之前的修改生效。所以，重启电脑吧！（如果有别的更好的方法，也欢迎指正） </p>
 <p>现在，好好享受joycss！</p>
 
                 <div class="copyright-notice">
@@ -351,7 +342,7 @@
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
         this.page.url = "https://www.shuizhongyueming.com/2014/07/22/solution-for-error-cant-find-node-gd-in-grunt-joycss-under-windows/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl5bxd089004n0hbm9bp95xgl"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.identifier = "cl9cigdfo004omsbmhvry2qak"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {
