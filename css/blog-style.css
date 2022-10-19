@@ -27,21 +27,26 @@ hr {
 }
 
 .sidebar-container a {
-    color: #bfbfbf !important;
+    color: #bfbfbf;
 }
 
 .sidebar-container a:hover,
 .sidebar-container a:active {
-    color: #0085a1 !important;
+    color: #0085a1;
 }
 
-.sidebar-container .tags a {
+.sidebar-container .tags .tag {
+    color: #bfbfbf;
     border-color: #bfbfbf;
 }
 
-.sidebar-container .tags a:hover,
-.sidebar-container .tags a:active {
+.sidebar-container .tags .tag:hover,
+.sidebar-container .tags .tag:active {
+    color: #0085a1;
     border-color: #0085a1;
+}
+.sidebar-container .tags .tag a {
+    text-decoration: none;
 }
 
 .sidebar-container .short-about img {
@@ -806,9 +811,17 @@ img::-moz-selection {
 .tags {
     text-align: center;
     margin-top: 20px;
+    padding: 0;
 }
 
-.tags a,
+.tags a {
+  color: inherit;
+}
+
+.tags .tag-list-count {
+
+}
+
 .tags .tag {
     display: inline-block;
     border: 1px solid rgba(255, 255, 255, 0.8);
@@ -822,9 +835,7 @@ img::-moz-selection {
     margin-bottom: 6px;
 }
 
-.tags a:hover,
 .tags .tag:hover,
-.tags a:active,
 .tags .tag:active {
     color: white;
     border-color: white;
@@ -834,9 +845,8 @@ img::-moz-selection {
 
 @media only screen and (min-width: 768px) {
 
-    .tags a,
     .tags .tag {
-        margin-right: 5px;
+        margin-right: 10px;
     }
 }
 
