@@ -26,12 +26,12 @@
     href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css"
   />
   <title>
-     Xcode 无法生成 Link Map 的可能原因｜水中月明的Blog 
+     command-codesign-failed-with-a-nonzero-exit-code｜水中月明的Blog 
   </title>
 
   <link
     rel="canonical"
-    href="https://shuizhongyueming.com/2022/07/08/Xcode无法生成LinkMap的可能原因/"
+    href="https://shuizhongyueming.com/2022/11/02/command-codesign-failed-with-a-nonzero-exit-code/"
   />
 
   <!-- Bootstrap Core CSS -->
@@ -179,25 +179,25 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>Xcode 无法生成 Link Map 的可能原因</h1>
+                    <h1>command-codesign-failed-with-a-nonzero-exit-code</h1>
                     
                     <span class="meta">
                          作者 happyWang
                         <span>
-                          日期 2022-07-08
+                          日期 2022-11-02
                          </span>
                         <span>
-                         <img src="https://happy-visitor-badge.glitch.me/badge?page_id=www.shuizhongyueming.com.Xcode 无法生成 Link Map 的可能原因&left_text=浏%20%20览%20%20量" alt="Views"/>
+                         <img src="https://happy-visitor-badge.glitch.me/badge?page_id=www.shuizhongyueming.com.command-codesign-failed-with-a-nonzero-exit-code&left_text=浏%20%20览%20%20量" alt="Views"/>
                          </span>
                     </span>
-                    <ul class="tags text-center" itemprop="keywords"><li class="tag"><a class="tag-list-link" href="/tags/Xcode/" rel="tag">Xcode</a></li><li class="tag"><a class="tag-list-link" href="/tags/Link-Map/" rel="tag">Link Map</a></li></ul>
+                    <ul class="tags text-center" itemprop="keywords"><li class="tag"><a class="tag-list-link" href="/tags/iOS/" rel="tag">iOS</a></li><li class="tag"><a class="tag-list-link" href="/tags/Xcode/" rel="tag">Xcode</a></li></ul>
                 </div>
             </div>
         </div>
     </div>
     <div class="post-title-haojen">
         <span>
-            Xcode 无法生成 Link Map 的可能原因
+            command-codesign-failed-with-a-nonzero-exit-code
         </span>
     </div>
 </header>
@@ -208,32 +208,31 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>最近帮项目组打包 iOS 项目并采用 Ohayoo 的 SDK，在提审之前，需要把 dYSM, LinkMap, ipa包体，这三个文件提交过去进行合规扫描。</p>
-<p>虽然很久没接触 iOS 打包了，但 ipa 还是知道怎么输出的。dYSM，在 Google 一圈之后，也顺利生成了。</p>
-<p>只是这 Link Map 文件，已经按照网上说的那样 target -&gt; Build Settings -&gt; Write Link Map File -&gt; YES 来配置了，但是编译之后，却没有生成。</p>
-<p>项目中 <code>Path to Link Map File</code> 默认配置的路径是 <code>build/xxxx/Release-iphoneos/xxxx</code>，但是我这边本地只有 <code>build/xxxx/Release-iphonesimulator</code> 这个目录</p>
-<p>我起初以为是需要将 build device 改为一个 simulator，然后编译运行一次，就能在 <code>Release-iphonesimulator</code> 目录下生成，但是并不行。后面试着在真机上运行，也还是不行</p>
-<p>最后我尝试修改 <code>Path to Link Map File</code> 到一个已有到目录上，然后再次编译运行。成功了。。。</p>
-<p>所以总结就是：如果在开启 <code>Write Link Map File = YES</code> 的情况下，编译之后，如果没有生成 Link Map 文件，可以看看 <code>Path to Link Map File</code> 配置的路径是否存在，如果不存在，试着换一个路径</p>
+                <p>今天做公司游戏打包上线 iOS 平台的活。在做各种项目配置，突然的项目就编译失败，提示错误：<code>Command CodeSign failed with a nonzero exit code</code>。</p>
+<p>尝试过进行 git 回滚操作但是错误一直存在。</p>
+<p>所幸公司的游戏是用的 CocosCreator 开发的，原始游戏项目在。所以我就干脆删除了 iOS 项目，然后重新使用 CocosCreator 来构建 iOS 项目。</p>
+<p>重新构建之后，iOS 项目可以正常运行了。然后开始逐步进行调整。</p>
+<p>这次终于发现出问题的点：在我进行启动图，也就是 LaunchScreen.storyboard 关联的图片资源的替换时，报错了。</p>
+<p>仔细对比了前后两张图片的差异，一开始的图片是 500KB，而我用的是 1.7MB。</p>
+<p>会不会是图片太大导致的？试着用 tinypng 压缩了图片，压缩之后，图片大小是 540KB，再更新 Xcode 里面的图片资源，重新运行，成功！</p>
+<p>所以是 Xcode 这边对启动图的大小有限制？</p>
+<p>在 Google 检索之后，发现有人跟我有<a target="_blank" rel="noopener" href="https://developer.apple.com/forums/thread/665358">类似的问题</a>，也是通过压缩图片解决的。</p>
+<p>但是粗略搜索一番，没找到官方对这个文件大小的具体限制。</p>
+<p>综上，如果你有遇到类似的问题，可以看看是不是新增的某些文件的体积太大导致的</p>
 
                 <div class="copyright-notice">
 <div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
-<div class="copyright-notice__link">转载请注明出处：<a href="https://shuizhongyueming.com/2022/07/08/Xcode%E6%97%A0%E6%B3%95%E7%94%9F%E6%88%90LinkMap%E7%9A%84%E5%8F%AF%E8%83%BD%E5%8E%9F%E5%9B%A0/" title="Xcode 无法生成 Link Map 的可能原因">https://shuizhongyueming.com/2022/07/08/Xcode无法生成LinkMap的可能原因/</a></div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://shuizhongyueming.com/2022/11/02/command-codesign-failed-with-a-nonzero-exit-code/" title="command-codesign-failed-with-a-nonzero-exit-code">https://shuizhongyueming.com/2022/11/02/command-codesign-failed-with-a-nonzero-exit-code/</a></div>
                 </div>
                 <hr>
                 
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2022/11/02/command-codesign-failed-with-a-nonzero-exit-code/" data-toggle="tooltip" data-placement="top"
-                           title="command-codesign-failed-with-a-nonzero-exit-code">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2019/08/13/如何使得Svelte项目输出ES5代码/" data-toggle="tooltip" data-placement="top"
-                           title="如何使得Svelte项目输出ES5代码">Next Post &rarr;</a>
+                        <a href="/2022/07/08/Xcode无法生成LinkMap的可能原因/" data-toggle="tooltip" data-placement="top"
+                           title="Xcode 无法生成 Link Map 的可能原因">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -241,7 +240,7 @@
                 <hr class="popular-posts-split">
                 <hr class="popular-posts-split">
                 <h2 class="popular-posts-title">相关推荐</h2>
-                <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2014/05/21/experiences-on-encountered-missing-localized-screenshots-when-upload-app-on-itunes-connect/" title="在提交应用时候遇到missing localized screenshots的经历" rel="bookmark">在提交应用时候遇到missing localized screenshots的经历</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2014/04/25/how-to-clear-mobileprovision-file-in-xcode/" title="如何清除xcode里面的mobileprovision文件" rel="bookmark">如何清除xcode里面的mobileprovision文件</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2014/01/06/load-local-image-js-css-file-to-webview-in-xcode/" title="xcode,在webView中引入本地html,image,js,css文件的方法" rel="bookmark">xcode,在webView中引入本地html,image,js,css文件的方法</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2022/11/02/command-codesign-failed-with-a-nonzero-exit-code/" title="command-codesign-failed-with-a-nonzero-exit-code" rel="bookmark">command-codesign-failed-with-a-nonzero-exit-code</a></h3></div></li></ul>
+                <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2022/07/08/Xcode无法生成LinkMap的可能原因/" title="Xcode 无法生成 Link Map 的可能原因" rel="bookmark">Xcode 无法生成 Link Map 的可能原因</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2014/05/21/experiences-on-encountered-missing-localized-screenshots-when-upload-app-on-itunes-connect/" title="在提交应用时候遇到missing localized screenshots的经历" rel="bookmark">在提交应用时候遇到missing localized screenshots的经历</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2014/04/25/how-to-clear-mobileprovision-file-in-xcode/" title="如何清除xcode里面的mobileprovision文件" rel="bookmark">如何清除xcode里面的mobileprovision文件</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2014/01/06/load-local-image-js-css-file-to-webview-in-xcode/" title="xcode,在webView中引入本地html,image,js,css文件的方法" rel="bookmark">xcode,在webView中引入本地html,image,js,css文件的方法</a></h3></div></li></ul>
 
                 <hr>
 
@@ -282,7 +281,7 @@
                     <h5 class="text-center">
                         <a href="/tags/">FEATURED TAGS</a>
                     </h5>
-                    <ul class="tags" itemprop="keywords"><li class="tag"><a class="tag-list-link" href="/tags/Xcode/" rel="tag">Xcode</a></li><li class="tag"><a class="tag-list-link" href="/tags/Link-Map/" rel="tag">Link Map</a></li></ul>
+                    <ul class="tags" itemprop="keywords"><li class="tag"><a class="tag-list-link" href="/tags/iOS/" rel="tag">iOS</a></li><li class="tag"><a class="tag-list-link" href="/tags/Xcode/" rel="tag">Xcode</a></li></ul>
                 </section>
                 
 
@@ -301,8 +300,8 @@
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "shui-zhong-yue-ming-de-blog";
     var disqus_config = function () {
-        this.page.url = "https://shuizhongyueming.com/2022/07/08/Xcode%E6%97%A0%E6%B3%95%E7%94%9F%E6%88%90LinkMap%E7%9A%84%E5%8F%AF%E8%83%BD%E5%8E%9F%E5%9B%A0/";  // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = "cl9cigdfa000ymsbmdlp3hird"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = "https://shuizhongyueming.com/2022/11/02/command-codesign-failed-with-a-nonzero-exit-code/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "cl9zevngv0000ghbm3cj43yse"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     document.addEventListener('DOMContentLoaded', function () {
