@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="技术人的博客, 说技术人的事" />
+  <meta name="keyword" content="" />
+  <meta name="theme-color" content="#600090" />
+  <meta name="msapplication-navbutton-color" content="#600090" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="#600090" />
+  <link
+    rel="shortcut icon"
+    href="https://cdn.imagehost.top/wp-content/uploads/2014/03/cropped-shuizhongyueming-icon-1.png"
+  />
+
+  <link
+    rel="stylesheet"
+    href="//cdn.imagehost.top/lib/animate.css/3.5.2/animate.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="//cdn.imagehost.top/lib/font-awesome/4.6.3/css/font-awesome.min.css"
+  />
+  <title>
+     如何在 TypeScript + ESM + Mocha + tsconfig-paths 下运行 Mocha 测试用例｜水中月明的Blog 
+  </title>
+
+  <link
+    rel="canonical"
+    href="https://shuizhongyueming.com/2024/02/29/mocha-with-typescript-esm-and-tsconfig-paths/"
+  />
+
+  <!-- Bootstrap Core CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.css">
+
+
+  <!-- Custom CSS -->
+  
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+  <!-- Pygments Github CSS -->
+  
+<link rel="stylesheet" href="https://cdn.imagehost.top/wp-content/uploads/2019/02/syntax.css">
+
+
+
+  <!-- Google Tag Manager -->
+  <script>
+    (function (w, d, s, l, i) {
+      w[l] = w[l] || [];
+      w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s),
+        dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-NVHB3R');
+  </script>
+  <!-- End Google Tag Manager -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3438190576149990" crossorigin="anonymous"></script>
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<!-- hack iOS CSS :active style -->
+
+<body class="animated fadeIn">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true"
+    data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    水中月明的Blog
+                </span>
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+
+                    
+                    <li>
+                        <a href="/about/">About</a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    //    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+
+    function handleMagic(e) {
+        if ($navbar.className.indexOf('in') > 0) {
+            // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function () {
+                // prevent frequently toggle
+                if ($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            }, 400)
+        } else {
+            // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+    <!-- Main Content -->
+    
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.imagehost.top/default-background-1920x640.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.imagehost.top/default-background-1920x640.jpg')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>如何在 TypeScript + ESM + Mocha + tsconfig-paths 下运行 Mocha 测试用例</h1>
+                    
+                    <span class="meta">
+                         作者 happyWang
+                        <span>
+                          日期 2024-02-29
+                         </span>
+                        <span>
+                         <img src="https://happy-visitor-badge.glitch.me/badge?page_id=www.shuizhongyueming.com.如何在 TypeScript + ESM + Mocha + tsconfig-paths 下运行 Mocha 测试用例&left_text=浏%20%20览%20%20量" alt="Views"/>
+                         </span>
+                    </span>
+                    <ul class="tags text-center" itemprop="keywords"><li class="tag"><a class="tag-list-link" href="/tags/TypeScript/" rel="tag">TypeScript</a></li><li class="tag"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag"><a class="tag-list-link" href="/tags/Mocha/" rel="tag">Mocha</a></li><li class="tag"><a class="tag-list-link" href="/tags/ESM/" rel="tag">ESM</a></li></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            如何在 TypeScript + ESM + Mocha + tsconfig-paths 下运行 Mocha 测试用例
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>我有一个基于 TypeScript 的项目,使用 Mocha 来运行测试用例，一直都正常工资，直到我将项目改成了 ESM 模块，然后就报错了。</p>
+<p>在一番搜索之后，我发现了解决方案，记录一下。</p>
+<p>TLDR:<br>使用 <a target="_blank" rel="noopener" href="https://github.com/privatenumber/tsx">tsx</a> 来替代 ts-node 作为 TypeScript 的运行时，就可以解决所有问题，而且性能更好。</p>
+<p>现在让我们一步一步的来看看如何解决这个问题。</p>
+<p>在开始之前，我们也许要声明一下，以下的所有问题和解决方案，都是基于这些相关库的特定版本的，在未来的版本中，可能会有所不同。</p>
+<pre><code class="json">&#123;
+  &quot;mocha&quot;: &quot;^10.1.0&quot;,
+  &quot;ts-node&quot;: &quot;^10.9.2&quot;,
+  &quot;tsconfig-paths&quot;: &quot;^4.2.0&quot;,
+  &quot;tsx&quot;: &quot;^4.7.1&quot;
+&#125;
+</code></pre>
+<h2 id="官方初始示例"><a href="#官方初始示例" class="headerlink" title="官方初始示例"></a>官方初始示例</h2><p>Mocha 的官方仓库里面提供了一个项目支持 Typescript 的示例：<a target="_blank" rel="noopener" href="https://github.com/mochajs/mocha-examples/tree/master/packages/typescript">https://github.com/mochajs/mocha-examples/tree/master/packages/typescript</a></p>
+<p>这个示例实现了 CommonJs 下的 TypeScript 支持，示例里面的 <code>.mocharc.json</code> 配置如下：</p>
+<pre><code class="json">&#123;
+  &quot;extension&quot;: [&quot;ts&quot;],
+  &quot;spec&quot;: &quot;src/**/*.spec.ts&quot;,
+  &quot;require&quot;: &quot;ts-node/register&quot;
+&#125;
+</code></pre>
+<p><code>require</code> 配置了 <code>ts-node/register</code>，这个配置是用来在运行测试用例的时候，在 nodejs 调用时执行类似 <code>node -r ts-node/register</code> 的命令。从而让 ts-node 扩展了 nodejs 的模块加载器，使得 nodejs 可以直接加载 TypeScript 文件。</p>
+<p><code>node -r &lt;module&gt;</code> 是 nodejs 的一个命令行参数，用来在启动 nodejs 时加载一个模块。</p>
+<p>通过这种方式，我们可以直接在 nodejs 中加载 TypeScript 文件，而不需要先编译成 JavaScript 文件。</p>
+<p>这是我基于官方示例配置的一个样例项目：<a target="_blank" rel="noopener" href="https://stackblitz.com/edit/node-qidqck?file=src/basic.ts&view=editor">https://stackblitz.com/edit/node-qidqck?file=src%2Fbasic.ts&view=editor</a></p>
+<p>但是上述有一个问题就是不支持我们在 <code>tsconfig.json</code> 里面配置的 <code>paths</code>，会报类似 <code>Error: Cannot find module ‘@utils/add’</code> 的错误。</p>
+<p>因为我们的 <code>ts-node/register</code> 只是扩展了 nodejs 的模块加载起，使得 TypeScript 文件在引用时，会被 ts-node 编译成 JavaScript 文件，然后再加载。但是并没有处理 import 的路径</p>
+<p>这也是为什么错误是 <code>Cannot find module</code> 的原因了。</p>
+<p>这个时候我们就需要 <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/tsconfig-paths">https://www.npmjs.com/package/tsconfig-paths</a> 来做这一个功能。</p>
+<h2 id="tsconfig-paths"><a href="#tsconfig-paths" class="headerlink" title="tsconfig-paths"></a>tsconfig-paths</h2><p>我们调整刚刚的 <code>.mocharc.json</code> 配置，改成如下：</p>
+<pre><code class="json">&#123;
+  &quot;extension&quot;: [&quot;ts&quot;],
+  &quot;spec&quot;: &quot;src/**/*.spec.ts&quot;,
+  &quot;require&quot;: [&quot;ts-node/register&quot;, &quot;tsconfig-paths/register&quot;]
+&#125;
+</code></pre>
+<p><code>require</code> 可以是一个 <code>string[]</code>，这样我们就可以在启动 nodejs 时，先加载 <code>ts-node/register</code>，然后再加载 <code>tsconfig-paths/register</code>。</p>
+<p><code>tsconfig-paths/register</code> 会读取 <code>tsconfig.json</code> 里面的 <code>paths</code> 配置，然后在加载模块时，会根据 <code>paths</code> 配置来解析模块的路径。</p>
+<p>同样，我也搭建了一个样例项目：<a target="_blank" rel="noopener" href="https://stackblitz.com/edit/node-wnq7ku?file=.mocharc.json&view=editor">https://stackblitz.com/edit/node-wnq7ku?file=.mocharc.json&view=editor</a></p>
+<h2 id="ESM"><a href="#ESM" class="headerlink" title="ESM"></a>ESM</h2><p>但是，当我们的项目启用了 ESM 模块时，又有新的错误发生了：<code>TypeError [ERR_UNKNOWN_FILE_EXTENSION]: Unknown file extension &quot;.ts&quot; for</code></p>
+<p>为什么 <code>.ts</code> 后缀的文件会无法识别呢？</p>
+<p>因为开启 esm 之后，<code>ts-node/register</code> 就无法正常工作了，这个时候需要使用 <code>ts-node/esm</code> 来替代 <code>ts-node/register</code>。</p>
+<p>如果我们的项目是 Typescript + ESM 的话，我们就可以用如下配置：</p>
+<pre><code class="json">&#123;
+  &quot;extension&quot;: [&quot;ts&quot;],
+  &quot;spec&quot;: &quot;src/**/*.spec.ts&quot;,
+  &quot;loader&quot;: &quot;ts-node/esm&quot;
+&#125;
+</code></pre>
+<p>这里面 <code>loader</code>，是等同于在 nodejs 启动时，执行 <code>node --loader ts-node/esm</code> 或者 <code>node --import ts-node/esm</code> 的效果。</p>
+<p>但是我们还是遇到最开始的问题，<code>ts-node</code> 无法处理 <code>paths</code> 的问题。</p>
+<p>只是这次我们遇到另外一个问题，<code>tsconfig-paths/register</code> 也无法正常工作了。<code>tsconfig-paths/register</code> 目前只支持 CommonJs 模块。</p>
+<p>事情到这一步似乎陷入僵局了。</p>
+<h2 id="tsx"><a href="#tsx" class="headerlink" title="tsx"></a>tsx</h2><p>这个时候，我们的 <a target="_blank" rel="noopener" href="https://github.com/privatenumber/tsx">tsx</a> 出场了。</p>
+<p><code>tsx</code> 是对 nodejs 的强化，使之可以支持 ESM 模块，同时也支持 TypeScript。</p>
+<p>按照官方的说明，它有这些特性：</p>
+<blockquote>
+<ul>
+<li>Blazing fast on-demand TypeScript &amp; ESM compilation</li>
+<li>Works in both CommonJS and ESM packages</li>
+<li>Supports next-gen TypeScript extensions (.cts &amp; .mts)</li>
+<li>Hides experimental feature warnings</li>
+<li>TypeScript REPL</li>
+<li>Resolves tsconfig.json paths</li>
+</ul>
+</blockquote>
+<p>这就很好的满足了我们在 ESM 模块下，同时支持 TypeScript 和 <code>paths</code> 的需求。</p>
+<p>基于 <code>tsx</code>，我们的 <code>mocha</code> 配置就可以改成如下：</p>
+<pre><code class="json">&#123;
+  &quot;extension&quot;: [&quot;ts&quot;],
+  &quot;spec&quot;: &quot;src/**/*.spec.ts&quot;,
+  &quot;import&quot;: &quot;tsx&quot;
+&#125;
+</code></pre>
+<p>同样的，这里提供了一个样例项目：<a target="_blank" rel="noopener" href="https://stackblitz.com/edit/node-xexp1j?file=.mocharc.json&view=editor">https://stackblitz.com/edit/node-xexp1j?file=.mocharc.json&view=editor</a></p>
+<p>但是上述配置适用于<strong>Node.js v20.6.0及以上版本</strong>，如果你的项目需要支持更低版本的 Node.js 那么配置需要调整为：</p>
+<pre><code class="json">&#123;
+  &quot;extension&quot;: [&quot;ts&quot;],
+  &quot;spec&quot;: &quot;src/**/*.spec.ts&quot;,
+  &quot;loader&quot;: &quot;tsx&quot;
+&#125;
+</code></pre>
+<p>原因是在 Node.js v20.6.0 之后，Node.js 新增了 <code>--import</code> 参数用来在 Node.js 启动前配置 <code>register</code>。</p>
+<p>具体变更参考：<a target="_blank" rel="noopener" href="https://github.com/nodejs/node/blob/main/doc/changelogs/CHANGELOG_V20.md#new-nodemodule-api-register-for-module-customization-hooks-new-initialize-hook">https://github.com/nodejs/node/blob/main/doc/changelogs/CHANGELOG_V20.md#new-nodemodule-api-register-for-module-customization-hooks-new-initialize-hook</a></p>
+
+                <div class="copyright-notice">
+<div class="copyright-notice__title">原创内容，欢迎转载 😊</div>
+<div class="copyright-notice__link">转载请注明出处：<a href="https://shuizhongyueming.com/2024/02/29/mocha-with-typescript-esm-and-tsconfig-paths/" title="如何在 TypeScript + ESM + Mocha + tsconfig-paths 下运行 Mocha 测试用例">https://shuizhongyueming.com/2024/02/29/mocha-with-typescript-esm-and-tsconfig-paths/</a></div>
+                </div>
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2023/04/24/high-order-function-type-definition-in-typescript/" data-toggle="tooltip" data-placement="top"
+                           title="如何为高阶函数定义TypeScript类型">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                <hr class="popular-posts-split">
+                <hr class="popular-posts-split">
+                <h2 class="popular-posts-title">相关推荐</h2>
+                <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="/2023/04/24/high-order-function-type-definition-in-typescript/" title="如何为高阶函数定义TypeScript类型" rel="bookmark">如何为高阶函数定义TypeScript类型</a></h3></div></li></ul>
+
+                <hr>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+
+                <!--加入新的评论系统-->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%98%E6%96%B9%E5%88%9D%E5%A7%8B%E7%A4%BA%E4%BE%8B"><span class="toc-text">官方初始示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tsconfig-paths"><span class="toc-text">tsconfig-paths</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ESM"><span class="toc-text">ESM</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#tsx"><span class="toc-text">tsx</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class=" col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <ul class="tags" itemprop="keywords"><li class="tag"><a class="tag-list-link" href="/tags/TypeScript/" rel="tag">TypeScript</a></li><li class="tag"><a class="tag-list-link" href="/tags/Node-js/" rel="tag">Node.js</a></li><li class="tag"><a class="tag-list-link" href="/tags/Mocha/" rel="tag">Mocha</a></li><li class="tag"><a class="tag-list-link" href="/tags/ESM/" rel="tag">ESM</a></li></ul>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "shui-zhong-yue-ming-de-blog";
+    var disqus_config = function () {
+        this.page.url = "https://shuizhongyueming.com/2024/02/29/mocha-with-typescript-esm-and-tsconfig-paths/";  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = "clt83e7qj0000jubm8fdpephz"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var d = document;
+        var dsq = d.createElement('script');
+        dsq.type = 'text/javascript';
+        dsq.async = true;
+        dsq.defer = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(dsq);
+    });
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 水中月明的Blog 2024
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="https://cdn.imagehost.top/wp-content/uploads/2019/02/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://shuizhongyueming.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script>
+$('pre').each(function(i, tag) {
+    $(this).addClass('prettyprint')
+})
+</script>
+<script async src="https://cdn.imagehost.top/wp-content/uploads/2019/02/google-code-prettify/run_prettify.js?skin=desert"></script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NVHB3R"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+    <!--wechat title img-->
+    <img class="wechat-title-img" src="https://cdn.imagehost.top/ipic/t0yg1.png-q60">
+</body>
+
+</html>

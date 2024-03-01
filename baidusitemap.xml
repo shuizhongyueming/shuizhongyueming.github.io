@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://shuizhongyueming.com/2024/02/29/mocha-with-typescript-esm-and-tsconfig-paths/</loc>
+    <lastmod>2024-03-01</lastmod>
+  </url>
+  <url>
     <loc>https://shuizhongyueming.com/2023/04/24/high-order-function-type-definition-in-typescript/</loc>
-    <lastmod>2023-04-23</lastmod>
+    <lastmod>2024-02-29</lastmod>
   </url>
   <url>
     <loc>https://shuizhongyueming.com/2022/11/02/command-codesign-failed-with-a-nonzero-exit-code/</loc>

@@ -185,6 +185,31 @@
 
 <div class="post-preview "
      style="background-image: url('')">
+    <a href="/2024/02/29/mocha-with-typescript-esm-and-tsconfig-paths/">
+        <h2 class="post-title">
+            如何在 TypeScript + ESM + Mocha + tsconfig-paths 下运行 Mocha 测试用例
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2024-02-29
+        </p>
+        
+        <div class="post-content-preview">
+            <p>
+                我有一个基于 TypeScript 的项目,使用 Mocha 来运行测试用例，一直都正常工资，直到我将项目改成了 ESM 模块，然后就报错了。
+在一番搜索之后，我发现了解决方案，记录一下。
+TLDR:使用 tsx 来替代 ts-node 作为 TypeScript 的运行时，就可以解决所有问题，..
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+<div class="post-preview "
+     style="background-image: url('')">
     <a href="/2023/04/24/high-order-function-type-definition-in-typescript/">
         <h2 class="post-title">
             如何为高阶函数定义TypeScript类型
@@ -412,33 +437,6 @@ Ctrl + U 是清空..
 
 
 
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2018/11/07/reach-router的嵌套路由失效的可能原因/">
-        <h2 class="post-title">
-            @reach/router的嵌套路由失效的可能原因
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2018-11-07
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                TL;DR请确认失效路由的上一级路由配置path的时候，附带了后缀/*
-出错代码// App.tsx
-const NotFound = (props: RouteComponentProps) =&gt; &lt;p&gt;Sorry, nothing here&lt;/p&gt;
-
-  &lt..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
 
 <!-- 翻页 pager -->
 
@@ -526,7 +524,7 @@ const NotFound = (props: RouteComponentProps) =&gt; &lt;p&gt;Sorry, nothing here
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; 水中月明的Blog 2023
+                    Copyright &copy; 水中月明的Blog 2024
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                     <br>
